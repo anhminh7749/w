@@ -31,4 +31,5 @@ public interface StogareService {
 	Stream<Path> loadAll();
 
 	List<Image> findImageByProductId(int productId);
+	List<Image> findImageByBlogId(int BlogId);
 }

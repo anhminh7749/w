@@ -1,5 +1,4 @@
 package com.watch.shopwatchonline.Model;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -33,8 +32,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Product")
-public class Product implements Serializable{
+@Table(name="Blog")
+public class Blog {
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -42,25 +41,20 @@ public class Product implements Serializable{
 	@Column(columnDefinition = "nvarchar(100)" ,nullable = false)
 	@Size(max = 120, min = 10, message = "Name must be between 10 and 120 characters")
 	@NotEmpty(message = "Please enter name")
-	private String name;
+	private String title;
 
-	@Column(nullable = false)
-	@Positive(message = "Quantity can contain values > 0 only")
-	private int quantity;
-
-	@Column(nullable = false)
-	@Positive(message = "Price can contain values > 0 only")
-	
-	private float price;
-
-	@PositiveOrZero(message = "SalePrice can contain values > 0 only")
-	private float discount;
 
 	@Column(length = 50,nullable = false)
-	private String thumbnail;
+	private String banner;
+
+    @Column(columnDefinition = "text not null")
+	// @Size(max = 3000, min = 100, message = "Short description must be between 100 and 3000 characters")
+	@NotEmpty(message = "Please enter short description")
+	private String shortdecs;
+
 
 	@Column(columnDefinition = "text not null")
-	@Size(max = 3000, min = 100, message = "Descriptionmust be between 100 and 3000 characters")
+	@Size(max = 3000, min = 100, message = "Description must be between 100 and 3000 characters")
 	@NotEmpty(message = "Please enter description")
 	private String description;
 
@@ -75,30 +69,19 @@ public class Product implements Serializable{
 	@Column(nullable = false)
 	private Date updateAt;
 
-    @ManyToOne
-	@JoinColumn(name = "CategoryId",nullable = false)
-	private Category Category;
-
-    @ManyToOne
-	@JoinColumn(name = "BrandId",nullable = false)
-	private Brand Brand;
-
-	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
-	private Set<Raiting> raitings;
-
-	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
-	private Set<Blog> blogs;
+	@ManyToOne
+	@JoinColumn(name = "ProductId",nullable = false)
+	private Product Product;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="product_images",
+	@JoinTable(name="blog_images",
 	joinColumns  = {
-		@JoinColumn(name="product_id")
+		@JoinColumn(name="blog_id")
 	},
 	inverseJoinColumns  = {
 		@JoinColumn(name="image_id")
 	}
 	)
-	private Set<Image> productImages;
+	private Set<Image> blogImages;
 
-	
 }

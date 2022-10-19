@@ -92,7 +92,9 @@ public class SearchProductController {
             if (abx == 2) {
                 sortable = Sort.by("name").descending();
             }
-
+            if (Getcategory != null) {
+                sortable = Sort.by("name").descending();
+            }
             model.addAttribute("sort", abx);
             Pageable pageable = PageRequest.of(curPage - 1, pageSize, sortable);
             resultPage = ProductService.findAll(pageable);

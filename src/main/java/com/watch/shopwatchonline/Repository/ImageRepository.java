@@ -17,4 +17,6 @@ public interface ImageRepository extends JpaRepository<Image, Integer>{
 
     @Query(value = "SELECT i.* FROM image i INNER JOIN product_images pi ON pi.image_id = i.id WHERE pi.product_id= :pid", nativeQuery = true)
     public List<Image> findImageByProductId(@Param("pid") int productId);
+    @Query(value = "SELECT i.* FROM image i INNER JOIN blog_images bi ON bi.image_id = i.id WHERE bi.blog_id= :bid", nativeQuery = true)
+    public List<Image> findImageByBlogId(@Param("bid") int blogId);
 }

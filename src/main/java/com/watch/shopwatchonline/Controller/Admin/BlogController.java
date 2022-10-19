@@ -17,11 +17,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.expression.ParseException;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,7 +27,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,6 +40,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.watch.shopwatchonline.Domain.ListImageDto;
 import com.watch.shopwatchonline.Domain.ProductDto;
+import com.watch.shopwatchonline.Domain.blogDto;
+import com.watch.shopwatchonline.Model.Blog;
 import com.watch.shopwatchonline.Model.Brand;
 import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Model.Image;
@@ -55,17 +53,15 @@ import com.watch.shopwatchonline.message.ResponseMessage;
 
 import javassist.runtime.Desc;
 
+import com.watch.shopwatchonline.Service.BlogService;
 import com.watch.shopwatchonline.Service.BrandService;
 
 @Controller
-@RequestMapping("admin/product")
-public class ProductController {
+@RequestMapping("admin/blog")
+public class BlogController {
 
-@Autowired
-private CategoryService CategoryService;
-
-@Autowired
-private BrandService BrandService;
+    @Autowired
+private BlogService blogService;
 
 @Autowired
 private ProductService ProductService;
@@ -74,15 +70,20 @@ private ProductService ProductService;
 private StogareService stogareService;
 
 
-@GetMapping("add-product")
+@GetMapping("add-blog")
 public String indexA(Model model) {
-    ProductDto dto = new ProductDto();
+    blogDto dto = new blogDto();
     dto.setIsEdit(false);
-    model.addAttribute("product", dto);
-return "web-admin/AddProduct";
+    model.addAttribute("blog", dto);
+return "web-admin/AddBlog";
 }
 
-@GetMapping("list-product")
+@ModelAttribute("products")
+public List<Product> getProductDtos(){
+    return ProductService.findAll();
+    }
+
+@GetMapping("list-blog")
 public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
 @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
@@ -90,15 +91,15 @@ public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", requi
     int pageSize = size.orElse(5);
 
   
-    Page<Product> resultPage = null;
+    Page<Blog> resultPage = null;
    
     if (StringUtils.hasText(keyword)) {
         Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = ProductService.findByNameContaining(keyword, pageable);
+        // resultPage = ProductService.findByNameContaining(keyword, pageable);
         model.addAttribute("keyword", keyword);
     } else {
         Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = ProductService.findAll(pageable);
+        resultPage = blogService.findAll(pageable);
         
     }
 
@@ -123,92 +124,64 @@ public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", requi
     
     }
 
-    List<Product> p = ProductService.findAll();
+    List<Blog> p = blogService.findAll();
 
 
     model.addAttribute("keyword", keyword);
-    model.addAttribute("productPage", resultPage);
+    model.addAttribute("blogPage", resultPage);
     model.addAttribute("tt", p.size());
-    return new ModelAndView("web-admin/ListProduct", model);
+    return new ModelAndView("web-admin/ListBlog", model);
 }
-
-@ModelAttribute("categories")
-public List<Category> getCategoryDtos(){
-    return CategoryService.findAll();
-    }
-
-    @ModelAttribute("brands")
-    public List<Brand> getBrandDtos(){
-        return BrandService.findAll();
-        }
-
-        @PostMapping("/store")
-        public String store(ModelMap model) {
-
-        return "web-admin/ListProduct";
-        }
-
-        @GetMapping("/create")
-        public String create() {
-
-        return "web-admin/AddProduct";
-        }
 
 
 
         @PostMapping(value = "update", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
         public ModelAndView update(ModelMap model, 
-        @Validated @ModelAttribute("product") ProductDto dto,
+        @Validated @ModelAttribute("blog") blogDto dto,
         @RequestParam("listImageFile") MultipartFile[] file ,BindingResult result)
         throws ParseException {
 
-
-           
-
         if (result.hasErrors()) {
        
-        return new ModelAndView("admin/product/AddProduct");
+        return new ModelAndView("admin/blog/AddBlog");
         }
         if(!dto.getIsEdit().booleanValue()) {
        dto.setCreateAt(new Date());
         }else {
-            Optional<Product> s = ProductService.findById( dto.getId());
-            
+            Optional<Blog> s = blogService.findById( dto.getId());           
 		    Date pdto = s.get().getCreateAt();
              dto.setCreateAt(pdto);
         }
-         
-           Product product = new Product();
-            BeanUtils.copyProperties(dto, product);
+        
+        
+           Blog bl = new Blog();
+            BeanUtils.copyProperties(dto, bl);
 
-            Category category = new Category();
-            category.setId(dto.getCategoryId());
-            product.setCategory(category);
+            Product pro = new Product();
+            pro.setId(dto.getProductId());
+            bl.setProduct(pro);
 
-            Brand Brand = new Brand();
-            Brand.setId(dto.getBrandId());
-            product.setBrand(Brand);
 
-            product.setUpdateAt(new Date());
-            product.setThumbnail(stogareService.getFileName(dto.getImageFile()));
-            stogareService.store(dto.getImageFile(), product.getThumbnail());
+           bl.setUpdateAt(new Date());
+            bl.setBanner(stogareService.getFileName(dto.getImageFile()));
+            stogareService.store(dto.getImageFile(), bl.getBanner());
             
 
             try {       
            
                 Set<Image> images = uploadImage(file);
-                product.setProductImages(images);
+                bl.setBlogImages(images);
                 
             } catch (Exception e) {
                 System.out.println(e);
 
             }
 
-            ProductService.save(product);
+            blogService.save(bl);
 
 
 
-            return new ModelAndView("redirect:/admin/product/list-product");
+            return new ModelAndView("redirect:/admin/blog/list-blog");
             }
 
 
@@ -221,11 +194,7 @@ public List<Category> getCategoryDtos(){
                         file.getContentType(),
                         file.getBytes());
                         stogareService.store(file,  img.getName());
-                        // System.out.println(stogareService.getFileName(file));
-                        // System.out.println(stogareService.loadResource(img.getName()));
-                        // System.out.println(img.getName());
-                        // System.out.println("--------------------------------------------------------------------------------------------------------------------------------");
-                         images.add(img);
+                       images.add(img);
 
                        
                 }
@@ -247,28 +216,28 @@ public List<Category> getCategoryDtos(){
 
             @GetMapping("delete/{Id}")
             public String delete(ModelMap map, @PathVariable("Id") Integer id) {
-            ProductService.deleteById(id);
+            blogService.deleteById(id);
 
-            return "redirect:/admin/product/list-product";
+            return "redirect:/admin/blog/list-blog";
             }
 
-    @GetMapping("edit/{productId}")
-	public ModelAndView edit(ModelMap map, @PathVariable("productId") Integer Id) {
+    @GetMapping("edit/{Id}")
+	public ModelAndView edit(ModelMap map, @PathVariable("Id") Integer Id) {
 
-		Optional<Product> opt = ProductService.findById(Id);
-        List<Image> images = stogareService.findImageByProductId(Id);
-		ProductDto dto = new ProductDto();
+		Optional<Blog> opt = blogService.findById(Id);
+        List<Image> images = stogareService.findImageByBlogId(Id);
+		blogDto dto = new blogDto();
 
 		if (opt.isPresent()) {
-			Product entity = opt.get();
+			Blog entity = opt.get();
 			BeanUtils.copyProperties(entity, dto);
 			dto.setIsEdit(true);
             map.addAttribute("pushImage", images);
-			map.addAttribute("product", dto);
-			return new ModelAndView("web-admin/AddProduct", map);
+			map.addAttribute("blog", dto);
+			return new ModelAndView("web-admin/AddBlog", map);
 		}
 
-            return new ModelAndView("web-admin/AddProduct");
+            return new ModelAndView("web-admin/AddBlog");
             }
 
 

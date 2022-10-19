@@ -41,6 +41,10 @@ ImageRepository imageRepository;
 public List<Image> findImageByProductId(int productId) {
 	return imageRepository.findImageByProductId(productId);
 }
+@Override
+public List<Image> findImageByBlogId(int BlogId) {
+	return imageRepository.findImageByBlogId(BlogId);
+}
 
 
 

@@ -83,9 +83,9 @@ input[type="file"] {
   
 }
 #page-wrapper .form-three .input-sm{
-  padding: 7px 8px;
+  /* padding: 7px 8px;
     height: 35px;
-    font-size: 16px;
+    font-size: 16px; */
 }
 .icon-add-image{
   font-size: 24px !important;
