@@ -24,13 +24,24 @@ import com.watch.shopwatchonline.Service.ProductService;
 public class ProductServiceImpl implements ProductService {
     
    
-
     @Autowired
 	private ProductRepository repository;
 
-    
 
+    public Page<Product> findByAllNotPrice(int id_brand, int id_cate, Pageable pageable) {
+        return repository.findByAllNotPrice(id_brand, id_cate, pageable);
+    }
+    public Page<Product> findByCategory(int id_cate, Pageable pageable) {
+        return repository.findByCategory(id_cate, pageable);
+    }
+    public Page<Product> findByBrand(int id_brand, Pageable pageable) {
+        return repository.findByBrand(id_brand, pageable);
+    }
 
+    @Override
+    public Page<Product> findByAllOrWhere(String id_cate, String id_brand, float min, float max, Pageable pageable) {
+        return repository.findByAllOrWhere(id_cate, id_brand, min, max, pageable);
+    }
     @Override
     public Page<Product> findByAll(int id_brand, int id_cate, float min, float max, Pageable pageable) {
         return repository.findByAll(id_brand, id_cate, min, max, pageable);

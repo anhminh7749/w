@@ -83,5 +83,10 @@ public interface ProductService {
 	Page<Product> findByAllNotBrand(int id_cate, float min, float max, Pageable pageable) ;
 	Page<Product> findByAllNotCate(int id_brand, float min, float max, Pageable pageable);
 	Page<Product> findByPriceBetween(double min, double max, Pageable pageable) ;
+    Page<Product> findByAllOrWhere(String id_cate, String id_brand, float min, float max, Pageable pageable);
+    Page<Product> findByAllNotPrice(int id_brand, int id_cate, Pageable pageable);
+    Page<Product> findByCategory(int id_cate, Pageable pageable);
+    Page<Product> findByBrand(int id_brand, Pageable pageable);
+
 
 }

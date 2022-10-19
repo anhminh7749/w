@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -82,6 +83,9 @@ public class Product implements Serializable{
 	@JoinColumn(name = "BrandId",nullable = false)
 	private Brand Brand;
 
+	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
+	private Set<Raiting> raitings;
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="product_images",
 	joinColumns  = {
@@ -93,5 +97,5 @@ public class Product implements Serializable{
 	)
 	private Set<Image> productImages;
 
-   
+	
 }
