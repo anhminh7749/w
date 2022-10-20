@@ -46,8 +46,8 @@ import com.watch.shopwatchonline.Service.StogareService;
 
 import com.watch.shopwatchonline.Service.BrandService;
 
-@Controller 
-@RequestMapping("site/product") 
+@Controller
+@RequestMapping("site/product")
 public class SearchProductController {
 
     @Autowired private CategoryService CategoryService;
@@ -72,9 +72,9 @@ public class SearchProductController {
 
         int curPage = page.orElse(1);
         int pageSize = size.orElse(6);
-
+        int abx = sort.orElse(1);
         if (!sort.isEmpty()) {
-            int abx = sort.orElse(1);
+
             Sort sortable = Sort.by("id").ascending();
 
             if (abx == 1) {
@@ -92,20 +92,17 @@ public class SearchProductController {
             if (abx == 2) {
                 sortable = Sort.by("name").descending();
             }
-            if (Getcategory != null) {
-                sortable = Sort.by("name").descending();
-            }
-            model.addAttribute("sort", abx);
-            Pageable pageable = PageRequest.of(curPage - 1, pageSize, sortable);
-            resultPage = ProductService.findAll(pageable);
 
-        } else {
-            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize, sortable);
 
             if (Getcategory != null || Getbrand != null || GetPrice != null) {
-                if (Getcategory != null && Getbrand != null && GetPrice != null) {
+                if (Getbrand != null && Getcategory == null && GetPrice == null) resultPage = ProductService.findByBrand(Integer.parseInt(Getbrand), pageable);
+                if (Getbrand == null && Getcategory != null && GetPrice == null) resultPage = ProductService.findByCategory(Integer.parseInt(Getcategory), pageable);
+                if (Getcategory != null && Getbrand != null && GetPrice == null) resultPage = ProductService.findByAllNotPrice(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), pageable);
+                if (Getbrand != null && Getcategory != null && GetPrice != null) {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
+
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 0, 100, pageable);
                             break;
                         case 2:
@@ -118,16 +115,163 @@ public class SearchProductController {
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 1000, 5000, pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 5000, 500000, pageable);
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 5000, 10000, pageable);
                             break;
                     }
                 }
-                else   if (Getcategory != null && Getbrand != null)  resultPage = ProductService.findByAllNotPrice(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), pageable);
-                else   if (Getbrand != null && GetPrice != null)  resultPage = ProductService.findAll(pageable);
-                else  if (Getcategory != null && GetPrice != null)  resultPage = ProductService.findAll(pageable);
-                else  if ( GetPrice != null)  resultPage = ProductService.findAll(pageable);
-                else  if (Getcategory != null)  resultPage = ProductService.findAll(pageable);
-                else   if (Getbrand != null)  resultPage = ProductService.findAll(pageable);
+                if (Getbrand == null && Getcategory != null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 5000, 500000, pageable);
+                            break;
+                    }
+
+                }
+                if (Getbrand != null && Getcategory == null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 5000, 500000, pageable);
+                            break;
+                    }
+                }
+                if (Getbrand == null && Getcategory == null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+                        
+                            resultPage = ProductService.findByPriceBetween(0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByPriceBetween(100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByPriceBetween(500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByPriceBetween(1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByPriceBetween(5000, 500000, pageable);
+                            break;
+                    }
+                }
+            } else {
+                resultPage = ProductService.findAll(pageable);
+            }
+
+            
+            model.addAttribute("sort", abx);
+
+        } else {
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+
+            if (Getcategory != null || Getbrand != null || GetPrice != null) {
+                if (Getbrand != null && Getcategory == null && GetPrice == null) resultPage = ProductService.findByBrand(Integer.parseInt(Getbrand), pageable);
+                if (Getbrand == null && Getcategory != null && GetPrice == null) resultPage = ProductService.findByCategory(Integer.parseInt(Getcategory), pageable);
+                if (Getcategory != null && Getbrand != null && GetPrice == null) resultPage = ProductService.findByAllNotPrice(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), pageable);
+                if (Getbrand != null && Getcategory != null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 5000, 10000, pageable);
+                            break;
+                    }
+                }
+                if (Getbrand == null && Getcategory != null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 5000, 500000, pageable);
+                            break;
+                    }
+
+                }
+                if (Getbrand != null && Getcategory == null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 5000, 500000, pageable);
+                            break;
+                    }
+                }
+                if (Getbrand == null && Getcategory == null && GetPrice != null) {
+                    switch (Integer.parseInt(GetPrice)) {
+                        case 1:
+                            resultPage = ProductService.findByPriceBetween(0, 100, pageable);
+                            break;
+                        case 2:
+                            resultPage = ProductService.findByPriceBetween(100, 500, pageable);
+                            break;
+                        case 3:
+                            resultPage = ProductService.findByPriceBetween(500, 1000, pageable);
+                            break;
+                        case 4:
+                            resultPage = ProductService.findByPriceBetween(1000, 5000, pageable);
+                            break;
+                        case 5:
+                            resultPage = ProductService.findByPriceBetween(5000, 500000, pageable);
+                            break;
+                    }
+                }
             } else {
                 resultPage = ProductService.findAll(pageable);
             }
@@ -156,6 +300,9 @@ public class SearchProductController {
 
         }
 
+        if (Getcategory != null) {
+            model.addAttribute("Getcategory", Integer.parseInt(Getcategory));
+        }
 
         if (Getbrand != null) {
             model.addAttribute("Getbrand", Integer.parseInt(Getbrand));
@@ -164,6 +311,8 @@ public class SearchProductController {
         if (GetPrice != null) {
             model.addAttribute("GetPrice", Integer.parseInt(GetPrice));
         }
+
+
 
         model.addAttribute("productPage", resultPage);
         model.addAttribute("brand", brand);
@@ -189,11 +338,6 @@ public class SearchProductController {
 
         if (opt.isPresent()) {
             Product entity = opt.get();
-
-            //  Image image = images.get();
-            for (Image i: images) {
-                System.out.println(i.getName());
-            }
 
             model.addAttribute("listimage", images);
             model.addAttribute("product", entity);

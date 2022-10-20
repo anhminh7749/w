@@ -1,3 +1,38 @@
+.text11{
+	margin-top: 10em;
+}
+.text11-content .admin-list{
+	list-style: none;
+
+}
+.text11-content .font-weight-bold{
+    color: #333;
+    text-transform: uppercase;
+	margin-left: 20px;
+	font-weight: 500;
+}
+.text11-content img{
+width: 100%;
+height: 100%;
+height: 500px;
+line-height: 300px;
+text-align: center;
+margin-bottom: 2em;
+}
+ul.admin-list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+.author-cardview, blockquote.quote {
+	padding: 30px;
+	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%);
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-moz-border-radius: 8px;
+}
 
 .justify-content-between i{
 	color: #ffdab0;

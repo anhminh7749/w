@@ -25,24 +25,24 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
 
 
-@Query(value = "select p.* from product p where p.brand_id = ?1 and p.category_id = ?2 and p.price between ?3 and ?4 ;", nativeQuery = true)
-Page<Product> findByAll(int id_brand, int id_cate, float min, float max, Pageable pageable);
+@Query(value = "select * from product where product.brand_id = :bid and product.category_id = :cid and product.price between :min and :max ", nativeQuery = true)
+Page<Product> findByAll(@Param("bid") int id_brand, @Param("cid") int id_cate, @Param("min") float min,@Param("max") float max, Pageable pageable);
 
-@Query(value = "select p.* from product p where  p.category_id = ?1 and p.price between ?2 and ?3 ;", nativeQuery = true)
-Page<Product> findByAllNotBrand( int id_cate, float min, float max, Pageable pageable);
+@Query(value = "select * from product where product.category_id = :cid and product.price between :min and :max ", nativeQuery = true)
+Page<Product> findByAllNotBrand(@Param("cid") int id_cate, @Param("min") float min,@Param("max") float max, Pageable pageable);
 
-@Query(value = "select p.* from product p where p.brand_id = ?1 p.price between ?2 and ?3 ;", nativeQuery = true)
-Page<Product> findByAllNotCate(int id_brand, float min, float max, Pageable pageable);
+@Query(value = "select * from product where product.brand_id = :bid and product.price between :min and :max", nativeQuery = true)
+Page<Product> findByAllNotCate(@Param("bid") int id_brand, @Param("min") float min,@Param("max") float max, Pageable pageable);
 
-@Query(value = "select p.* from product p where p.brand_id = ?1 and p.category_id = ?2;", nativeQuery = true)
-Page<Product> findByAllNotPrice(int id_brand, int id_cate, Pageable pageable);
+@Query(value = "SELECT * FROM Product where Product.brand_id = :bid and Product.category_Id = :cid", nativeQuery = true)
+Page<Product> findByAllNotPrice( @Param("bid") int id_brand, @Param("cid") int id_cate, Pageable pageable);
 
-Page<Product> findByPriceBetween(double min, double max, Pageable pageable);
+Page<Product> findByPriceBetween(float min, float max, Pageable pageable);
 
-@Query(value = "SELECT p FROM Product p where p.category_id = :cid", nativeQuery = true)
+@Query(value = "SELECT * FROM Product  where Product.category_Id = :cid", nativeQuery = true)
 Page<Product> findByCategory(@Param("cid") int id_cate, Pageable pageable);
 
-@Query(value = "SELECT p FROM Product p where p.brand_id = :bid", nativeQuery = true)
+@Query(value = "SELECT * FROM Product where Product.brand_id = :bid", nativeQuery = true)
 Page<Product> findByBrand(@Param("bid") int id_brand, Pageable pageable);
 
 @Query(value = "select p.* from product p"+

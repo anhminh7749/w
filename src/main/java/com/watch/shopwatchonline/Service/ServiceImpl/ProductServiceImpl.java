@@ -55,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
         return repository.findByAllNotCate(id_brand, min, max, pageable);
     }
     @Override
-    public Page<Product> findByPriceBetween(double min, double max, Pageable pageable) {
+    public Page<Product> findByPriceBetween(float min, float max, Pageable pageable) {
         return repository.findByPriceBetween(min, max, pageable);
     }
 

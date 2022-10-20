@@ -53,7 +53,7 @@
 								<div id="pushImage">
 									<label class="custom-file-upload" th:if="${blog.isEdit}" th:each="img:${pushImage}">
 										<img class="chosen"
-											th:src="${img.name!=null?'/site/blog/images/'+img.name:'/images/Background.png'}">
+											th:src="${img.name!=null?'/admin/blog/images/'+img.name:'/images/Background.png'}">
 									</label>
 								</div>
 
