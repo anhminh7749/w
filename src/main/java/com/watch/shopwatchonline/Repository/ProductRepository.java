@@ -54,4 +54,6 @@ Page<Product> findByBrand(@Param("bid") int id_brand, Pageable pageable);
 " or p.category_id = :c "+ 
 " or p.price between :min and :max ", nativeQuery = true)
 Page<Product> findByAllOrWhere(@Param("b") String id_cate, @Param("c") String id_brand, @Param("min") float min, @Param("max")  float max, Pageable pageable);
+
+
 }

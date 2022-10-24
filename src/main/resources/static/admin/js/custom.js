@@ -71,6 +71,13 @@ function changeContentDecs() {
         document.getElementById('panel-guide').style.display = "block";
 
 }
+
+function changeContentCategory() {
+    document.getElementById('panel-title').innerHTML = "Danh mục";
+    document.getElementById('panel-body').innerHTML = "<div><p>- Việc đăng tải sản phẩm đúng ngành hàng giúp Người mua dễ dàng tìm thấy sản phẩm của Shop khi đang tìm kiếm trong ngành hàng đó.</p><p>- Người bán có thể dễ dàng tìm thấy ngành hàng phù hợp cho sản phẩm của Shop.</p><p>- Tham khảo hướng dẫn chọn danh mục ngành hàng cho sản phẩm <a><strong>tại đây</strong></a>.</p></div>";
+        document.getElementById('panel-guide').style.display = "block";
+
+} 
 function changeContentBrand() {
     document.getElementById('panel-title').innerHTML = "Thương Hiệu";
     document.getElementById('panel-body').innerHTML = "<div ><p>Sản phẩm có thương hiệu:</p><p>- Chọn từ danh sách/đăng ký thương hiệu</p><p>Xem hướng dẫn Đăng ký Thương hiệu cho sản phẩm <a  ><strong>tại đây</strong></a></p><p>Sản phẩm không thương hiệu:</p><p>- Chọn <strong>No brand</strong></p><p><br></p><p>⚠️Sản phẩm Mall phải có thương hiệu</p></div>    ";

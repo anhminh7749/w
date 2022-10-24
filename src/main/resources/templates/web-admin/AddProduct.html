@@ -12,12 +12,12 @@
 			<div class="main-page">
 
 				<div class="forms" id="static-content">
-					<h2>ThÃªm Sáº£n Pháº©m</h2>
+					<h2>Thêm Sản Phẩm</h2>
 					<div class="row">
 						<ol class="breadcrumb">
-							<li><a href="#">Trang Chá»§</a></li>
-							<li><a id="par-1">Sáº£n Pháº©m</a></li>
-							<li class="active">ThÃªm Sáº£n Pháº©m</li>
+							<li><a href="#">Trang Chủ</a></li>
+							<li><a id="par-1">Sản Phẩm</a></li>
+							<li class="active">Thêm Mới</li>
 						</ol>
 					</div>
 				</div>
@@ -26,146 +26,95 @@
 
 					<input type="hidden" th:field="*{isEdit}">
 					<input hidden readonly="readonly" th:field="*{Id}">
+					<div class="col-sm-9 col-lg-9">
 
-					<div class="form-three widget-shadow  col-sm-9 col-lg-9">
-						<div class="form-group row mb-5">
-							<div class="lable-add-image">
-								<label class="">HÃ¬nh áº£nh sáº£n pháº©m</label>
-							</div>
-
-							<div style=" max-width: 700px; float: left;">
-								<label class="custom-file-upload">
-									<input id="upload-button-thumbnail" name="imageFile" accept=".png, .jpg, .jpeg"
-										onclick="changeContentThumbnail()" type="file" />
-									<i class="fa fa-plus-circle icon-add-image"></i>
-									<img class="chosen" th:field="*{thumbnail}" id="chosen-thumbnail" alt="edit"
-										th:src="${product.thumbnail!=null?'/admin/product/images/'+product.thumbnail:'/images/Background.png'}">
-									<a class="name-add-image" id="file-thumbnail">áº¢nh bÃ¬a</a>
-								</label>
-
-								<label class="custom-file-upload">
-									<input onclick="changeContentImage()" multiple name="listImageFile" id="listImage"
-										type="file" />
-									<i class="fa fa-plus-circle icon-add-image"></i>
-									<img class="chosen">
-									<a class="name-add-image">áº¢nh bÃ¬a</a>
-								</label>
-
-								<div id="pushImage">
-									<label class="custom-file-upload" th:if="${product.isEdit}"
-									 th:each="img:${pushImage}"> 
-										<img class="chosen"
-											th:src="${img.name!=null?'/site/product/images/'+img.name:'/images/Background.png'}">
-									</label>
+						<div class="form-three widget-shadow ">
+							<div class="form-group">
+								<div class="lable-add-image col-lg-3">
+									<label class="">Hình ảnh sản phẩm</label>
 								</div>
+								<div class="col-lg-9">
+									<label class="custom-file-upload">
+										<input id="upload-button-thumbnail" name="imageFile" accept=".png, .jpg, .jpeg"
+											onclick="changeContentThumbnail()" type="file" />
+										<i class="fa fa-plus-circle icon-add-image"></i>
+										<img class="" th:field="*{thumbnail}" id="chosen-thumbnail" alt="edit"
+											th:src="${product.thumbnail!=null?'/admin/product/images/'+product.thumbnail:'/images/Background.png'}">
+										<a class="name-add-image" id="file-thumbnail">Ảnh bìa</a>
+									</label>
 
-
-									<label class="custom-file-upload" id="file-upload0">
+									<label class="custom-file-upload">
+										<input onclick="changeContentImage()" multiple name="listImageFile"
+											id="listImage" type="file" />
+										<i class="fa fa-plus-circle icon-add-image"></i>
+										<img class="">
+										<a class="name-add-image">Hình ảnh</a>
+									</label>
+									<label class="" id="file-upload0">
 
 										<img class="chosen" id="chosen-image0">
 
 									</label>
-									<label class="custom-file-upload" id="file-upload1">
+									<label class="" id="file-upload1">
 
 										<img class="chosen" id="chosen-image1">
 
 									</label>
-									<label class="custom-file-upload" id="file-upload2">
+									<label class="" id="file-upload2">
 
 										<img class="chosen" id="chosen-image2">
 
 									</label>
-									<label class="custom-file-upload" id="file-upload3">
+									<label class="" id="file-upload3">
 
 										<img class="chosen" id="chosen-image3">
 
 									</label>
-									<label class="custom-file-upload" id="file-upload4">
+									<label class="" id="file-upload4">
 
 										<img class="chosen" id="chosen-image4">
 
 									</label>
-									<label class="custom-file-upload" id="file-upload5">
+									<label class="" id="file-upload5">
 
 										<img class="chosen" id="chosen-image5">
 
 									</label>
-								
-
+									<div id="pushImage">
+										<label class="custom-file-upload" th:if="${product.isEdit}"
+											th:each="img:${pushImage}">
+											<img class="chosen"
+												th:src="${img.name!=null?'/site/product/images/'+img.name:'/images/Background.png'}">
+										</label>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row mb-5">
-							<label for="focusedinput" class="col-sm-2 control-label">TÃªn sáº£n pháº©m</label>
-							<div class="col-sm-9 col-lg-9">
-								<input onclick="changeContentNamePro()" th:field="*{Name}" name="Name" type="text"
-									class="form-control1" id="focusedinput" placeholder="">
-							</div>
-							<small th:if="${#fields.hasErrors('Name')}"
+							<div class="form-group row mb-5">
+								<label for="focusedinput" class="col-sm-2 control-label">Tên sản phẩm</label>
+								<div class="col-sm-9 col-lg-9">
+									<input onclick="changeContentNamePro()" th:field="*{Name}" name="Name" type="text"
+										class="form-control1" id="focusedinput" placeholder="">
+								</div>
+								<small th:if="${#fields.hasErrors('Name')}"
 												id="messError" class="form-text text-muted">Category Id is required!</small>
 							</div>
 
 							<div class="form-group row">
-								<label for="focusedinput" class="col-sm-2 control-label">MÃ´ táº£ sáº£n pháº©m</label>
+								<label for="focusedinput" class="col-sm-2 control-label">Mô tả sản phẩm</label>
 								<div class="col-sm-9 col-lg-9">
 									<textarea onclick="changeContentDecs()" th:field="*{description}" name="description"
-										rows="4" type="text" class="form-control" id="focusedinput"
+										rows="8" type="text" class="form-control" id="focusedinput"
 										placeholder=""></textarea>
 								</div>
 								<small th:if="${#fields.hasErrors('description')}"
 												id="messError" class="form-text text-muted">Category Id is required!</small>
 							</div>
-						
-
-						<div class="col-sm-3 col-lg-3 ">
-							<div id="sidebar-menu" class="col-md-2 hidden-xs hidden-sm">
-								<ul class="main-menu nav nav-stacked affix">
-									<li id="par-1-menu"><a href="#par-1">ThÃ´ng tin cÆ¡ báº£n</a></li>
-									<li id="par-2-menu"><a href="#par-2">ThÃ´ng tin chi tiáº¿t</a></li>
-									<li id="par-3-menu"><a href="#par-3">ThÃ´ng tin bÃ¡n hÃ ng</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col-sm-3 col-lg-3 panel-grids post-note" id="panel-guide">
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<h3 class="panel-title" id="panel-title"> </h3>
-									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
-								</div>
-								<div class="panel-body" id="panel-body">
-
-								</div>
-							</div>
-						</div>
-						
-					</div>
-					
-
-						<div class="form-three widget-shadow  col-sm-9 col-lg-9">
+					</div>					
+					<div class="form-three widget-shadow ">
 							<div id="par-2"></div>
 							<div class="row">
-
 								<div class="form-group  col-sm-6 col-lg-6">
-									<label for="disabledinput" class=" control-label">Máº·t Ä‘á»“ng há»“</label>
-									<div>
-										<select class="form-control input-sm">
-											<option value="">1</option>
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group  col-sm-6 col-lg-6">
-									<label for="disabledinput" class=" control-label">Kiá»ƒu Ä‘á»“ng há»“</label>
-									<div class="">
-										<select class="form-control input-sm">
-											<option value="">1</option>
-										</select>
-									</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="form-group  col-sm-6 col-lg-6">
-									<label for="disabledinput" class=" control-label">ThÆ°Æ¡ng Hiá»‡u</label>
+									<label for="disabledinput" class=" control-label">Thương hiệu</label>
 									<div class="" onclick="changeContentBrand() ">
 										<select th:field="*{BrandId}" name="brands" 
 													class="form-control input-sm">
@@ -176,8 +125,8 @@
 									</div>
 								</div>
 								<div class="form-group  col-sm-6 col-lg-6">
-									<label for="disabledinput" class=" control-label">Danh Má»¥c</label>
-									<div class="">
+									<label for="disabledinput" class=" control-label">Danh Mục</label>
+									<div class="" onclick="changeContentCategory()">
 										<select th:field="*{categoryId}" name="categories" 
 													class="form-control input-sm">
 													<option th:each="item:${categories}"
@@ -186,22 +135,19 @@
 												</select>
 									</div>
 								</div>
-							</div>
+							</div>						
+					</div> 
 
-						
-						</div> 
-
-
-						<div class="form-three widget-shadow  col-sm-9 col-lg-9 mb-5em" id="par-3">
+					<div class="form-three widget-shadow mb-5em" id="par-3">
 							<div class="form-group row ">
-								<label for="focusedinput" class="col-sm-2">GiÃ¡</label>
+								<label for="focusedinput" class="col-sm-2">Giá</label>
 								<div class="col-sm-7 col-lg-7">
 									<input onclick="changeContentPrice()" th:field="*{Price}" name="Price"
 										type="number" class="form-control1" id="focusedinput" placeholder="">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label for="focusedinput" class="col-sm-2">GiÃ¡ Giáº£m</label>
+								<label for="focusedinput" class="col-sm-2">Giá Giảm</label>
 								<div class="col-sm-7 col-lg-7">
 									<input onclick="changeContentSalePrice()"  th:field="*{Discount}" name="Discount"
 										type="text" class="form-control1" id="focusedinput" placeholder="">
@@ -209,16 +155,38 @@
 								
 							</div>
 							<div class="form-group row ">
-								<label for="focusedinput" class="col-sm-2 control-label">Sá»‘ lÆ°á»£ng</label>
+								<label for="focusedinput" class="col-sm-2 control-label">Số lượng</label>
 								<div class="col-sm-7 col-lg-7">
 									<input onclick="changeContentQuantity()" name="Quantity" th:field="*{Quantity}"
 										type="text" class="form-control1" id="focusedinput" placeholder="">
 								</div>
 							</div>
 							
+					</div>
+					</div>
+					<div  class="col-sm-3 col-lg-3">
+						<div class="affix ">
+							<div id="sidebar-menu" class="hidden-xs hidden-sm">
+								<ul class="main-menu nav nav-stacked">
+									<li id="par-1-menu"><a href="#par-1">Thông tin cơ bản</a></li>
+									<li id="par-2-menu"><a href="#par-2">Thông tin trạng trạng thái</a></li>
+									<li id="par-3-menu"><a href="#par-3">Thông tin bán hàng</a></li>
+								</ul>
+							</div>
+						</div> 
+						<div class="panel-grids post-note" id="panel-guide">
+							
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title" id="panel-title"> </h3>
+									<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+								</div>
+								<div class="panel-body" id="panel-body"></div>
+							</div>
 						</div>
-						<div class="sticky-fooder header-section row">
 
+					</div>
+						<div class="sticky-fooder header-section row">
 							<div class="header-right">
 
 								<button name="submit" type="submit" class="btn btn-primary">
@@ -227,9 +195,9 @@
 								</button>
 							</div>
 						</div>
-					</form>
+				</form>
 
-				</div>
+				
 
 			</div>
 		</div>

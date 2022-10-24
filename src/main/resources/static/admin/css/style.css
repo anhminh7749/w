@@ -1,19 +1,32 @@
-/*
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
-*/
+.form-three .form-group .chosen{
+  width: 101px;
+    height: 101px;
+    margin-right: 30px;
+    margin-bottom: 35px;
+    border-radius: 5px;
+    border: 1px solid #8fd3ff;
+}
+
+#page-wrapper .main-page .affix {
+  position: fixed;
+  top: 180px;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
 .tbl-list{
   width: 100px;
 }
 .custom-file-upload img{
-  width: 100px;
-  height: 100px;
+  width: 101px;
+  height: 101px;
   position: relative;
   right: 13px;
   bottom: 7px;
   border: 1px solid #8fd3ff;
+  border-radius: 5px;
 }
 
 .fa-lightbulb-o{
@@ -61,14 +74,14 @@ display: none;
 .header-right .btn-warning, .header-right .btn-default{
   text-transform: initial;
 }
-.sticky-fooder{
+ .main-page .sticky-fooder{
   position: fixed;
   bottom: 0;
   left:2em;
   margin-top: 2em;
   padding: 1em;
   z-index: 100;
-  width: 1157px;
+  width: 1142px;
 }
 .mb-5{
 margin-bottom: 5rem !important;
@@ -118,6 +131,7 @@ input[type="file"] {
   position:relative;
   margin-right: 30px;
   margin-bottom: 35px;
+  border-radius: 5px;
 }
 .custom-file-upload:hover{
   background-color: #f1f1f1;

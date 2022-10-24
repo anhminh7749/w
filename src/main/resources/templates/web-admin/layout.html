@@ -35,8 +35,11 @@
     <link href="/admin/css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"
+        integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css"
+        integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
 </head>
 
@@ -95,26 +98,26 @@
                 const lableimg = document.getElementById("file-upload" + i);
                 if (img != null) {
                     img.setAttribute('src', '');
-                    lableimg.style.visibility = 'hidden';
+                    lableimg.style.display = 'none';
                 }
             }
 
             $("#listImage:file").change(function () {
-              const list=  document.getElementById("pushImage");
-list.style.display= 'none';
+                const list = document.getElementById("pushImage");
+                list.style.display = 'none';
                 for (var i = 0; i < 6; i++) {
                     const img = document.getElementById("chosen-image" + i);
                     const lableimg = document.getElementById("file-upload" + i);
                     if (img != null) {
                         img.setAttribute('src', '');
-                        lableimg.style.visibility = 'hidden';
+                        lableimg.style.display = 'none';
                     }
                 }
 
                 for (var i = 0; i < this.files.length; i++) {
                     let chosenImage = document.getElementById("chosen-image" + i);
                     const lableimg = document.getElementById("file-upload" + i);
-                    lableimg.style.visibility = 'visible';
+                    lableimg.style.display = 'inline';
                     let reader = new FileReader();
                     reader.onload = () => {
                         chosenImage.setAttribute("src", reader.result);
@@ -126,18 +129,15 @@ list.style.display= 'none';
 
         });
 
-// find Selection
-
+        // find Selection
     </script>
 
     <script>
-
-
-    $("#select-state").ready(function () {
-      $('select').selectize({
-          sortField: 'text'
-      });
-  });
+        $("#select-state").ready(function () {
+            $('select').selectize({
+                sortField: 'text'
+            });
+        });
     </script>
     <!-- //Classie -->
     <!-- //for toggle left push menu script -->
