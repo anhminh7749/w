@@ -49,7 +49,7 @@ import com.watch.shopwatchonline.Model.Product;
 import com.watch.shopwatchonline.Service.CategoryService;
 import com.watch.shopwatchonline.Service.ProductService;
 import com.watch.shopwatchonline.Service.StogareService;
-import com.watch.shopwatchonline.message.ResponseMessage;
+import com.watch.shopwatchonline.message.MessageResponse;
 
 import javassist.runtime.Desc;
 
