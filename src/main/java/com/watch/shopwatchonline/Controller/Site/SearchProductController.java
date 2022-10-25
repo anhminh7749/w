@@ -7,6 +7,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -25,6 +27,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,11 +46,11 @@ import com.watch.shopwatchonline.Model.Product;
 import com.watch.shopwatchonline.Service.CategoryService;
 import com.watch.shopwatchonline.Service.ProductService;
 import com.watch.shopwatchonline.Service.StogareService;
-
+import com.watch.shopwatchonline.security.jwt.JwtUtils;
 import com.watch.shopwatchonline.Service.BrandService;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("site/product")
+@RequestMapping("api/site/product")
 public class SearchProductController {
 
     @Autowired private CategoryService CategoryService;
@@ -64,8 +67,12 @@ public class SearchProductController {
         @RequestParam("sort") Optional < Integer > sort,
         @RequestParam(name = "Getcategory", required = false) String Getcategory,
         @RequestParam(name = "Getbrand", required = false) String Getbrand,
-        @RequestParam(name = "GetPrice", required = false) String GetPrice) {
+        @RequestParam(name = "GetPrice", required = false) String GetPrice, HttpServletRequest request) {
 
+            JwtUtils jwt = new JwtUtils();
+            System.out.println("-------------------------------");
+            System.out.println(jwt.getUserNameFromJwtToken(jwt.getJwtFromCookies(request)));
+            
         List < Brand > brand = BrandService.findAll();
         List < Category > cate = CategoryService.findAll();
         Page < Product > resultPage = null;

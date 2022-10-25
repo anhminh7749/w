@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,13 +16,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.watch.shopwatchonline.Domain.ProductDto;
 import com.watch.shopwatchonline.Domain.UserDto;
@@ -38,7 +44,7 @@ import com.watch.shopwatchonline.security.jwt.JwtUtils;
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
-@RestController
+@Controller
 @RequestMapping("/api/auth")
 public class AuthController {
   @Autowired
@@ -55,39 +61,77 @@ public class AuthController {
 
   @Autowired
   JwtUtils jwtUtils;
-  @PostMapping("/signin")
-  public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+  private String linkApi;
+
+  // @PostMapping(value="/signin")
+  // public String authenticateUser( @RequestParam(name = "username") String username,
+  //  @RequestParam(name = "password") String password ) {
+
+  //   Authentication authentication = authenticationManager
+  //       .authenticate(new UsernamePasswordAuthenticationToken(username, password));
+
+  //   SecurityContextHolder.getContext().setAuthentication(authentication);
+
+  //   UserDto userDetails = (UserDto) authentication.getPrincipal();
+
+  //   ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+
+  //   List<String> roles = userDetails.getAuthorities().stream()
+  //       .map(item -> item.getAuthority())
+  //       .collect(Collectors.toList());
+        
+  //       ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new UserInfoResponse(userDetails.getId(),
+  //       userDetails.getUsername(),
+  //       userDetails.getEmail(),
+  //       userDetails.getGender(),
+  //       userDetails.getPhone(),
+  //       roles));
+     
+  //   return "redirect:/admin/product/add-product";
+  // }
+
+
+  @PostMapping(value="/signin")
+  public ResponseEntity<?> authenticateUser( @RequestParam(name = "username") String username,
+   @RequestParam(name = "password") String password ) {
 
     Authentication authentication = authenticationManager
-        .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        .authenticate(new UsernamePasswordAuthenticationToken(username, password));
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
 
     UserDto userDetails = (UserDto) authentication.getPrincipal();
-
+    
     ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
+    
+    // List<String> roles = userDetails.getAuthorities().stream()
+    //     .map(item -> item.getAuthority())
+    //     .collect(Collectors.toList());
 
-    List<String> roles = userDetails.getAuthorities().stream()
-        .map(item -> item.getAuthority())
-        .collect(Collectors.toList());
+    //     roles.forEach(role -> {
+    //       if(role.equals("admin")){linkApi = "redirect:/api/admin/product/add-product";}else{
+    //         linkApi = "redirect:/api/site/product";
+    //       }
+    //     });
+        
+        // return "redirect:/api/admin/product/add-product";
 
-    return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-        .body(new UserInfoResponse(userDetails.getId(),
-                                   userDetails.getUsername(),
-                                   userDetails.getEmail(),
-                                   userDetails.getGender(),
-                                   userDetails.getPhone(),
-                                   roles));
+        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new MessageResponse("okkk"));
+               
+       
   }
 
-  @PostMapping("/signup")
-  public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+  @PostMapping(value="/signup")
+  public String registerUser(  @Validated @ModelAttribute("signUpRequest") SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-      return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+      ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+      return "forward:/signup";
     }
 
     if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-      return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+      ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+      return "forward:/signup";
     }
    
     // Create new user's account
@@ -130,8 +174,8 @@ public class AuthController {
 
     user.setRoles(roles);
     userRepository.save(user);
-
-    return ResponseEntity.ok(new MessageResponse("User registered successfully!" ));
+    ResponseEntity.ok(new MessageResponse("User registered successfully!" ));
+    return "redirect:/api/login";
   }
 
   @PostMapping("/signout")
@@ -140,4 +184,5 @@ public class AuthController {
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
   }
+  
 }

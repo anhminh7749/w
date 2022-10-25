@@ -11,6 +11,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -21,8 +23,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.expression.ParseException;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +34,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -41,6 +47,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.resource.HttpResource;
 
 import com.watch.shopwatchonline.Domain.ListImageDto;
 import com.watch.shopwatchonline.Domain.ProductDto;
@@ -52,13 +59,16 @@ import com.watch.shopwatchonline.Service.CategoryService;
 import com.watch.shopwatchonline.Service.ProductService;
 import com.watch.shopwatchonline.Service.StogareService;
 import com.watch.shopwatchonline.message.MessageResponse;
+import com.watch.shopwatchonline.security.Response.UserInfoResponse;
+import com.watch.shopwatchonline.security.jwt.AuthTokenFilter;
+import com.watch.shopwatchonline.security.jwt.JwtUtils;
 
 import javassist.runtime.Desc;
 
 import com.watch.shopwatchonline.Service.BrandService;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("admin/product")
+@RequestMapping("api/admin/product")
 public class ProductController {
 
 @Autowired
@@ -73,11 +83,11 @@ private ProductService ProductService;
 @Autowired
 private StogareService stogareService;
 
-
-@GetMapping("add-product")
+@GetMapping(value="add-product")
 public String indexA(Model model) {
     ProductDto dto = new ProductDto();
     dto.setIsEdit(false);
+
     model.addAttribute("product", dto);
 return "web-admin/AddProduct";
 }

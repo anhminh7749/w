@@ -33,6 +33,7 @@ public class UserDto implements UserDetails{
 
   private String phone;
   
+  
     private Collection<? extends GrantedAuthority> authorities;
     
     public static UserDto build(User user) {

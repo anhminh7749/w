@@ -15,6 +15,11 @@ public class HomeController {
     public String allAccess() {
       return "web-admin/login";
     }
+
+    @GetMapping("/register")
+    public String Access() {
+      return "web-admin/signup";
+    }
   
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")

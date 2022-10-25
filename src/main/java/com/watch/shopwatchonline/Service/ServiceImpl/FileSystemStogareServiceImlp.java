@@ -35,8 +35,6 @@ public class FileSystemStogareServiceImlp implements StogareService {
 @Autowired
 ImageRepository imageRepository;
 
-
-
 @Override
 public List<Image> findImageByProductId(int productId) {
 	return imageRepository.findImageByProductId(productId);
