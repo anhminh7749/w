@@ -21,6 +21,7 @@ import org.springframework.expression.ParseException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -43,9 +44,14 @@ import com.watch.shopwatchonline.Model.Brand;
 import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Model.Image;
 import com.watch.shopwatchonline.Model.Product;
+import com.watch.shopwatchonline.Model.Raiting;
+import com.watch.shopwatchonline.Model.User;
+import com.watch.shopwatchonline.Repository.RaitingRepository;
+import com.watch.shopwatchonline.Repository.UserRepository;
 import com.watch.shopwatchonline.Service.CategoryService;
 import com.watch.shopwatchonline.Service.ProductService;
 import com.watch.shopwatchonline.Service.StogareService;
+import com.watch.shopwatchonline.Service.ServiceImpl.UserDetailsServiceImpl;
 import com.watch.shopwatchonline.security.jwt.JwtUtils;
 import com.watch.shopwatchonline.Service.BrandService;
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -60,6 +66,10 @@ public class SearchProductController {
     @Autowired private ProductService ProductService;
 
     @Autowired private StogareService StogareService;
+    @Autowired
+  private RaitingRepository raitingRepository;
+
+
 
     @GetMapping("") public ModelAndView index(ModelMap model,
         @RequestParam("page") Optional < Integer > page,
@@ -67,12 +77,9 @@ public class SearchProductController {
         @RequestParam("sort") Optional < Integer > sort,
         @RequestParam(name = "Getcategory", required = false) String Getcategory,
         @RequestParam(name = "Getbrand", required = false) String Getbrand,
-        @RequestParam(name = "GetPrice", required = false) String GetPrice, HttpServletRequest request) {
+        @RequestParam(name = "GetPrice", required = false) String GetPrice) {
 
-            JwtUtils jwt = new JwtUtils();
-            System.out.println("-------------------------------");
-            System.out.println(jwt.getUserNameFromJwtToken(jwt.getJwtFromCookies(request)));
-            
+          
         List < Brand > brand = BrandService.findAll();
         List < Category > cate = CategoryService.findAll();
         Page < Product > resultPage = null;
@@ -337,13 +344,27 @@ public class SearchProductController {
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @GetMapping("detail/{id}") public ModelAndView detailProduct(ModelMap model, @PathVariable("id") Integer id) {
+    @GetMapping("detail/{id}") public ModelAndView detailProduct(ModelMap model, @PathVariable("id") Integer id, HttpServletRequest request) {
         Optional < Product > opt = ProductService.findById(id);
         List < Image > images = StogareService.findImageByProductId(id);
-
-
-
+        List<Raiting> rai = raitingRepository.findByProductId(id);
+        // System.out.println("-------------------------------");
+        // String token = jwtUtils.getJwtFromCookies(request);
+        // String username =jwtUtils.getUserNameFromJwtToken(token);
+        // Optional<User> user = userRepository.findByUsername(username);
+        float avg = raitingRepository.AvgByProductId(id);
+        System.out.println("-------------------------------");
+        System.out.println(avg);
         if (opt.isPresent()) {
+            if (!rai.isEmpty()) {
+                model.addAttribute("raiting", rai);
+              
+            }
+
+            if (avg!=0) {
+                model.addAttribute("avg", avg);
+              
+            }
             Product entity = opt.get();
 
             model.addAttribute("listimage", images);

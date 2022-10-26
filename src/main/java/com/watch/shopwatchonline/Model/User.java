@@ -45,6 +45,9 @@ public class User {
 //   @Size(max = 10)
   private String phone;
 
+  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	private Set<Raiting> raitings;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles", 
              joinColumns = @JoinColumn(name = "user_id"),

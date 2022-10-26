@@ -124,6 +124,7 @@ public class AuthController {
 
   @PostMapping(value="/signup")
   public String registerUser(  @Validated @ModelAttribute("signUpRequest") SignupRequest signUpRequest) {
+   
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
       ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
       return "forward:/signup";
@@ -143,14 +144,15 @@ public class AuthController {
 
     Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
-    System.out.println(user.getGender());
+   
     if (strRoles == null) {
       Role userRole = roleRepository.findByName(Erole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is null."));
       roles.add(userRole);
     } else {
       strRoles.forEach(role -> {
-       
+    //     System.out.println("----------------------------");
+    // System.out.println(role);
         switch (role) {
         case "admin":
           Role adminRole = roleRepository.findByName(Erole.ROLE_ADMIN)

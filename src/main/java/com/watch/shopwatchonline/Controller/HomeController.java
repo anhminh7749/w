@@ -15,6 +15,10 @@ public class HomeController {
     public String allAccess() {
       return "web-admin/login";
     }
+    @GetMapping("/site/login")
+    public String all() {
+      return "web-site/login";
+    }
 
     @GetMapping("/register")
     public String Access() {

@@ -31,7 +31,7 @@ public class Raiting implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Size(max = 3000, min = 100, message = "Comment be between 100 and 3000 characters")
+	// @Size(max = 3000, min = 100, message = "Comment be between 100 and 3000 characters")
 	private String comment;
 
 	@Column(nullable = false)
@@ -48,8 +48,8 @@ public class Raiting implements Serializable{
 	@JoinColumn(name = "ProductId",nullable = false)
 	private Product Product;
 
-    // @ManyToOne
-	// @JoinColumn(name = "CustomerId",nullable = false)
-	// private Customer customer;
+    @ManyToOne
+	@JoinColumn(name = "UserId",nullable = false)
+	private User users;
    
 }
