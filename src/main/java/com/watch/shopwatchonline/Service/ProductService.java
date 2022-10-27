@@ -88,5 +88,5 @@ public interface ProductService {
     Page<Product> findByCategory(int id_cate, Pageable pageable);
     Page<Product> findByBrand(int id_brand, Pageable pageable);
 
-
+    Page<Product> findByUserName(String username, Pageable pageable);
 }

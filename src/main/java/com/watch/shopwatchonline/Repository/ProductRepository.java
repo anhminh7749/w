@@ -13,17 +13,14 @@ import com.watch.shopwatchonline.Model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer>{
 
+  @Query(value = "select p.* from product p join wishlist w on w.product_id = p.id join users u on u.id = w.user_id where u.username = ?1", nativeQuery= true)
+  Page<Product> findByUserName(String username, Pageable pageable);
 
     @Query(value = "SELECT p FROM Product p "+
    "join Brand b on b.id =  p.Brand.id "+ 
      "join Category c on c.id =  p.Category.id "+ 
     "where p.name like %:kw% or p.id like %:kw% or c.name like %:kw% or b.name like %:kw%")
     Page<Product> findByNameContaining(@Param("kw") String keyword, Pageable pageable);
-
-
-
-
-
 
 @Query(value = "select * from product where product.brand_id = :bid and product.category_id = :cid and product.price between :min and :max ", nativeQuery = true)
 Page<Product> findByAll(@Param("bid") int id_brand, @Param("cid") int id_cate, @Param("min") float min,@Param("max") float max, Pageable pageable);

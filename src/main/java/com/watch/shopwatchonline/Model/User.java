@@ -48,6 +48,9 @@ public class User {
   @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 	private Set<Raiting> raitings;
 
+  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	private Set<wishlist> wishlists;
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles", 
              joinColumns = @JoinColumn(name = "user_id"),

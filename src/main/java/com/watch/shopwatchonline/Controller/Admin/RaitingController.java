@@ -28,132 +28,132 @@ import com.watch.shopwatchonline.Repository.RaitingRepository;
 @RequestMapping("api/admin/raiting")
 public class RaitingController {
     @Autowired
-  private RaitingRepository raitingRepository;
+    private RaitingRepository raitingRepository;
 
-  
-@GetMapping("list-waiting")
-public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
-@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
-    int curPage = page.orElse(1);
-    int pageSize = size.orElse(5);
+    @GetMapping("list-waiting")
+    public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
+        @RequestParam("page") Optional < Integer > page, @RequestParam("size") Optional < Integer > size) {
 
-  
-    Page<Raiting> resultPage = null;
-   
-    if (StringUtils.hasText(keyword)) {
-        Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = raitingRepository.findByKeyWord(keyword, (short) 0,pageable);
-        model.addAttribute("keyword", keyword);
-    } else {
-        Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = raitingRepository.findByActive((short) 0,pageable);
-        
-    }
+        int curPage = page.orElse(1);
+        int pageSize = size.orElse(5);
 
-    int totalPages = resultPage.getTotalPages();
 
-    if (totalPages > 0) {
-        int start = Math.max(1, curPage - 2);
-        int end = Math.min(curPage + 2, totalPages);
+        Page < Raiting > resultPage = null;
 
-        if (totalPages > 5) {
-            if (end == totalPages){
-                start = end - 5;
-            }else{
-                if (start == 1){
-                    end = start + 5;
-                }
-            }
+        if (StringUtils.hasText(keyword)) {
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+            resultPage = raitingRepository.findByKeyWord(keyword, (short) 0, pageable);
+            model.addAttribute("keyword", keyword);
+        } else {
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+            resultPage = raitingRepository.findByActive((short) 0, pageable);
+
         }
 
-        List<Integer> pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-        model.addAttribute("pageNums", pageNums);
-    
-    }
+        int totalPages = resultPage.getTotalPages();
 
-    List<Raiting> p = raitingRepository.findAll();
+        if (totalPages > 0) {
+            int start = Math.max(1, curPage - 2);
+            int end = Math.min(curPage + 2, totalPages);
 
-
-    model.addAttribute("keyword", keyword);
-    model.addAttribute("raitingPage", resultPage);
-    model.addAttribute("tt", p.size());
-    return new ModelAndView("web-admin/ListRaiting", model);
-}
-
-
-@GetMapping("list-check")
-public ModelAndView index(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
-@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
-
-    int curPage = page.orElse(1);
-    int pageSize = size.orElse(5);
-
-  
-    Page<Raiting> resultPage = null;
-   
-    if (StringUtils.hasText(keyword)) {
-        Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = raitingRepository.findByKeyWord(keyword, (short) 1,pageable);
-        model.addAttribute("keyword", keyword);
-    } else {
-        Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-        resultPage = raitingRepository.findByActive((short) 1,pageable);
-        
-    }
-
-    int totalPages = resultPage.getTotalPages();
-
-    if (totalPages > 0) {
-        int start = Math.max(1, curPage - 2);
-        int end = Math.min(curPage + 2, totalPages);
-
-        if (totalPages > 5) {
-            if (end == totalPages){
-                start = end - 5;
-            }else{
-                if (start == 1){
-                    end = start + 5;
+            if (totalPages > 5) {
+                if (end == totalPages) {
+                    start = end - 5;
+                } else {
+                    if (start == 1) {
+                        end = start + 5;
+                    }
                 }
             }
+
+            List < Integer > pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNums", pageNums);
+
         }
 
-        List<Integer> pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-        model.addAttribute("pageNums", pageNums);
-    
+        List < Raiting > p = raitingRepository.findAll();
+
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("raitingPage", resultPage);
+        model.addAttribute("tt", p.size());
+        return new ModelAndView("web-admin/ListRaiting", model);
     }
 
-    List<Raiting> p = raitingRepository.findAll();
+
+    @GetMapping("list-check")
+    public ModelAndView index(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
+        @RequestParam("page") Optional < Integer > page, @RequestParam("size") Optional < Integer > size) {
+
+        int curPage = page.orElse(1);
+        int pageSize = size.orElse(5);
 
 
-    model.addAttribute("keyword", keyword);
-    model.addAttribute("raitingPage", resultPage);
-    model.addAttribute("tt", p.size());
-    return new ModelAndView("web-admin/ListRaiting", model);
-}
+        Page < Raiting > resultPage = null;
 
+        if (StringUtils.hasText(keyword)) {
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+            resultPage = raitingRepository.findByKeyWord(keyword, (short) 1, pageable);
+            model.addAttribute("keyword", keyword);
+        } else {
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
+            resultPage = raitingRepository.findByActive((short) 1, pageable);
 
-@GetMapping("check/{Id}")
-	public ModelAndView edit(ModelMap map, @PathVariable("Id") Integer Id) {
+        }
 
-		Optional<Raiting> opt = raitingRepository.findById(Id);
+        int totalPages = resultPage.getTotalPages();
 
-		if (opt.isPresent()) {
-			Raiting entity = opt.get();
-			Raiting r = new Raiting();
-             BeanUtils.copyProperties(entity, r);
-             r.setActive((short) 1);
-             raitingRepository.save(r);
-			return new ModelAndView("/list-waiting", map);
-		}
+        if (totalPages > 0) {
+            int start = Math.max(1, curPage - 2);
+            int end = Math.min(curPage + 2, totalPages);
 
-            return new ModelAndView("/list-waiting");
+            if (totalPages > 5) {
+                if (end == totalPages) {
+                    start = end - 5;
+                } else {
+                    if (start == 1) {
+                        end = start + 5;
+                    }
+                }
             }
 
-            @GetMapping("delete/{Id}")
-            public String delete(ModelMap map, @PathVariable("Id") Integer id) {
-                raitingRepository.deleteById(id);
+            List < Integer > pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNums", pageNums);
 
-            return "redirect:/api/admin/raiting/list-waiting";
-            }
+        }
+
+        List < Raiting > p = raitingRepository.findAll();
+
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("raitingPage", resultPage);
+        model.addAttribute("tt", p.size());
+        return new ModelAndView("web-admin/ListRaiting", model);
+    }
+
+
+    @GetMapping("check/{Id}")
+    public ModelAndView edit(ModelMap map, @PathVariable("Id") Integer Id) {
+
+        Optional < Raiting > opt = raitingRepository.findById(Id);
+
+        if (opt.isPresent()) {
+            Raiting entity = opt.get();
+            Raiting r = new Raiting();
+            BeanUtils.copyProperties(entity, r);
+            r.setActive((short) 1);
+            raitingRepository.save(r);
+            return new ModelAndView("/list-waiting", map);
+        }
+
+        return new ModelAndView("/list-waiting");
+    }
+
+    @GetMapping("delete/{Id}")
+    public String delete(ModelMap map, @PathVariable("Id") Integer id) {
+        raitingRepository.deleteById(id);
+
+        return "redirect:/api/admin/raiting/list-waiting";
+    }
 }

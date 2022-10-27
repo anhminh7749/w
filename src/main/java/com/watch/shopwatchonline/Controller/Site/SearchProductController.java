@@ -48,6 +48,7 @@ import com.watch.shopwatchonline.Model.Raiting;
 import com.watch.shopwatchonline.Model.User;
 import com.watch.shopwatchonline.Repository.RaitingRepository;
 import com.watch.shopwatchonline.Repository.UserRepository;
+import com.watch.shopwatchonline.Repository.WishlistRepository;
 import com.watch.shopwatchonline.Service.CategoryService;
 import com.watch.shopwatchonline.Service.ProductService;
 import com.watch.shopwatchonline.Service.StogareService;
@@ -68,8 +69,10 @@ public class SearchProductController {
     @Autowired private StogareService StogareService;
     @Autowired
   private RaitingRepository raitingRepository;
-
-
+  @Autowired private JwtUtils jwtUtils;
+  @Autowired private UserRepository userRepository;
+  @Autowired
+  private WishlistRepository wishlistRepository;
 
     @GetMapping("") public ModelAndView index(ModelMap model,
         @RequestParam("page") Optional < Integer > page,
@@ -348,13 +351,23 @@ public class SearchProductController {
         Optional < Product > opt = ProductService.findById(id);
         List < Image > images = StogareService.findImageByProductId(id);
         List<Raiting> rai = raitingRepository.findByProductId(id);
-        // System.out.println("-------------------------------");
-        // String token = jwtUtils.getJwtFromCookies(request);
-        // String username =jwtUtils.getUserNameFromJwtToken(token);
-        // Optional<User> user = userRepository.findByUsername(username);
-        float avg = raitingRepository.AvgByProductId(id);
-        System.out.println("-------------------------------");
-        System.out.println(avg);
+        String token = jwtUtils.getJwtFromCookies(request);
+        String username =jwtUtils.getUserNameFromJwtToken(token);
+        Optional<User> user = userRepository.findByUsername(username);
+        float avg=0;
+         if(raitingRepository.AvgByProductId(id) != null){
+            avg = Float.parseFloat(raitingRepository.AvgByProductId(id));
+        }
+        
+        int like;
+        if(!wishlistRepository.check(opt.get().getId(), user.get().getId()).isEmpty()){
+            like = 0;
+            model.addAttribute("like", like);
+        }else{
+            like = 1;
+            model.addAttribute("like", like);
+        }
+
         if (opt.isPresent()) {
             if (!rai.isEmpty()) {
                 model.addAttribute("raiting", rai);
@@ -377,27 +390,3 @@ public class SearchProductController {
 
 }
 
-
-// if (Getbrand != null) {
-//     if (GetPrice != null) {
-//         switch (Integer.parseInt(GetPrice)) {
-//             case 1:
-//             System.out.println("---------------------------------------------------------------------------------------------------------------------");
-//                 resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 0, 100, pageable);
-//                 break;
-//             case 2:
-//                 resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 100, 500, pageable);
-//                 break;
-//             case 3:
-//                 resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 500, 1000, pageable);
-//                 break;
-//             case 4:
-//                 resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 1000, 5000, pageable);
-//                 break;
-//             case 5:
-//                 resultPage = ProductService.findByAll(Integer.parseInt(Getbrand), Integer.parseInt(Getcategory), 5000, 500000, pageable);
-//                 break;
-//         }
-
-//     }
-// }

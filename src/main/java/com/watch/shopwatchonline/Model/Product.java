@@ -87,6 +87,9 @@ public class Product implements Serializable{
 	private Set<Raiting> raitings;
 
 	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
+	private Set<wishlist> wishlists;
+
+	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
 	private Set<Blog> blogs;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

@@ -1,3 +1,22 @@
+
+.icon-heart-empty{
+
+	font-size: initial;
+    color: #b2b2b2;
+	font-weight: bold !important;
+	text-decoration: none !important;
+}
+
+.icon-heart-empty:hover{
+	color: red;
+}
+
+.icon-heart {
+	font-size: initial;
+    color: red;
+	text-decoration: none !important;
+}
+
 .stars-outer {
 	position: relative;
 	display: inline-block;

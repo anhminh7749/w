@@ -27,13 +27,15 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
 	private ProductRepository repository;
 
-
+    @Override
     public Page<Product> findByAllNotPrice(int id_brand, int id_cate, Pageable pageable) {
         return repository.findByAllNotPrice(id_brand, id_cate, pageable);
     }
+    @Override
     public Page<Product> findByCategory(int id_cate, Pageable pageable) {
         return repository.findByCategory(id_cate, pageable);
     }
+    @Override
     public Page<Product> findByBrand(int id_brand, Pageable pageable) {
         return repository.findByBrand(id_brand, pageable);
     }
@@ -168,7 +170,10 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Product entity) {
         repository.delete(entity);
     }
-
+    @Override
+    public Page<Product> findByUserName(String username, Pageable pageable) {
+        return repository.findByUserName(username, pageable);
+    }
     @Override
     public <S extends Product, R> R findBy(Example<S> example, Function<FetchableFluentQuery<S>, R> queryFunction) {
         return repository.findBy(example, queryFunction);
