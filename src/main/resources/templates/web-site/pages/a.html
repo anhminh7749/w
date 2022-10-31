@@ -1,0 +1,46 @@
+<div class="cart_item cart-header">
+    <div class="close1 btn__small btn_remove" action="remove">&times;</div>
+    <div class="cart-sec simpleCart_shelfItem">
+        <div class="cart-item cyc">
+            <img id="product_image" src="${product.image}" class="img-responsive" alt="" />
+        </div>
+        <div class="cart-item-info">
+            <input type="hidden" id="product__id" value="${product.id}">
+            <h3><a class="product__name">${product.name}</a><span>Model No: 3578</span></h3>
+            <ul class="qty">
+                <div th:if="${pro.discount==0}">
+                    <li>
+                        <p id="product__price">Price : ${product.price}</p>
+                    </li>
+                </div>
+                <div th:if="${pro.discount!=0}">
+                    <li>
+                        <p id="product__price">Original Price : ${product.price}</p>
+                    </li>
+                    <li>
+                        <p class="product__discount">Unit Price : ${product.discount}</p>
+                    </li>
+                </div>
+                <li>
+                    <p class="product__quantity">Qty : ${product.quantity}</p>
+                </li>
+                <div th:if="${pro.discount==0}">
+                    <li>
+                        <p>Total Price : ${product.price * product.quantity}</p>
+                    </li>
+                </div>
+                <div th:if="${pro.discount!=0}">
+                    <li>
+                        <p>Total Price : ${(product.price - product.discount) * product.quantity}</p>
+                    </li>
+                </div>
+            </ul>
+            <div class="delivery">
+                <p>Service Charges : Rs.100.00</p>
+                <span>Delivered in 2-3 business days</span>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>

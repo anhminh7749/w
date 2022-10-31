@@ -4,7 +4,7 @@
 
 
 	<body layout:fragment="content">
-	
+		<div th:replace="web-site/pages/mini-cart :: mini-cart"></div> 
 	<form class="men">
 		<div class="container">
 			<div class="col-md-4 sidebar_men">
@@ -28,9 +28,7 @@
 						<li class="cat-item cat-item-42">
 							<a th:text="${br.name}"></a>
 							<span class="count">
-								
-										<input type="radio" name="Getbrand" th:checked="${Getbrand==br.id} ? 'checked'" th:value="${br.id}" onchange="this.form.submit()" > 
-										
+										<input type="radio" name="Getbrand" th:checked="${Getbrand==br.id} ? 'checked'" th:value="${br.id}" onchange="this.form.submit()" > 							
 							</span>
 						</li>
 					</ul>
@@ -118,6 +116,7 @@
 					<div class="clearfix"></div>
 					<ul>
 						<li class="simpleCart_shelfItem" th:each="pro, iStart:${productPage}">
+						
 							<a class="cbp-vm-image" href="#">
 								<div class="view view-first">
 									<div class="inner_content clearfix">
@@ -131,16 +130,27 @@
 												</div>
 											</div>
 											<div class="product_container">
-												<h4 th:text="${pro.name}"></h4>
-
-												<div class="price mount item_price" th:text="${pro.Price}+'VND'"></div>
-												<a class="button item_add cbp-vm-icon cbp-vm-add" href="#">Add to
-													cart</a>
+											<img id="image" style="display: none;"
+													th:src="${pro.thumbnail!=null?'/api/site/product/images/'+pro.thumbnail:'/images/Background.png'}"
+													class="img-responsive zoom-img"></div>
+												<h4 class="product__name" th:text="${pro.name}"></h4>
+												<input type="hidden" name="" id="product__id" th:value="${pro.id}" />
+												<div th:if="${pro.discount==0}">
+													<a class="price mount product__price" th:text="'$'+${pro.Price}"></a>
+												</div>
+												<div th:if="${pro.discount!=0}">
+													<a class="price mount product__price reducedfrom" th:text="'$'+${pro.Price}"></a>
+													<a class="price mount actual" th:text="'$'+${pro.Price-pro.discount}"></a>
+												</div>
+													
+												<p class=" product__discount actual" hidden th:text="'$'+${pro.discount}"></p>
+												<a class="button item_add cbp-vm-icon cbp-vm-add row btn__add__to__cart" style="display: block;"> Add to cart</a>
 											</div>
 										</div>
 									</div>
 								</div>
 							</a>
+							
 						</li>
 
 					</ul>
