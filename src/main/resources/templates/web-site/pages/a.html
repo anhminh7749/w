@@ -1,46 +1,39 @@
-<div class="cart_item cart-header">
-    <div class="close1 btn__small btn_remove" action="remove">&times;</div>
-    <div class="cart-sec simpleCart_shelfItem">
-        <div class="cart-item cyc">
-            <img id="product_image" src="${product.image}" class="img-responsive" alt="" />
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+</head>
+
+<body th:fragment="chat">
+
+  <body>
+
+    <div id="body">
+      <div id="chat-circle" class="btn btn-raised">
+        <div id="chat-overlay"></div>
+        <a  id="btn-chat"><i class="icon-comment"></i></a>
+      </div>
+
+      <div class="chat-box" id="chat-box">
+        <div class="chat-box-header">
+          <span class="chat-box-toggle" id="room-id-display"><i class="material-icons">close</i></span>
         </div>
-        <div class="cart-item-info">
-            <input type="hidden" id="product__id" value="${product.id}">
-            <h3><a class="product__name">${product.name}</a><span>Model No: 3578</span></h3>
-            <ul class="qty">
-                <div th:if="${pro.discount==0}">
-                    <li>
-                        <p id="product__price">Price : ${product.price}</p>
-                    </li>
-                </div>
-                <div th:if="${pro.discount!=0}">
-                    <li>
-                        <p id="product__price">Original Price : ${product.price}</p>
-                    </li>
-                    <li>
-                        <p class="product__discount">Unit Price : ${product.discount}</p>
-                    </li>
-                </div>
-                <li>
-                    <p class="product__quantity">Qty : ${product.quantity}</p>
-                </li>
-                <div th:if="${pro.discount==0}">
-                    <li>
-                        <p>Total Price : ${product.price * product.quantity}</p>
-                    </li>
-                </div>
-                <div th:if="${pro.discount!=0}">
-                    <li>
-                        <p>Total Price : ${(product.price - product.discount) * product.quantity}</p>
-                    </li>
-                </div>
-            </ul>
-            <div class="delivery">
-                <p>Service Charges : Rs.100.00</p>
-                <span>Delivered in 2-3 business days</span>
-                <div class="clearfix"></div>
-            </div>
+        <div class="chat-box-body">
+          <div class="chat-box-overlay"> </div>
+          <div class="connecting">
+            Connecting...
+          </div>
+          <ul class="chat-logs" id="messageArea"></ul>
+          <!--chat-log -->
         </div>
-        <div class="clearfix"></div>
+        <div class="chat-input">
+          <form id="messageForm" name="messageForm" nameForm="messageForm">
+            <input type="text" id="chat-input" placeholder="Send a message..." />
+            <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>
+          </form>
+        </div>
+      </div>
     </div>
-</div>
+  </body>
+
+</html>

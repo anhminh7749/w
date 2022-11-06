@@ -1,9 +1,12 @@
 package com.watch.shopwatchonline.Controller.Admin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.watch.shopwatchonline.Model.ChatBox;
 import com.watch.shopwatchonline.Model.Raiting;
+import com.watch.shopwatchonline.Repository.ChatBoxRepository;
 import com.watch.shopwatchonline.Repository.RaitingRepository;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -122,10 +128,9 @@ public class RaitingController {
             model.addAttribute("pageNums", pageNums);
 
         }
-
+       
         List < Raiting > p = raitingRepository.findAll();
-
-
+        
         model.addAttribute("keyword", keyword);
         model.addAttribute("raitingPage", resultPage);
         model.addAttribute("tt", p.size());

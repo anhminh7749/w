@@ -38,6 +38,7 @@ public class User {
   @Size(max = 120)
   private String password;
 
+  private String avatar;
   @NotNull
   private Short gender;
 
@@ -50,6 +51,9 @@ public class User {
 
   @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 	private Set<wishlist> wishlists;
+
+  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+private Set<ChatBox> chatBox;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles", 

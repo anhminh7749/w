@@ -7,15 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="keywords" content="Watches Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
     Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
-        <script type="application/x-javascript">
-            addEventListener("load", function () {
-                setTimeout(hideURLbar, 0);
-            }, false);
-    
-            function hideURLbar() {
-                window.scrollTo(0, 1);
-            }
-        </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
         <link href="/site/css/bootstrap.css" rel='stylesheet' type='text/css' />
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <!-- Custom Theme files -->
@@ -23,30 +15,18 @@
         <!-- Custom Theme files -->
         <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'>
     	<link href="/site/css/component.css" rel='stylesheet' type='text/css' />
-
+        <link href="/site/css/x.css" rel='stylesheet' type='text/css' />
         <!--webfont-->
         <link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700' rel='stylesheet' type='text/css'>
         <link href='//fonts.googleapis.com/css?family=Dorsa' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="/site/js/jquery-1.11.1.min.js"></script>
+        <!-- <script type="text/javascript" src="/site/js/jquery-1.11.1.min.js"></script> -->
         <!-- start menu -->
         <link href="/site/css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
         <script type="text/javascript" src="/site/js/megamenu.js"></script>
-        <script>
-            $(document).ready(function () {
-                $(".megamenu").megamenu();
-            });
-        </script>
+ 
         <script src="/site/js/jquery.easydropdown.js"></script>
         <script src="/site/js/easyResponsiveTabs.js" type="text/javascript"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#horizontalTab').easyResponsiveTabs({
-                    type: 'default', //Types: default, vertical, accordion           
-                    width: 'auto', //auto or any width like 600px
-                    fit: true // 100% fit in a container
-                });
-            });
-        </script>
+        <!-- <script src="/site/js/x.js"> </script> -->
         <script src="/site/js/simpleCart.min.js"> </script>
     </head>
     
@@ -55,25 +35,20 @@
 
 
 <div th:replace="web-site/pages/banner :: banner"></div>
-
-
+<!-- <div th:replace="web-site/pages/chatbox :: chatbox"></div> -->
+<div th:replace="web-site/pages/a :: chat"></div>
 <!-- main content start-->
 <div layout:fragment="content"></div>
 
 <div th:replace="web-site/pages/footer :: footer"></div>
+<script src="/site/js/chatbox.js" type="text/javascript"></script>
 <script src="/site/js/cart.js" type="text/javascript"></script>
 <script src="/site/js/mini-cart.js" type="text/javascript"></script>
 <script  src="/site/js/jquery.flexslider.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="/site/css/flexslider.css" type="text/css" media="screen" />
    
    <script>
-		// Can also be used with $(document).ready()
-		$(window).load(function () {
-			$('.flexslider').flexslider({
-				animation: "slide",
-				controlNav: "thumbnails"
-			});
-		});
+		
 
         //raiting
 		const x =	document.getElementById('avg').value;
@@ -100,7 +75,24 @@ function Login() {
         alert("hello "+UserName);
 }
 
-       
+$(function(){
+$("#addClass").click(function () {
+          $('#qnimate').addClass('popup-box-on');
+            });
+          
+            $("#removeClass").click(function () {
+          $('#qnimate').removeClass('popup-box-on');
+            });
+  })
 	</script>
-    </body>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js" integrity="sha512-iKDtgDyTHjAitUDdLljGhenhPwrbBfqTKWO1mkhSFH3A7blITC9MhYon6SjnMhp4o0rADGw9yAC6EW4t5a4K3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.js" integrity="sha512-DJw15+xxGmXB1/c6pvu2eRoVCGo5s6rdeswkFS4HLFfzNQSc6V71jk6t+eMYzlyakoLTwBrKnyhVc7SCDZOK4Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+
+</body>
 </html>

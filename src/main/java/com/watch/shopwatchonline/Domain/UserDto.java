@@ -32,7 +32,8 @@ public class UserDto implements UserDetails{
     private Short gender;
 
   private String phone;
-  
+  private String avatar;
+ 
   
     private Collection<? extends GrantedAuthority> authorities;
     
@@ -48,6 +49,7 @@ public class UserDto implements UserDetails{
             user.getPassword(), 
             user.getGender(),
             user.getPhone(),
+            user.getAvatar(),
             authorities);
       }
 

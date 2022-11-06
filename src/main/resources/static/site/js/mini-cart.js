@@ -1,3 +1,4 @@
+
 const cartDOM = document.querySelector(".cart__items");
 const addToCartBtn = document.querySelectorAll(".btn__add__to__cart");
 const cartCounter = document.querySelector(".cart__counter");
