@@ -164,7 +164,7 @@ public class wishlistController {
         return "redirect:/api/site/product/detail/"+id ;
     }
 
-    private String getUser( HttpServletRequest request){
+    public String getUser( HttpServletRequest request){
         String token = jwtUtils.getJwtFromCookies(request);
         String username = jwtUtils.getUserNameFromJwtToken(token);
        

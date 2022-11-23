@@ -1,4 +1,4 @@
-package com.watch.shopwatchonline.Controller;
+  package com.watch.shopwatchonline.Controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -104,18 +104,7 @@ public class AuthController {
     UserDto userDetails = (UserDto) authentication.getPrincipal();
     
     ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(userDetails);
-    
-    // List<String> roles = userDetails.getAuthorities().stream()
-    //     .map(item -> item.getAuthority())
-    //     .collect(Collectors.toList());
 
-    //     roles.forEach(role -> {
-    //       if(role.equals("admin")){linkApi = "redirect:/api/admin/product/add-product";}else{
-    //         linkApi = "redirect:/api/site/product";
-    //       }
-    //     });
-        
-        // return "redirect:/api/admin/product/add-product";
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(new MessageResponse("okkk"));
                
@@ -151,8 +140,6 @@ public class AuthController {
       roles.add(userRole);
     } else {
       strRoles.forEach(role -> {
-    //     System.out.println("----------------------------");
-    // System.out.println(role);
         switch (role) {
         case "admin":
           Role adminRole = roleRepository.findByName(Erole.ROLE_ADMIN)

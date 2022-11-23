@@ -55,6 +55,10 @@ public class User {
   @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 private Set<ChatBox> chatBox;
 
+  @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+private Set<Address> address;
+
+
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "user_roles", 
              joinColumns = @JoinColumn(name = "user_id"),

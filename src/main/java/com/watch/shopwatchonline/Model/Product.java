@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,22 +25,22 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Product")
-public class Product implements Serializable{
-    @Id
+@Table(name = "Product")
+public class Product implements Serializable {
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(columnDefinition = "nvarchar(100)" ,nullable = false)
+	@Column(columnDefinition = "nvarchar(100)", nullable = false)
 	@Size(max = 120, min = 10, message = "Name must be between 10 and 120 characters")
 	@NotEmpty(message = "Please enter name")
 	private String name;
@@ -50,13 +51,13 @@ public class Product implements Serializable{
 
 	@Column(nullable = false)
 	@Positive(message = "Price can contain values > 0 only")
-	
+
 	private float price;
 
 	@PositiveOrZero(message = "SalePrice can contain values > 0 only")
 	private float discount;
 
-	@Column(length = 50,nullable = false)
+	@Column(length = 50, nullable = false)
 	private String thumbnail;
 
 	@Column(columnDefinition = "text not null")
@@ -67,20 +68,20 @@ public class Product implements Serializable{
 	@Column(nullable = false)
 	private short active;
 
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date createAt;
 
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date updateAt;
 
-    @ManyToOne
-	@JoinColumn(name = "CategoryId",nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "CategoryId", nullable = false)
 	private Category Category;
 
-    @ManyToOne
-	@JoinColumn(name = "BrandId",nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "BrandId", nullable = false)
 	private Brand Brand;
 
 	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
@@ -92,16 +93,14 @@ public class Product implements Serializable{
 	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
 	private Set<Blog> blogs;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="product_images",
-	joinColumns  = {
-		@JoinColumn(name="product_id")
-	},
-	inverseJoinColumns  = {
-		@JoinColumn(name="image_id")
-	}
-	)
-	private Set<Image> productImages;
+	@OneToMany(mappedBy = "Product")
+	private Set<OrderDetail> orderDetails;
 
-	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "product_images", joinColumns = {
+			@JoinColumn(name = "product_id")
+	}, inverseJoinColumns = {
+			@JoinColumn(name = "image_id")
+	})
+	private Set<Image> productImages;
 }

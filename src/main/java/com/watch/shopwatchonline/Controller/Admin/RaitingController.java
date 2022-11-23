@@ -36,16 +36,14 @@ public class RaitingController {
     @Autowired
     private RaitingRepository raitingRepository;
 
-
     @GetMapping("list-waiting")
     public ModelAndView indexL(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
-        @RequestParam("page") Optional < Integer > page, @RequestParam("size") Optional < Integer > size) {
+            @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
         int curPage = page.orElse(1);
         int pageSize = size.orElse(5);
 
-
-        Page < Raiting > resultPage = null;
+        Page<Raiting> resultPage = null;
 
         if (StringUtils.hasText(keyword)) {
             Pageable pageable = PageRequest.of(curPage - 1, pageSize);
@@ -73,13 +71,12 @@ public class RaitingController {
                 }
             }
 
-            List < Integer > pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+            List<Integer> pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
             model.addAttribute("pageNums", pageNums);
 
         }
 
-        List < Raiting > p = raitingRepository.findAll();
-
+        List<Raiting> p = raitingRepository.findAll();
 
         model.addAttribute("keyword", keyword);
         model.addAttribute("raitingPage", resultPage);
@@ -87,16 +84,14 @@ public class RaitingController {
         return new ModelAndView("web-admin/ListRaiting", model);
     }
 
-
     @GetMapping("list-check")
     public ModelAndView index(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
-        @RequestParam("page") Optional < Integer > page, @RequestParam("size") Optional < Integer > size) {
+            @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
 
         int curPage = page.orElse(1);
         int pageSize = size.orElse(5);
 
-
-        Page < Raiting > resultPage = null;
+        Page<Raiting> resultPage = null;
 
         if (StringUtils.hasText(keyword)) {
             Pageable pageable = PageRequest.of(curPage - 1, pageSize);
@@ -124,24 +119,23 @@ public class RaitingController {
                 }
             }
 
-            List < Integer > pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+            List<Integer> pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
             model.addAttribute("pageNums", pageNums);
 
         }
-       
-        List < Raiting > p = raitingRepository.findAll();
-        
+
+        List<Raiting> p = raitingRepository.findAll();
+
         model.addAttribute("keyword", keyword);
         model.addAttribute("raitingPage", resultPage);
         model.addAttribute("tt", p.size());
         return new ModelAndView("web-admin/ListRaiting", model);
     }
 
-
     @GetMapping("check/{Id}")
-    public ModelAndView edit(ModelMap map, @PathVariable("Id") Integer Id) {
+    public String edit(ModelMap map, @PathVariable("Id") Integer Id) {
 
-        Optional < Raiting > opt = raitingRepository.findById(Id);
+        Optional<Raiting> opt = raitingRepository.findById(Id);
 
         if (opt.isPresent()) {
             Raiting entity = opt.get();
@@ -149,10 +143,10 @@ public class RaitingController {
             BeanUtils.copyProperties(entity, r);
             r.setActive((short) 1);
             raitingRepository.save(r);
-            return new ModelAndView("/list-waiting", map);
+            return "/list-waiting";
         }
 
-        return new ModelAndView("/list-waiting");
+        return"/list-check";
     }
 
     @GetMapping("delete/{Id}")

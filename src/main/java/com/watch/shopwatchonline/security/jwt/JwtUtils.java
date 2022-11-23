@@ -79,4 +79,11 @@ public class JwtUtils {
         .signWith(SignatureAlgorithm.HS512, jwtSecret)
         .compact();
   }
+
+  public String getUser( HttpServletRequest request){
+    String token = getJwtFromCookies(request);
+    String username = getUserNameFromJwtToken(token);
+   
+    return username;
+}
 }

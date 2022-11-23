@@ -179,7 +179,7 @@ public List<Category> getCategoryDtos(){
        
         return new ModelAndView("admin/product/AddProduct");
         }
-        if(!dto.getIsEdit().booleanValue()) {
+        if(!dto.getIsEdit()) {
        dto.setCreateAt(new Date());
         }else {
             Optional<Product> s = ProductService.findById( dto.getId());
