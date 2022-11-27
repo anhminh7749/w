@@ -1,30 +1,40 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{web-site/layout}">
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{web-site/layout}"
+>
+  <head> </head>
+  <body layout:fragment="content">
+    <div class="account-in">
+      <div class="container" style="display: flex;justify-content: center;">
+        
+        <div class="col-8 account-top">
+          <h3 class="text-center">Account</h3>
+          <form th:action="@{/api/auth/signin}" method="post">
+            <div>
+              <span>UserName*</span>
+              <input type="text" id="username" name="username" />
+            </div>
+            <div>
+              <span class="pass">Password*</span>
+              <input type="password" name="password" />
+            </div>
+           
+           <div class="float-left">
+            <input type="submit" onclick="Login()" value="Login" />
+           </div>
+           
+            <div class="float-right ">
+              <a href="/forgot-password">Quên mật khẩu </a>|
+              <a href="/api/auth/site/register"> Đăng ký</a>
+            </div>
+          </form>
+        </div>
 
-<head>
-</head>
-<body layout:fragment="content">
-   <div class="account-in">
-   	 <div class="container">
-   	   <h3>Account</h3>
-		<div class="col-md-7 account-top">
-		  <form  th:action="@{/api/auth/signin}" method="post">
-			<div> 	
-				<span>UserName*</span>
-				<input type="text" id="username" name="username" > 
-			</div>
-			<div> 
-				<span class="pass">Password*</span>
-				<input type="password" name="password">
-			</div>				
-				<input type="submit" onclick="Login()" value="Login"> 
-		   </form>
-		</div>
-		
-	    <div class="clearfix"> </div>
-	  </div>
-   </div>
-  
-</body>
-</html>		
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </body>
+</html>

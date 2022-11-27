@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,6 +41,10 @@ public class Order implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateAt;
     
+     @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deleteAt;
+     
    
       @Column
     @Temporal(TemporalType.TIMESTAMP)
@@ -60,12 +65,12 @@ public class Order implements Serializable {
     @Column
     private Short Status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "addressId", referencedColumnName = "Id")
+    @ManyToOne
+    @JoinColumn(name = "addressId", nullable = false)
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "discountCodeId", referencedColumnName = "Id")
+    @ManyToOne
+    @JoinColumn(name = "discountCodeId")
     private DiscountCode discountCode;
 
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)

@@ -48,7 +48,7 @@ private StogareService stogareService;
         return "web-site/comment";
     }
 
-    @GetMapping("site/blog/detail/{id}") 
+    @GetMapping("/api/site/blog/detail/{id}") 
      public String detail(ModelMap model, @PathVariable("id") Integer id) {
         Optional < Blog > opt = blogService.findById(id);
         List <Image> images = stogareService.findImageByBlogId(id);
@@ -72,7 +72,7 @@ private StogareService stogareService;
                 .body(file);
     }
 
-    @GetMapping("site/blog")
+    @GetMapping("/api/site/blog")
      public String Listblog(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
      @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         int curPage = page.orElse(1);

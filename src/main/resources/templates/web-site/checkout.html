@@ -5,27 +5,24 @@
 <body layout:fragment="content">
 	<div class="account-in">
 		<div class="container">
-			<div class="check_box">
+			<div class="check_box row">
 				<div class="col-md-8">
-					<h1>My Shopping Bag (2)</h1>
+					<h1>My Shopping Bag</h1>
 
 					<div class="shop_cart_items"></div>
 				</div>
 				<div class="col-md-4 cart-total">
 					<div>
 						<!-- th:action="@{/filter}" method="post" -->
-						<a class="continue" href="#">Continue to basket</a>
+						<a class="continue" href="/api/site/product">Quay lại mua hàng</a>
 						<div class="price-details">
-							<h4>Delivery Address</h4>
+							<h4>Địa CHỉ Nhận Hàng</h4>
 							<div>
 								<input type="text" name="addressId" id="addressId" hidden />
 								<span id="name-phone" style="display: contents"></span>
 								<p id="address-detail"></p>
 
-
-								<a class="btn btn-primary" data-bs-toggle="modal" href="#modal-list-address"
-									role="button">Địa
-									CHỉ Nhận Hàng</a>
+								<a class="btn btn-primary" id="showaddressbtn">Chọn</a>
 							</div>
 							<div class="clearfix"></div>
 						</div>
@@ -64,17 +61,20 @@
 						<a class="order" id="checkout">Place Order</a>
 					</div>
 
+					<div class="modal">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<p>Some text in the Modal..</p>
+						</div>
+					</div>
 
-
-
-					<div class="modal fade" id="modal-list-address" aria-hidden="true"
-						aria-labelledby="modal-list-address" tabindex="-1">
-						<div class="modal-dialog modal-dialog-centered">
+					<div class="modal" id="myModal">
+						<div class="">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="modal-list-address">Modal 1</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
+									<h1 class="modal-title fs-5" id="modal-list-address">
+										Modal 1
+									</h1>
 								</div>
 								<div class="modal-body">
 									<div class="listaddress" th:each="item, iStart:${listaddress}">
@@ -98,17 +98,12 @@
 											</li>
 										</ul>
 									</div>
-									<a class="btn btn-primary" href="#new-address" data-bs-toggle="modal">Thêm Địa
-										Chỉ</a>
-
-
+									<a class="btn btn-primary" id="btn-new-address">Thêm Địa Chỉ</a>
 								</div>
-								
 
 								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-										id="closeModels">
-										Đóng
+									<button type="button" class="btn btn-secondary">
+										<span class="close">Đóng</span>
 									</button>
 									<button type="button" class="btn btn-primary" th:onclick="getaddress()">
 										Hoàn Thành
@@ -118,31 +113,29 @@
 						</div>
 					</div>
 
-
-					<div class="modal fade" id="new-address" aria-hidden="true"
-						aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-						<div class="modal-dialog modal-dialog-centered">
+					<div class="modal" id="modal-new-address">
+						<div class="">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Thêm Địa Chỉ</h1>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
+									<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+										Thêm Địa Chỉ
+									</h1>
 								</div>
 								<div class="modal-body">
 									<div th:replace="web-site/pages/address-model :: add"></div>
-									<a type="button" class="btn btn-secondary" id="closeFormAddress"
-									data-dismiss="modal">
-									Close
-								</a>
-								<a class="btn btn-primary" id="createAddress" href="#modal-list-address"
-									data-bs-toggle="modal">Hoàn Thành</a>
+									<div class="row" style="flex-direction: row-reverse;align-items: center;">
+										<a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
+											data-bs-toggle="modal">Hoàn Thành</a>
+										<a type="button"
+											style=" margin-block-end: 10px; margin-right: 20px; margin-left: 10px; "
+											class="btn btn-secondary closeFormAddress" id="closeFormAddress"> Trở lại
+										</a>
+
+									</div>
 								</div>
-								
 							</div>
 						</div>
 					</div>
-
-
 				</div>
 			</div>
 		</div>

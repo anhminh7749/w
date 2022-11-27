@@ -52,6 +52,6 @@ public class Address implements Serializable{
 	@JoinColumn(name = "userId",nullable = false)
 	private User users;
 
-    @OneToOne(mappedBy = "address")
-    private Order orders;
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    private Set<Order> orders;
 }

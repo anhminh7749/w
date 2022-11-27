@@ -1,4 +1,5 @@
 package com.watch.shopwatchonline.security.jwt;
+
 import java.util.Date;
 
 import javax.servlet.http.Cookie;
@@ -18,13 +19,11 @@ import io.jsonwebtoken.*;
 public class JwtUtils {
   private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-  
   private String jwtSecret = "shopwatchSecretKey";
 
   private int jwtExpirationMs = 86400000;
 
   private String jwtCookie = "shopwatch";
-
 
   public String getJwtFromCookies(HttpServletRequest request) {
     Cookie cookie = WebUtils.getCookie(request, jwtCookie);
@@ -37,12 +36,14 @@ public class JwtUtils {
 
   public ResponseCookie generateJwtCookie(UserDto userPrincipal) {
     String jwt = generateTokenFromUsername(userPrincipal.getUsername());
-    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/api").maxAge(24 * 60 * 60).httpOnly(true).build();
+   
+    ResponseCookie cookie = ResponseCookie.from(jwtCookie, jwt).path("/").maxAge(24 * 60 * 60).httpOnly(true).build();
     return cookie;
   }
 
   public ResponseCookie getCleanJwtCookie() {
-    ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/api").build();
+   
+    ResponseCookie cookie = ResponseCookie.from(jwtCookie, null).path("/").build();
     return cookie;
   }
 
@@ -68,10 +69,8 @@ public class JwtUtils {
 
     return false;
   }
-  
-  public String generateTokenFromUsername(String username) {   
-    // System.out.println("generateTokenFromUsername-------------------------------------------------------------------------------");
-    // System.out.println(username);
+
+  public String generateTokenFromUsername(String username) {
     return Jwts.builder()
         .setSubject(username)
         .setIssuedAt(new Date())
@@ -80,10 +79,10 @@ public class JwtUtils {
         .compact();
   }
 
-  public String getUser( HttpServletRequest request){
+  public String getUser(HttpServletRequest request) {
     String token = getJwtFromCookies(request);
     String username = getUserNameFromJwtToken(token);
-   
+
     return username;
-}
+  }
 }

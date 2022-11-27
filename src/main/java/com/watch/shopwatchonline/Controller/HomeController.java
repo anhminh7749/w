@@ -81,14 +81,38 @@ public class HomeController {
   @Autowired
   private ProductRepository productRepository;
 
-  @GetMapping("/login")
+  @GetMapping("/auth/login")
   public String allAccess() {
     return "web-admin/login";
   }
 
-  @GetMapping("/site/login")
+  @GetMapping("/admin")
+  public String main() {
+    return "web-admin/main";
+  }
+  @GetMapping("/site")
+  public String viewmain() {
+    return "web-site/main";
+  }
+
+  @GetMapping("/site/abc")
+  public String profileUser() {
+    return "web-site/user/profile";
+  }
+
+  @GetMapping("/auth/site/login")
   public String all() {
     return "web-site/login";
+  }
+
+  @GetMapping("/auth/register")
+  public String register() {
+    return "web-admin/signup";
+  }
+
+  @GetMapping("/auth/site/register")
+  public String siteRegister() {
+    return "web-site/signup";
   }
 
   @GetMapping("/address")
@@ -96,52 +120,50 @@ public class HomeController {
     return "web-site/address";
   }
 
+  
+
   @GetMapping("/site/user/history-order/detail/{id}")
-  public String aa(@PathVariable(name = "id") int id,Model model) {
-List<OrderDetail> details = detailRepository.FindByOrder(id);
-List<ProductDto> dtos = new ArrayList<>();
-for (OrderDetail detail : details) {
-  ProductDto dto = new ProductDto();
-  Optional<Product> pro = productRepository.findById(detail.getProduct().getId());
-  BeanUtils.copyProperties(pro.get(), dto);
-  dto.setPrice(detail.getPrice());
-  dto.setQuantity(detail.getQuantity());
-  dto.setDiscount(detail.getDiscount());
-  dtos.add(dto);
-}
-model.addAttribute("detail", dtos);
+  public String aa(@PathVariable(name = "id") int id, Model model) {
+    List<OrderDetail> details = detailRepository.FindByOrder(id);
+    List<ProductDto> dtos = new ArrayList<>();
+    for (OrderDetail detail : details) {
+      ProductDto dto = new ProductDto();
+      Optional<Product> pro = productRepository.findById(detail.getProduct().getId());
+      BeanUtils.copyProperties(pro.get(), dto);
+      dto.setPrice(detail.getPrice());
+      dto.setQuantity(detail.getQuantity());
+      dto.setDiscount(detail.getDiscount());
+      dtos.add(dto);
+    }
+    model.addAttribute("detail", dtos);
     return "web-site/shoppingdetail";
   }
 
-  @RequestMapping(value = "/order/cancel", method = RequestMethod.POST)
-  public @ResponseBody  ResponseEntity<?> CancelOrder(@RequestParam(name = "id") String id){
-   Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
-   if(!orders.isEmpty()){
-    Order order  = new Order();
-    BeanUtils.copyProperties(orders.get(), order);
-    order.setStatus((short) 3);
-    order.setUpdateAt(new Date());
-    order.setCancellationDate(new Date());
-    orderRepository.save(order);
-   }else{
-    return  ResponseEntity.ok().body("isEmpty");
-   }
+  @RequestMapping(value = "/site/user/order/cancel", method = RequestMethod.POST)
+  public @ResponseBody ResponseEntity<?> CancelOrder(@RequestParam(name = "id") String id) {
+    Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
+    if (!orders.isEmpty()) {
+      Order order = new Order();
+      BeanUtils.copyProperties(orders.get(), order);
+      order.setStatus((short) 4);
+      order.setUpdateAt(new Date());
+      order.setCancellationDate(new Date());
+      orderRepository.save(order);
+    } else {
+      return ResponseEntity.ok().body("isEmpty");
+    }
 
-    return  ResponseEntity.ok().body("success");
+    return ResponseEntity.ok().body("success");
   }
 
   @GetMapping("/site/user")
   public String ShoppingCartDetail(Model model, HttpServletRequest request) {
-    
-    model.addAttribute("orders", getTotalPriceAndQuantity(request));
+
+    model.addAttribute("orders", getTotalPriceAndQuantityWithUser(request));
     return "web-site/profile";
   }
 
-
- 
-
-  
-  public List<OrderDto> getTotalPriceAndQuantity(HttpServletRequest request){
+  public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest request) {
 
     Optional<User> user = userRepository.findByUsername(utils.getUser(request));
     List<Order> orders = orderRepository.FindbyUserName(user.get().getId());
@@ -149,12 +171,12 @@ model.addAttribute("detail", dtos);
     for (Order order : orders) {
       OrderDto dto = new OrderDto();
       BeanUtils.copyProperties(order, dto);
-      float total=0;
-      int quantity=0;
+      float total = 0;
+      int quantity = 0;
       List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
       for (OrderDetail detail : details) {
-        total += (detail.getPrice()-detail.getDiscount()) * detail.getQuantity();
-        quantity  += detail.getQuantity();
+        total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
+        quantity += detail.getQuantity();
         dto.setTotalAmount(total);
         dto.setTotalQuantity(quantity);
       }
@@ -176,7 +198,6 @@ model.addAttribute("detail", dtos);
   }
 
   @PostMapping("/address/up")
-
   public String upadd(ModelMap model, @ModelAttribute("address") AddressDto dto, HttpServletRequest request) {
 
     Address address = new Address();
@@ -203,6 +224,7 @@ model.addAttribute("detail", dtos);
     List<Address> address = addressRepository.findbyuser(user.get().getId());
     if (!address.isEmpty()) {
       model.addAttribute("listaddress", address);
+      System.out.println("------------------------------------------------");
 
     }
     return "web-site/checkout";

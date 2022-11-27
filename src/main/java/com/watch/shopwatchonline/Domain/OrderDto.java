@@ -44,4 +44,8 @@ public class OrderDto implements Serializable {
     private float totalAmount;
 
     private int totalQuantity;
+
+    private String username;
+
+    private float totaldiscount;
 }

@@ -17,30 +17,30 @@ function cancelorder(id){
 }
 
 
-AgreeDel.addEventListener("click", () => {
-  if(iddel){
-    $.ajax({
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      url:
-        "http://localhost:8080/api/order/cancel?id=" + iddel,
-      success: function (response) {
-        if (response == "success") {      
-          alert("success ok");
-          document.getElementById("cancel").click();
-        }else if(response == "isEmpty"){
-          alert("isEmpty");
-        }
-      },
-      error: function (response) {
-        alert(response);
-      },
-    });
-  }
-  else{
-    alert("Không thể hủy!");
-  }
-});
+// AgreeDel.addEventListener("click", () => {
+//   if(iddel){
+//     $.ajax({
+//       type: "POST",
+//       contentType: "application/json; charset=utf-8",
+//       url:
+//         "http://localhost:8080/api/order/cancel?id=" + iddel,
+//       success: function (response) {
+//         if (response == "success") {      
+//           alert("success ok");
+//           document.getElementById("cancel").click();
+//         }else if(response == "isEmpty"){
+//           alert("isEmpty");
+//         }
+//       },
+//       error: function (response) {
+//         alert(response);
+//       },
+//     });
+//   }
+//   else{
+//     alert("Không thể hủy!");
+//   }
+// });
 
 checkdiscountcode.addEventListener("click", () => {
   $.ajax({

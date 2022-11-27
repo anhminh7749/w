@@ -2,6 +2,7 @@ package com.watch.shopwatchonline.Model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -48,6 +49,6 @@ public class DiscountCode implements Serializable{
      @Column 
      private Short status;
 
-     @OneToOne(mappedBy = "discountCode")
-     private Order orders;
+     @OneToMany(mappedBy = "discountCode", cascade = CascadeType.ALL)
+     private Set<Order> orders;
 }

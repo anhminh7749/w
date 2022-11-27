@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", loadData);
 
 
 checkOutBtn.addEventListener("click", () => {
-    alert("Your Order Sent Succesfully");
     clearCartItems();
 })
 
@@ -130,15 +129,18 @@ function clearCartItems() {
 
 
 function addItemToTheDOM(product) {
-    
-    // Adding the new Item to the Dom
+
+   
+    if((product.name).length>25){
+        product.name = (product.name).substring(0, 25)+'...';
+    }
     cartDOM.insertAdjacentHTML("afterbegin", `<div class="cart_item">
             <input type="hidden" id="product__id" value="${product.id}">
            <img id="product_image" src="${product.thumbnail}" alt="" srcset="">
-           <h4 class="product__name">${product.name}</h4>
-           <a class="btn__small" action="decrease">&minus;</a> <h4 class="product__quantity">${product.quantity}</h4><a class="btn__small" action="increase">&plus;</a>
+           <h4 class="product__name">${product.name}  </h4>
+           <div style="display: flex;"><a class="btn__small" action="decrease">&minus;</a> <h4 class="product__quantity">${product.quantity}</h4><a class="btn__small" action="increase">&plus;</a>
           <span id="product__price">${product.price - product.discount}</span>
-           <a class="btn__small btn_remove" action="remove">&times;</a>
+           <a class="btn__small btn_remove" action="remove">&times;</a></div>
        </div>`);
 
 }

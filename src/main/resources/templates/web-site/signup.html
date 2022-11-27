@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+
+<head>
+
+</head> 
+<body layout:fragment="content" class="cbp-spmenu-push">
+		
+		
+        <div class="account-in">
+            <div class="container" >
+              
+              <div class=" account-top ms-3" >
+                <h3 class="text-center">Đăng ký</h3>
+                <form th:action="@{/api/auth/signup}" method="post" th:object="${signUpRequest}" >
+                  <div>
+                    <span>UserName*</span>
+                    <input type="text" name="username" placeholder="First Name" required="">
+                  </div>
+                  <div>
+                    <span class="pass">Email</span>
+                    <input type="email" placeholder="Email Address" name="email" required="">
+                  </div>
+                  <div>
+                    <span class="pass">Số điện thoại*</span>
+                    <input type="text" placeholder="phone" name="phone" required="">
+                  </div>
+                  <div>
+                    <span class="pass">Giới tính*</span>
+                    <div class="sign-up2">
+                        <label>
+                            <input type="radio" name="Gender" value="0" required="">
+                            Nam
+                        </label>
+                        <label>
+                            <input type="radio" name="Gender" value="1" required="">
+                            Nữ
+                        </label>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="pass">Mật khẩu*</span>
+                    <input type="password" placeholder="Password" name="password" required="">
+                  </div>
+                  <div>
+                    <span class="pass">Nhập lại mật khẩu*</span>
+                    <input type="password" placeholder="Confirm Password" required="">
+                  </div>
+                 
+                 <div class="float-left">
+                  <input type="submit" value="Login" />
+                 </div>
+                 
+                  <div class="float-right ">
+                    <a href="/api/auth/site/login">Đăng nhập </a>
+                    
+                  </div>
+                </form>
+              </div>
+      
+              <div class="clearfix"></div>
+            </div>
+          </div>
+</body>
+</html>

@@ -97,10 +97,10 @@ public class getLocalStorage {
           Cart cart = new Cart();
           BeanUtils.copyProperties(product, cart);
           listcart.add(cart);
-          System.out.println("------------------------------------------------------");
+         
           System.out.println("cart" + cart);
         }
-        System.out.println("------------------------------------------------------");
+      
 
         System.out.println("json bean " + URLDecoder.decode(json));
         json = UriUtils.encode(mapper.writeValueAsString(listcart), "UTF-8");
@@ -116,7 +116,7 @@ public class getLocalStorage {
   public ResponseEntity<?> saveOrUpdateCompany(
       @RequestBody String cart,
       @RequestParam(name = "discountcode", required = false) String code,
-      @RequestParam(name = "addressId", required = false) Integer addressId) {
+      @RequestParam(name = "addressId") Integer addressId) {
 
     try {
       Order order = new Order();
@@ -136,20 +136,22 @@ public class getLocalStorage {
       if (discountcode != null) {
         order.setDiscountCode(discountcode);
         discountcode.setQuantity(discountcode.getQuantity() - 1);
+        discountCodeRepository.save(discountcode);
       }
-      order.setAddress(address.get());
 
+      order.setAddress(address.get());
       order.setCreateAt(new Date());
       order.setStatus((short) 0);
       /*
        * 0:chot duyet
        * 1:da duyet và đg chuển bị đơn hàng
        * 2:đang ship
-       * 4: hoan thanh
+       * 3: hoan thanh
+       * 4: huy boi khach hang
+       * 5: huy boi admin
        */
-      order.setUpdateAt(null);
-
       orderRepository.save(order);
+      
       for (Product product : listrequest) {
         Optional<Product> pro = ProductService.findById(product.getId());
         OrderDetail detail = new OrderDetail();

@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+<body layout:fragment="content">
+    <div class="container pIHdXn">
+        <div th:replace="web-site/user/slide-user:: sidebar"></div>
+        <div class="xMDeox">
+            <div class="Hvae38" role="main">
+                <div style="display: contents;">
+                    <div class="TApBFI">
+                        <div class="Q5feZb">
+                            <h1 class="OomjNA">Hồ sơ của tôi</h1>
+                            <div class="HJ5nmd">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+                        </div>
+                        <div class="+eqaLN">
+                            <div class="InGfFt">
+                                <form th:action="@{a}" method="post" enctype="multipart/form-data" th:object="${userprofile}">
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label >Tên đăng nhập</label></div>
+                                            <div class="gV+dPk">
+                                                <div class="_2NnHla">
+                                                    <div class="Z1Wx1m"> <span th:field="*{username}" name="username"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label>Tên</label></div>
+                                            <div class="gV+dPk">
+                                                <div>
+                                                    <div class="ovqcxY"><input type="text" placeholder="" class="y-NK4C"
+                                                        th:field="*{username}" name="username"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label>Email</label></div>
+                                            <div class="gV+dPk">
+                                                <div class="_2NnHla">
+                                                    <div class="Z1Wx1m"><input type="text" placeholder="" class="y-NK4C"
+                                                        th:field="*{username}" name="username">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label>Số điện thoại</label></div>
+                                            <div class="gV+dPk">
+                                                <div class="_2NnHla">
+                                                    <div class="Z1Wx1m"><input type="text" placeholder="" class="y-NK4C"
+                                                        th:field="*{username}" name="username">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label>Giới tính</label></div>
+                                            <div class="gV+dPk">
+                                                <div class="vidoEC">
+                                                    <div class="stardust-radio-group" role="radiogroup">
+                                                        <div class="stardust-radio stardust-radio--checked" tabindex="0"
+                                                            role="radio" aria-checked="true">
+                                                            <div class="stardust-radio-button stardust-radio-button--checked">
+                                                                <div class="stardust-radio-button__outer-circle">
+                                                                    <div class="stardust-radio-button__inner-circle">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="stardust-radio__content">
+                                                                <div class="stardust-radio__label">Nam</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="stardust-radio" tabindex="0" role="radio"
+                                                            aria-checked="false">
+                                                            <div class="stardust-radio-button">
+                                                                <div class="stardust-radio-button__outer-circle">
+                                                                    <div class="stardust-radio-button__inner-circle">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="stardust-radio__content">
+                                                                <div class="stardust-radio__label">Nữ</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="stardust-radio" tabindex="0" role="radio"
+                                                            aria-checked="false">
+                                                            <div class="stardust-radio-button">
+                                                                <div class="stardust-radio-button__outer-circle">
+                                                                    <div class="stardust-radio-button__inner-circle">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="stardust-radio__content">
+                                                                <div class="stardust-radio__label">Khác</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dghdd9">
+                                        <div class="h4eiAQ">
+                                            <div class="tBgRZR"><label>Ngày sinh</label></div>
+                                            <div class="gV+dPk">
+                                                <div class="MWGELC">
+                                                    <div class="shopee-dropdown shopee-dropdown--has-selected">
+                                                        <div class="shopee-dropdown__entry shopee-dropdown__entry--selected">
+                                                            <span>12</span><svg enable-background="new 0 0 11 11"
+                                                                viewBox="0 0 11 11" x="0" y="0"
+                                                                class="shopee-svg-icon icon-arrow-down">
+                                                                <g>
+                                                                    <path
+                                                                        d="m11 2.5c0 .1 0 .2-.1.3l-5 6c-.1.1-.3.2-.4.2s-.3-.1-.4-.2l-5-6c-.2-.2-.1-.5.1-.7s.5-.1.7.1l4.6 5.5 4.6-5.5c.2-.2.5-.2.7-.1.1.1.2.3.2.4z">
+                                                                    </path>
+                                                                </g>
+                                                            </svg></div>
+                                                    </div>
+                                                    <div class="shopee-dropdown shopee-dropdown--has-selected">
+                                                        <div class="shopee-dropdown__entry shopee-dropdown__entry--selected">
+                                                            <span>Tháng 1</span><svg enable-background="new 0 0 11 11"
+                                                                viewBox="0 0 11 11" x="0" y="0"
+                                                                class="shopee-svg-icon icon-arrow-down">
+                                                                <g>
+                                                                    <path
+                                                                        d="m11 2.5c0 .1 0 .2-.1.3l-5 6c-.1.1-.3.2-.4.2s-.3-.1-.4-.2l-5-6c-.2-.2-.1-.5.1-.7s.5-.1.7.1l4.6 5.5 4.6-5.5c.2-.2.5-.2.7-.1.1.1.2.3.2.4z">
+                                                                    </path>
+                                                                </g>
+                                                            </svg></div>
+                                                    </div>
+                                                    <div class="shopee-dropdown shopee-dropdown--has-selected">
+                                                        <div class="shopee-dropdown__entry shopee-dropdown__entry--selected">
+                                                            <span>2002</span><svg enable-background="new 0 0 11 11"
+                                                                viewBox="0 0 11 11" x="0" y="0"
+                                                                class="shopee-svg-icon icon-arrow-down">
+                                                                <g>
+                                                                    <path
+                                                                        d="m11 2.5c0 .1 0 .2-.1.3l-5 6c-.1.1-.3.2-.4.2s-.3-.1-.4-.2l-5-6c-.2-.2-.1-.5.1-.7s.5-.1.7.1l4.6 5.5 4.6-5.5c.2-.2.5-.2.7-.1.1.1.2.3.2.4z">
+                                                                    </path>
+                                                                </g>
+                                                            </svg></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="X9w211"><button type="button" class="btn btn-solid-primary btn--m btn--inline"
+                                            aria-disabled="false">Lưu</button></div>
+                                </form>
+                            </div>
+                            <div class="_6-dPdd">
+                                <div class="DyzGC5">
+                                    <div class="miizbf">
+                                        <div class="qpNcUn"
+                                            style="background-image: url(&quot;https://cf.shopee.vn/file/71284313e54af2347cd763f4f53e007d&quot;);">
+                                        </div>
+                                    </div><input class="_8LDVUy" type="file" accept=".jpg,.jpeg,.png"><button type="button"
+                                        class="btn btn-light btn--m btn--inline">Chọn ảnh</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

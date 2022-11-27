@@ -102,36 +102,35 @@ function clearCartShopItems() {
 function ShowItemToTheDOM(product) {
     // Adding the new Item to the Dom
     shopcartDOM.insertAdjacentHTML("afterbegin", `<div class="shop_cart_item"><div class="cart-header">
-    <div class="close1 btn__small btn_remove" action="remove">&times;</div>
+    <div class="close1 btn__small btn_remove" action="remove"></div>
     <div class="cart-sec simpleCart_shelfItem">
         <div class="cart-item cyc">
             <img id="product_image" src="${product.thumbnail}" class="img-responsive" alt="" />
         </div>
         <div class="cart-item-info">
             <input type="hidden" id="product__id" value="${product.id}">
-            <h3><a class="product__name">${product.name}</a><span>Model No: 3578</span></h3>
-            <ul class="qty">
+            <h3 style="width: 450px;"><a style="  color: #8a8585; text-decoration: none;" class="product__name">${product.name}</a><span>Model No: ${product.id}</span></h3>
+            <ul class="qty row" style="display: flex; align-items: center;">
             ${product.discount == 0 ? '<li> <p id="product__price">Price : '+product.price+' </p></li>': '<li><p id="product__price">Original Price : '+product.price+'</p></li><li><p class="product__discount">Unit Price : '+(product.price-product.discount)+'</p></li>'}
         
-                <li>
+                <li style="display: flex;">
                 <a class="btn__small" action="decrease">&minus;</a> <p class="product__quantity">Qty : ${product.quantity}</p><a class="btn__small" action="increase">&plus;</a>
                 </li>
              
              
             </ul>
-            <div class="delivery">
-                <p>Service Charges : Rs.100.00</p>
-                <span>Delivered in 2-3 business days</span>
-                <div class="clearfix"></div>
-            </div>
+            
         </div>
         <div class="clearfix"></div>
     </div>
 </div></div>`);
 }
 
-// ${product.discount == 0 ? '<li> <p>Total Price : '+product.price * product.quantity+' </p></li>': '<li> <p>Total Price : '+((product.price - product.discount) * product.quantity)+'</p></li>'}
-
+// //<div class="delivery">
+// <p>Service Charges : Rs.100.00</p>
+// <span>Delivered in 2-3 business days</span>
+// <div class="clearfix"></div>
+// </div>
 
 function shopincreaseItem(individualItem, product) {
 

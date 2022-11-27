@@ -6,8 +6,8 @@
 	<body layout:fragment="content">
 		
 	<form class="men">
-		<div class="container">
-			<div class="col-md-4 sidebar_men">
+		<div class="container" style="display: flex;">
+			<div class="col-md-3 sidebar_men">
 				<div>
 					<h3>Categories</h3>
 					<ul class="product-categories color" th:each="Category, iStart:${cate}">
@@ -49,10 +49,10 @@
 
 					
 				</div>
-				<a class="btn btn-danger" th:href="@{/site/product}"> clearfix</a>
+				<a class="btn btn-danger" th:href="@{/api/site/product}"> clearfix</a>
 				
 			</div>
-			<div class="col-md-8 mens_right">
+			<div class="col-md-9 mens_right" >
 				<div>
 				<div class="dreamcrub">
 					<ul class="breadcrumbs">
@@ -88,7 +88,7 @@
 						<li th:each="pageNum:${pageNums}" th:if="${productPage.totalPages>0}"
 							th:class="${pageNum==productPage.number+1}?'page-item active':'page-item'"><a
 								class="page-link"
-								th:href="@{/site/product(sort=${sort}, size = ${productPage.size}, page=${pageNum})}"
+								th:href="@{/api/site/product(sort=${sort}, size = ${productPage.size}, page=${pageNum})}"
 								th:text="${pageNum}"></a>
 						</li>
 					</ul>
@@ -121,7 +121,7 @@
 								<div class="view view-first">
 									<div class="inner_content clearfix">
 										<div class="product_image">
-											<div class="mask1"><img id="image"
+											<div class="mask1"><img id="image" style="height: 250px;"
 													th:src="${pro.thumbnail!=null?'/api/site/product/images/'+pro.thumbnail:'/images/Background.png'}"
 													class="img-responsive zoom-img"></div>
 											<div class="mask">
@@ -136,7 +136,7 @@
 												<h4 class="product__name" th:text="${pro.name}"></h4>
 												<input type="hidden" name="" id="product__id" th:value="${pro.id}" />
 												<div th:if="${pro.discount==0}">
-													<a class="price mount product__price" th:text="'$'+${pro.Price}"></a>
+													<a class="price mount product__price" style="color: black;" th:text="'$'+${pro.Price}"></a>
 												</div>
 												<div th:if="${pro.discount!=0}">
 													<a class="price mount product__price reducedfrom" th:text="'$'+${pro.Price}"></a>
