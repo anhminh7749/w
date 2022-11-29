@@ -88,7 +88,7 @@ public class HomeController {
 
   @GetMapping("/admin")
   public String main() {
-    return "web-admin/main";
+    return "web-admin/index";
   }
   @GetMapping("/site")
   public String viewmain() {

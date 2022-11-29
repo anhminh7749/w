@@ -1,145 +1,147 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{web-site/layout}">
+  layout:decorate="~{web-site/layout}">
 
 <body layout:fragment="content">
-	<div class="account-in">
-		<div class="container">
-			<div class="check_box row">
-				<div class="col-md-8">
-					<h1>My Shopping Bag</h1>
+  <div class="account-in">
+    <div class="container">
+      <div class="check_box row">
+        <div class="col-md-8">
+          <h1>Giỏ hàng</h1>
 
-					<div class="shop_cart_items"></div>
-				</div>
-				<div class="col-md-4 cart-total">
-					<div>
-						<!-- th:action="@{/filter}" method="post" -->
-						<a class="continue" href="/api/site/product">Quay lại mua hàng</a>
-						<div class="price-details">
-							<h4>Địa CHỉ Nhận Hàng</h4>
-							<div>
-								<input type="text" name="addressId" id="addressId" hidden />
-								<span id="name-phone" style="display: contents"></span>
-								<p id="address-detail"></p>
+          <div class="shop_cart_items"></div>
+        </div>
+        <div class="col-md-4 cart-total">
+          <div>
+            <!-- th:action="@{/filter}" method="post" -->
+            <a class="continue" href="/api/site/product">Quay lại mua hàng</a>
+            <div class="price-details">
+              <h4>Địa CHỉ Nhận Hàng</h4>
+              <div>
+                <input type="text" name="addressId" id="addressId" hidden />
+                <div id="name-phone"></div>
 
-								<a class="btn btn-primary" id="showaddressbtn">Chọn</a>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="price-details" id="alltotal">
-							<h3>Price Details</h3>
-							<ul>
-								<li>
-									<span>Total Cost</span> <a id="shop__total__cost">0</a>
-								</li>
-								<li>
-									<span>Discount</span> <a class="total1" id="discount">0</a>
-								</li>
-								<li>
-									<span>Delivery Charges</span> <a class="total1">150.00</a>
-								</li>
-							</ul>
-							<div class="clearfix"></div>
-						</div>
-						<ul class="total_price">
-							<li class="last_price">
-								<h4>TOTAL</h4>
-							</li>
-							<li><span id="total_price">0</span></li>
-							<div class="clearfix"></div>
-						</ul>
+                <div id="address-detail"></div>
+              </div>
+              <a class="btn btn-primary" id="showaddressbtn">Chọn</a>
+              <div class="clearfix"></div>
+            </div>
+            <div class="price-details" id="alltotal">
+              <h3>CHI TIẾT GIÁ CẢ</h3>
+              <ul>
+                <li>
+                  <span>Tổng chi phí</span> <a id="shop__total__cost">0</a>
+                </li>
+                <li>
+                  <span>Giảm giá</span> <a class="total1" id="discount" style="color: black">0</a>
+                </li>
+                <li>
+                  <span>Phí giao hàng</span> <a class="total1" style="color: black">150.00</a>
+                </li>
+              </ul>
+              <div class="clearfix"></div>
+            </div>
+            <ul class="total_price">
+              <li class="last_price row" style=" width: 100%;">
+                <h4 style=" margin-left: 25px;">TOTAL</h4>
+                <span id="total_price" style="margin-left: 5.2em;font-size: 26px;">0</span>
+              </li>
 
-						<div class="total-item">
-							<h3>OPTIONS</h3>
+              <div class="clearfix"></div>
+            </ul>
 
-							<input type="text" name="discountcode" id="discountcode" placeholder="COUPONS" />
-							<a class="cpns btn" id="checkdiscountcode">Apply Coupons</a>
-						</div>
+            <div class="total-item">
+              <h3>Khuyến mãi</h3>
 
-						<div class="clearfix"></div>
+              <input type="text" name="discountcode" id="discountcode" placeholder="Mã giảm giá" />
+              <a class="cpns btn" id="checkdiscountcode">ÁP DỤNG</a>
+            </div>
 
-						<a class="order" id="checkout">Place Order</a>
-					</div>
+            <div class="clearfix"></div>
 
-					<div class="modal">
-						<!-- Modal content -->
-						<div class="modal-content">
-							<p>Some text in the Modal..</p>
-						</div>
-					</div>
+            <a class="order" id="checkout">Thanh toán</a>
+          </div>
 
-					<div class="modal" id="myModal">
-						<div class="">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="modal-list-address">
-										Modal 1
-									</h1>
-								</div>
-								<div class="modal-body">
-									<div class="listaddress" th:each="item, iStart:${listaddress}">
-										<input type="radio" name="abcs"
-											th:attr="onclick=|setaddress('${item.id}','${item.name}', '${item.phone}','${item.specificAddress}','${item.address}')|"
-											required />
+          <div class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <p>Some text in the Modal..</p>
+            </div>
+          </div>
 
-										<div th:if="${item.status==1}">
-											<span th:text="${item.status}">defaut</span>
-										</div>
-										<ul>
-											<li class="row">
-												<span th:utext="${item.name}"></span>
-												<p th:utext="${item.phone}"></p>
-											</li>
-											<li>
-												<p th:utext="${item.address}"></p>
-											</li>
-											<li>
-												<p th:utext="${item.specificAddress}"></p>
-											</li>
-										</ul>
-									</div>
-									<a class="btn btn-primary" id="btn-new-address">Thêm Địa Chỉ</a>
-								</div>
+          <div class="modal" id="myModal">
+            <div class="">
+              <div class="modal-content" style="width: 30% !important">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modal-list-address">
+                    Danh sách địa chỉ
+                  </h1>
+                </div>
+                <div class="modal-body">
+                  <div class="listaddress" th:each="item, iStart:${listaddress}">
+                    <input type="radio" name="abcs"
+                      th:attr="onclick=|setaddress('${item.id}','${item.name}', '${item.phone}','${item.specificAddress}','${item.address}')|"
+                      required />
 
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary">
-										<span class="close">Đóng</span>
-									</button>
-									<button type="button" class="btn btn-primary" th:onclick="getaddress()">
-										Hoàn Thành
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
+                    <div th:if="${item.status==1}">
+                      <span th:text="${item.status}">defaut</span>
+                    </div>
+                    <ul style="border-bottom: 1px solid #d5cece;padding-bottom: 6px;">
+                      <li class="row" style="align-items: center;">
+                        <span th:utext="${item.name}"></span>
+                        <p th:utext="${item.phone}"></p>
+                      </li>
+                      <li style="display: flex; color: #aca5a5;  font-weight: 400;  font-size: 1.2rem;">
+                        <p th:utext="${item.address}"></p>
+                        <p th:utext="${item.specificAddress}" style="margin-left: 9px;"></p>
+                      </li>
 
-					<div class="modal" id="modal-new-address">
-						<div class="">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
-										Thêm Địa Chỉ
-									</h1>
-								</div>
-								<div class="modal-body">
-									<div th:replace="web-site/pages/address-model :: add"></div>
-									<div class="row" style="flex-direction: row-reverse;align-items: center;">
-										<a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
-											data-bs-toggle="modal">Hoàn Thành</a>
-										<a type="button"
-											style=" margin-block-end: 10px; margin-right: 20px; margin-left: 10px; "
-											class="btn btn-secondary closeFormAddress" id="closeFormAddress"> Trở lại
-										</a>
+                    </ul>
+                  </div>
+                  <a class="btn btn-primary" id="btn-new-address">Thêm Địa Chỉ</a>
+                </div>
 
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary">
+                    <span class="close">Đóng</span>
+                  </button>
+                  <button type="button" class="btn btn-primary" th:onclick="getaddress()">
+                    Hoàn Thành
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal" id="modal-new-address">
+            <div class="">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                    Thêm Địa Chỉ
+                  </h1>
+                </div>
+                <div class="modal-body">
+                  <div th:replace="web-site/pages/address-model :: add"></div>
+                  <div class="row" style="flex-direction: row-reverse; align-items: center">
+                    <a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
+                      data-bs-toggle="modal">Hoàn Thành</a>
+                    <a type="button" style="
+                          margin-block-end: 10px;
+                          margin-right: 20px;
+                          margin-left: 10px;
+                        " class="btn btn-secondary closeFormAddress" id="closeFormAddress">
+                      Trở lại
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>

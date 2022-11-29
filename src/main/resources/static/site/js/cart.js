@@ -28,8 +28,8 @@ function setaddress(id,name,phone,detail,address){
    
 }
 function getaddress(){ 
-    document.getElementById("name-phone").innerHTML= dress.at(1)+'  '+dress.at(2);
-    document.getElementById("address-detail").innerHTML=dress.at(3) +', '+ dress.at(4); 
+    document.getElementById("name-phone").innerHTML= dress.at(1)+'  <div id="numberphoneaddress"> '+dress.at(2)+'</div>';
+    document.getElementById("address-detail").innerHTML=dress.at(3) +',  <div style="margin-left: 9px;">'+dress.at(4)+'</div> '; 
     document.getElementById("addressId").setAttribute('value', dress.at(0));
     closeModels();
 }
@@ -109,12 +109,12 @@ function ShowItemToTheDOM(product) {
         </div>
         <div class="cart-item-info">
             <input type="hidden" id="product__id" value="${product.id}">
-            <h3 style="width: 450px;"><a style="  color: #8a8585; text-decoration: none;" class="product__name">${product.name}</a><span>Model No: ${product.id}</span></h3>
-            <ul class="qty row" style="display: flex; align-items: center;">
+            <h3 style="width: 450px;"><a style="font-size: large;  color: #8a8585; text-decoration: none;" class="product__name">${product.name}</a><span>Model No: ${product.id}</span></h3>
+            <ul class="qty row" style="display: flex; align-items: center; ">
             ${product.discount == 0 ? '<li> <p id="product__price">Price : '+product.price+' </p></li>': '<li><p id="product__price">Original Price : '+product.price+'</p></li><li><p class="product__discount">Unit Price : '+(product.price-product.discount)+'</p></li>'}
         
-                <li style="display: flex;">
-                <a class="btn__small" action="decrease">&minus;</a> <p class="product__quantity">Qty : ${product.quantity}</p><a class="btn__small" action="increase">&plus;</a>
+                <li style="display: flex;     align-items: center;">
+                <a class="btn__small" action="decrease">&minus;</a> <p class="product__quantity"> ${product.quantity}</p><a class="btn__small" action="increase">&plus;</a>
                 </li>
              
              

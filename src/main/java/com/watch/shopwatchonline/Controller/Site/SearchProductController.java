@@ -355,8 +355,14 @@ public class SearchProductController {
         String username =jwtUtils.getUserNameFromJwtToken(token);
         Optional<User> user = userRepository.findByUsername(username);
         float avg=0;
+        int raitting=0;
          if(raitingRepository.AvgByProductId(id) != null){
             avg = Float.parseFloat(raitingRepository.AvgByProductId(id));
+        }
+        if(raitingRepository.CountByProductId(id)!=null){          
+            raitting = Integer.parseInt(raitingRepository.CountByProductId(id));
+            model.addAttribute("raitting", raitting);
+            System.out.println("-------------------------------------"+raitting);
         }
         
         int like;
@@ -376,7 +382,6 @@ public class SearchProductController {
 
             if (avg!=0) {
                 model.addAttribute("avg", avg);
-              
             }
             Product entity = opt.get();
 

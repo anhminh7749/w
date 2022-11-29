@@ -19,6 +19,9 @@ public interface RaitingRepository extends JpaRepository<Raiting, Integer>{
     @Query(value = " SELECT AVG(point) FROM Raiting  where Raiting.product_Id = :pid", nativeQuery = true)
     String AvgByProductId(@Param("pid") int id_pro);
 
+    @Query(value = " SELECT COUNT(point) FROM Raiting  where Raiting.product_Id = :pid", nativeQuery = true)
+    String CountByProductId(@Param("pid") int id_pro);
+
     @Query(value = "SELECT * FROM Raiting  "+
    "join users u on u.id = Raiting.user_id "+ 
      "join product p on p.id =  Raiting.product_id "+ 

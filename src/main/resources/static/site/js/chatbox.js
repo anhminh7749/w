@@ -12,27 +12,28 @@ var messageForm = document.querySelector('#messageForm');
 
 var stompClient = null;
 var currentSubscription;
-var usernamechat= null;
+var usernamechat = null;
 var roomId = null;
 var topic = null;
 var InputRoom = null;
-    
+
 
 var colors = [
-    '#2196F3', '#32c787', '#00BCD4', '#ff5652',
-    '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
+  '#2196F3', '#32c787', '#00BCD4', '#ff5652',
+  '#ffc107', '#ff85af', '#FF9800', '#39bbb0'
 ];
 
 function connect(event) {
-  
-  if(nameInput == null){
-nameInput = "client_"+ (Math.random() + 1).toString(36).substring(5);
- 
+  usernamechat = nameInput;
+  InputRoom = nameInput;
+
+  if (nameInput == null) {
+    nameInput = "client_" + (Math.random() + 1).toString(36).substring(5);
+    roomToken();
+    InputRoom = Cookies.get('roomId');
   }
- 
- usernamechat = nameInput;  
- roomToken();
- InputRoom =  Cookies.get('roomId');
+
+
   if (usernamechat) {
     // usernamePage.classList.add('hidden');
     // chatPage.classList.remove('hidden');
@@ -49,9 +50,9 @@ nameInput = "client_"+ (Math.random() + 1).toString(36).substring(5);
 
 // Leave the current room and enter a new one.
 function enterRoom(newRoomId) {
-  
+
   roomId = newRoomId;
-   roomIdDisplay.textContent = usernamechat;
+  roomIdDisplay.textContent = usernamechat;
   topic = `/app/chat/${newRoomId}`;
 
   if (currentSubscription) {
@@ -59,15 +60,17 @@ function enterRoom(newRoomId) {
   }
   currentSubscription = stompClient.subscribe(`/channel/${roomId}`, onMessageReceived);
 
-  stompClient.send(`${topic}/addUser`,
-    {},
-    JSON.stringify({sender: usernamechat, type: 'JOIN'})
+  stompClient.send(`${topic}/addUser`, {},
+    JSON.stringify({
+      sender: usernamechat,
+      type: 'JOIN'
+    })
   );
 }
 
 function onConnected() {
-  enterRoom( InputRoom );
-   connectingElement.classList.add('hidden');
+  enterRoom(InputRoom);
+  connectingElement.classList.add('hidden');
 }
 
 function onError(error) {
@@ -126,8 +129,8 @@ function onMessageReceived(payload) {
     divElement.appendChild(usernameElement);
   }
   var divText = document.createTextNode(getCurrentTime());
-    divElement.appendChild(divText);
-    messageElement.appendChild(divElement);
+  divElement.appendChild(divText);
+  messageElement.appendChild(divElement);
 
   var textElement = document.createElement('p');
   var messageText = document.createTextNode(message.content);
@@ -141,13 +144,13 @@ function onMessageReceived(payload) {
 function getAvatarColor(messageSender) {
   var hash = 0;
   for (var i = 0; i < messageSender.length; i++) {
-      hash = 31 * hash + messageSender.charCodeAt(i);
+    hash = 31 * hash + messageSender.charCodeAt(i);
   }
   var index = Math.abs(hash % colors.length);
   return colors[index];
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
 
   btnChat.addEventListener('click', connect, true);
   messageForm.addEventListener('submit', sendMessage, true);
@@ -157,23 +160,23 @@ function getCurrentTime() {
   return new Date().toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
 }
 
-function base64EncodeUrl(str){
+function base64EncodeUrl(str) {
   return window.btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
 }
 
-function roomToken() { 
+function roomToken() {
   // JWT body 
   var token = {
-          sub: usernamechat,
-          aud: "https://AAAS_PLATFORM/idp/YOUR_TENANT/authn/token",
-          nbf: Math.floor(Date.now() / 1000) - 30,
-          iss: usernamechat,
-          exp: Math.floor(Date.now() / 1000) + (60 * 60),
-          iat: Math.floor(Date.now() / 1000) - 30
-      };
-  Cookies.set(  'roomId',base64EncodeUrl( JSON.stringify( token ) ));
+    sub: usernamechat,
+    aud: "https://AAAS_PLATFORM/idp/YOUR_TENANT/authn/token",
+    nbf: Math.floor(Date.now() / 1000) - 30,
+    iss: usernamechat,
+    exp: Math.floor(Date.now() / 1000) + (60 * 60),
+    iat: Math.floor(Date.now() / 1000) - 30
+  };
+  Cookies.set('roomId', base64EncodeUrl(JSON.stringify(token)));
 }
-$(".chat-box-toggle").click(function() {
+$(".chat-box-toggle").click(function () {
   $("#chat-circle").toggle('scale');
   $(".chat-box").toggle('scale');
 })

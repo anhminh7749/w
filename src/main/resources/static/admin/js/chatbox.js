@@ -152,8 +152,6 @@ function getAvatarColor(messageSender) {
 }
 
 $(document).ready(function() {
-  
-    
     messageForm.addEventListener('submit', sendMessage, true);
   
  

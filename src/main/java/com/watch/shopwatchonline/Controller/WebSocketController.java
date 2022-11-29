@@ -23,7 +23,6 @@ import com.watch.shopwatchonline.Model.User;
 import com.watch.shopwatchonline.Repository.ChatBoxRepository;
 import com.watch.shopwatchonline.Repository.UserRepository;
 
-
 @Controller
 public class WebSocketController {
 
@@ -33,6 +32,7 @@ public class WebSocketController {
   private ChatBoxRepository boxRepository;
   @Autowired
   private UserRepository userRepository;
+
   @MessageMapping("/chat/{roomId}/sendMessage")
   // @SendTo("/topic/publicChatRoom")
   public void sendMessage(@DestinationVariable String roomId, @Payload ChatMessage chatMessage) {
@@ -43,44 +43,44 @@ public class WebSocketController {
   @MessageMapping("/chat/{roomId}/addUser")
   // @SendTo("/topic/publicChatRoom")
   public void addUser(@DestinationVariable String roomId, @Payload ChatMessage chatMessage,
-    SimpMessageHeaderAccessor headerAccessor) {
+      SimpMessageHeaderAccessor headerAccessor) {
     String currentRoomId = (String) headerAccessor.getSessionAttributes().put("room_id", roomId);
     if (currentRoomId != null) {
-     
+
       ChatMessage leaveMessage = new ChatMessage();
       leaveMessage.setType(MessageType.LEAVE);
       leaveMessage.setSender(chatMessage.getSender());
       messagingTemplate.convertAndSend(format("/channel/%s", currentRoomId), leaveMessage);
     }
 
-
     headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
     messagingTemplate.convertAndSend(format("/channel/%s", roomId), chatMessage);
     saveuser(chatMessage.getSender(), roomId);
   }
 
-
   public void saveuser(String username, String room) {
-    System.out.println("------------------------------------------------------");
-    Optional < User > user = userRepository.findByUsername(username);
-    ChatBox chatbox = boxRepository.findByUsername(username);
+    System.out.println("------------------------------" + username);
+    System.out.println("------------------------------" + room);
+    Optional<User> user = userRepository.findByUsername(username);
+
+    Optional<ChatBox> chatbox = boxRepository.findByUsername(username);
     ChatBox chat = new ChatBox();
-    if (chatbox != null && user.isPresent()) {
-      if (chatbox.getUsers().getId() != user.get().getId()) {
-        if (username.equals("admin") == false) {
+    if (!username.equals("admin")) {
+      if (chatbox.isPresent() && user.isPresent()) {
+        if (chatbox.get().getUsers().getId() != user.get().getId()) {
           chat.setUsername(username);
-            chat.setUsers(user.get());
-            chat.setStatus((short) 1);       
+          chat.setUsers(user.get());
+          chat.setStatus((short) 1);
+        } else {
+          BeanUtils.copyProperties(chatbox, chat);
+          chat.setRoom(room);
         }
       } else {
-        BeanUtils.copyProperties(chatbox, chat);
+        chat.setUsername(username);
         chat.setRoom(room);
-      }    
-    }else{
-      chat.setUsername(username);
-      chat.setRoom(room);
-      chat.setStatus((short) 0);
+        chat.setStatus((short) 0);
+      }
+      boxRepository.save(chat);
     }
-    boxRepository.save(chat);
   }
 }

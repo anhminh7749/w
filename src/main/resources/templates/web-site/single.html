@@ -46,13 +46,14 @@
 					</div>
 					<div class="cont1 span_2_of_a1 simpleCart_shelfItem">
 						<h1 th:text="${product.name}" name="name" ></h1>
-						<div class="stars">
-							<a class="averagerating">
+						<div class="stars row">
+							<a class="averagerating" style="margin-left: 15px;"> 
 								<div class="stars-outer">
 									<div class="stars-inner"></div>
 								</div>
 							</a>
-							<input type="hidden" id="avg" th:value="${avg}">
+							<p style="margin-left: 20px;">Số lượt đánh giá: <span th:text="${raitting}"></span></p>
+							<input type="hidden" id="raitting" th:value="${avg}">
 						  </div>
 						<div class="price_single" th:if="${product.discount==0}">
 							<span class="amount item_price actual" th:text="${#numbers.formatDecimal(product.Price, 0, 'COMMA', 0, 'POINT')} +'VND'"></span>
@@ -61,53 +62,53 @@
 							<span class="reducedfrom" name="price" th:text="${#numbers.formatDecimal(product.Price, 0, 'COMMA', 0, 'POINT')} "></span>
 							<span class="amount item_price actual" th:text="${#numbers.formatDecimal(product.Price-product.discount, 0, 'COMMA', 0, 'POINT')} +'VND'"></span><a>SALE OFF  <span th:text="${#numbers.formatDecimal(product.Discount/product.Price*100, 1, 'COMMA', 2, 'POINT')} + '%'"> </span></a>
 						</div>
-						<h2 class="quick">Quick Overview:</h2>
+						<h2 class="quick">Mô tả ngắn:</h2>likePr
 						<p class="quick_desc" th:text="${product.description}"></p>
 						<div class="wish-list">
-							<ul>
+							<ul style=" display: block; ">
 								<li>
 									<!-- th:class="${like==0}?'icon-heart':'icon-heart-empty'" -->
-									<a th:href="@{'/api/site/wishlist/like/'+${product.id}}"><i th:class="${like==0}?'icon-heart':'icon-heart-empty'"></i>   Add to Wishlist</a>
+									<a th:attr="onclick=|likeProduct('${product.id}')|"><i th:class="${like==0}?'icon-heart':'icon-heart-empty'" id="iconLikePro"></i>   Thêm Vào yêu thích</a>
 								</li>
-								<li class="compare"><a href="#">Add to Compare</a></li>
+								<li class="compare"><a href="#">So sánh</a></li>
 							</ul>
 						</div>
 						<div class="wish-list">
-							<ul class="tag-men">
+							<ul class="tag-men" style=" display: block; ">
 								<li><span>TAG</span>
 								<span th:text="${': ' + product.Category.name}"></span></li>
 								<li ><span>SKU</span>
 								<span >: CK09</span></li>
-								<li ><span>BRAND</span>
+								<li ><span>THƯƠNG HIỆU</span>
 									<span th:text="${': ' +product.brand.name}"></span></li>
 							</ul>
 						</div>
-							<ul class="size float_right">
+							<!-- <ul class="size float_right" style=" display: block; ">
 								<h3>Length</h3>
 								<li><a href="#">32</a></li>
 								<li><a href="#">34</a></li>
 								<li><a href="#">32</a></li>
 
-							</ul>
-							<ul class="size header_top_left">
-								<h3>Quantity:</h3>
+							</ul> -->
+							<ul class="size header_top_left" style=" display: flex;">
+								<h3>Số lượng:</h3>
 								<!-- <li><input min="1" type="number" class="quantity_box_ind" style="width: 80px; height: 30px;"
 										value="1"></li> -->
-								<li><a class="availability">Availability: <span class="color" th:text="${#numbers.formatDecimal(product.Quantity, 0, 'COMMA', 0, 'POINT')}"></span></a></li>
+								<li><a class="availability"><span class="color" th:text="${#numbers.formatDecimal(product.Quantity, 0, 'COMMA', 0, 'POINT')}"></span> : Sẵn có </span></a></li>
 							</ul>
 						
 
 						<div class="clearfix quantity_box"></div>
 					</div>
-					<a href="#" class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1"
-						target="_self">Add to cart</a>
+					<a href="#" class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1 btn__add__to__cart"
+						target="_self">Thêm vào giỏ hàng</a>
 				
 				<div class="clearfix"> </div>
 			</div>
 
 			<div class="sap_tabs">
 				<div id="horizontalTab" >
-					<ul class="resp-tabs-list">
+					<ul class="resp-tabs-list" style=" display: block; ">
 						<li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span onclick="openTab('tab_item-0')">Mô tả sản phẩm</span>
 						</li>
 						<li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span onclick="openTab('tab_item-1')">Bổ sung thông tin

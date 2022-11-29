@@ -449,9 +449,8 @@ h1 {
   padding: 0;
 }
 ul {
-  display: block;
-  list-style-type: disc;
- 
+  display: grid;
+  list-style-type: none;
   margin-block-end: 1em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
@@ -501,7 +500,6 @@ li {
   background: #ee4d2d;
 }
 
-
 .btn-solid-primary {
   color: #fff;
   position: relative;
@@ -521,7 +519,6 @@ li {
   outline: 0;
   background: #ee4d2d;
 }
-
 
 ._6-dPdd {
   width: 17.5rem;

@@ -53,19 +53,25 @@ checkdiscountcode.addEventListener("click", () => {
       shoptotalCost.innerText,
     success: function (response) {
       if (response == "null") {
+        discountcode.value="";
         alert("Mã giảm giá không tồn tại");
       } else if (response == "notexist") {
+        discountcode.value="";
         alert("Mã giảm giá không tồn tại");
       } else if (response == "mismatched") {
+        discountcode.value="";
         alert("Mã giảm giá không khớp");
       } else if (response == "oof") {
+        discountcode.value="";
         alert("Mã giảm giá đã hết lượt sử dụng");
       } else if (response == "Insufficientfunds") {
+        discountcode.value="";
         alert("Đơn hàng chưa đủ tiền để áp dụng mã giảm giá");
       } else if (response == "date") {
+        discountcode.value="";
         alert("Mã giảm giá đã hết hạn hoặc chưa đến hạn sử dụng");
       } else {
-        alert("success ok");
+        alert("Áp dụng mã Thành công!");
         countcode.innerHTML = response;
       }
     },
@@ -109,3 +115,35 @@ btnCreateAddress.addEventListener("click", () => {
   
   setTimeout(formaddress.submit(),1000);
 });
+
+
+function likeProduct(id){
+  $.ajax({
+    type: "GET",
+    contentType: "application/json; charset=utf-8",
+    url:
+      "/api/site/wishlist/like?id=" + id+"&username="+sessionStorage.getItem("UserName"),
+      success: function (response) {
+        switch (response) {
+          case 0:
+          
+            document.getElementById("iconLikePro").classList.remove("icon-heart");
+            document.getElementById("iconLikePro").classList.add("icon-heart-empty");
+            break;
+            case 1:
+              
+              document.getElementById("iconLikePro").classList.remove("icon-heart-empty");
+              document.getElementById("iconLikePro").classList.add("icon-heart");
+            break;
+        
+          default:
+            alert("Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích");
+            break;
+        }
+       
+      },
+      error: function (response) {
+        alert(response);
+      }, 
+  });
+}
