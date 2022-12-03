@@ -48,4 +48,6 @@ public class OrderDto implements Serializable {
     private String username;
 
     private float totaldiscount;
+
+    private float totaldiscountcode;
 }

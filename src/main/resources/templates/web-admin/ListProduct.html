@@ -61,17 +61,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="badge badge-warning">30%</span></td>
-                                    <td><span class="label label-success">completed</span></td>
-                                    <td><span class="badge badge-success">80%</span></td>
-                                    <td><span class="label label-danger">in progress</span></td>
-                                    <td><span class="badge badge-info">70%</span></td>
-                                </tr>
-
                                 <tr th:each="item, iStart:${productPage}">
                                     <td scope="row" th:text="${item.Id}"></td>
                                     <td><img class="tbl-list img-fluid" id="image"
@@ -113,12 +102,12 @@
 								<li th:each="pageNum:${pageNums}"
 										th:if="${productPage.totalPages>1}"
 										th:class="${pageNum==productPage.number+1}?'page-item active':'page-item'"><a class="page-link"
-										th:href="@{/admin/product/list-product(name=${keyword}, size = ${productPage.size}, page=${pageNum})}"
+										th:href="@{/api/admin/product/list-product(name=${keyword}, size = ${productPage.size}, page=${pageNum})}"
 										th:text="${pageNum}"></a>
 									</li>
 								
 								<li th:class="${productPage.totalPages== productPage.number+1} ? 'active':''">
-                                <a th:href="@{/admin/product/list-product(name=${keyword}, size = ${productPage.size}, page=${productPage.totalPages})}" 
+                                <a th:href="@{/api/admin/product/list-product(name=${keyword}, size = ${productPage.size}, page=${productPage.totalPages})}" 
 								aria-label="Next"><span aria-hidden="true">»</span></a></li>
 							</ul>
 

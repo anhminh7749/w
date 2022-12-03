@@ -48,19 +48,19 @@ public class Order implements Serializable {
    
       @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date CompleteDate;
+    private Date CompleteDate; //Ngày hoàn thành
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date confirmationDate;
+    private Date confirmationDate; // ngày xác nhận
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date cancellationDate;
+    private Date cancellationDate;  //ngày hủy bỏ
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
-    private Date DeliveringDate;
+    private Date DeliveringDate; //  Ngày giao hàng
 
     @Column
     private Short Status;

@@ -1,3 +1,7 @@
+.showaddressbtn:hover{
+  color: #f9d9be;
+}
+
 .total-item #discountcode {
   width: 70%;
   margin-left: 14px;

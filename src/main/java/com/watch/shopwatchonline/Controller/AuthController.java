@@ -81,13 +81,13 @@ public class AuthController {
     log.info("tvtv, jwtCookie: {}", jwtCookie.toString());
 
     response.addHeader(HttpHeaders.SET_COOKIE, jwtCookie.toString()); // Đính jwt vào
-    String pathToRedirect = "redirect:/";
+    String pathToRedirect = "redirect:/api/site";
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
         .collect(Collectors.toList());
     for (String role : roles) {
       if (role.equals("ROLE_ADMIN")) {
-        pathToRedirect = "redirect:/api/admin/product/list-product";
+        pathToRedirect = "redirect:/api/admin";
       }
     }
     log.info("tvtv, pathToRedirect: {}, roles: {}", pathToRedirect, roles);

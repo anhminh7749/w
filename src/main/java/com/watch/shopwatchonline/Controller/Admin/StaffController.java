@@ -24,7 +24,7 @@ import com.watch.shopwatchonline.Model.Staff;
 import com.watch.shopwatchonline.Service.StaffService;
 
 @Controller
-@RequestMapping("admin/staffs")
+@RequestMapping("api/admin/staffs")
 public class StaffController {
     @Autowired
     StaffService staffService;

@@ -23,7 +23,7 @@
 
                 <div id="address-detail"></div>
               </div>
-              <a class="btn btn-primary" id="showaddressbtn">Chọn</a>
+              <a class="btn btn-primary" style="text-decoration: none;" id="showaddressbtn">Chọn</a>
               <div class="clearfix"></div>
             </div>
             <div class="price-details" id="alltotal">
@@ -43,7 +43,7 @@
             </div>
             <ul class="total_price">
               <li class="last_price row" style=" width: 100%;">
-                <h4 style=" margin-left: 25px;">TOTAL</h4>
+                <h4 style=" margin-left: 25px;">Tổng thanh toán</h4>
                 <span id="total_price" style="margin-left: 5.2em;font-size: 26px;">0</span>
               </li>
 
@@ -68,6 +68,8 @@
               <p>Some text in the Modal..</p>
             </div>
           </div>
+
+       
 
           <div class="modal" id="myModal">
             <div class="">
@@ -103,11 +105,11 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary">
-                    <span class="close">Đóng</span>
+                    <span class="close" id="closeModels">Đóng</span>
                   </button>
-                  <button type="button" class="btn btn-primary" th:onclick="getaddress()">
+                  <a type="button" class="btn btn-primary" id="sussecAddress" th:onclick="getaddress()">
                     Hoàn Thành
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -142,6 +144,8 @@
       </div>
     </div>
   </div>
+
+  
 </body>
 
 </html>

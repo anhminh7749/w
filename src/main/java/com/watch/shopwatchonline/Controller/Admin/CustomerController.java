@@ -23,7 +23,7 @@ import com.watch.shopwatchonline.Model.Customer;
 import com.watch.shopwatchonline.Service.CustomerService;
 
 @Controller
-@RequestMapping("admin/customers")
+@RequestMapping("api/admin/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -73,7 +73,7 @@ public class CustomerController {
     public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("customer") CustomerDto dto,
             BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return new ModelAndView("web-admin/customer");
         }
         Customer entity = new Customer();

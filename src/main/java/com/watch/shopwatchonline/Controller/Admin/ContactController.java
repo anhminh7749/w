@@ -28,7 +28,7 @@ import com.watch.shopwatchonline.Model.Mail;
 import com.watch.shopwatchonline.Repository.MailRepository;
 
 @Controller
-@RequestMapping("admin/contacs")
+@RequestMapping("api/admin/contacs")
 public class ContactController {
 	@Autowired
 	JavaMailSender javaMailSender;
@@ -70,15 +70,15 @@ public class ContactController {
 	}
 
 	@PostMapping("send")
-	public ModelAndView sendMail(ModelMap model,@Valid @ModelAttribute("mail") MailDto dto,
+	public ModelAndView sendMail(ModelMap model, @Valid @ModelAttribute("mail") MailDto dto,
 			@RequestParam("gmail") String to,
 			@RequestParam("title") String subject,
 			@RequestParam("description") String content,
 			BindingResult result) {
 
-		if(result.hasErrors()) {
-            return new ModelAndView("web-admin/mail");
-        }
+		if (result.hasErrors()) {
+			return new ModelAndView("web-admin/mail");
+		}
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(to);
 		msg.setSubject(subject);
@@ -90,23 +90,23 @@ public class ContactController {
 		entity.setStatus((short) 1);
 		// 0 = chua phan hoi short
 		// 1= da phan hoi
-//		Date date = new Date();
-//		entity.setCreateAt(date);
-//		entity.setUpdateAt(date);
+		// Date date = new Date();
+		// entity.setCreateAt(date);
+		// entity.setUpdateAt(date);
 		Date now = new Date();
 
 		try {
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = dateFormat.parse(dateFormat.format(new Date()));
-//			System.out.println("date: "+date);
-//			System.out.println("--------------------------------------------");
+			// System.out.println("date: "+date);
+			// System.out.println("--------------------------------------------");
 			entity.setUpdateAt(date);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		System.out.println(entity);
+		// System.out.println(entity);
 
 		mailRepository.save(entity);
 		model.addAttribute("message", "Mail is saved!");
