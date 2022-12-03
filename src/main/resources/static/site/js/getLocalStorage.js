@@ -17,31 +17,6 @@ function cancelorder(id){
 }
 
 
-// AgreeDel.addEventListener("click", () => {
-//   if(iddel){
-//     $.ajax({
-//       type: "POST",
-//       contentType: "application/json; charset=utf-8",
-//       url:
-//         "http://localhost:8080/api/order/cancel?id=" + iddel,
-//       success: function (response) {
-//         if (response == "success") {      
-//           alert("success ok");
-//           document.getElementById("cancel").click();
-//         }else if(response == "isEmpty"){
-//           alert("isEmpty");
-//         }
-//       },
-//       error: function (response) {
-//         alert(response);
-//       },
-//     });
-//   }
-//   else{
-//     alert("Không thể hủy!");
-//   }
-// });
-
 checkdiscountcode.addEventListener("click", () => {
   $.ajax({
     type: "POST",
@@ -54,24 +29,29 @@ checkdiscountcode.addEventListener("click", () => {
     success: function (response) {
       if (response == "null") {
         discountcode.value="";
-        alert("Mã giảm giá không tồn tại");
+        swal("", "Mã giảm giá không tồn tại!", "error");
+       
       } else if (response == "notexist") {
         discountcode.value="";
-        alert("Mã giảm giá không tồn tại");
+        swal("", "Mã giảm giá không tồn tại!", "error");
       } else if (response == "mismatched") {
         discountcode.value="";
-        alert("Mã giảm giá không khớp");
+        swal("", "Mã giảm giá không khớp!", "error");
+        
       } else if (response == "oof") {
         discountcode.value="";
-        alert("Mã giảm giá đã hết lượt sử dụng");
+        swal("", "Mã giảm giá đã hết lượt sử dụng!", "error");
+      
       } else if (response == "Insufficientfunds") {
         discountcode.value="";
-        alert("Đơn hàng chưa đủ tiền để áp dụng mã giảm giá");
+        swal("", "Đơn hàng chưa đủ tiền để áp dụng mã giảm giá!", "error");
+        
       } else if (response == "date") {
         discountcode.value="";
-        alert("Mã giảm giá đã hết hạn hoặc chưa đến hạn sử dụng");
+        swal("", "Mã giảm giá đã hết hạn hoặc chưa đến hạn sử dụng!", "error");
       } else {
-        alert("Áp dụng mã Thành công!");
+        swal("", "Áp dụng mã Thành công!", "success");
+      
         countcode.innerHTML = response;
       }
     },
@@ -83,32 +63,41 @@ checkdiscountcode.addEventListener("click", () => {
 
 checkout.addEventListener("click", () => {
   if (addressId.value) {
-    $.ajax({
-      type: "POST",
-      contentType: "application/json; charset=utf-8",
-      url:
-        "http://localhost:8080/cart/save?addressId=" +
-        addressId.value +
-        "&discountcode=" +
-        discountcode.value,
-      data: {
-        shopcart: JSON.stringify(shopCartItems),
-      },
-      success: function (response) {
-        if (response == "success") {
-          clearCartItems();
-          clearCartShopItems() ;
-          alert("success ok");
-        }
-      },
-      error: function (response) {
-        alert(response);
-      },
-    });
+    if(shopCartItems.length != 0){
+      $.ajax({
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        url:
+          "http://localhost:8080/cart/save?addressId=" +
+          addressId.value +
+          "&discountcode=" +
+          discountcode.value,
+        data: {
+          shopcart: JSON.stringify(shopCartItems),
+        },
+        success: function (response) {
+          if (response == "success") {
+            clearCartItems();
+            clearCartShopItems() ;
+            swal("", "Thanh toán thành công!", "success");
+           
+          }
+        },
+        error: function (response) {
+          alert(response);
+        },
+      });
+    }else{
+      swal("Vui lòng thêm sản phẩm vào giỏ hàng", "Chưa có sản phẩm nào được chọn!", "warning");
+    }
+   
   } else {
-    alert("Vui lòng chọn địa chỉ!");
+    swal("", "Vui lòng chọn địa chỉ!", "warning");
+    
   }
 });
+
+
 document.getElementById("redirect").value = window.location.pathname;
 btnCreateAddress.addEventListener("click", () => {
   
@@ -137,7 +126,8 @@ function likeProduct(id){
             break;
         
           default:
-            alert("Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích");
+            swal("", "Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích!", "error");
+          
             break;
         }
        

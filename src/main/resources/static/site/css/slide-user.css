@@ -55,9 +55,9 @@
 svg:not(:root) {
   overflow: hidden;
 }
-:not(svg) {
+/* :not(svg) {
   transform-origin: 0px 0px;
-}
+} */
 .shopee-svg-icon {
   display: inline-block;
   width: 1em;

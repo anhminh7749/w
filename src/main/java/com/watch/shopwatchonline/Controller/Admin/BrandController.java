@@ -31,14 +31,14 @@ import com.watch.shopwatchonline.Service.BrandService;
 import com.watch.shopwatchonline.Service.StogareService;
 
 @Controller
-@RequestMapping("admin/brands")
+@RequestMapping("api/admin/brands")
 public class BrandController {
 
 	@Autowired
 	private BrandService brandService;
 
-//	@Autowired
-//	private StogareService stogareService;
+	// @Autowired
+	// private StogareService stogareService;
 
 	@GetMapping("add-brand")
 	public String add(Model model) {
@@ -69,16 +69,18 @@ public class BrandController {
 
 		return new ModelAndView("forward:/admin/brands", model);
 	}
-//
-//	@GetMapping("images/{filename:.+}")
-//	@ResponseBody
-//	public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
-//
-//		Resource file = stogareService.loadResource(fileName);
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-//				.body(file);
-//	}
+	//
+	// @GetMapping("images/{filename:.+}")
+	// @ResponseBody
+	// public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename")
+	// String fileName) {
+	//
+	// Resource file = stogareService.loadResource(fileName);
+	// return ResponseEntity.ok()
+	// .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+	// file.getFilename() + "\"")
+	// .body(file);
+	// }
 
 	@GetMapping("delete/{id}")
 	public ModelAndView delete(ModelMap model, @PathVariable("id") Integer id) {

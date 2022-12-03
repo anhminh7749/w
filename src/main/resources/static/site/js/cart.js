@@ -9,41 +9,45 @@ let shopCartItems = (JSON.parse(localStorage.getItem(usernameshop)) || []);
 
 
 document.addEventListener("DOMContentLoaded", loadDatashop);
-var dress =[
+var dress = [
     name = null,
     phone = null,
     detail = null,
-    address =null
+    address = null
 ]
 
-function setaddress(id,name,phone,detail,address){
-    dress =[
-        id=id,
+function setaddress(id, name, phone, detail, address) {
+    dress = [
+        id = id,
         name = name,
         phone = phone,
         detail = detail,
-        address=address
-        
+        address = address
+
     ]
-   
+
 }
-function getaddress(){ 
-    document.getElementById("name-phone").innerHTML= dress.at(1)+'  <div id="numberphoneaddress"> '+dress.at(2)+'</div>';
-    document.getElementById("address-detail").innerHTML=dress.at(3) +',  <div style="margin-left: 9px;">'+dress.at(4)+'</div> '; 
+
+function getaddress() {
+    document.getElementById("name-phone").innerHTML = dress.at(1) + '  <div id="numberphoneaddress"> ' + dress.at(2) + '</div>';
+    document.getElementById("address-detail").innerHTML = dress.at(3) + ',  <div style="margin-left: 9px;">' + dress.at(4) + '</div> ';
     document.getElementById("addressId").setAttribute('value', dress.at(0));
     closeModels();
 }
 
-function closeModels(){
+function closeModels() {
+    const btn = document.getElementById('showaddressbtn');
+    btn.innerText = 'Thay đổi';
+    btn.className = "showaddressbtn";
     document.getElementById('closeModels').click();
 }
 
 function loadDatashop() {
     if (shopCartItems.length > 0) {
         shopCartItems.forEach(product => {
-           
+
             ShowItemToTheDOM(product);
-           
+
             const shopcartDOMItems = document.querySelectorAll(".shop_cart_item");
 
             shopcartDOMItems.forEach(individualItem => {
@@ -82,7 +86,7 @@ function shopsaveToLocalStorage() {
 
 function clearCartShopItems() {
 
-    
+
     localStorage.removeItem(usernameshop);
     shopCartItems = [];
 
@@ -141,7 +145,7 @@ function shopincreaseItem(individualItem, product) {
                 individualItem.querySelector(".product__quantity").innerText = ++cartItem.quantity;
                 shopcalculateTotal();
                 shopsaveToLocalStorage();
-                
+
             }
         })
     });
@@ -157,14 +161,14 @@ function shopdecreaseItem(individualItem, product) {
                 if (cartItem.quantity > 1) {
                     individualItem.querySelector(".product__quantity").innerText = --cartItem.quantity;
                     shopcalculateTotal();
-                   
+
                     shopsaveToLocalStorage();
                 } else {
                     // removing this element and assign the new elemntos to the old of the array
 
                     shopCartItems = shopCartItems.filter(newElements => newElements.id !== product.id);
                     individualItem.remove();
-                 
+
                     shopcalculateTotal();
                     shopsaveToLocalStorage();
 
@@ -184,7 +188,7 @@ function shopremoveItem(individualItem, product) {
             if (cartItem.id === product.id) {
                 shopCartItems = shopCartItems.filter(newElements => newElements.id !== product.id);
                 individualItem.remove();
-                shopcalculateTotal();      
+                shopcalculateTotal();
                 shopsaveToLocalStorage();
             }
         })

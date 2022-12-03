@@ -23,4 +23,8 @@ public interface WishlistRepository extends JpaRepository<wishlist, Integer>{
 
     @Query(value = "DELETE FROM wishlist WHERE wishlist.product_id = ?1 and wishlist.User_id = ?2", nativeQuery = true)
     void deleteByProAndUser(int pro,int users);
+    
+
+    @Query(value = "SELECT count(w.id)  from wishlist w ", nativeQuery = true)
+  Integer countWishList();
 }

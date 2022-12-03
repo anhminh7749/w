@@ -22,14 +22,13 @@ import com.watch.shopwatchonline.Domain.CategoryDto;
 import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Service.CategoryService;
 
-
 @Controller
-@RequestMapping("admin/categories")
+@RequestMapping("api/admin/categories")
 public class CategoryController {
 
     @Autowired
-	private CategoryService categoryService;
-    
+    private CategoryService categoryService;
+
     @GetMapping("add-category")
     public String add(Model model) {
         CategoryDto dto = new CategoryDto();
@@ -41,7 +40,7 @@ public class CategoryController {
     @GetMapping("edit/{id}")
     public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) {
 
-    	Optional<Category> opt = categoryService.findById(id);
+        Optional<Category> opt = categoryService.findById(id);
         CategoryDto dto = new CategoryDto();
 
         if (opt.isPresent()) {
@@ -75,7 +74,7 @@ public class CategoryController {
     public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("category") CategoryDto dto,
             BindingResult result) {
 
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return new ModelAndView("web-admin/Addcategory");
         }
         Category entity = new Category();

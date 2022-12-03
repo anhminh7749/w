@@ -30,4 +30,6 @@ public interface RaitingRepository extends JpaRepository<Raiting, Integer>{
 
     Page<Raiting> findByActive(Short active, Pageable pageable);
    
+    @Query(value = " SELECT AVG(point) FROM Raiting ", nativeQuery = true)
+    Integer avgRaitting();
 }
