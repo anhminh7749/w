@@ -83,6 +83,11 @@ public class HomeController {
   @Autowired
   private ProductRepository productRepository;
 
+
+  @GetMapping("/abc")
+  public String alless() {
+    return "web-site/user/tete";
+  }
   @GetMapping("/auth/login")
   public String allAccess() {
     return "web-admin/login";
