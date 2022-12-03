@@ -15,13 +15,13 @@
 					<h2>Thêm Sản Phẩm</h2>
 					<div class="row">
 						<ol class="breadcrumb">
-							<li><a href="#">Trang Chủ</a></li>
-							<li><a id="par-1">Sản Phẩm</a></li>
-							<li class="active">Thêm Mới</li>
+							<li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
+							<li><a th:href="@{/api/admin/product/list-product}">Sản Phẩm</a></li>
+							<li class="active"><a th:href="@{/api/admin/product/add-product}">Thêm Mới</a></li>
 						</ol>
 					</div>
 				</div>
-				<form th:action="@{/admin/product/update}" method="post" enctype="multipart/form-data"
+				<form th:action="@{/api/admin/product/update}" method="post" enctype="multipart/form-data"
 					th:object="${product}">
 
 					<input type="hidden" th:field="*{isEdit}">
@@ -39,7 +39,7 @@
 											onclick="changeContentThumbnail()" type="file" />
 										<i class="fa fa-plus-circle icon-add-image"></i>
 										<img class="" th:field="*{thumbnail}" id="chosen-thumbnail" alt="edit"
-											th:src="${product.thumbnail!=null?'/admin/product/images/'+product.thumbnail:'/images/Background.png'}">
+											th:src="${product.thumbnail!=null?'/api/admin/product/images/'+product.thumbnail:'/images/Background.png'}">
 										<a class="name-add-image" id="file-thumbnail">Ảnh bìa</a>
 									</label>
 

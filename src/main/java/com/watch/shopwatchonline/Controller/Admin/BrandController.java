@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,16 +33,16 @@ import com.watch.shopwatchonline.Service.BrandService;
 import com.watch.shopwatchonline.Service.StogareService;
 
 @Controller
-@RequestMapping("admin/brands")
+@RequestMapping("api/admin/brands")
 public class BrandController {
 
 	@Autowired
 	private BrandService brandService;
 
-//	@Autowired
-//	private StogareService stogareService;
+	@Autowired
+	private StogareService stogareService;
 
-	@GetMapping("add-brand")
+	@GetMapping("/add-brand")
 	public String add(Model model) {
 		BrandDto dto = new BrandDto();
 		dto.setIsEdit(false);
@@ -48,7 +50,7 @@ public class BrandController {
 		return "web-admin/Addbrand";
 	}
 
-	@GetMapping("edit/{id}")
+	@GetMapping("/edit/{id}")
 	public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) {
 
 		Optional<Brand> opt = brandService.findById(id);
@@ -67,45 +69,48 @@ public class BrandController {
 
 		model.addAttribute("message", "Brand is existed");
 
-		return new ModelAndView("forward:/admin/brands", model);
-	}
-//
-//	@GetMapping("images/{filename:.+}")
-//	@ResponseBody
-//	public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
-//
-//		Resource file = stogareService.loadResource(fileName);
-//		return ResponseEntity.ok()
-//				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-//				.body(file);
-//	}
-
-	@GetMapping("delete/{id}")
-	public ModelAndView delete(ModelMap model, @PathVariable("id") Integer id) {
-
-		Optional<Brand> opt = brandService.findById(id);
-		brandService.deleteById(id);
-
-		model.addAttribute("message", "Brand is delete!");
-
-		return new ModelAndView("forward:/admin/brands", model);
+		return new ModelAndView("forward:/api/admin/brands", model);
 	}
 
-	@PostMapping("saveOrUpdate")
+	@GetMapping("images/{filename:.+}")
+	@ResponseBody
+	public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
+
+		Resource file = stogareService.loadResource(fileName);
+		return ResponseEntity.ok()
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
+				.body(file);
+	}
+
+	   @GetMapping("/delete")
+	    public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
+	        brandService.deleteById(Integer.parseInt(id));
+	        return new ModelAndView("forward:/api/admin/brands");
+	    }
+
+
+	@PostMapping("/saveOrUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("brand") BrandDto dto,
 			BindingResult result) {
+		try {
+			if (result.hasErrors()) {
+				System.out.println(result.getAllErrors());
+				return new ModelAndView("web-admin/Addbrand");
+			}
+			Brand entity = new Brand();
+			BeanUtils.copyProperties(dto, entity);
 
-		if (result.hasErrors()) {
-			return new ModelAndView("web-admin/Addbrand");
+			entity.setThumbnail(stogareService.getFileName(dto.getImageFile()));
+			stogareService.store(dto.getImageFile(), entity.getThumbnail());
+
+			brandService.save(entity);
+
+			model.addAttribute("message", "Brand is saved!");
+		} catch (Exception e) {
+			e.getMessage();
 		}
-		Brand entity = new Brand();
-		BeanUtils.copyProperties(dto, entity);
 
-		brandService.save(entity);
-
-		model.addAttribute("message", "Brand is saved!");
-
-		return new ModelAndView("forward:/admin/brands", model);
+		return new ModelAndView("forward:/api/admin/brands", model);
 	}
 
 	@RequestMapping("")

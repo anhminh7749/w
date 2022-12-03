@@ -1,3 +1,128 @@
+
+#img{
+    top: 5px;
+    width: 122px;
+    height: 130px;
+    position: relative;
+    left: -363px !important;
+    bottom: 2px;
+    border: 1px solid #8fd3ff;
+    border-radius: 5px;
+}
+.faa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.name-add-image1 {
+    white-space: normal;
+    font-size: 17px !important;
+    color: #1e1f20;
+    position: absolute;
+    left: 1147px;
+    top: 51%;
+    transform: translate(-50%,-50%);
+    width: 90px;
+        margin-bottom: 17px;
+    
+}
+.name-add-image11 {
+    white-space: normal;
+    font-size: 17px !important;
+    color: #1e1f20;
+    position: absolute;
+    right: 1094px;
+    top: 51%;
+    transform: translate(-50%,-50%);
+    width: 90px;
+
+}
+.custom-file-upload1 img{
+  width: 370px;
+  height: 128px;
+  position: relative;
+  left: 6px;
+  bottom: 0px;
+  border: 1px solid #8fd3ff;
+  border-radius: 5px;
+}
+.table img {
+    vertical-align: middle;
+    width: 130px;
+}
+#messageArea .chat-message {
+	display: flex;
+}
+
+#messageArea .chat-message div{
+	margin-left: 10px;
+	 
+}
+#messageArea .chat-message div span{
+	margin-right: 20px;
+	 font-size: large;
+    font-weight: bold;
+}
+
+#messageArea::-webkit-scrollbar-track
+{
+	
+	background-color:#f0f0f0;
+}
+
+#messageArea::-webkit-scrollbar
+{
+	width:4px;
+	background-color: #f5f5f5;
+}
+
+#messageArea::-webkit-scrollbar-thumb
+{
+	
+	background-color:#0091cd;
+}
+.panel-default .panel-body #messageArea{
+overflow-y: scroll;
+    height: 500px;
+    }
+   #messageForm .form-group .input-group{
+    display: flex;
+    }
+
+.form-three .form-group .chosen{
+    width: 121px;
+    height: 101px;
+    margin-left: -4px;
+    margin-right: 56px;
+    margin-bottom: 59px;
+    margin-top: 0px;
+    border-radius: 5px;
+    border: 1px solid #8fd3ff;
+}
+
+#page-wrapper .main-page .affix {
+  position: fixed;
+  top: 180px;
+  background-color: white;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.tbl-list{
+  width: 100px;
+}
+.custom-file-upload img{
+  width: 115px;
+    height: 101px;
+    position: relative;
+    right: 20px;
+    bottom: 7px;
+    border: 1px solid #8fd3ff;
+    border-radius: 5px;
+}
 #radios label {
   cursor: pointer;
   position: relative;
@@ -1935,7 +2060,7 @@ form.search-form {
 .login-top  h4  a:hover{
     color: #555;
 }
-.login-page input[type="email"], .login-page input[type="password"] {
+.login-page input[type="text"], .login-page input[type="password"] {
     font-size: 1em;
     padding: 14px 15px 14px 37px;
     width: 100%;

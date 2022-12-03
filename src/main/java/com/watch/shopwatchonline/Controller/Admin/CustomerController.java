@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.watch.shopwatchonline.Domain.CustomerDto;
@@ -23,20 +25,20 @@ import com.watch.shopwatchonline.Model.Customer;
 import com.watch.shopwatchonline.Service.CustomerService;
 
 @Controller
-@RequestMapping("admin/customers")
+@RequestMapping("api/admin/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
 
-    @GetMapping("add")
+    @GetMapping("/add-customer")
     public String add(Model model) {
         CustomerDto dto = new CustomerDto();
         dto.setIsEdit(false);
         model.addAttribute("customer", dto);
-        return "web-admin/customer";
+        return "web-admin/Addcustomer";
     }
 
-    @GetMapping("edit/{customerId}")
+    @GetMapping("/edit/{customerId}")
     public ModelAndView edit(ModelMap model, @PathVariable("customerId") Integer customerId) {
 
         Optional<Customer> opt = customerService.findById(customerId);
@@ -50,31 +52,26 @@ public class CustomerController {
 
             model.addAttribute("customer", dto);
 
-            return new ModelAndView("web-admin/customer", model);
+            return new ModelAndView("web-admin/Addcustomer", model);
         }
 
         model.addAttribute("message", "Customer is existed");
 
-        return new ModelAndView("forward:/admin/customers", model);
+        return new ModelAndView("forward:/api/admin/customers", model);
     }
 
-    @GetMapping("delete/{customerId}")
-    public ModelAndView delete(ModelMap model, @PathVariable("customerId") Integer customerId) {
+	   @GetMapping("/delete")
+	    public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
+	        customerService.deleteById(Integer.parseInt(id));
+	        return new ModelAndView("forward:/api/admin/customers");
+	    }
 
-        Optional<Customer> opt = customerService.findById(customerId);
-        customerService.deleteById(customerId);
-
-        model.addAttribute("message", "Customer is delete!");
-
-        return new ModelAndView("forward:/admin/customers", model);
-    }
-
-    @PostMapping("saveOrUpdate")
+    @PostMapping("/saveOrUpdate")
     public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("customer") CustomerDto dto,
             BindingResult result) {
 
         if(result.hasErrors()) {
-            return new ModelAndView("web-admin/customer");
+            return new ModelAndView("web-admin/Addcustomer");
         }
         Customer entity = new Customer();
         BeanUtils.copyProperties(dto, entity);
@@ -84,7 +81,7 @@ public class CustomerController {
 
         model.addAttribute("message", "Customer is saved!");
 
-        return new ModelAndView("forward:/admin/customers", model);
+        return new ModelAndView("forward:/api/admin/customers", model);
     }
 
     @RequestMapping("")
@@ -97,6 +94,6 @@ public class CustomerController {
 
     @GetMapping("search")
     public String search() {
-        return "web-admin/customers";
+        return "web-admin/customer";
     }
 }
