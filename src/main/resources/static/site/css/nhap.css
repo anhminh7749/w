@@ -1,0 +1,37 @@
+
+.main{
+    height: 80%;
+    position: relative;
+}
+.list-image{
+    width: 100%;
+    height: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+.list-image div{
+    flex: 1px;
+    padding: 5px;
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.control{
+    position: absolute;
+    top: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translateY(-50%);
+}
+.prev{
+    left: 10px;
+}
+.next{
+    right: 10px;
+}
+.active{
+    background: brown;
+}
