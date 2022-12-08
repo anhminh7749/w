@@ -112,7 +112,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-phone"></i>
-														</span> <input type="number" class="form-control"
+														</span> <input type="text" class="form-control"
 															th:field="*{phone}" placeholder="Phone">
 													</div>
 													<small th:if="${#fields.hasErrors('phone')}" id="customerIdHid"
@@ -126,7 +126,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-money"></i>
-														</span> <input type="number" class="form-control"
+														</span> <input type="number" class="form-control" style="padding: 10px;"
 															th:field="*{luong}" placeholder="Luong">
 													</div>
 													<small th:if="${#fields.hasErrors('luong')}" id="customerIdHid"
@@ -140,7 +140,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-calendar"></i>
-														</span> <input type="date" class="form-control"
+														</span> <input type="date" class="form-control" style="padding: 10px;"
 															th:field="*{ngayBD}" placeholder="dd/mm/yyyy">
 													</div>
 													<small th:if="${#fields.hasErrors('ngayBD')}" id="customerIdHid"
