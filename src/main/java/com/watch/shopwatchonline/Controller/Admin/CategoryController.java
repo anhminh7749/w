@@ -25,7 +25,7 @@ import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Service.CategoryService;
 
 @Controller
-@RequestMapping("admin/categories")
+@RequestMapping("api/admin/categories")
 public class CategoryController {
 
     @Autowired

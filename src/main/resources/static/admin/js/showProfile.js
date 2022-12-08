@@ -78,37 +78,6 @@ function showProfileDiscountcode(name, ra, aa, qt, bc, ad, ed) {
 	document.getElementById("ExpirationDate").value = ed;
 }
 
-function showConfirmModelDialog(id, name) {
-	$('#mailName').text(name);
-	$('#yesOption').attr('href',
-		'/api/admin/contacs/delete/' + id);
-	$('#confirmationId').modal('show');
-}
-function showConfirmModelDialogCustomer(id, name) {
-	$('#mailName').text(name);
-	$('#yesOption').attr('href',
-		'/api/admin/customers/delete/' + id);
-	$('#confirmationId').modal('show');
-}
-function showConfirmModelDialogStaff(id, name) {
-	$('#mailName').text(name);
-	$('#yesOption').attr('href',
-		'/api/admin/staffs/delete/' + id);
-	$('#confirmationId').modal('show');
-}
-function showConfirmModelDialogCategory(id, name) {
-	$('#mailName').text(name);
-	$('#yesOption').attr('href',
-		'/api/admin/categories/delete/' + id);
-	$('#confirmationId').modal('show');
-}
-function showConfirmModelDialogBrand(id, name) {
-	$('#mailName').text(name);
-	$('#yesOption').attr('href',
-		'/api/admin/brands/delete/' + id);
-	$('#confirmationId').modal('show');
-}
-
 function DeleteSwal(id, model) {
 	console.log(model)
 	swal({

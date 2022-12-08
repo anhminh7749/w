@@ -93,7 +93,7 @@ public class StaffController {
     public String list(ModelMap model) {
         List<Staff> list = staffService.findAll();
 
-        model.addAttribute("staffs", list);
+        model.addAttribute("staffss", list);
         return "web-admin/liststaff";
     }
 

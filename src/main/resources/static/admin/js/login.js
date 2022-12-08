@@ -11,10 +11,11 @@ function checklogin() {
 	setTimeout( swal("", "Trường password không được rỗng!", "error"),1400);
 
 }else
-	if(user.length<9 && user.length>0){
-		swal("", "Trường username không dưới 8 ký tự!", "error");
+// 	if(user.length<9 && user.length>0){
+// 		swal("", "Trường username không dưới 8 ký tự!", "error");
 	
-}else{
+// }else
+{
 	console.log("saiodhiuash")
 	document.getElementById('submit').click();
 }

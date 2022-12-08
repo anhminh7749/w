@@ -63,11 +63,11 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div> <!-- /.modal -->
-										<a th:href="@{'/admin/categories/edit/' + ${item.id}}" class="fa fa-edit"></a>
+										<a th:href="@{'/api/admin/categories/edit/' + ${item.id}}" class="fa fa-edit"></a>
 
 										<a th:data-id="${item.id}" th:data-name="${item.name}"
-											onclick="showConfirmModelDialogCategory(this.getAttribute('data-id'), this.getAttribute('data-name'))"
-											class="fa fa-trash-o"> </a>
+										onclick="DeleteSwal(this.getAttribute('data-id'),'categories')"
+										class="fa fa-trash-o"> </a>
 									</td>
 								</tr>
 							</tbody>
