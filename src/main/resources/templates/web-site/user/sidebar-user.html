@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+</head>
+<body>
+    <div>
+        <div th:fragment="siderbar" class="kul4+s">
+            <div class="AmWkJQ" id="getImg">
+                <a class="_1O4r+C" href="">
+                    <div class="shopee-avatar">
+                        <div class="shopee-avatar__placeholder">
+                            <svg enable-background="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0"
+                                class="shopee-svg-icon icon-headshot">
+                                <g>
+                                    <circle cx="7.5" cy="4.5" fill="none" r="3.8" stroke-miterlimit="10"></circle>
+                                    <path d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6" fill="none" stroke-linecap="round"
+                                        stroke-miterlimit="10"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <img class="shopee-avatar__img" id="avatar__img"
+                            src="https://cf.shopee.vn/file/71284313e54af2347cd763f4f53e007d_tn" />
+                    </div>
+                </a>
+                <div class="miwGmI">
+                    <div class="mC1Llc" id="username__slide"></div>
+                    <div>
+                        <a class="_78QHr1" href="/api/user/profile/info"><svg width="12" height="12" viewBox="0 0 12 12"
+                                xmlns="http://www.w3.org/2000/svg" style="margin-right: 4px">
+                                <path
+                                    d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48"
+                                    fill="#9B9B9B" fill-rule="evenodd"></path>
+                            </svg>Sửa hồ sơ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="rhmIbk">
+                <div id="accordianId" aria-multiselectable="true">
+                    <div style="margin-bottom: 1em; ">
+                        <div class="stardust-dropdown__item-header" id="section1HeaderId">
+                            <a class="+1U02e" data-toggle="collapse" data-parent="#accordianId"
+                                href="#section1ContentId" aria-expanded="true" aria-controls="section1ContentId">
+                                <div class="DlL0zX">
+                                    <span class="adF7Xs">Tài khoản của tôi</span>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="section1ContentId" class="collapse in" aria-labelledby="section1HeaderId"
+                            data-parent="#accordianId">
+                            <div class="Yu7gVR">
+                                <a class="FEE-3D tH0d6d" href="/api/user/profile/info"><span class="qyt-aY">Hồ sơ</span></a>
+                                <a class="FEE-3D" href="/api/user/profile/listaddress"><span class="qyt-aY">Địa chỉ</span></a>
+                                <a class="FEE-3D" href="/api/user/profile/change-password"><span class="qyt-aY">Đổi mật khẩu</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="stardust-dropdown">
+                    <div class="stardust-dropdown__item-header">
+                        <a class="+1U02e" href="/api/user/orders">
+                            <div class="DlL0zX"><span class="adF7Xs">Đơn Mua</span></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+</body>
+
+</html>

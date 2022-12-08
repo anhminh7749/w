@@ -9,6 +9,7 @@
 <body>
 	<div layout:fragment="content">
 	<div class="men" th:object="${product}">
+		<input type="hidden" name="" id="product__id" th:value="${product.id}" />
 		<div class="container">
 			<div class="col-md-12 single_top">
 				<div class="single_left">

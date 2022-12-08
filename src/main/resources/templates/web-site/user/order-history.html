@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+
+<head>
+</head>
+
+<body>
+    <div layout:fragment="content" style=" background: #f5f5f5; ">
+
+        <div class="container pIHdXn">
+            <div th:replace="web-site/user/sidebar-user :: siderbar"></div>
+
+            <div class="xMDeox">
+                <div class="" style="padding: 20px;">
+                    <header id="radios" class="nav nav-pills d-flex justify-content-between">
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="7" onclick="showDataUserOrder(7)" checked />
+                                <span>Tất cả</span>
+                            </label>
+                        </a>
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="0" onclick="showDataUserOrder(0)" />
+                                <span>Chờ xác nhận</span>
+                            </label>
+                        </a>
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="1" onclick="showDataUserOrder(1)" />
+                                <span>Chờ lấy hàng</span>
+                            </label>
+                        </a>
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="2" onclick="showDataUserOrder(2)" />
+                                <span>Đang giao</span>
+                            </label>
+                        </a>
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="3" onclick="showDataUserOrder(3)" />
+                                <span>Đã giao</span>
+                            </label>
+                        </a>
+
+                        <a>
+                            <label class="material-icons">
+                                <input type="radio" name="mode" value="6" onclick="showDataUserOrder(6)" />
+                                <span>Đã hủy</span>
+                            </label>
+                        </a>
+                    </header>
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Mã đơn hàng</th>
+                                <th scope="col">Số sản phẩm</th>
+                                <th scope="col">Tổng tiền</th>
+                                <th scope="col">Ngày đặt</th>
+                                <th scope="col">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <tr th:each="item:${orders}">
+                                <th scope="row" th:utext="${item.Id}"></th>
+                                <td th:utext="${item.totalQuantity}"></td>
+                                <td th:utext="${item.totalAmount}"></td>
+                                <td th:utext="${#dates.format(item.createAt, 'dd-MM-yyyy hh:mm:ss')}"></td>
+                                <td  th:switch="${item.Status}">
+                                    <span th:case="0">Chờ xác nhận</span>
+                                    <span th:case="1">Chờ lấy hàng</span>
+                                    <span th:case="2">Đang giao</span>
+                                    <span th:case="3">Đã giao</span>
+                                    <span th:case="4">Hủy bởi bạn</span>
+                                    <span th:case="5">Hệ thống hủy</span>
+                                </td>
+                                <td>
+                                    <a  th:if="${item.status==0}" 
+                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                    th:attr="onclick=|cancelorder('${item.id}')|"> <i class="icon-remove"></i></a>
+                                    <a th:href="@{'/api/user/orders/detail/'+${item.id}}"> <i class="icon-exclamation"></i> </a>
+                                    
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

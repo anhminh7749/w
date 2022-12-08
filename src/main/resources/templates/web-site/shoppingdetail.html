@@ -6,7 +6,7 @@
     <div class="container  pt-5">
         <div class="row ">
             <div class="col-3 ">
-                <div th:replace="web-site/user/sidebar :: sidebar"></div>
+               
             </div>
             <div class="col-9">
                 <div class="row">
@@ -27,7 +27,7 @@
                         <div class="d-flex text-muted pt-3">
                             <div class="">
                                 <img class="bd-placeholder-img flex-shrink-0 me-2 img-fluid rounded float-start"
-                                th:src="${item.thumbnail!=null?'/api/site/product/images/'+item.thumbnail:'/images/Background.png'}" alt="" srcset="">
+                                th:src="${item.thumbnail!=null?'/api/images/'+item.thumbnail:'/images/Background.png'}" alt="" srcset="">
                             </div>
                             <div class="pb-3 mb-0  lh-sm border-bottom p-3 ps-3 w500">
                                 

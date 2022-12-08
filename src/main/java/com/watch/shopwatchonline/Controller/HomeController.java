@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -105,12 +106,6 @@ public class HomeController {
   public String viewmain() {
     return "web-site/main";
   }
-
-  @GetMapping("/site/abc")
-  public String profileUser() {
-    return "web-site/user/profile";
-  }
-
   @GetMapping("/auth/site/login")
   public String all() {
     return "web-site/login";
@@ -173,85 +168,54 @@ public class HomeController {
 
     List<Statistics> statistics = new ArrayList<>();
     String list = orderRepository.statisticyear();
-   
-      String[] splits = list.split(",");
-      Statistics s = new Statistics();
-      for (String item : splits) {
 
-        
-        s.setStartyear(item);
-        statistics.add(s);
-        System.out.print(item);
-        System.out.println(s);
-      }
+    String[] splits = list.split(",");
+    Statistics s = new Statistics();
+    for (String item : splits) {
 
-    
+      s.setStartyear(item);
+      statistics.add(s);
+      System.out.print(item);
+      System.out.println(s);
+    }
 
     return ResponseEntity.ok().body(null);
   }
 
-  @GetMapping("/site/user/history-order/detail/{id}")
-  public String aa(@PathVariable(name = "id") int id, Model model) {
-    List<OrderDetail> details = detailRepository.FindByOrder(id);
-    List<ProductDto> dtos = new ArrayList<>();
-    for (OrderDetail detail : details) {
-      ProductDto dto = new ProductDto();
-      Optional<Product> pro = productRepository.findById(detail.getProduct().getId());
-      BeanUtils.copyProperties(pro.get(), dto);
-      dto.setPrice(detail.getPrice());
-      dto.setQuantity(detail.getQuantity());
-      dto.setDiscount(detail.getDiscount());
-      dtos.add(dto);
-    }
-    model.addAttribute("detail", dtos);
-    return "web-site/shoppingdetail";
+  
+
+  @GetMapping("/product/getInfo")
+  public @ResponseBody Product getProduct(@RequestBody @RequestParam(name = "id") int id) {
+Optional<Product> product = productRepository.findById(id);
+product.get().setBrand(null);
+product.get().setCategory(null);
+product.get().setWishlists(null);
+product.get().setBlogs(null);
+product.get().setOrderDetails(null);
+return product.get();
   }
 
-  @RequestMapping(value = "/site/user/order/cancel", method = RequestMethod.POST)
-  public @ResponseBody ResponseEntity<?> CancelOrder(@RequestParam(name = "id") String id) {
-    Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
-    if (!orders.isEmpty()) {
-      Order order = new Order();
-      BeanUtils.copyProperties(orders.get(), order);
-      order.setStatus((short) 4);
-      order.setUpdateAt(new Date());
-      order.setCancellationDate(new Date());
-      orderRepository.save(order);
-    } else {
-      return ResponseEntity.ok().body("isEmpty");
-    }
+  // public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest request) {
 
-    return ResponseEntity.ok().body("success");
-  }
-
-  @GetMapping("/site/user")
-  public String ShoppingCartDetail(Model model, HttpServletRequest request) {
-
-    model.addAttribute("orders", getTotalPriceAndQuantityWithUser(request));
-    return "web-site/profile";
-  }
-
-  public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest request) {
-
-    Optional<User> user = userRepository.findByUsername(utils.getUser(request));
-    List<Order> orders = orderRepository.FindbyUserName(user.get().getId());
-    List<OrderDto> ordersDto = new ArrayList<>();
-    for (Order order : orders) {
-      OrderDto dto = new OrderDto();
-      BeanUtils.copyProperties(order, dto);
-      float total = 0;
-      int quantity = 0;
-      List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
-      for (OrderDetail detail : details) {
-        total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
-        quantity += detail.getQuantity();
-        dto.setTotalAmount(total);
-        dto.setTotalQuantity(quantity);
-      }
-      ordersDto.add(dto);
-    }
-    return ordersDto;
-  }
+  //   Optional<User> user = userRepository.findByUsername(utils.getUser(request));
+  //   List<Order> orders = orderRepository.FindbyUserName(user.get().getId());
+  //   List<OrderDto> ordersDto = new ArrayList<>();
+  //   for (Order order : orders) {
+  //     OrderDto dto = new OrderDto();
+  //     BeanUtils.copyProperties(order, dto);
+  //     float total = 0;
+  //     int quantity = 0;
+  //     List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
+  //     for (OrderDetail detail : details) {
+  //       total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
+  //       quantity += detail.getQuantity();
+  //       dto.setTotalAmount(total);
+  //       dto.setTotalQuantity(quantity);
+  //     }
+  //     ordersDto.add(dto);
+  //   }
+  //   return ordersDto;
+  // }
 
   @GetMapping("/chatbox")
   public String chatbox(Model model, HttpServletRequest request) {
@@ -270,6 +234,7 @@ public class HomeController {
 
     Address address = new Address();
     BeanUtils.copyProperties(dto, address);
+System.out.println(address);
     Optional<User> user = userRepository.findByUsername(utils.getUser(request));
     address.setUsers(user.get());
 

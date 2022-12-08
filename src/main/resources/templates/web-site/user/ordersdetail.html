@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{web-site/layout}">
+
+<head> </head>
+
+<body>
+  <div layout:fragment="content" style="background: #f5f5f5">
+    <div class="container pIHdXn">
+      <div th:replace="web-site/user/sidebar-user :: siderbar"></div>
+
+      <div class="xMDeox">
+        <div class="title">
+          <div class="">
+            <a href="/api/user/orders">
+              <i class="icon-angle-left"></i>
+              <span>trở lại</span>
+            </a>
+          </div>
+          <div class="">
+            <h3>CHI TIẾT ĐƠN HÀNG</h3>
+          </div>
+          <div class="">
+            <h5 th:text="${'ID đơn hàng: '+detail[0].orders.id}"></h5>
+          </div>
+
+        </div>
+        <div class="" style="padding: 20px">
+          <div class="justify-content">
+            <div class="progress-containers">
+              <div class="progressdefaul"></div>
+              <div class="progress-order" id="progress"></div>
+              <div class="order actives">
+                <i class="fa icon-list-alt fa-2x active"></i>
+                <p>Đã đặt hàng</p>
+                <span th:text="${#dates.format(detail[0].orders.createAt, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                            </div>
+                            <div th:if="${detail[0].orders.status == 4 || detail[0].orders.status == 5}" class="order error">
+                                <i class="fa icon-remove fa-2x error"></i>
+                                <span th:text="${#dates.format(detail[0].orders.cancellationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                <p th:utext="${detail[0].orders.status != 4?'Bị hủy bởi hệ thống':'Bị hủy bởi người dùng'}"
+                                    style="left: -37px !important"></p>
+                            </div>
+                            <div th:if="${detail[0].orders.status != 4 && detail[0].orders.status != 5}"
+                                th:each="i:${#numbers.sequence( 0, 2, 1)}" th:class="${detail[0].orders.status > i}?'order actives':'order'"
+                                th:switch="${i}">
+                                <div th:case="0">
+                                  
+                                    <i th:class="${detail[0].orders.status > 0}?'icon-ok fa-2x active':'icon-ok fa-2x'"></i>
+                                    <p th:if="${detail[0].orders.status > 0}">Đã xác nhận</p>
+                                    <span th:if="${detail[0].orders.status > 0}"
+                                        th:text="${#dates.format(detail[0].orders.confirmationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                </div>
+                                <div th:case="1">
+                                    <i
+                                        th:class="${detail[0].orders.status > 1}?'icon-truck fa-2x fa-flip-horizontal active':'icon-truck fa-2x fa-flip-horizontal'"></i>
+                                    <p th:if="${detail[0].orders.status >1}">Đã lấy hàng</p>
+                                    <span th:if="${detail[0].orders.status >1}"
+                                        th:text="${#dates.format(detail[0].orders.DeliveringDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                </div>
+                        
+                                <div th:case="2">
+                                    <i th:class="${detail[0].orders.status > 2}?'fa icon-inbox fa-2x active':'fa icon-inbox fa-2x'"></i>
+                                    <p th:if="${detail[0].orders.status >2}">Đã giao song</p>
+                                    <span th:if="${detail[0].orders.status >2}"
+                                        th:text="${#dates.format(detail[0].orders.CompleteDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                </div>
+                            </div>
+                        </div>      
+                    </div>
+
+          <div class="tF2pJg" th:each="item, iStart:${detail}">
+            <div>
+              <input hidden type="text" id="orderdetails__id" th:value="${item.id}">
+              <div class="_6nAGBW">
+                <div class="_1ox39j">
+                  <div class="_9bLyA+">
+                    <div class="mzsqa6" th:utext="${'Thương hiệu: '+detail[iStart.index].product.brand.name}"></div>
+                  </div>
+                  <div class="WPNwG4" th:if="${detail[0].orders.status == 3}">
+                    <div  th:text="${detail[iStart.index].Raiting}?'Đã đánh giá':'Chưa đánh giá'"></div>
+                    <!-- <div class="l4WFo0" th:text="${detail[0].raitting_id != null}?'Đã đánh giá':'Chưa đánh giá'"></div> -->
+                  </div>
+                </div>
+                <div class="_60q+NM"></div>
+                <a th:href="${'/api/site/product/detail/'+detail[iStart.index].product.id}"
+                  style="text-decoration: none">
+                  <div class="giUtSy">
+                    <div class="vdofqJ">
+                      <div>
+                        <span class="QkIuzE">
+                          <div class="hDGdsD">
+                            <div class="_50XPwl">
+                              <div class="shopee-image__wrapper">
+                                <img id="orderdetails__img"
+                                  class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2 img-fluid rounded float-start"
+                                  th:src="${'/api/images/'+detail[iStart.index].product.thumbnail }" alt="" srcset="" />
+                              </div>
+                            </div>
+                            <div class="tODfT4">
+                              <div>
+                                <div class="QJqUaT">
+                                  <span class="WVc4Oc" id="orderdetails__name" th:utext="${detail[iStart.index].product.name}"></span>
+                                </div>
+                              </div>
+                              <div>
+                                <div class="_9ca9GU"
+                                  th:utext="${'Phân loại hàng: '+detail[iStart.index].product.Category.name}"></div>
+                                <div class="qGisqd" th:utext="'x'+${item.quantity}"></div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="+QRFJX">
+                            <div th:if="${item.discount!=0}">
+                              <span class="d12Axb" th:utext="'₫'+${item.price}"></span><span class="ghw9hb igidiy"
+                                th:utext="'₫'+${item.price - item.discount}"></span>
+                            </div>
+                            <div th:if="${item.discount==0}">
+                              <span class="ghw9hb igidiy" th:utext="'₫'+${item.price - item.discount}"></span>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                      <div class="_472J0A"></div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="CqYika">
+              <div class="oDBmi- n012K3"></div>
+              <div class="oDBmi- b-VPB8"></div>
+            </div>
+            <div class="KinvoL">
+              <div class="BAMNqz">
+                <div class="Ge6yU5">Tổng số tiền:</div>
+                <div class="TDMlX1" th:utext="'₫'+${(item.price - item.discount)*item.quantity}">
+                </div>
+              </div>
+            </div>
+            <div class="_1ERzqw">
+              <div class="cLwmWY">
+                <div class="_8vTqu9">
+                  <input type="hidden" name="" id="product__id" th:value="${detail[iStart.index].product.id}" />
+                  <button class="stardust-button stardust-button--primary Kz9HeM btn__add__to__cart">
+                    Mua lại
+                  </button>
+                </div>
+              </div>
+              <div class="NIZAp8">
+                <div class="VN6h8+">
+                  <div th:if="${detail[iStart.index].Raiting}">
+                    <button class="stardust-button stardust-button--secondary Kz9HeM" 
+                    >
+                      Xem đánh giá
+                    </button>
+                  </div>
+                 <!-- th:attr="onclick=|showraiting('${detail[iStart.index].product.id}')|" -->
+                  <div th:if="!${detail[iStart.index].Raiting}"></div>
+                  <button class="stardust-button stardust-button--secondary Kz9HeM" 
+                  >
+                    Đánh giá
+                  </button>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="modal" id="showraitting">
+            <div class="">
+              <div class="modal-content" style="width: 45% !important">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="modal-list-address"style="text-align: center;margin: 0 auto;">
+                    Đánh giá sản phẩm
+                  </h1>
+                </div>
+                <div class="modal-body">
+                <div class="hDGdsD" style="align-items: center;">
+                  <div class="shopee-image__wrapper _50XPwl">
+                    <img id="img-order" src="" class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2 img-fluid rounded float-start">
+                  </div>
+                  <div class="tODfT4 QJqUaT">
+                    <span id="name-order" class="WVc4Oc"></span>
+                  </div>
+                </div>
+                <div class="KinvoL">
+                  <div class="BAMNqz" style="justify-content: flex-start;">
+                    <div class="Ge6yU5" style="margin-right: 5rem;">Chất lượng sản phẩm</div>
+                    <div class="TDMlX1">
+                      <div class='rating-stars text-center'>
+                        <ul id='stars'>
+                          <li class='star' title='Poor' data-value='1'>
+                            <i class='icon-star'></i>
+                          </li>
+                          <li class='star' title='Fair' data-value='2'>
+                            <i class='icon-star'></i>
+                          </li>
+                          <li class='star' title='Good' data-value='3'>
+                            <i class='icon-star'></i>
+                          </li>
+                          <li class='star' title='Excellent' data-value='4'>
+                            <i class='icon-star'></i>
+                          </li>
+                          <li class='star' title='WOW!!!' data-value='5'>
+                            <i class='icon-star'></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div id="totalRaiting" style="margin-left: 10px;"></div>
+                  </div>
+                </div>
+                <div class="">
+                  <textarea name="" id="" cols="88" rows="7"></textarea>
+                </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary">
+                    <span class="close" id="closeModels">Đóng</span>
+                  </button>
+                  <a type="button" class="btn btn-primary" id="sussecraiting" >
+                    Hoàn Thành
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

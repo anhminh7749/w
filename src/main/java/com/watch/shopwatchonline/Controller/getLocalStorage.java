@@ -83,12 +83,10 @@ public class getLocalStorage {
       if (json != null) {
         List<Product> listrequest = mapper.readValue(URLDecoder.decode(request.getHeader("shoppingcart"), "UTF-8"),
             mapper.getTypeFactory().constructCollectionType(List.class, Product.class));
-        String ulrImage = "/api/site/product/images/";
         List<Product> list = new ArrayList<>();
         for (Product dto : listrequest) {
           int quantity = dto.getQuantity();
           Optional<Product> product = ProductService.findById(dto.getId());
-          product.get().setThumbnail(ulrImage.concat(product.get().getThumbnail()));
           product.get().setQuantity(quantity);
           list.add(product.get());
         }
@@ -97,12 +95,9 @@ public class getLocalStorage {
           Cart cart = new Cart();
           BeanUtils.copyProperties(product, cart);
           listcart.add(cart);
-         
-          System.out.println("cart" + cart);
+
         }
       
-
-        System.out.println("json bean " + URLDecoder.decode(json));
         json = UriUtils.encode(mapper.writeValueAsString(listcart), "UTF-8");
       }
     } catch (Exception e) {

@@ -47,11 +47,14 @@ public class Address implements Serializable{
     private String address;
     private String specificAddress;
     private Short status;
-
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deleteAt;
+    
     @ManyToOne
 	@JoinColumn(name = "userId",nullable = false)
 	private User users;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "address")
     private Set<Order> orders;
 }

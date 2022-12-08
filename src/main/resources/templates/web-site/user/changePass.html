@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+
+<head>
+</head>
+
+<body>
+    <div layout:fragment="content" style=" background: #f5f5f5; ">
+
+        <div class="container pIHdXn">
+            <div th:replace="web-site/user/sidebar-user :: siderbar"></div>
+
+            <div class="xMDeox">
+                <div class="Hvae38" role="main">
+                    <div style="display: contents">
+                        <div class="TApBFI">
+                            <div class="Q5feZb VzJhMY" style="display: flex;align-items: center;">
+                                <h1 class="OomjNA" style="flex: 1;">Đổi mật khẩu của tôi</h1>
+                                
+
+                            </div>
+                            <div>
+                                <h6 th:text="${error}" class="text-danger"></h6>
+                                <div class="col-md-12 account-top">
+                                  <form th:action="@{/api/user/profile/change-password}" method="post">
+                                    <div>
+                                      <span>Mật khẩu hiện tại*</span>
+                                      <input type="password" name="currentPassword" />
+                                    </div>
+                                    <div>
+                                      <span>Mật khẩu mới*</span>
+                                      <input type="password" name="newPassword" />
+                                    </div>
+                                    <div>
+                                      <span class="pass">Xác nhận mật khẩu*</span>
+                                      <input type="password" name="confirmPassword" />
+                                    </div>
+                                    <a href="/api/user/forgot-password" class="pass float-right">Quên mật khẩu?</a>
+                                    <input type="submit" value="Đổi mật khẩu" />
+                                  </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

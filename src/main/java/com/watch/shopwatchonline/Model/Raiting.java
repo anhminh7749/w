@@ -45,10 +45,6 @@ public class Raiting implements Serializable{
 	private Date createAt;
 
     @ManyToOne
-	@JoinColumn(name = "ProductId",nullable = false)
-	private Product Product;
-
-    @ManyToOne
 	@JoinColumn(name = "UserId",nullable = false)
 	private User users;
    

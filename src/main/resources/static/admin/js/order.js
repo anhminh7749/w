@@ -158,7 +158,7 @@ function cancelOrder(id, page) {
         url: "/api/admin/order/cancel?id=" + id,
         method: "GET",
         success: function (data) {
-            swal("", "Đac hủy đơn hàng song!", "success");
+            swal("", "Đã hủy đơn hàng song!", "success");
             showDataOrder(page);
         }
     });
@@ -180,8 +180,5 @@ function confirmOrder(id, page) {
 
 
 $(document).ready(function () {
-
-
     showDataOrder(7);
-
 });

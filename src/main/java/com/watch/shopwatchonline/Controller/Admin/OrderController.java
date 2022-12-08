@@ -50,7 +50,7 @@ public class OrderController {
   private AddressRepository addressRepository;
   @Autowired
   private DiscountCodeRepository codeRepository;
-  private ObjectMapper mapper = new ObjectMapper();
+  
 
   /*
    * 0:chot duyet

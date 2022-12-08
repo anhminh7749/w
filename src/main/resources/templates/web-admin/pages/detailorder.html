@@ -1,185 +1,127 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
->
-  <head> </head>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-  <body>
-    <div th:fragment="details">
-      <div class="progress-containers">
-        <div class="progressdefaul"></div>
-        <div class="progress-order" id="progress"></div>
-        <div class="order actives">
-          <i class="fa fa-list-alt fa-2x active"></i>
-          <p>Đã đặt hàng</p>
-          <span
-            th:text="${#dates.format(detail.createAt, 'dd-MM-yyyy hh:mm:ss')}"
-          ></span>
-        </div>
-        <div
-          th:if="${detail.status == 4 || detail.status == 5}"
-          class="order error"
-        >
-          <i class="fa fa-times fa-2x error"></i>
-          <span
-            th:text="${#dates.format(detail.cancellationDate, 'dd-MM-yyyy hh:mm:ss')}"
-          ></span>
-          <p
-            th:utext="${detail.status != 4?'Bị hủy bởi hệ thống':'Bị hủy bởi người dùng'}"
-            style="left: -37px !important"
-          ></p>
-        </div>
-        <div
-          th:if="${detail.status != 4 && detail.status != 5}"
-          th:each="i:${#numbers.sequence( 0, 2, 1)}"
-          th:class="${detail.status > i}?'order actives':'order'"
-          th:switch="${i}"
-        >
-          <div th:case="0">
-            <i
-              th:class="${detail.status > 0}?'fa fa-check fa-2x active':'fa fa-check fa-2x'"
-            ></i>
-            <p th:if="${detail.status > 0}">Đã xác nhận</p>
-            <span
-              th:if="${detail.status > 0}"
-              th:text="${#dates.format(detail.confirmationDate, 'dd-MM-yyyy hh:mm:ss')}"
-            ></span>
-          </div>
-          <div th:case="1">
-            <i
-              th:class="${detail.status > 1}?'fa fa-truck fa-2x fa-flip-horizontal active':'fa fa-truck fa-2x fa-flip-horizontal'"
-            ></i>
-            <p th:if="${detail.status >1}">Đã lấy hàng</p>
-            <span
-              th:if="${detail.status >1}"
-              th:text="${#dates.format(detail.DeliveringDate, 'dd-MM-yyyy hh:mm:ss')}"
-            ></span>
-          </div>
+<head> </head>
 
-          <div th:case="2">
-            <i
-              th:class="${detail.status > 2}?'fa fa-inbox fa-2x active':'fa fa-inbox fa-2x'"
-            ></i>
-            <p th:if="${detail.status >2}">Đã giao song</p>
-            <span
-              th:if="${detail.status >2}"
-              th:text="${#dates.format(detail.CompleteDate, 'dd-MM-yyyy hh:mm:ss')}"
-            ></span>
-          </div>
+<body>
+  <div th:fragment="details">
+    <div class="progress-containers">
+      <div class="progressdefaul"></div>
+      <div class="progress-order" id="progress"></div>
+      <div class="order actives">
+        <i class="fa fa-list-alt fa-2x active"></i>
+        <p>Đã đặt hàng</p>
+        <span th:text="${#dates.format(detail.createAt, 'dd-MM-yyyy hh:mm:ss')}"></span>
+      </div>
+      <div th:if="${detail.status == 4 || detail.status == 5}" class="order error">
+        <i class="fa fa-times fa-2x error"></i>
+        <span th:text="${#dates.format(detail.cancellationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+        <p th:utext="${detail.status != 4?'Bị hủy bởi hệ thống':'Bị hủy bởi người dùng'}"
+          style="left: -37px !important"></p>
+      </div>
+      <div th:if="${detail.status != 4 && detail.status != 5}" th:each="i:${#numbers.sequence( 0, 2, 1)}"
+        th:class="${detail.status > i}?'order actives':'order'" th:switch="${i}">
+        <div th:case="0">
+          <i th:class="${detail.status > 0}?'fa fa-check fa-2x active':'fa fa-check fa-2x'"></i>
+          <p th:if="${detail.status > 0}">Đã xác nhận</p>
+          <span th:if="${detail.status > 0}"
+            th:text="${#dates.format(detail.confirmationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+        </div>
+        <div th:case="1">
+          <i
+            th:class="${detail.status > 1}?'fa fa-truck fa-2x fa-flip-horizontal active':'fa fa-truck fa-2x fa-flip-horizontal'"></i>
+          <p th:if="${detail.status >1}">Đã lấy hàng</p>
+          <span th:if="${detail.status >1}"
+            th:text="${#dates.format(detail.DeliveringDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+        </div>
+
+        <div th:case="2">
+          <i th:class="${detail.status > 2}?'fa fa-inbox fa-2x active':'fa fa-inbox fa-2x'"></i>
+          <p th:if="${detail.status >2}">Đã giao song</p>
+          <span th:if="${detail.status >2}"
+            th:text="${#dates.format(detail.CompleteDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
         </div>
       </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Mã đơn hàng</label>
-          <input
-            type="text"
-            th:value="${detail.id}"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Số điện thoại</label>
-          <a
-            th:text="${detail.address.phone}"
-            disabled
-            class="form-control"
-          ></a>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Người đặt</label>
-          <input
-            type="text"
-            th:value="${detail.address.name}"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Địa chỉ</label>
-          <input
-            type="text"
-            th:value="${detail.address.address}"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-	  
-      <div class="col-md-6">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Địa chỉ cụ thể</label>
-          <input
-            type="text"
-            th:value="${detail.address.specificAddress}"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-
-      <div class="col-md-6" th:if="${detail.discountCode != null}">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Giá mã áp dụng </label>
-          <input id="discounttotal"
-            type="text"
-            th:value="${detail.discountCode.ReductionAmount}"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-
-	  <div class="col-md-12">
-        <div class="form-group">
-          <label class="control-label" for="inputSuccess1">Tổng tiền</label>
-          <input
-            type="text"
-            id="totaldetailorder"
-            disabled
-            class="form-control"
-          />
-        </div>
-      </div>
-      
-      <div style="margin-bottom: 4em"></div>
-
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Mã sản phẩm</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Số lượng</th>
-            <th scope="col">Giá</th>
-            <th scope="col">Giá giảm</th>
-            <th scope="col">Tổng</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="item:${detailpro}">
-            <th scope="row" th:text="${item.id}"></th>
-            <td th:text="${item.Product.name}"></td>
-            <td th:text="${item.quantity}"></td>
-            <td th:text="${item.price}"></td>
-            <td th:text="${item.discount}"></td>
-            <td >
-				
-              <input class="total" type="text" hidden th:value="${item.quantity * (item.price - item.discount) }"/>
-			  <span th:text="${item.quantity * (item.price - item.discount) }"></span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  </body>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Mã đơn hàng</label>
+        <input type="text" th:value="${detail.id}" disabled class="form-control" />
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Số điện thoại</label>
+        <a th:text="${detail.address.phone}" disabled class="form-control"></a>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Người đặt</label>
+        <input type="text" th:value="${detail.address.name}" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Địa chỉ</label>
+        <input type="text" th:value="${detail.address.address}" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Địa chỉ cụ thể</label>
+        <input type="text" th:value="${detail.address.specificAddress}" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div class="col-md-6" th:if="${detail.discountCode != null}">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Giá mã áp dụng </label>
+        <input id="discounttotal" type="text" th:value="${detail.discountCode.ReductionAmount}" disabled
+          class="form-control" />
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class="control-label" for="inputSuccess1">Tổng tiền</label>
+        <input type="text" id="totaldetailorder" disabled class="form-control" />
+      </div>
+    </div>
+
+    <div style="margin-bottom: 4em"></div>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Mã sản phẩm</th>
+          <th scope="col">Tên sản phẩm</th>
+          <th scope="col">Số lượng</th>
+          <th scope="col">Giá</th>
+          <th scope="col">Giá giảm</th>
+          <th scope="col">Tổng</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="item:${detailpro}">
+          <th scope="row" th:text="${item.id}"></th>
+          <td th:text="${item.Product.name}"></td>
+          <td th:text="${item.quantity}"></td>
+          <td th:text="${item.price}"></td>
+          <td th:text="${item.discount}"></td>
+          <td>
+
+            <input class="total" type="text" hidden th:value="${item.quantity * (item.price - item.discount) }" />
+            <span th:text="${item.quantity * (item.price - item.discount) }"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
 </html>

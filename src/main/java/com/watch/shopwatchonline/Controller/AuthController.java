@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -96,18 +97,16 @@ public class AuthController {
 
   @PostMapping(value = "/signup")
   public String registerUser(@Validated @ModelAttribute("signUpRequest") SignupRequest signUpRequest) {
-    User user = new User(signUpRequest.getUsername(),
-        signUpRequest.getEmail(),
-        encoder.encode(signUpRequest.getPassword()),
-        signUpRequest.getGender(),
-        signUpRequest.getPhone());
+    User user = new User();
+    BeanUtils.copyProperties(signUpRequest, user);
+    user.setPassword(encoder.encode(signUpRequest.getPassword()));
     Role userRole = roleRepository.findByName(Erole.ROLE_USER)
         .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
     Set<Role> roles = new HashSet<>();
     roles.add(userRole);
     user.setRoles(roles);
     userRepository.save(user);
-    return "redirect:/api/site";
+    return "redirect:/api/auth/site/login";
 
   }
 
@@ -117,5 +116,4 @@ public class AuthController {
     return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
         .body(new MessageResponse("You've been signed out!"));
   }
-
 }

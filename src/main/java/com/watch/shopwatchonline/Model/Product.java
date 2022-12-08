@@ -84,8 +84,6 @@ public class Product implements Serializable {
 	@JoinColumn(name = "BrandId", nullable = false)
 	private Brand Brand;
 
-	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
-	private Set<Raiting> raitings;
 
 	@OneToMany(mappedBy = "Product", cascade = CascadeType.ALL)
 	private Set<wishlist> wishlists;

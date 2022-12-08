@@ -33,35 +33,33 @@ import com.watch.shopwatchonline.Service.StogareService;
 @Controller
 // @RequestMapping
 public class comment {
+    @Autowired
+    private BlogService blogService;
 
-    
-@Autowired
-private BlogService blogService;
+    @Autowired
+    private StogareService stogareService;
 
-@Autowired
-private StogareService stogareService;
-    
-    @GetMapping("site/cmt") 
-     public String detailProduct() {
-      
+    @GetMapping("site/cmt")
+    public String detailProduct() {
 
         return "web-site/comment";
     }
 
-    @GetMapping("/api/site/blog/detail/{id}") 
-     public String detail(ModelMap model, @PathVariable("id") Integer id) {
-        Optional < Blog > opt = blogService.findById(id);
-        List <Image> images = stogareService.findImageByBlogId(id);
+    @GetMapping("/api/site/blog/detail/{id}")
+    public String detail(ModelMap model, @PathVariable("id") Integer id) {
+        Optional<Blog> opt = blogService.findById(id);
+        List<Image> images = stogareService.findImageByBlogId(id);
 
         if (opt.isPresent()) {
             Blog entity = opt.get();
 
             model.addAttribute("listimage", images);
             model.addAttribute("blog", entity);
-			return "web-site/blog-single";
-		}
+            return "web-site/blog-single";
+        }
         return "web-site/blog-single";
     }
+
     @GetMapping("images/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
@@ -73,49 +71,47 @@ private StogareService stogareService;
     }
 
     @GetMapping("/api/site/blog")
-     public String Listblog(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
-     @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
+    public String Listblog(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
+            @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         int curPage = page.orElse(1);
         int pageSize = size.orElse(5);
         Page<Blog> resultPage = null;
         if (StringUtils.hasText(keyword)) {
             Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-          //  resultPage = blogService.findByNameContaining(keyword, pageable);
+            // resultPage = blogService.findByNameContaining(keyword, pageable);
             model.addAttribute("keyword", keyword);
         } else {
-            
-            Pageable pageable = PageRequest.of(curPage - 1, pageSize,Sort.by("createAt").descending());
+
+            Pageable pageable = PageRequest.of(curPage - 1, pageSize, Sort.by("createAt").descending());
             resultPage = blogService.findAll(pageable);
-            
+
         }
-      
+
         int totalPages = resultPage.getTotalPages();
 
         if (totalPages > 0) {
             int start = Math.max(1, curPage - 2);
             int end = Math.min(curPage + 2, totalPages);
-    
+
             if (totalPages > 5) {
-                if (end == totalPages){
+                if (end == totalPages) {
                     start = end - 5;
-                }else{
-                    if (start == 1){
+                } else {
+                    if (start == 1) {
                         end = start + 5;
                     }
                 }
             }
-    
+
             List<Integer> pageNums = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
             model.addAttribute("pageNums", pageNums);
-        
+
         }
         List<Blog> p = blogService.findAll();
 
-
-    model.addAttribute("keyword", keyword);
-    model.addAttribute("blogPage", resultPage);
-    model.addAttribute("tt", p.size());
-      
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("blogPage", resultPage);
+        model.addAttribute("tt", p.size());
 
         return "web-site/ListBlog";
     }

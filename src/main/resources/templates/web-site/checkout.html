@@ -73,7 +73,7 @@
 
           <div class="modal" id="myModal">
             <div class="">
-              <div class="modal-content" style="width: 30% !important">
+              <div class="modal-content" style="width: 45% !important">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="modal-list-address">
                     Danh sách địa chỉ
@@ -100,14 +100,14 @@
 
                     </ul>
                   </div>
-                  <a class="btn btn-primary" id="btn-new-address">Thêm Địa Chỉ</a>
+                 
                 </div>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary">
-                    <span class="close" id="closeModels">Đóng</span>
+                    <span class="close" >Đóng</span>
                   </button>
-                  <a type="button" class="btn btn-primary" id="sussecAddress" th:onclick="getaddress()">
+                  <a type="button" class="btn btn-primary" id="sussecraiting" th:onclick="getaddress()">
                     Hoàn Thành
                   </a>
                 </div>
@@ -128,11 +128,8 @@
                   <div class="row" style="flex-direction: row-reverse; align-items: center">
                     <a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
                       data-bs-toggle="modal">Hoàn Thành</a>
-                    <a type="button" style="
-                          margin-block-end: 10px;
-                          margin-right: 20px;
-                          margin-left: 10px;
-                        " class="btn btn-secondary closeFormAddress" id="closeFormAddress">
+                    <a type="button" style=" margin-block-end: 10px; margin-left: 10px; "
+                     class="btn btn-secondary closeFormAddress" id="closeFormAddress">
                       Trở lại
                     </a>
                   </div>
