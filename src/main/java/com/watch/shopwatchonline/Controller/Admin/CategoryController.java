@@ -24,15 +24,14 @@ import com.watch.shopwatchonline.Domain.CategoryDto;
 import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Service.CategoryService;
 
-
 @Controller
-@RequestMapping("api/admin/categories")
+@RequestMapping("admin/categories")
 public class CategoryController {
 
     @Autowired
 	private CategoryService categoryService;
     
-    @GetMapping("/add-category")
+    @GetMapping("add-category")
     public String add(Model model) {
         CategoryDto dto = new CategoryDto();
         dto.setIsEdit(false);
@@ -43,7 +42,7 @@ public class CategoryController {
     @GetMapping("/edit/{id}")
     public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) {
 
-    	Optional<Category> opt = categoryService.findById(id);
+        Optional<Category> opt = categoryService.findById(id);
         CategoryDto dto = new CategoryDto();
 
         if (opt.isPresent()) {
@@ -73,7 +72,7 @@ public class CategoryController {
             BindingResult result) {
 
         if(result.hasErrors()) {
-            return new ModelAndView("web-admin/Addcatrgory");
+            return new ModelAndView("web-admin/Addcategory");
         }
         Category entity = new Category();
         BeanUtils.copyProperties(dto, entity);

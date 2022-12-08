@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,7 +38,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/api/order")
+@RequestMapping("/api/admin/order")
 public class OrderController {
   @Autowired
   private OrderRepository orderRepository;
@@ -49,8 +50,16 @@ public class OrderController {
   private AddressRepository addressRepository;
   @Autowired
   private DiscountCodeRepository codeRepository;
-  private ObjectMapper mapper = new ObjectMapper();
+  
 
+  /*
+   * 0:chot duyet
+   * 1:da duyet và đg chuển bị đơn hàng
+   * 2:đang ship
+   * 3: hoan thanh
+   * 4: huy boi khach hang
+   * 5: huy boi admin
+   */
   @GetMapping("/confirm")
   public @ResponseBody void confirmorder(
       @RequestParam(name = "id") String id) {
@@ -58,16 +67,25 @@ public class OrderController {
     Order order = new Order();
     BeanUtils.copyProperties(orders.get(), order);
     order.setStatus((short) (orders.get().getStatus() + 1));
+    switch (order.getStatus()) {
+      case 1:
+        order.setConfirmationDate(new Date());
+        break;
+      case 2:
+        order.setDeliveringDate(new Date());
+        break;
+      case 3:
+        order.setCompleteDate(new Date());
+        break;
+    }
     order.setUpdateAt(new Date());
-    order.setCompleteDate(new Date());
+
     orderRepository.save(order);
   }
 
   @GetMapping("/cancel")
   public @ResponseBody void cancelorder(
       @RequestParam(name = "id") String id) {
-    System.out.println("+++++++++++++++++++++++++++++++++++++++++++");
-    System.out.println(id);
     Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
     Order order = new Order();
     if (orders.isPresent()) {
@@ -81,10 +99,18 @@ public class OrderController {
   }
 
   @GetMapping("/show")
-  public @ResponseBody void showorder(
-      @RequestParam(name = "id") String id) {
-    Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
+  public String showorder(Model model, @RequestBody @RequestParam(name = "id") String id) {
+    try {
+      Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
+      List<OrderDetail> details = detailRepository.FindByOrder(orders.get().getId());
 
+      model.addAttribute("detail", orders.get());
+      model.addAttribute("detailpro", details);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+
+    return "web-admin/pages/detailorder :: details";
   }
 
   @PostMapping("/delete")
@@ -92,7 +118,7 @@ public class OrderController {
       @RequestParam(name = "id") String id) {
     Optional<Order> orders = orderRepository.findById(Integer.parseInt(id));
     Order order = new Order();
-    BeanUtils.copyProperties(orders, order);
+    BeanUtils.copyProperties(orders.get(), order);
     order.setDeleteAt(new Date());
     orderRepository.save(order);
   }
@@ -105,8 +131,6 @@ public class OrderController {
   @GetMapping("/find")
   public @ResponseBody List<OrderDto> view(
       @RequestParam(name = "status") String status) {
-    String json = new Gson().toJson(getTotalPriceAndQuantityWithStatus(Short.valueOf("7")));
-
     return getTotalPriceAndQuantityWithStatus(Short.valueOf(status));
   }
 
@@ -116,31 +140,38 @@ public class OrderController {
       orders = orderRepository.findAll();
     } else if (status == 6) {
       orders = orderRepository.findByStatusCancel();
-
     } else {
       orders = orderRepository.findByStatus(status);
     }
 
     List<OrderDto> ordersDto = new ArrayList<>();
     for (Order order : orders) {
-      Optional<Address> address = addressRepository.findById(order.getAddress().getId());
-      OrderDto dto = new OrderDto();
-      BeanUtils.copyProperties(order, dto);
-      float total = 0;
-      int quantity = 0;
-      float discount = 0;
-      List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
-      for (OrderDetail detail : details) {
-        total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
-        quantity += detail.getQuantity();
-        discount += detail.getDiscount();
+      if (order.getDeleteAt() == null) {
+        Optional<Address> address = addressRepository.findById(order.getAddress().getId());
+        OrderDto dto = new OrderDto();
+        BeanUtils.copyProperties(order, dto);
+        float total = 0;
+        int quantity = 0;
+        float discount = 0;
+        List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
+
+        for (OrderDetail detail : details) {
+          total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
+          quantity += detail.getQuantity();
+          discount += detail.getDiscount();
+        }
+        if (order.getDiscountCode() != null) {
+          dto.setTotaldiscountcode(order.getDiscountCode().getReductionAmount());
+          total = total - dto.getTotaldiscountcode();
+        }
         dto.setTotaldiscount(discount);
         dto.setTotalAmount(total);
         dto.setTotalQuantity(quantity);
         dto.setUsername(address.get().getName());
+        ordersDto.add(dto);
       }
-      ordersDto.add(dto);
     }
+
     return ordersDto;
   }
 }

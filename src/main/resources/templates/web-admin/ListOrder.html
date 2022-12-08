@@ -1,143 +1,109 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{web-admin/layout}">
+  layout:decorate="~{web-admin/layout}">
 
-<head>
-
-</head>
+<head> </head>
 
 <body class="cbp-spmenu-push">
-    <div layout:fragment="content">
-        <div id="page-wrapper">
-            <h2>Đơn Hàng</h2>
-            <div class="row">
-                <ol class="breadcrumb">
-                    <li><a href="#">Trang Chủ</a></li>
-                    <li class="active">Đơn Hàng</li>
-                </ol>
-            </div>
-            <div id="radios" class="row nav-order widget-shadow">
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(7)" checked />
-                        <span>Tất cả</span>
-                    </label>
-                </a>
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(0)" />
-                        <span>Chờ xác nhận</span>
-                    </label>
-                </a>
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(1)" />
-                        <span>Chờ lấy hàng</span>
-                    </label>
-                </a>
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(2)" />
-                        <span>Đang giao</span>
-                    </label>
-                </a>
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(3)" />
-                        <span>Đã giao</span>
-                    </label>
-                </a>
+  <div layout:fragment="content">
+    <div id="page-wrapper">
+      <h2>Đơn Hàng</h2>
+      <div class="row">
+        <ol class="breadcrumb">
+          <li><a href="#">Trang Chủ</a></li>
+          <li class="active">Đơn Hàng</li>
+        </ol>
+      </div>
+      <div id="radios" class="row nav-order widget-shadow">
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(7)" checked />
+            <span>Tất cả</span>
+          </label>
+        </a>
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(0)" />
+            <span>Chờ xác nhận</span>
+          </label>
+        </a>
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(1)" />
+            <span>Chờ lấy hàng</span>
+          </label>
+        </a>
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(2)" />
+            <span>Đang giao</span>
+          </label>
+        </a>
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(3)" />
+            <span>Đã giao</span>
+          </label>
+        </a>
 
-                <a>
-                    <label class="material-icons">
-                        <input type="radio" name="mode" onclick="showDataOrder(6)" />
-                        <span>Đã hủy</span>
-                    </label>
-                </a>
-            </div>
+        <a>
+          <label class="material-icons">
+            <input type="radio" name="mode" onclick="showDataOrder(6)" />
+            <span>Đã hủy</span>
+          </label>
+        </a>
+      </div>
 
-
-            <div class="main-page">
-                <div class="tables">
-                    <div class=" widget-shadow" data-example-id="hoverable-table">
-                        <table class="table table-hover display">
-                            <thead>
-                                <tr>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Tên người đặt</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Số sản phẩm</th>
-                                    <th>Tiền giảm</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Hành động</th>
-                                    <th>&nbsp;</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody">
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Mã đơn hàng</th>
-                                    <th>Tên người đặt</th>
-                                    <th>Ngày đặt</th>
-                                    <th>Số sản phẩm</th>
-                                    <th>Tiền giảm</th>
-                                    <th>Tổng tiền</th>
-                                    
-                                   
-                                </tr>
-                            </tfoot>
-                        </table>
-
-                    </div>
-
-
-
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <span>Bạn có chắc chắn muốn hủy đơn hàng này!</span>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" id="cancel"
-                                        data-bs-dismiss="modal">Hủy bỏ</button>
-                                    <button type="button" id="AgreeDel" class="btn btn-primary">Đồng ý</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-
-            <table id="example" class="display" style="width:100%">
-                <!-- <thead>
-                    <tr>
-                        <th>Name</th>
-                     
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                     
-                    </tr>
-                </tfoot> -->
+      <div class="main-page">
+        <div class="tables">
+          <div class="widget-shadow" data-example-id="hoverable-table">
+            <table class="table table-hover display">
+              <thead>
+                <tr>
+                  <th>Mã đơn hàng</th>
+                  <th>Tên người đặt</th>
+                  <th>Ngày đặt</th>
+                  <th>Số sản phẩm</th>
+                  <th>Tiền giảm</th>
+                  <th>Tổng tiền</th>
+                  <th>Hành động</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+              <tfoot>
+                <tr>
+                  <th>Mã đơn hàng</th>
+                  <th>Tên người đặt</th>
+                  <th>Ngày đặt</th>
+                  <th>Số sản phẩm</th>
+                  <th>Tiền giảm</th>
+                  <th>Tổng tiền</th>
+                </tr>
+              </tfoot>
             </table>
-          
+          </div>
+
+
+          <div class='modal fade' tabindex='-1' role='dialog' id="myModal">
+            <div class='modal-dialog modal-lg' role='document' >
+              <div class='modal-content' style="width: 1000px;">
+                <div class='modal-header'><button type='button' class='close' data-dismiss='modal'
+                    aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                  <h4 class='modal-title'>Chi tiết đơn hàng</h4>
+                </div>
+                <div class='modal-body' id="modal-body">
+                
+                </div>
+                
+              </div>
+            </div>
+          </div>
 
         </div>
+      </div>
     </div>
-
-
+  </div>
 </body>
 
 </html>

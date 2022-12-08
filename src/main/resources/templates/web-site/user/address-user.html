@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+
+<head>
+</head>
+
+<body>
+    <div layout:fragment="content" style=" background: #f5f5f5; ">
+
+        <div class="container pIHdXn">
+            <div th:replace="web-site/user/sidebar-user :: siderbar"></div>
+
+            <div class="xMDeox">
+                <div class="Hvae38" role="main">
+                    <div style="display: contents">
+                        <div class="TApBFI">
+                            <div class="Q5feZb VzJhMY" style="display: flex;align-items: center;">
+                                <h1 class="OomjNA" style="flex: 1;">Địa chỉ của tôi</h1>
+                                <a class="btn btn-primary" id="btn-new-address"
+                                    style="  height: 40px;  padding: 9px 20px; ">Thêm Địa Chỉ</a>
+
+                            </div>
+                            <div>
+                                <h4>Địa chỉ</h4>
+                                <div class="ApAubL nn3Z" th:each="item:${addresses}">
+                                    <div class="_221a6W">
+                                        <div role="heading" class="FSlv-V m3QHyX">
+                                            <div class="nFbAe4 beZuCH"><span class="_30MS7O VKNC5l">
+                                                    <div class="tziqvJ" th:utext="${item.name}"></div>
+                                                </span>
+                                                <div class="kTdq3r"></div>
+                                                <div role="row" class="bRMEUm _2bzRo+ _4DcXuJ" th:utext="${item.phone}">
+                                                </div>
+                                            </div>
+                                            <div class="aQxJVJ">
+                                                <a class="wORiuh" th:attr="onclick=|updateAddress(${item.id})|">Cập nhật</a>
+                                                <a th:if="${item.status==0}"
+                                                    th:attr="onclick=|deleteAddress(${item.id})|" class="wORiuh">Xóa</a>
+                                            </div>
+                                        </div>
+                                        <div role="heading" class="FSlv-V m3QHyX">
+                                            <div class="nFbAe4 beZuCH">
+                                                <div class="xk89A1">
+                                                    <div role="row" class="_4DcXuJ" th:utext="${item.specificAddress}">
+                                                    </div>
+                                                    <div role="row" class="_4DcXuJ" th:utext="${item.address}"></div>
+                                                </div>
+                                            </div>
+                                            <div class="_5txhTu aQxJVJ"><button class="WTM1cN amiqmV EfkdTP"
+                                                    th:disabled="${item.status==1}"
+                                                    th:attr="onclick=|setStatusAddress(${item.id})|">Thiết lập mặc
+                                                    định</button></div>
+
+                                        </div>
+                                        <div th:if="${item.status==1}" role="row" class="GM70BR _4DcXuJ"><span
+                                                role="mark" class="BQozJg D+-Kud _8-tEK7">Mặc định</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal" id="modal-new-address">
+                        <div class="">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">
+                                        Thêm Địa Chỉ
+                                    </h1>
+                                </div>
+                                <div class="modal-body">
+                                    <div th:replace="web-site/pages/address-model :: add"></div>
+                                    <div class="row" style="flex-direction: row-reverse; align-items: center">
+                                        <a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
+                                            data-bs-toggle="modal">Hoàn Thành</a>
+                                        <a type="button" style=" margin-block-end: 10px; margin-left: 10px; "
+                                            class="btn btn-secondary closeFormAddress" id="closeFormAddress">
+                                            Trở lại
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

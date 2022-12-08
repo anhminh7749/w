@@ -6,7 +6,7 @@
   <div class="container text-center setting-user">
     <div class="row">
       <div class="col-3">
-        <div th:replace="web-site/user/sidebar :: sidebar"></div>
+        <!-- <div th:replace="web-site/user/sidebar :: sidebar"></div> -->
       </div>
       <div class="col-9">
         <header>
@@ -38,8 +38,7 @@
               <th scope="row" th:utext="${item.Id}"></th>
               <td th:utext="${item.totalQuantity}"></td>
               <td th:utext="${item.totalAmount}"></td>
-              <td th:utext="${#dates.format(item.createAt, 'dd-MM-yyyy hh:mm:ss')}"
-                ></td>
+              <td th:utext="${#dates.format(item.createAt, 'dd-MM-yyyy hh:mm:ss')}"></td>
                 <td>
                   <a  th:if="${item.status==0}" 
                   data-bs-toggle="modal" data-bs-target="#staticBackdrop"

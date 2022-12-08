@@ -47,7 +47,7 @@ addToCartBtn.forEach(btn => {
         if (!isIncart) {
             addItemToTheDOM(product);
         } else {
-            alert("Product Already in the Cart");
+            swal("", "Sản phẩm đã có trong giỏ hàng!", "info");
             return;
         }
 

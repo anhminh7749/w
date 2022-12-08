@@ -1,37 +1,24 @@
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{web-admin/layout}">
-
-<head>
-
-</head>
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{web-admin/layout}"
+>
+  <head> </head>
 
 <body class="cbp-spmenu-push">
 	<div layout:fragment="content">
 		<div id="page-wrapper">
-			<div class="main-page">
-		<h2>Danh Sách Danh Mục</h2>
+			<h2>Danh Sach Loại</h2>
 			<div class="row">
-                <ol class="breadcrumb">
-                    <li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
-                    <li><a th:href="@{/api/admin/categories/}">Danh Sách</a></li>
-                    <li><a th:href="@{/api/admin/categories/add-category}">Thêm Mới</a></li>
-                </ol>
-            </div>
-				<div class="tables">
-					<div class="table-responsive bs-example widget-shadow">
-						<div class="collapse navbar-collapse">
-						<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-								<label class="nav-item active">
-									<h4>Danh Sách Danh Mục:</h4>
-								</label>
-							</ul>
-							<div class="form-inline my-2 my-lg-0 text-right">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							</div>
-						</div>	
+				<ol class="breadcrumb">
+					<li><a href="#">Trang Chủ</a></li>
+					<li><a href="#">Danh Sách</a></li>
+					<li><a href="#">Thêm Mới</a></li>
+				</ol>
+			</div>
+
 			<div class="main-page">
 				<div class="tables">
 					<div class="bs-example widget-shadow" data-example-id="hoverable-table">
@@ -76,16 +63,16 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div> <!-- /.modal -->
-										<a th:href="@{'/api/admin/categories/edit/' + ${item.id}}" class="fa fa-edit"></a>
+										<a th:href="@{'/admin/categories/edit/' + ${item.id}}" class="fa fa-edit"></a>
 
 										<a th:data-id="${item.id}" th:data-name="${item.name}"
-											onclick="DeleteSwal(this.getAttribute('data-id'),'categories')"
+											onclick="showConfirmModelDialogCategory(this.getAttribute('data-id'), this.getAttribute('data-name'))"
 											class="fa fa-trash-o"> </a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
-<!--  
+
 						<div class="modal fade" id="confirmationId" tabindex="-1" role="dialog"
 							aria-labelledby="modelTitleId" aria-hidden="true">
 							<div class="modal-dialog" role="document">
@@ -106,10 +93,7 @@
 								</div>
 							</div>
 						</div>
-						-->
-						</div>
-						</div>
-						</div>
+
 					</div>
 
 				</div>

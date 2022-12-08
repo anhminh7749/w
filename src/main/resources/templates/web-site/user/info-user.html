@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{web-site/layout}">
+
+<head>
+</head>
+
+<body>
+    <div layout:fragment="content" style=" background: #f5f5f5; ">
+
+        <div class="container pIHdXn">
+            <div th:replace="web-site/user/sidebar-user :: siderbar"></div>
+
+            <div class="xMDeox">
+                <div class="Hvae38" role="main">
+                    <div style="display: contents">
+                        <div class="TApBFI">
+                            <div class="Q5feZb">
+                                <h1 class="OomjNA">Hồ sơ của tôi</h1>
+                                <div class="HJ5nmd">
+                                    Quản lý thông tin hồ sơ để bảo mật tài khoản
+                                </div>
+                            </div>
+                            <div >
+                                <form th:action="@{/api/user/profile/info/update}" method="post"
+                                class="+eqaLN"  enctype="multipart/form-data">
+                                    <div class="InGfFt">
+
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR"><label>Tên đăng nhập</label></div>
+                                                <div class="gV+dPk">
+                                                    <div class="_2NnHla">
+                                                        <div class="Z1Wx1m">
+                                                            <input type="text" th:value="${user.username}"
+                                                                name="username" style="border: 0px solid;" disabled>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR"><label> Tên người dùng</label></div>
+                                                <div class="gV+dPk">
+                                                    <div>
+                                                        <div class="ovqcxY">
+                                                            <input type="text" placeholder="" class="y-NK4C" name="name"
+                                                                th:value="${user.name}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR"><label>Email</label></div>
+                                                <div class="gV+dPk" id="adderorr">
+                                                    <div class="_2NnHla" id="formEmail">
+                                                        <div class="Z1Wx1m defautEmail">
+                                                            <input type="email" id="defautEmail" disabled
+                                                                th:value="${user.email}" name="email"
+                                                                style="border: 0px solid;">
+                                                        </div>
+                                                        <a class="+x-MFb defautEmail btn-change-info"
+                                                            onclick="changeEmail()">Thay đổi</a>
+                                                    </div>
+                                                    <span class="alert-error" style="display: none;" id="error-email"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR"><label>Số điện thoại</label></div>
+                                                <div class="gV+dPk">
+                                                    <div class="_2NnHla" id="formPhone">
+                                                        <div class="Z1Wx1m defautPhone">
+                                                            <input type="text" id="defautPhone" disabled
+                                                                th:value="${user.phone}" name="phone"
+                                                                style="border: 0px solid;">
+                                                        </div>
+                                                        <a class="+x-MFb defautPhone btn-change-info"
+                                                            onclick="changePhone()">Thay đổi</a>
+                                                    </div>
+                                                    <span class="alert-error" style="display: none;" id="error-phone"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR"><label>Giới tính</label></div>
+                                                <div class="gV+dPk">
+                                                    <div class="vidoEC">
+                                                        <div class="stardust-radio-group" role="radiogroup">
+                                                            <div class="stardust-radio stardust-radio--checked"
+                                                                tabindex="0" role="radio" aria-checked="true">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="gender" id="inlineRadio1" value="0"
+                                                                        th:checked="${user.gender==0}" />
+                                                                    <label class="form-check-label"
+                                                                        for="inlineRadio1">Nam</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="gender" id="inlineRadio1" value="1"
+                                                                        th:checked="${user.gender==1}" />
+                                                                    <label class="form-check-label"
+                                                                        for="inlineRadio1">Nữ</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dghdd9">
+                                            <div class="h4eiAQ">
+                                                <div class="tBgRZR">
+                                                    <label>Ngày sinh</label>
+                                                </div>
+                                                <div class="gV+dPk">
+                                                    <!-- th:selected="${#dates.format(user.birtday, 'yyyy')}" -->
+                                                    <input type="date" hidden th:value="${#dates.format(user.birtday, 'yyyy-MM-dd')}"  name="birtday" id="birtday">                                      
+                                                    <div onchange="getbirtday()">
+                                                        <select style="width: 30%;" id="year" name="yyyy" onchange="change_year(this)">
+                                                            <option th:value="${#dates.format(user.birtday, 'yyyy')}" th:text="${#dates.format(user.birtday, 'yyyy')}" checked></option>
+                                                        </select>
+                                                        <select style="width: 30%;margin-left: 12px;" id="month"
+                                                            name="mm" onchange="change_month(this)">
+                                                            <option th:value="${#dates.format(user.birtday, 'MM')}" th:text="${#dates.format(user.birtday, 'MM')}" checked></option>
+                                                        </select>
+                                                        <select style="width: 30%;margin-left: 12px;" id="day" name="dd">
+                                                            <option th:value="${#dates.format(user.birtday, 'dd')}" th:text="${#dates.format(user.birtday, 'dd')}" checked></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="X9w211">
+                                            <button onclick="submitforminfo()" class="btn btn-solid-primary btn--m btn--inline"
+                                                aria-disabled="false" style="padding-top: 8px; ">
+                                                Lưu
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="avatar-upload">
+                                        <div class="avatar-edit">
+                                            <input type='file' id="imageUpload" name="imageFile"  accept=".png, .jpg, .jpeg" />
+                                            <label for="imageUpload"></label>
+                                        </div>
+                                        <div class="avatar-preview">
+                                            <img id="imagePreview" th:src="${user.avatar!=null?'/api/images/'+user.avatar:'/site/images/OIP.jpg'}">
+                                         <div id="imageName"></div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

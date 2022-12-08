@@ -76,9 +76,9 @@ public class ContactController {
 			@RequestParam("description") String content,
 			BindingResult result) {
 
-		if(result.hasErrors()) {
-            return new ModelAndView("web-admin/mail");
-        }
+		if (result.hasErrors()) {
+			return new ModelAndView("web-admin/mail");
+		}
 		SimpleMailMessage msg = new SimpleMailMessage();
 		msg.setTo(to);
 		msg.setSubject(subject);
@@ -90,23 +90,23 @@ public class ContactController {
 		entity.setStatus((short) 1);
 		// 0 = chua phan hoi short
 		// 1= da phan hoi
-//		Date date = new Date();
-//		entity.setCreateAt(date);
-//		entity.setUpdateAt(date);
+		// Date date = new Date();
+		// entity.setCreateAt(date);
+		// entity.setUpdateAt(date);
 		Date now = new Date();
 
 		try {
 
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Date date = dateFormat.parse(dateFormat.format(new Date()));
-//			System.out.println("date: "+date);
-//			System.out.println("--------------------------------------------");
+			// System.out.println("date: "+date);
+			// System.out.println("--------------------------------------------");
 			entity.setUpdateAt(date);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		System.out.println(entity);
+		// System.out.println(entity);
 
 		mailRepository.save(entity);
 		model.addAttribute("message", "Mail is saved!");

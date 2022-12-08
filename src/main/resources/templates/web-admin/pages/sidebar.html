@@ -17,14 +17,18 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <h1><a class="navbar-brand" href="index.html"><span class="fa fa-area-chart"></span> WATCH<span
+                        <h1><a class="navbar-brand" href="/api/admin"><span class="fa fa-area-chart"></span> WATCH<span
                                     class="dashboard_text">SHOP</span></a></h1>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="sidebar-menu">
                             <li class="header">MAIN NAVIGATION</li>
                             <li class="treeview">
+<<<<<<< HEAD
                                 <a th:href="@{/api/admin/statistical/}">
+=======
+                                <a href="/api/admin">
+>>>>>>> master
                                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                                 </a>
                             </li>
@@ -50,6 +54,16 @@
                                     <li><a th:href="@{/api/admin/categories/add-category}"><i class="fa fa-angle-right"></i> Add Category</a></li>
                                 </ul>
                             </li>
+                            <li class="treeview">
+                               <a href="#">
+                                   <i class="fa fa-drupal"></i>
+                                   <span>Order</span>
+                                   <i class="fa fa-angle-left pull-right"></i>
+                               </a>
+                               <ul class="treeview-menu">
+                                   <li><a th:href="@{/api/admin/order}"><i class="fa fa-angle-right"></i> List Order</a></li>
+                               </ul>
+                           </li>
                              <li class="treeview">
                                 <a href="#">
                                     <i class="fa fa-drupal"></i>
@@ -69,7 +83,11 @@
                                 </a>
                                 <ul class="treeview-menu">
                                    <li><a th:href="@{/api/admin/staffs/}"><i class="fa fa-angle-right"></i> List Staff</a></li>
+<<<<<<< HEAD
                                     <li><a th:href="@{/api/admin/staffs/add-staff}"><i class="fa fa-angle-right"></i> Add Staff</a></li>
+=======
+                                    <li><a th:href="@{/api/admin/staffs/add}"><i class="fa fa-angle-right"></i> Add Staff</a></li>
+>>>>>>> master
                                 </ul>
                             </li>
                             <li class="treeview">
@@ -80,7 +98,11 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a th:href="@{/api/admin/customers/}"><i class="fa fa-angle-right"></i> List Customer</a></li>
+<<<<<<< HEAD
                                     <li><a th:href="@{/api/admin/customers/add-customer}"><i class="fa fa-angle-right"></i> Add Customer</a></li>
+=======
+                                    <li><a th:href="@{/api/admin/customers/add}"><i class="fa fa-angle-right"></i> Add Customer</a></li>
+>>>>>>> master
                                 </ul>
                             </li>
                              <li class="treeview">
@@ -131,10 +153,17 @@
                             </li>
                             <li class="treeview">
                                 <a href="#">
+<<<<<<< HEAD
                                     <i class="fa fa-envelope"></i> <span>Mailbox</span></a>
                                 <ul class="treeview-menu">
                                     <li><a th:href="@{/api/admin/contacs/}"><i class="fa fa-bell-o"></i> Mail Inbox</a></li>
                                     <li><a th:href="@{/admin/mail/form}"><i class="fa fa-angle-right"></i> Compose Mail </a></li>
+=======
+                                    <i class="fa fa-envelope"></i> <span>Mailbox</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                <ul class="treeview-menu">
+                                    <li><a th:href="@{/api/admin/contacs/}"><i class="fa fa-bell-o"></i> Mail Inbox</a></li>
+>>>>>>> master
                                 </ul>
                             </li>
                             <li class="treeview">

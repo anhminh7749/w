@@ -23,7 +23,7 @@
 
                 <div id="address-detail"></div>
               </div>
-              <a class="btn btn-primary" id="showaddressbtn">Chọn</a>
+              <a class="btn btn-primary" style="text-decoration: none;" id="showaddressbtn">Chọn</a>
               <div class="clearfix"></div>
             </div>
             <div class="price-details" id="alltotal">
@@ -43,7 +43,7 @@
             </div>
             <ul class="total_price">
               <li class="last_price row" style=" width: 100%;">
-                <h4 style=" margin-left: 25px;">TOTAL</h4>
+                <h4 style=" margin-left: 25px;">Tổng thanh toán</h4>
                 <span id="total_price" style="margin-left: 5.2em;font-size: 26px;">0</span>
               </li>
 
@@ -69,9 +69,11 @@
             </div>
           </div>
 
+       
+
           <div class="modal" id="myModal">
             <div class="">
-              <div class="modal-content" style="width: 30% !important">
+              <div class="modal-content" style="width: 45% !important">
                 <div class="modal-header">
                   <h1 class="modal-title fs-5" id="modal-list-address">
                     Danh sách địa chỉ
@@ -98,16 +100,16 @@
 
                     </ul>
                   </div>
-                  <a class="btn btn-primary" id="btn-new-address">Thêm Địa Chỉ</a>
+                 
                 </div>
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary">
-                    <span class="close">Đóng</span>
+                    <span class="close" >Đóng</span>
                   </button>
-                  <button type="button" class="btn btn-primary" th:onclick="getaddress()">
+                  <a type="button" class="btn btn-primary" id="sussecraiting" th:onclick="getaddress()">
                     Hoàn Thành
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -126,11 +128,8 @@
                   <div class="row" style="flex-direction: row-reverse; align-items: center">
                     <a class="btn btn-primary me-5" id="createAddress" href="#modal-list-address"
                       data-bs-toggle="modal">Hoàn Thành</a>
-                    <a type="button" style="
-                          margin-block-end: 10px;
-                          margin-right: 20px;
-                          margin-left: 10px;
-                        " class="btn btn-secondary closeFormAddress" id="closeFormAddress">
+                    <a type="button" style=" margin-block-end: 10px; margin-left: 10px; "
+                     class="btn btn-secondary closeFormAddress" id="closeFormAddress">
                       Trở lại
                     </a>
                   </div>
@@ -142,6 +141,8 @@
       </div>
     </div>
   </div>
+
+  
 </body>
 
 </html>

@@ -64,6 +64,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td><span class="label label-warning">in progress</span></td>
+                                    <td><span class="label label-warning">in progress</span></td>
+                                    <td><span class="badge badge-warning">30%</span></td>
+                                    <td><span class="label label-success">completed</span></td>
+                                    <td><span class="badge badge-success">80%</span></td>
+                                    <td><span class="label label-danger">in progress</span></td>
+                                    <td><span class="badge badge-info">70%</span></td>
+                                </tr>
+
                                 <tr th:each="item, iStart:${productPage}">
                                     <td><img class="tbl-list img-fluid" id="image"
                                             th:src="${item.thumbnail!=null?'/api/admin/product/images/'+item.thumbnail:'/images/Background.png'}"
