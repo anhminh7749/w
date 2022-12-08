@@ -1,32 +1,28 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{web-admin/layout}"
->
-  <head> </head>
-  <body layout:fragment="content" class="cbp-spmenu-push">
-    <div class="main-page login-page ">
-      <h2 class="title1">Login</h2>
-      <div class="widget-shadow">
-        <div class="login-body">
-          <form th:action="@{/api/auth/signin}" method="post">
-            <input type="text" class="user" name="username" placeholder="Enter Your user name" required="">
-            <input type="password" name="password" class="lock" placeholder="Password" required="">
-            <div class="forgot-grid">
-              <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>
-              <div class="forgot">
-                <a href="#">forgot password?</a>
-              </div>
-              <div class="clearfix"> </div>
-            </div>
-            <input type="submit" name="Sign In" value="Sign In">
-           
-          </form>
-        </div>
-      </div>
-      
-    </div>
-  </body>
+<html>
+<head>
+<title>Watch Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/admin/css/login.css" media="all" rel="stylesheet"
+	type="text/css" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/admin/js/login.js"></script>
+</head>
+<body id="particles-js"></body>
+<div class="animated bounceInDown">
+  <div class="container">
+  <span class="error animated tada" id="msg"></span>
+    <form th:action="@{/api/auth/signin}" method="post" name="form1" class="box" >
+      <h4>Admin<span>Dashboard</span></h4>
+      <h5>Sign in to your account.</h5>
+        <input type="text" name="username" id="username" placeholder="username" autocomplete="off">
+        
+        <input type="password" name="password" id="password" placeholder="Passsword" autocomplete="off">
+        
+        <input hidden type="submit" id="submit" value="Sign in" class="btn1">
+        <a onclick="checklogin()" class="btn1">Submit</a>
+      </form>
+  </div> 
+</div>
 </html>

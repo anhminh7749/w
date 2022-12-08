@@ -1,69 +1,8 @@
-
-.xMDeox table i {
-  font-size: 20px;
-  margin: 1;
+.total-item #discountcode {
+  width: 70%;
+  margin-left: 14px;
+  height: 35px;
 }
-.icon-exclamation{
-  color: #05728f;
-}
-.icon-remove{
-  color: rgb(255, 82, 82);
-
-  margin-right: 10px;
-}
-#radios {
-   margin-bottom: 2em;
-   height: 45px;
-   align-items: center;
-   box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
- }
-.xMDeox table{
-
-  box-shadow: 0 -1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
-}
- #radios label {
-   cursor: pointer;
-   position: relative;
-   display: contents !important;
- }
-
- #radios label+label {
-
-   margin-left: 15px;
- }
-
- #radios input[type="radio"] {
-   opacity: 0;
-   position: absolute;
- }
-
- #radios input[type="radio"]+span {
-   color: #76848a;
-   border-radius: 10%;
-   padding: 12px;
-   transition: all 0.4s;
-   -webkit-transition: all 0.4s;
- }
-
- #radios input[type="radio"]:checked+span {
-   color: #ffffff;
-   background-color: #37d999;
- }
-
- #radios input[type="radio"]:focus+span {
-   color: #fff;
- }
-
-
- .showaddressbtn:hover {
-   color: #f9d9be;
- }
-
- .total-item #discountcode {
-   width: 70%;
-   margin-left: 14px;
-   height: 35px;
- }
 
  .modal-content .listaddress {
    position: relative;
@@ -1552,11 +1491,11 @@
    -webkit-transition-timing-function: linear, ease-out;
  }
 
- .lb-album {
-   margin: 0 auto;
-   padding: 0;
-   list-style: none;
- }
+.lb-album {
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
 
  .lb-album li {
    width: 24.9999%;
@@ -2424,16 +2363,16 @@
    position: relative;
  }
 
- .view .info {
-   display: inline-block;
-   text-decoration: none;
-   padding: 7px 52px;
-   background: #f9d9be;
-   color: #000;
-   text-transform: uppercase;
-   margin-top: 8em;
-   font-family: "PT Sans Narrow", sans-serif;
- }
+.view .info {
+  display: inline-block;
+  text-decoration: none;
+  padding: 7px 52px;
+  background: #f9d9be;
+  color: #000;
+  text-transform: uppercase;
+  margin-top: 8em;
+  font-family: "PT Sans Narrow", sans-serif;
+}
 
  .view-first img {
    -webkit-transition: all 0.2s linear;

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.watch.shopwatchonline.Domain.CategoryDto;
@@ -23,21 +25,21 @@ import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Service.CategoryService;
 
 @Controller
-@RequestMapping("api/admin/categories")
+@RequestMapping("admin/categories")
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
-
+	private CategoryService categoryService;
+    
     @GetMapping("add-category")
     public String add(Model model) {
         CategoryDto dto = new CategoryDto();
         dto.setIsEdit(false);
         model.addAttribute("category", dto);
-        return "web-admin/Addcategory";
+        return "web-admin/Addcatrgory";
     }
 
-    @GetMapping("edit/{id}")
+    @GetMapping("/edit/{id}")
     public ModelAndView edit(ModelMap model, @PathVariable("id") Integer id) {
 
         Optional<Category> opt = categoryService.findById(id);
@@ -51,30 +53,25 @@ public class CategoryController {
 
             model.addAttribute("category", dto);
 
-            return new ModelAndView("web-admin/Addcategory", model);
+            return new ModelAndView("web-admin/Addcatrgory", model);
         }
 
         model.addAttribute("message", "Category is existed");
 
-        return new ModelAndView("forward:/admin/categories", model);
+        return new ModelAndView("forward:/api/admin/categories", model);
     }
 
-    @GetMapping("delete/{id}")
-    public ModelAndView delete(ModelMap model, @PathVariable("id") Integer id) {
+	   @GetMapping("/delete")
+	    public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
+	        categoryService.deleteById(Integer.parseInt(id));
+	        return new ModelAndView("forward:/api/admin/staffs");
+	    }
 
-        Optional<Category> opt = categoryService.findById(id);
-        categoryService.deleteById(id);
-
-        model.addAttribute("message", "Category is delete!");
-
-        return new ModelAndView("forward:/admin/categories", model);
-    }
-
-    @PostMapping("saveOrUpdate")
+    @PostMapping("/saveOrUpdate")
     public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("category") CategoryDto dto,
             BindingResult result) {
 
-        if (result.hasErrors()) {
+        if(result.hasErrors()) {
             return new ModelAndView("web-admin/Addcategory");
         }
         Category entity = new Category();
@@ -84,7 +81,7 @@ public class CategoryController {
 
         model.addAttribute("message", "Category is saved!");
 
-        return new ModelAndView("forward:/admin/categories", model);
+        return new ModelAndView("forward:/api/admin/categories", model);
     }
 
     @RequestMapping("")
@@ -97,6 +94,6 @@ public class CategoryController {
 
     @GetMapping("search")
     public String search() {
-        return "web-admin/Addcategory";
+        return "web-admin/Addcatrgory";
     }
 }

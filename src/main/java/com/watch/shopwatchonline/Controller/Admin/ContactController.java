@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.watch.shopwatchonline.Domain.MailDto;
 import com.watch.shopwatchonline.Model.Mail;
 import com.watch.shopwatchonline.Repository.MailRepository;
+import com.watch.shopwatchonline.Service.MailService;
 
 @Controller
 @RequestMapping("api/admin/contacs")
@@ -35,8 +37,11 @@ public class ContactController {
 
 	@Autowired
 	MailRepository mailRepository;
+	
+	@Autowired
+	MailService mailService;
 
-	@GetMapping("edit/{mailId}")
+	@GetMapping("/edit/{mailId}")
 	public ModelAndView edit(ModelMap model, @PathVariable("mailId") Integer mailId) {
 
 		Optional<Mail> opt = mailRepository.findById(mailId);
@@ -55,22 +60,17 @@ public class ContactController {
 
 		model.addAttribute("message", "Mail is existed");
 
-		return new ModelAndView("forward:/admin/contacs", model);
+		return new ModelAndView("forward:/api/admin/contacs", model);
 	}
 
-	@GetMapping("delete/{mailId}")
-	public ModelAndView delete(ModelMap model, @PathVariable("mailId") Integer mailId) {
-
-		Optional<Mail> opt = mailRepository.findById(mailId);
-		mailRepository.deleteById(mailId);
-
-		model.addAttribute("message", "Mail is delete!");
-
-		return new ModelAndView("redirect:/admin/contacs", model);
-	}
-
-	@PostMapping("send")
-	public ModelAndView sendMail(ModelMap model, @Valid @ModelAttribute("mail") MailDto dto,
+	   @GetMapping("/delete")
+	    public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
+	        mailRepository.deleteById(Integer.parseInt(id));
+	        return new ModelAndView("forward:/api/admin/contacs");
+	    }
+	   
+	@PostMapping("/send")
+	public ModelAndView sendMail(ModelMap model,@Valid @ModelAttribute("mail") MailDto dto,
 			@RequestParam("gmail") String to,
 			@RequestParam("title") String subject,
 			@RequestParam("description") String content,
@@ -110,7 +110,7 @@ public class ContactController {
 
 		mailRepository.save(entity);
 		model.addAttribute("message", "Mail is saved!");
-		return new ModelAndView("redirect:/admin/contacs", model);
+		return new ModelAndView("redirect:/api/admin/contacs", model);
 	}
 
 	@RequestMapping("")
