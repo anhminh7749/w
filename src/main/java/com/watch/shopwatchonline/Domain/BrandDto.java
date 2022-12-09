@@ -40,6 +40,7 @@ private int id;
 	@Size(max = 3000, min = 10, message = "Phải từ 10 kí tự trở lên và 3000 kí tự trở xuống!")
 	private String description;
 
+	private int countBrandProduct;
 	private short active;
     
 	private Boolean isEdit = false;

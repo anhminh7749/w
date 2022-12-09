@@ -2982,7 +2982,9 @@
  }
 
  .left-side img {
-   border: 1px solid #cfcfcf;
+   border: 3px solid #cfcfcf;
+   width: 250px;
+  height: 110px;
  }
 
  .middle-side h4 a {
