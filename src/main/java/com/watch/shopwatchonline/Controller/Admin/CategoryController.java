@@ -36,7 +36,7 @@ public class CategoryController {
         CategoryDto dto = new CategoryDto();
         dto.setIsEdit(false);
         model.addAttribute("category", dto);
-        return "web-admin/Addcatrgory";
+        return "web-admin/Addcategory";
     }
 
     @GetMapping("/edit/{id}")
@@ -53,7 +53,7 @@ public class CategoryController {
 
             model.addAttribute("category", dto);
 
-            return new ModelAndView("web-admin/Addcatrgory", model);
+            return new ModelAndView("web-admin/Addcategory", model);
         }
 
         model.addAttribute("message", "Category is existed");
@@ -94,6 +94,6 @@ public class CategoryController {
 
     @GetMapping("search")
     public String search() {
-        return "web-admin/Addcatrgory";
+        return "web-admin/Addcategory";
     }
 }

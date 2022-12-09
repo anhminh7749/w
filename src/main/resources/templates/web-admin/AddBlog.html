@@ -15,13 +15,14 @@
 					<h2>Thêm Sản Phẩm</h2>
 					<div class="row">
 						<ol class="breadcrumb">
-							<li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
-							<li><a id="par-1">Danh Sách Sản Phẩm</a></li>
-							<li class="active">Thêm Sản Phẩm</li>
+							<li><a th:href="@{/api/admin}">Trang Chủ</a></li>
+							<li><a th:href="@{/api/admin/blog/list-blog}">Danh Sách</a></li>
+							<li><a th:href="@{/api/admin/blog/add-blog}">Thêm Mới</a></li>
 						</ol>
 					</div>
 				</div>
-				<form th:action="@{/api/admin/blog/update}" method="post" enctype="multipart/form-data" th:object="${blog}">
+				<form th:action="@{/api/admin/blog/update}" method="post" enctype="multipart/form-data"
+					th:object="${blog}">
 
 					<input type="hidden" th:field="*{isEdit}">
 					<input hidden readonly="readonly" th:field="*{Id}">
@@ -95,14 +96,14 @@
 
 						<div class="form-group  col-sm-12 col-lg-12  ">
 							<label for="disabledinput" class=" control-label">Tên:</label>
-<div>
-							<select th:field="*{ProductId}" name="products" id="select-state"
-								class="form-control input-sm">
-								
-								<option th:each="p:${products}"th:selected="${p.Id==blog.productId}" th:value="${p.Id}"
-									th:text="${p.name}"></option>
-							</select>
-						</div>
+							<div>
+								<select th:field="*{ProductId}" name="products" id="select-state"
+									class="form-control input-sm">
+
+									<option th:each="p:${products}" th:selected="${p.Id==blog.productId}"
+										th:value="${p.Id}" th:text="${p.name}"></option>
+								</select>
+							</div>
 						</div>
 
 						<div class="form-group row mb-5">
@@ -111,56 +112,56 @@
 								<input onclick="changeContentNamePro()" th:field="*{title}" name="title" type="text"
 									class="form-control1" id="focusedinput" placeholder="">
 							</div>
-							<small th:if="${#fields.hasErrors('title')}"
-												id="messError" class="form-text text-muted">Category Id is required!</small>
-							</div>
-
-							<div class="form-group row">
-								<label for="focusedinput" class="col-sm-2 control-label">Mô Tả:</label>
-								<div class="col-sm-12 col-lg-12">
-									<textarea onclick="changeContentDecs()" th:field="*{description}" name="description"
-										rows="4" type="text" class="form-control" id="focusedinput"
-										placeholder=""></textarea>
-								</div>
-								<small th:if="${#fields.hasErrors('description')}"
-												id="messError" class="form-text text-muted">Category Id is required!</small>
-							</div>
-							<div class="form-group mb-5 row">
-								<label for="focusedinput" class="col-sm-2 control-label">Mô Tả Ngắn:</label>
-								<div class="col-sm-12 col-lg-12">
-									<textarea onclick="changeContentDecs()" th:field="*{shortdecs}" name="shortdecs"
-										rows="4" type="text" class="form-control" id="focusedinput"
-										placeholder=""></textarea>
-								</div>
-								<small th:if="${#fields.hasErrors('shortdecs')}"
-												id="messError" class="form-text text-muted">Category Id is required!</small>
-							</div>
-						
-							
-					
-
-							
-
-						
-							
-							
+							<small th:if="${#fields.hasErrors('title')}" id="messError"
+								class="form-text text-muted">Category Id is required!</small>
 						</div>
-						<div class="sticky-fooder header-section row">
 
-							<div class="header-right">
-
-								<button name="submit" type="submit" class="btn btn-primary">
-									<span th:unless="${blog.isEdit}">Save</span>
-									<span th:if="${blog.isEdit}">Update</span>
-								</button>
+						<div class="form-group row">
+							<label for="focusedinput" class="col-sm-2 control-label">Mô Tả:</label>
+							<div class="col-sm-12 col-lg-12">
+								<textarea onclick="changeContentDecs()" th:field="*{description}" name="description"
+									rows="4" type="text" class="form-control" id="focusedinput"
+									placeholder=""></textarea>
 							</div>
+							<small th:if="${#fields.hasErrors('description')}" id="messError"
+								class="form-text text-muted">Category Id is required!</small>
 						</div>
-					</form>
+						<div class="form-group mb-5 row">
+							<label for="focusedinput" class="col-sm-2 control-label">Mô Tả Ngắn:</label>
+							<div class="col-sm-12 col-lg-12">
+								<textarea onclick="changeContentDecs()" th:field="*{shortdecs}" name="shortdecs"
+									rows="4" type="text" class="form-control" id="focusedinput"
+									placeholder=""></textarea>
+							</div>
+							<small th:if="${#fields.hasErrors('shortdecs')}" id="messError"
+								class="form-text text-muted">Category Id is required!</small>
+						</div>
 
-				</div>
+
+
+
+
+
+
+
+
+					</div>
+					<div class="sticky-fooder header-section row">
+
+						<div class="header-right">
+
+							<button name="submit" type="submit" class="btn btn-primary">
+								<span th:unless="${blog.isEdit}">Save</span>
+								<span th:if="${blog.isEdit}">Update</span>
+							</button>
+						</div>
+					</div>
+				</form>
 
 			</div>
+
 		</div>
+	</div>
 	</div>
 
 </body>

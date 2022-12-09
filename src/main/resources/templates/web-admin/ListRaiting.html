@@ -9,12 +9,12 @@
 <body class="cbp-spmenu-push">
     <div layout:fragment="content">
         <div id="page-wrapper">
-            <h2>Danh SÃ¡ch Sáº£n Pháº©m</h2>
+            <h2>Danh Sách Chờ</h2>
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><a href="#">Trang Chá»§</a></li>
-                    <li><a>Sáº£n Pháº©m</a></li>
-                    <li class="active">Danh SÃ¡ch</li>
+                    <li><a th:href="@{/api/admin}">Trang Chủ</a></li>
+				<li><a th:href="@{/api/admin/raiting/list-waiting}">Danh Sách</a></li>
+				<li><a th:href="@{/api/admin/raiting/list-check}">Check</a></li>
                 </ol>
             </div>
 
