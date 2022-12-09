@@ -12,14 +12,15 @@
         
         <div class="col-8 account-top">
           <h3 class="text-center">Account</h3>
-          <form th:action="@{/api/auth/signin}" method="post">
+          <!-- <form  method="post">  -->
+            <!-- th:action="@{/api/auth/signin}" -->
             <div>
               <span>UserName*</span>
               <input type="text" id="username" name="username" />
             </div>
             <div>
               <span class="pass">Password*</span>
-              <input type="password" name="password" />
+              <input type="password" id="password" name="password" />
             </div>
            
            <div class="float-left">
@@ -30,7 +31,7 @@
               <a href="/forgot-password">Quên mật khẩu </a>|
               <a href="/api/auth/site/register"> Đăng ký</a>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
 
         <div class="clearfix"></div>

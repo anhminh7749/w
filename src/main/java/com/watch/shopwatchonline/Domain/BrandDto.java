@@ -43,4 +43,5 @@ private int id;
 	private short active;
     
 	private Boolean isEdit = false;
+	private int countBrandProduct;
 }

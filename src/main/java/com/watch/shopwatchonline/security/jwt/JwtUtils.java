@@ -81,8 +81,11 @@ public class JwtUtils {
 
   public String getUser(HttpServletRequest request) {
     String token = getJwtFromCookies(request);
-    String username = getUserNameFromJwtToken(token);
+    String username=null;
+    if(token !=null){
+       username = getUserNameFromJwtToken(token);
 
+    }
     return username;
   }
 }

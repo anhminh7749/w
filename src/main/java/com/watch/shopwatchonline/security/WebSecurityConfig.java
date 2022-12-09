@@ -59,11 +59,11 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable()
-        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+        .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).accessDeniedPage("/a.jsp").and()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        .authorizeRequests().antMatchers("/api/auth/**", "/**/*.{js,html,css}", "/", "/forgot-password").permitAll()
+        .authorizeRequests().antMatchers("/api/auth/**", "/**/*.{js,html,css}", "/api/site/**", "/api/user/forgot-password","/api/images/**","/images","/random","/").permitAll()
         .antMatchers("/admin/**", "/api/admin/**").hasAnyAuthority(Erole.ROLE_ADMIN.name())
-        .antMatchers("/profile/**").hasAnyAuthority(Erole.ROLE_USER.name())
+        .antMatchers("/api/user/profile/**","/api/user/orders/**").hasAnyAuthority(Erole.ROLE_USER.name())
         .antMatchers("/api/test/**").permitAll()
         .anyRequest().authenticated();
 

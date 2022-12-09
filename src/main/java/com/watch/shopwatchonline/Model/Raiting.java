@@ -32,6 +32,7 @@ public class Raiting implements Serializable{
 	private int id;
 
 	// @Size(max = 3000, min = 100, message = "Comment be between 100 and 3000 characters")
+	@Column(columnDefinition = "nvarchar(250)")
 	private String comment;
 
 	@Column(nullable = false)
@@ -40,7 +41,7 @@ public class Raiting implements Serializable{
 	@Column(nullable = false)
 	private short active;
 
-    @Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date createAt;
 

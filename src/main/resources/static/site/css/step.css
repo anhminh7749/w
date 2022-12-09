@@ -1,101 +1,79 @@
-.progress {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: table;
-    table-layout: fixed;
-    width: 100%;
-    color: #849397;
-  }
-  .progress > li {
-    position: relative;
-    display: table-cell;
-    text-align: center;
-    font-size: 0.8em;
-  }
-  .progress > li:before {
-    content: attr(data-step);
-    display: block;
-    margin: 0 auto;
-    background: #DFE3E4;
-    width: 3em;
-    height: 3em;
-    text-align: center;
-    margin-bottom: 0.25em;
-    line-height: 3em;
-    border-radius: 100%;
-    position: relative;
-    z-index: 1000;
-  }
-  .progress > li:after {
-    content: '';
-    position: absolute;
-    display: block;
-    background: #DFE3E4;
-    width: 100%;
-    height: 0.5em;
-    top: 1.25em;
-    left: 50%;
-    margin-left: 1.5em\9;
-    z-index: -1;
-  }
-  .progress > li:last-child:after {
-    display: none;
-  }
-  .progress > li.is-complete {
-    color: #2ECC71;
-  }
-  .progress > li.is-complete:before, .progress > li.is-complete:after {
-    color: #FFF;
-    background: #2ECC71;
-  }
-  .progress > li.is-active {
-    color: #3498DB;
-  }
-  .progress > li.is-active:before {
-    color: #FFF;
-    background: #3498DB;
-  }
-  
-  /**
-   * Needed for IE8
-   */
-  .progress__last:after {
-    display: none !important;
-  }
-  
-  /**
-   * Size Extensions
-   */
-  .progress--medium {
-    font-size: 1.5em;
-  }
-  
-  .progress--large {
-    font-size: 2em;
-  }
-  
-  /**
-   * Some Generic Stylings
-   */
-  *, *:after, *:before {
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    margin-bottom: 1.5em;
-  }
-  
-  .progress {
-    margin-bottom: 3em;
-  }
-  
-  a {
-    color: #3498DB;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  
- 
+.progress-containers i{
+  font-size: 2rem;
+}
+ .progress-containers i.active{
+  color: #37d999;
+}
+.progress-containers i.error{
+  color: #fe0000;
+}
+
+ .progress-containers {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 5em;
+  max-width: 100%;
+  width: 900px;
+  margin-left: 34px;
+}
+
+.progressdefaul {
+  background-color: rgb(186 185 185);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 4px;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+ .progress-containers .progress-order{
+  background-color: #37d999;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 50%;
+  height: 4px;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+
+.progress-containers span{
+  position: absolute;
+    top: 6.4em;
+    left: -40px;
+    width: 200px;
+}
+.progress-containers  p{
+  position: absolute;
+  top: 4.8em;
+  left: -5px;
+  font-weight: 700;
+  color: black;
+  width: 200px;
+}
+
+.progress-containers .order{
+  position: relative;
+  background-color: #fff;
+  color: #999;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  border: 4px solid #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s ease;
+  z-index: 1;
+}
+
+.order.actives{
+  border-color: #37d999;
+}
+.order.error{
+  border-color:  #fe0000;
+}

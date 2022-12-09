@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -35,11 +38,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.watch.shopwatchonline.Domain.AddressDto;
+import com.watch.shopwatchonline.Domain.BrandDto;
 import com.watch.shopwatchonline.Domain.OrderDto;
 import com.watch.shopwatchonline.Domain.ProductDto;
 import com.watch.shopwatchonline.Domain.Statistics;
 import com.watch.shopwatchonline.Domain.UserDto;
 import com.watch.shopwatchonline.Model.Address;
+import com.watch.shopwatchonline.Model.Brand;
 import com.watch.shopwatchonline.Model.ChatBox;
 import com.watch.shopwatchonline.Model.DiscountCode;
 import com.watch.shopwatchonline.Model.Order;
@@ -47,6 +52,7 @@ import com.watch.shopwatchonline.Model.OrderDetail;
 import com.watch.shopwatchonline.Model.Product;
 import com.watch.shopwatchonline.Model.User;
 import com.watch.shopwatchonline.Repository.AddressRepository;
+import com.watch.shopwatchonline.Repository.BrandRepository;
 import com.watch.shopwatchonline.Repository.ChatBoxRepository;
 import com.watch.shopwatchonline.Repository.DiscountCodeRepository;
 import com.watch.shopwatchonline.Repository.OrderDetailRepository;
@@ -83,12 +89,31 @@ public class HomeController {
   private OrderDetailRepository detailRepository;
   @Autowired
   private ProductRepository productRepository;
+  @Autowired
+  private BrandRepository brandRepository;
 
   @GetMapping("/auth/login")
   public String allAccess() {
     return "web-admin/login";
   }
 
+  @GetMapping("/site/brands")
+  public String brands(Model model,@RequestParam("page") Optional<Integer> page) {
+    int pages = page.orElse(1);
+    Pageable pageable = PageRequest.of(pages, 6);
+    List<Brand> brands = brandRepository.findAll();
+    List<BrandDto> cnst = new ArrayList<>();
+    for (Brand brand : brands) {
+      BrandDto brandDto = new BrandDto();
+      BeanUtils.copyProperties(brand, brandDto);
+      brandDto.setCountBrandProduct(productRepository.countBrandProduct(brand.getId()));
+      cnst.add(brandDto);
+System.out.println(brandDto);
+    }
+
+    model.addAttribute("brands", cnst);
+    return "web-site/brands";
+  }
   @GetMapping("/admin")
   public String main(Model model) {
     model.addAttribute("countUsers", userRepository.countUsers());
@@ -252,15 +277,17 @@ System.out.println(address);
 
   @GetMapping("ShoppingCart")
   public String ShoppingCart(Model model, HttpServletRequest request, HttpServletResponse response) {
-    Optional<User> user = userRepository.findByUsername(utils.getUser(request));
-    List<Address> address = addressRepository.findbyuser(user.get().getId());
-    if (!address.isEmpty()) {
-      model.addAttribute("listaddress", address);
+    List<Address> address = new ArrayList<>();
+    if (utils.getUser(request) != null) {
+      Optional<User> user = userRepository.findByUsername(utils.getUser(request));
+    address = addressRepository.findbyuser(user.get().getId());
     }
+      model.addAttribute("listaddress", address);
+    
     return "web-site/checkout";
   }
 
-  @GetMapping("images/{filename:.+}")
+  @GetMapping("/images/{filename:.+}")
   @ResponseBody
   public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
     Resource file = StogareService.loadResource(fileName);

@@ -46,7 +46,7 @@
 							<li th:each="pageNum:${pageNums}" th:if="${productPage.totalPages>0}"
 								th:class="${pageNum==productPage.number+1}?'page-item active':'page-item'"><a
 									class="page-link"
-									th:href="@{/site/product(sort=${sort}, size = ${productPage.size}, page=${pageNum})}"
+									th:href="@{/api/site/product(sort=${sort}, size = ${productPage.size}, page=${pageNum})}"
 									th:text="${pageNum}"></a>
 							</li>
 						</ul>

@@ -93,7 +93,7 @@
 											<!-- /.modal-content -->
 										</div>
 										<!-- /.modal-dialog -->
-										<a th:href="@{'/admin/customers/edit/' + ${item.customerId}}"
+										<a th:href="@{'/api/admin/customers/edit/' + ${item.customerId}}"
 											class="fa fa-edit"></a>
 										<a th:data-id="${item.customerId}" th:data-name="${item.name}"
 											onclick="showConfirmModelDialogCustomer(this.getAttribute('data-id'), this.getAttribute('data-name'))"

@@ -1,37 +1,37 @@
 
-.main{
+.slide .main{
     height: 80%;
     position: relative;
 }
-.list-image{
+.slide .list-image{
     width: 100%;
     height: 15%;
     display: flex;
     justify-content: space-between;
 }
-.list-image div{
+.slide .list-image div{
     flex: 1px;
     padding: 5px;
 }
-img{
+.slide img{
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
-.control{
+.slide .control{
     position: absolute;
     top: 50%;
     font-size: 50px;
     color: white;
     transform: translateY(-50%);
 }
-.prev{
+.slide .prev{
     left: 10px;
 }
-.next{
+.slide .next{
     right: 10px;
 }
-.active{
+.slide .active{
     background: brown;
 }

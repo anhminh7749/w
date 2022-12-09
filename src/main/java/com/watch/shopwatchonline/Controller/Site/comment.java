@@ -60,32 +60,19 @@ public class comment {
         return "web-site/blog-single";
     }
 
-    @GetMapping("images/{filename:.+}")
-    @ResponseBody
-    public ResponseEntity<Resource> serverFile(@PathVariable(name = "filename") String fileName) {
-
-        Resource file = stogareService.loadResource(fileName);
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"")
-                .body(file);
-    }
 
     @GetMapping("/api/site/blog")
-    public String Listblog(ModelMap model, @RequestParam(name = "keyword", required = false) String keyword,
+    public String Listblog(ModelMap model, 
             @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         int curPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(6);
         Page<Blog> resultPage = null;
-        if (StringUtils.hasText(keyword)) {
-            Pageable pageable = PageRequest.of(curPage - 1, pageSize);
-            // resultPage = blogService.findByNameContaining(keyword, pageable);
-            model.addAttribute("keyword", keyword);
-        } else {
+       
 
             Pageable pageable = PageRequest.of(curPage - 1, pageSize, Sort.by("createAt").descending());
             resultPage = blogService.findAll(pageable);
 
-        }
+        
 
         int totalPages = resultPage.getTotalPages();
 
@@ -109,7 +96,6 @@ public class comment {
         }
         List<Blog> p = blogService.findAll();
 
-        model.addAttribute("keyword", keyword);
         model.addAttribute("blogPage", resultPage);
         model.addAttribute("tt", p.size());
 

@@ -57,7 +57,7 @@ public class Product implements Serializable {
 	@PositiveOrZero(message = "SalePrice can contain values > 0 only")
 	private float discount;
 
-	@Column(length = 50, nullable = false)
+	@Column(length = 50)
 	private String thumbnail;
 
 	@Column(columnDefinition = "text not null")
@@ -77,11 +77,11 @@ public class Product implements Serializable {
 	private Date updateAt;
 
 	@ManyToOne
-	@JoinColumn(name = "CategoryId", nullable = false)
+	@JoinColumn(name = "CategoryId")
 	private Category Category;
 
 	@ManyToOne
-	@JoinColumn(name = "BrandId", nullable = false)
+	@JoinColumn(name = "BrandId")
 	private Brand Brand;
 
 

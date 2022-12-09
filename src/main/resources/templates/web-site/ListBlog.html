@@ -1,54 +1,50 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{web-site/layout}">
-
 <head>
-
 </head>
-
 <body>
 	<div layout:fragment="content">
 		<div class="men">
 			<div class="container">
 
 				<div class="newsletter">
-					<h3>Newsletter</h3>
-					<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-						the
-						industry's standard</p>
-
+					<h3>Tin tức</h3>
+					
 				</div>
 				<div class="row justify-content-center">
 					<div class="col-lg-4 col-md-6" th:each="item, iStart:${blogPage}">
 						<div class="blog-card-single">
 							<div class="grids5-info">
-								<a href="@{'/api/site/blog/detail/'+${item.id}}"><img class="tbl-list img-fluid" id="image"
-									th:src="${item.banner!=null?'/admin/blog/images/'+item.banner:'/images/Background.png'}"
+								<a href="@{'/api/site/blog/detail/'+${item.id}}"><img class="tbl-list img-fluid" id="image" style="border-top-right-radius: 20px;
+									border-top-left-radius: 20px;"
+									th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}"
 									alt="edit"></a>
 								<div class="blog-info">
-									<h5><a th:href="@{'/api/site/product/detail/'+${item.product.id}}" class=" primary-clr-bg" th:text="${item.product.name}"></a></h5>
-									<h3><a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}"></a></h3>
+									<h5><a style="text-decoration: none;color: black;font-size: 15px;" th:href="@{'/api/site/product/detail/'+${item.product.id}}" class=" primary-clr-bg" th:text="${item.product.name}"></a></h5>
+									<h3 style=" width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+								"><a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}"></a></h3>
 									<div class="d-flex align-items-center justify-content-between mb-3">
 										<a class="d-flex align-items-center" title="23k followers">
-											<i class="icon-user"></i><span class="small ml-2"> Eetey Cruis</span>
+											<i class="icon-user"></i><span class="small ml-2">Admin</span>
 										</a>
-										<p class="float_right"><i class="icon-calendar"></i> <a th:text="${item.createAt}"></a></p>
+										<p class="float_right"><i class="icon-calendar"></i> <a th:text="${#dates.format(item.createAt, 'dd-MM-yyyy')}"></a></p>
 									</div>
-									<p class="quick_desc" th:text="${item.shortdecs}"></p>
+									<!-- <p class="quick_desc" th:text="${item.shortdecs}"></p> -->
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-
-
-
 				</div>
-				<!-- pagination -->
-
-				<!-- //pagination -->
-
+				<ul class="women_pagenation dc_paginationA dc_paginationA06" style="display: block;">
+					<li><a class="previous">Trang : </a></li>
+					<li th:each="pageNum:${pageNums}" th:if="${blogPage.totalPages>0}"
+						th:class="${pageNum==blogPage.number+1}?'page-item active':'page-item'"><a
+							class="page-link"
+							th:href="@{/api/site/blog(sort=${sort}, size = ${blogPage.size}, page=${pageNum})}"
+							th:text="${pageNum}"></a>
+					</li>
+				</ul>
 				<div class="clearfix"> </div>
 			</div>
 		</div>

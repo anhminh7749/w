@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -61,58 +62,63 @@ public class OrderUserController {
 
   @GetMapping("/find")
   public @ResponseBody List<OrderDto> view(
-    @RequestBody @RequestParam(name = "status") String status, HttpServletRequest request) {     
-    return getTotalPriceAndQuantityWithUser(request, Short.parseShort(status)) ;
+      @RequestBody @RequestParam(name = "status") String status, HttpServletRequest request) {
+    return getTotalPriceAndQuantityWithUser(request, Short.parseShort(status));
   }
 
   @GetMapping("/check/raitting")
   public @ResponseBody Raiting raiting(
-    @RequestBody @RequestParam(name = "id") String id) {     
-      Raiting raiting = new Raiting();
-      Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
-      if(detail.isPresent()){
-        System.out.println("------------------------------------");
-        if(detail.get().getRaiting() !=null){
-          System.out.println("------------------------------------");
-          raiting = raitingRepository.findById(detail.get().getRaiting().getId()).get();
-        }
+      @RequestBody @RequestParam(name = "id") String id) {
+    Raiting raiting = new Raiting();
+    Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
+    if (detail.isPresent()) {
+      if (detail.get().getRaiting() != null) {
+        raiting = raitingRepository.findById(detail.get().getRaiting().getId()).get();
       }
+    } 
+    raiting.setUsers(null);
     return raiting;
   }
 
-  @GetMapping("/create/raitting")
-  public void createraiting(
-    @RequestBody @RequestParam(name = "id") String id,@ModelAttribute("Raiting") Raiting raiting, HttpServletRequest request) { 
-      Optional<User> user = userRepository.findByUsername(jwtUtils.getUser(request));   
-      Short x = 0; 
-      raiting.setActive(x);
-      raiting.setCreateAt(new Date());
-      System.out.println("------------------------------------"+raiting);
+  @PostMapping("/create/raitting")
+  public @ResponseBody void createraiting(
+      @RequestBody @RequestParam(name = "id") String id, @RequestBody Raiting raitings, HttpServletRequest request) {
+    Optional<User> user = userRepository.findByUsername(jwtUtils.getUser(request));
+    Optional<Raiting> rai = raitingRepository.findByUserAndDetail(Integer.parseInt(id));
+    Raiting raiting = new Raiting();
+
+    if (rai.isPresent()) {
+      BeanUtils.copyProperties(rai.get(), raiting);
+    } else {
       raiting.setUsers(user.get());
-     // raitingRepository.save(raiting);
-      Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
-      if(detail.isPresent()){
-        detail.get().setRaiting(raiting);
-        //detailRepository.save(detail.get());
-      }
+    }
+    Short x = 0;
+    raiting.setPoint(raitings.getPoint());
+    raiting.setComment(raitings.getComment());
+    raiting.setActive(x);
+    raiting.setCreateAt(new Date());
+    
+    raitingRepository.save(raiting);
+    Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
+    detail.get().setRaiting(raiting);
+    detailRepository.save(detail.get());
   }
 
   public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest request, Short status) {
     Optional<User> user = userRepository.findByUsername(jwtUtils.getUser(request));
     List<Order> orders = null;
-    if (status != null ) {
+    if (status != null) {
       if (status == 7) {
         orders = orderRepository.FindbyUserName(user.get().getId());
       } else if (status == 6) {
         orders = orderRepository.FindbyUserNameandStatusCancel(user.get().getId());
       } else {
         orders = orderRepository.FindbyUserNameandStatus(user.get().getId(), status);
-      }  
+      }
     } else {
       orders = orderRepository.FindbyUserName(user.get().getId());
     }
-    
-    
+
     List<OrderDto> ordersDto = new ArrayList<>();
     for (Order order : orders) {
       OrderDto dto = new OrderDto();
@@ -148,7 +154,6 @@ public class OrderUserController {
     return ResponseEntity.ok().body("success");
   }
 
-
   @GetMapping("/detail/{id}")
   public String ordersdetail(@PathVariable(name = "id") int id, Model model) {
     List<OrderDetail> details = detailRepository.FindByOrder(id);
@@ -165,7 +170,5 @@ public class OrderUserController {
     model.addAttribute("detail", details);
     return "web-site/user/ordersdetail";
   }
-
- 
 
 }

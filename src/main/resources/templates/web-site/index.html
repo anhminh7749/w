@@ -122,7 +122,7 @@
 									<div class="inner_content clearfix">
 										<div class="product_image">
 											<div class="mask1"><img id="image" style="height: 250px;"
-													th:src="${pro.thumbnail!=null?'/api/site/product/images/'+pro.thumbnail:'/images/Background.png'}"
+													th:src="${pro.thumbnail!=null?'/api/images/'+pro.thumbnail:'/images/Background.png'}"
 													class="img-responsive zoom-img"></div>
 											<div class="mask">
 												<div class="info">
@@ -131,7 +131,7 @@
 											</div>
 											<div class="product_container">
 											<img id="image" style="display: none;"
-													th:src="${pro.thumbnail!=null?'/api/site/product/images/'+pro.thumbnail:'/images/Background.png'}"
+													th:src="${pro.thumbnail!=null?'/api/images/'+pro.thumbnail:'/images/Background.png'}"
 													class="img-responsive zoom-img"></div>
 												<h4 class="product__name" th:text="${pro.name}"></h4>
 												<input type="hidden" name="" id="product__id" th:value="${pro.id}" />

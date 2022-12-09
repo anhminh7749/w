@@ -91,7 +91,7 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div> <!-- /.modal --> <a th:if="${item.status==0}"
-											th:href="@{'/admin/contacs/edit/' + ${item.mailId}}" class="fa fa-edit"></a>
+											th:href="@{'/api/admin/contacs/edit/' + ${item.mailId}}" class="fa fa-edit"></a>
 										<a th:data-id="${item.mailId}" th:data-name="${item.gmail}"
 											onclick="showConfirmModelDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"
 											class="fa fa-trash-o"> </a>

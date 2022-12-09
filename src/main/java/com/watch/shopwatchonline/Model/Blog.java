@@ -45,7 +45,7 @@ public class Blog {
 	private String title;
 
 
-	@Column(length = 50,nullable = false)
+	//@Column(length = 50,nullable = false)
 	private String banner;
 
     @Column(columnDefinition = "text not null")
@@ -55,20 +55,18 @@ public class Blog {
 
 
 	@Column(columnDefinition = "text not null")
-	@Size(max = 3000, min = 100, message = "Description must be between 100 and 3000 characters")
+	//@Size(max = 3000, min = 100, message = "Description must be between 100 and 3000 characters")
 	@NotEmpty(message = "Please enter description")
 	private String description;
 
 	@Column(nullable = false)
 	private short active;
 
-    @Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date createAt;
 
-    @Temporal(TemporalType.DATE)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+    @Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
 	private Date updateAt;
 

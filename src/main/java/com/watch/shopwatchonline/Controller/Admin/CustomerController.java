@@ -84,7 +84,7 @@ public class CustomerController {
         return new ModelAndView("forward:/api/admin/customers", model);
     }
 
-    @RequestMapping("")
+    @GetMapping("")
     public String list(ModelMap model) {
         List<Customer> list = customerService.findAll();
 

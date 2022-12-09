@@ -141,11 +141,13 @@ function showOrder(id, page) {
 		$(".total").each(function() {		
 				sum += parseFloat(this.value);	
 		});
+
+       
 const discount = document.getElementById('discounttotal');
-if(discount.value!=null){
+if(discount){
     sum=sum-discount.value
 }
-	document.getElementById('totaldetailorder').value=sum;
+document.getElementById('totaldetailorder').value=sum;
     }).catch(function (err) {
         console.warn('Something went wrong.', err);
     });

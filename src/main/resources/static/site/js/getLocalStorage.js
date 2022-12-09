@@ -12,6 +12,56 @@ let message;
 
 let iddel = null;
 
+function logout() {
+  swal({
+    title: "Bạn có chắc chắn muốn đăng xuất?",
+    text: "",
+    icon: "info",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then(del => {
+    if (!del) throw null;
+    $.ajax({
+      url: "/api/auth/signout",
+      method: "POST",
+      dataType: "JSON",
+    })
+    swal("Đã đăng xuất!", "Bạn sẽ được chuyển hướng đến trang chủ", "success");
+    sessionStorage.removeItem("UserName");
+    
+    setTimeout(function(){ window.location = 'http://localhost:8080/api/site' }, 1500);    
+  });
+  
+}
+
+function Login() {
+  console.log(window.location.hostname);
+  $.ajax({
+    url: "/api/auth/signin?username=" + document.getElementById("username").value +
+      "&password=" + document.getElementById("password").value,
+    method: "POST",
+    dataType: "JSON",
+    success: function (response) {
+      
+    },
+    error: function (response) {
+      if (response.status == 401) {
+        swal("Đăng nhập thất bại!", "Tài khoản hoặc mật khẩu sai", "error");
+      }
+      if (response.status == 200) {
+        UserName = document.getElementById("username").value;
+        sessionStorage.setItem("UserName", UserName);
+        swal("Đăng nhập thành công!", "", "success");
+        const url =window.location.hostname+response.responseText;
+        console.log(url);
+        setTimeout(function(){ window.location = url }, 1500);
+      }
+
+    }
+  })
+}
+
 function showDataUserOrder(status) {
 
   output = "";
@@ -231,19 +281,12 @@ function likeProduct(id) {
 const error = document.querySelectorAll(".error");
 const actives = document.querySelectorAll(".actives");
 const orders = document.querySelectorAll(".order");
-if(orders){
+if (orders) {
   document.getElementById('progress').style.width = ((actives.length - 1) / (orders.length - 1)) * 100 + '%';
   if (error.length != 0) {
     document.getElementById('progress').style.width = '100%';
     document.getElementById('progress').style.background = 'linear-gradient(90deg, rgba(55,217,153,1) 0%, rgba(101,168,119,0.8858893899356618) 33%, rgba(129,138,98,0.9363095580028886) 55%, rgba(209,52,38,0.8578781854538691) 71%, rgba(255,3,3,1) 100%)';
   }
-  var sum = 0;
-  $(".total").each(function () {
-    sum += parseFloat(this.value);
-  });
-  const discount = document.getElementById('discounttotal');
-  if (discount.value != null) {
-    sum = sum - discount.value
-  }
-  document.getElementById('totaldetailorder').value = sum;
+
+
 }

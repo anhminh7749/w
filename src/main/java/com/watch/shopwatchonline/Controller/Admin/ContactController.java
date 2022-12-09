@@ -113,7 +113,7 @@ public class ContactController {
 		return new ModelAndView("redirect:/api/admin/contacs", model);
 	}
 
-	@RequestMapping("")
+	@GetMapping("")
 	public String list(ModelMap model) {
 		List<Mail> list = mailRepository.findAll();
 

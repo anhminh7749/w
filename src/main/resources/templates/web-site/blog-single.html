@@ -5,19 +5,18 @@
 </head>
 <body>
     <div layout:fragment="content">
-
         <section class="w3l-text-11 py-5" th:object="${blog}">
             <div class="text11 py-md-5 py-4">
                 <div class="container">
                     
                         <div class=" text11-content mx-auto">
-                            <img th:src="${blog.banner!=null?'/admin/blog/images/'+blog.banner:'/images/Background.png'}"
+                            <img th:src="${blog.banner!=null?'/api/images/'+blog.banner:'/images/Background.png'}"
                                 class="img-fluid radius-image img-rounded" alt="">
                             <h3 class="title font-weight-bold mt-4" th:text="${blog.title}"></h3>
                             <ul class="admin-list mt-2 mb-4">
                                 <li><a href="blog-single.html">Eetey Cruis<i class="icon-user"></i>
                                     </a></li>
-                                <li><a th:href="@{'/site/product/detail/'+${blog.product.id}}" class=" primary-clr-bg"
+                                <li><a th:href="@{'/api/site/product/detail/'+${blog.product.id}}" class=" primary-clr-bg"
                                         th:text="${blog.product.name}"></a></i>
                                     </a></li>
                                 <li> <i class="icon-calendar"></i><a href="blog-single.html"
@@ -38,7 +37,7 @@
                                         <div class="list-view list-view1">
                                             <div class="grids5-info">
                                                 <a  class="d-block zoom"><img
-                                                        th:src="${img.name!=null?'/admin/blog/images/'+img.name:'/images/Background.png'}"
+                                                        th:src="${img.name!=null?'/api/images/'+img.name:'/images/Background.png'}"
                                                         class="img-fluid radius-image news-image"></a>
                                             </div>
                                         </div>

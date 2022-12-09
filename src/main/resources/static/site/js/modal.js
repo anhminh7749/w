@@ -12,10 +12,16 @@ var span = document.getElementsByClassName("close")[0];
 
 var closeaddres = document.getElementsByClassName("closeFormAddress")[0];
 
+const sussecraiting = document.getElementById('sussecraiting');
 
 if (showraitting) {
   span.onclick = function () {
     showraitting.style.display = "none";
+    const list = document.querySelectorAll('.star');
+    document.getElementById('textarearaiting').value = '';
+    for (i = 0; i < 5; i++) {
+      list[i].classList.remove('selected');
+    }
   };
 }
 
@@ -26,10 +32,21 @@ function showraiting(id, name, img) {
     url: "/api/user/orders/check/raitting?id=" + id,
     method: "GET",
     success: function (data) {
+      document.getElementById('orderdetailsid').value = id;
       document.getElementById('img-order').src = img;
       document.getElementById('name-order').innerText = name;
-      if (data.user) {
-
+      
+      if (data.point) {
+        document.getElementById('textarearaiting').value = data.comment;
+        const list = document.querySelectorAll('.star');
+        for (i = 0; i < data.point; i++) {
+          list[i].classList.add('selected');
+        }
+        document.getElementById('setDefault').style.pointerEvents = 'none';
+        document.getElementById("sussecraiting").style.display='none';
+      }else{
+        document.getElementById('setDefault').style.pointerEvents = 'unset';
+        document.getElementById("sussecraiting").style.display='block';
       }
     },
   });
@@ -48,6 +65,36 @@ if (details) {
       });
     });
   });
+}
+
+if (sussecraiting) {
+  sussecraiting.addEventListener('click', () => {
+    var raiting = {
+      "id": null,
+      "comment": document.getElementById('textarearaiting').value,
+      "point": document.querySelectorAll('.selected').length,
+      "active": null,
+      "createAt": null,
+      "users": null
+    }
+    console.log(document.getElementById('orderdetailsid').value);
+    $.ajax({
+      url: "/api/user/orders/create/raitting?id=" + document.getElementById('orderdetailsid').value,
+      method: "POST",
+      data: JSON.stringify(raiting),
+      dataType: "text",
+      contentType: "application/json",
+      success: function (data) {
+
+        swal({
+          title: 'Đã đánh giá sản phẩm thành công!',
+          type: 'success',
+          confirmButtonText: 'okay'
+        })
+        setTimeout(function(){ location.reload(); }, 1500);
+      },
+    });
+  })
 }
 
 if (modal) {
@@ -146,11 +193,10 @@ function updateAddress(id) {
 
 
 
-/* 1. Visualizing things on Hover - See next part for action on click */
-$('#stars li').on('mouseover', function () {
-  var onStar = parseInt($(this).data('value'), 10); // The star currently mouse on
 
-  // Now highlight all the stars that's not after the current hovered star
+$('#stars li').on('mouseover', function () {
+  var onStar = parseInt($(this).data('value'), 10);
+
   $(this).parent().children('li.star').each(function (e) {
     if (e < onStar) {
       $(this).addClass('hover');
@@ -166,7 +212,6 @@ $('#stars li').on('mouseover', function () {
 });
 
 
-/* 2. Action to perform on click */
 $('#stars li').on('click', function () {
   var onStar = parseInt($(this).data('value'), 10); // The star currently selected
   var stars = $(this).parent().children('li.star');
@@ -208,6 +253,5 @@ $('#stars li').on('click', function () {
 
 
 function responseMessage(msg) {
-  console.log(msg);
   document.getElementById('totalRaiting').innerText = msg;
 }

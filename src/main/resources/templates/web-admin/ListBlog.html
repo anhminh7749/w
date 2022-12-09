@@ -74,21 +74,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="label label-warning">in progress</span></td>
-                                    <td><span class="badge badge-warning">30%</span></td>
-                                    <td><span class="label label-success">completed</span></td>
-                                    <td><span class="badge badge-success">80%</span></td>
-                                    <td><span class="label label-danger">in progress</span></td>
-                                    <td><span class="badge badge-info">70%</span></td>
-                                </tr>
+                                
 
                                 <tr th:each="item, iStart:${blogPage}">
                                     <td scope="row" th:text="${item.Id}"></td>
-                                    <td><img class="tbl-list img-fluid" id="image"
-                                            th:src="${item.banner!=null?'/admin/blog/images/'+item.banner:'/images/Background.png'}"
+                                    <td><img class="tbl-list img-fluid" id="image" style="height: 100px;"
+                                            th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}"
                                             alt="edit"></td>
                                     <td th:text="${item.title}"></td>
                                        
@@ -99,8 +90,8 @@
                                             th:text="${item.Active==0?'ACTIVE':'INACTIVE'}"></span>
                                         </td>
                                         <td>
-                                            <a th:href="@{'/admin/blog/edit/' + ${item.Id}}"><i class="fa fa-pencil-square-o icon_del" aria-hidden="true"></i></a>
-                                            <a th:href="@{'/admin/blog/delete/' + ${item.Id}}"><i class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
+                                            <a th:href="@{'/api/admin/blog/edit/' + ${item.Id}}"><i class="fa fa-pencil-square-o icon_del" aria-hidden="true"></i></a>
+                                            <a th:href="@{'/api/admin/blog/delete/' + ${item.Id}}"><i class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
                                         </td>
                                       
                                       
@@ -115,18 +106,18 @@
                             <h5 class="avatar_left items" th:text="${blogPage.size}+'/'+${tt}"></h5>
                             <ul class="header-right pagination">
 								<li class="disabled" th:class="${1== blogPage.number+1} ? 'active':''">
-								<a th:href="@{/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${1})}" aria-label="Previous">
+								<a th:href="@{/api/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${1})}" aria-label="Previous">
 								<span aria-hidden="true">«</span></a></li>
 								
 								<li th:each="pageNum:${pageNums}"
 										th:if="${blogPage.totalPages>1}"
 										th:class="${pageNum==blogPage.number+1}?'page-item active':'page-item'"><a class="page-link"
-										th:href="@{/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${pageNum})}"
+										th:href="@{/api/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${pageNum})}"
 										th:text="${pageNum}"></a>
 									</li>
 								
 								<li th:class="${blogPage.totalPages== blogPage.number+1} ? 'active':''">
-                                <a th:href="@{/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${blogPage.totalPages})}" 
+                                <a th:href="@{/api/admin/blog/list-blog(name=${keyword}, size = ${blogPage.size}, page=${blogPage.totalPages})}" 
 								aria-label="Next"><span aria-hidden="true">»</span></a></li>
 							</ul>
 

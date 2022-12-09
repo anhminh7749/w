@@ -54,4 +54,7 @@ Page<Product> findByAllOrWhere(@Param("b") String id_cate, @Param("c") String id
 
 @Query(value = "SELECT count(p.id)  from product p where DATEDIFF(day,p.create_at, getdate()) >= 365",nativeQuery = true)
 Integer sumStockProduct();
+
+@Query(value = "SELECT count(p.id) from product p Join brand b on b.id = p.Brand_id where p.brand_id = :bid",nativeQuery = true)
+Integer countBrandProduct(@Param("bid") int id_brand);
 }

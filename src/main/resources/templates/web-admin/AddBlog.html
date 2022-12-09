@@ -21,7 +21,7 @@
 						</ol>
 					</div>
 				</div>
-				<form th:action="@{/admin/blog/update}" method="post" enctype="multipart/form-data" th:object="${blog}">
+				<form th:action="@{/api/admin/blog/update}" method="post" enctype="multipart/form-data" th:object="${blog}">
 
 					<input type="hidden" th:field="*{isEdit}">
 					<input hidden readonly="readonly" th:field="*{Id}">
@@ -38,7 +38,7 @@
 										onclick="changeContentThumbnail()" type="file" />
 									<i class="fa fa-plus-circle icon-add-image"></i>
 									<img class="chosen" th:field="*{banner}" id="chosen-thumbnail" alt="edit"
-										th:src="${blog.banner!=null?'/admin/blog/images/'+blog.banner:'/images/Background.png'}">
+										th:src="${blog.banner!=null?'/api/images/'+blog.banner:'/images/Background.png'}">
 									<a class="name-add-image" id="file-thumbnail">áº¢nh bÃ¬a</a>
 								</label>
 
@@ -51,43 +51,31 @@
 								</label>
 
 								<div id="pushImage">
-									<label class="custom-file-upload" th:if="${blog.isEdit}" th:each="img:${pushImage}">
+									<label class="d" th:if="${blog.isEdit}" th:each="img:${pushImage}">
 										<img class="chosen"
-											th:src="${img.name!=null?'/api/admin/blog/images/'+img.name:'/images/Background.png'}">
+											th:src="${img.name!=null?'/api/images/'+img.name:'/images/Background.png'}">
 									</label>
 								</div>
 
 
-								<label class="custom-file-upload" id="file-upload0">
-
-									<img class="chosen" id="chosen-image0">
-
-								</label>
-								<label class="custom-file-upload" id="file-upload1">
-
-									<img class="chosen" id="chosen-image1">
-
-								</label>
-								<label class="custom-file-upload" id="file-upload2">
-
-									<img class="chosen" id="chosen-image2">
-
-								</label>
-								<label class="custom-file-upload" id="file-upload3">
-
-									<img class="chosen" id="chosen-image3">
-
-								</label>
-								<label class="custom-file-upload" id="file-upload4">
-
-									<img class="chosen" id="chosen-image4">
-
-								</label>
-								<label class="custom-file-upload" id="file-upload5">
-
-									<img class="chosen" id="chosen-image5">
-
-								</label>
+								<label class="" id="file-upload0">
+									<img class="chosen" id="chosen-image0" />
+								  </label>
+								  <label class="" id="file-upload1">
+									<img class="chosen" id="chosen-image1" />
+								  </label>
+								  <label class="" id="file-upload2">
+									<img class="chosen" id="chosen-image2" />
+								  </label>
+								  <label class="" id="file-upload3">
+									<img class="chosen" id="chosen-image3" />
+								  </label>
+								  <label class="" id="file-upload4">
+									<img class="chosen" id="chosen-image4" />
+								  </label>
+								  <label class="" id="file-upload5">
+									<img class="chosen" id="chosen-image5" />
+								  </label>
 
 
 							</div>
@@ -161,7 +149,7 @@
 
 			</div>
 		</div>
-	</div>
+	
 
 </body>
 

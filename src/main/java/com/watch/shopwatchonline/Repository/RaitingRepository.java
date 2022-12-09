@@ -1,6 +1,7 @@
 package com.watch.shopwatchonline.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,4 +38,10 @@ Page<Raiting> findByActive(Short active, Pageable pageable);
 
     @Query(value = " SELECT AVG(point) FROM Raiting ", nativeQuery = true)
     Integer avgRaitting();
+
+    @Query(value = "SELECT * FROM Raiting  " +
+            "join users u on u.id = Raiting.user_id " +
+            "JOIN Order_Detail ON Order_Detail.raiting_Id = Raiting.id "+
+            "where Order_Detail.id=:id", nativeQuery = true)
+    Optional<Raiting> findByUserAndDetail(@Param("id") int id);
 }

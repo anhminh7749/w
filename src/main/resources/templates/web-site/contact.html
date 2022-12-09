@@ -10,51 +10,17 @@
 		<div class="men">
 			<div class="container">
 				<div class="grid_1">
-					<h1>Contact Info</h1>
-					<p>Duis autem vel eum iriure dolor in hendrerit in vulputate
-						velit esse molestie consequat, vel illum dolore eu feugiat nulla
-						facilisis at vero eros et accumsan et iusto odio dignissim qui
-						blandit praesent luptatum zzril delenit augue duis dolore te
-						feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend
-						option congue nihil imperdiet doming id quod mazim placerat facer
-						possim assum</p>
+					<h1>THÔNG TIN LIÊN HỆ</h1>
+					
 				</div>
-				<div class="grid_4">
-					<div class="grid_2 preffix_1">
-						<ul class="iphone">
-							<i class="phone"> </i>
-							<li class="phone_desc">Phone : +1 800 245 2365</li>
-							<div class="clearfix"></div>
-						</ul>
-						<ul class="iphone">
-							<i class="flag"> </i>
-							<li class="phone_desc">Website : <a href="mailto:mail@demolink.org">www.demolink.com</a>
-							</li>
-							<div class="clearfix"></div>
-						</ul>
-					</div>
-					<div class="grid_3">
-						<ul class="iphone">
-							<i class="msg"> </i>
-							<li class="phone_desc">Email : <a href="mailto:mail@demolink.org">mail(at)watches.com</a>
-							</li>
-							<div class="clearfix"></div>
-						</ul>
-						<ul class="iphone">
-							<i class="home"> </i>
-							<li class="phone_desc">Address : vel illum dolore eu feugiat
-								nulla</li>
-							<div class="clearfix"></div>
-						</ul>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="contact_form">
-					<h2>Feedback</h2>
-					<form class="com-mail" th:action="@{/site/mail/send}" method="post">
+				<div class="row"  style="    align-items: center;">
+				
+				<div class="contact_form col-8">
+					<h2>Phản hồi với chúng tôi</h2>
+					<form class="com-mail" th:action="@{/api/site/mail/send}" method="post">
 						<div class="col-ms-6 to">
 
-							<input type="text" class="form-control1 control3" name="gmail" placeholder="Mail :">
+							<input type="text" class="form-control1 control3" name="gmail" placeholder="Email :">
 
 							<input type="text" class="form-control1 control3" name="title" placeholder="Title :"> <br>
 
@@ -70,6 +36,39 @@
 						</div>
 					</form>
 				</div>
+				<div class="grid_4 col-4 ">
+					<div class="row">
+						<div class="">
+							<ul class="iphone" style="display: block;">
+								<i class="phone"> </i>
+								<li class="phone_desc">Số điện thoại : +1 800 245 2365</li>
+								<div class="clearfix"></div>
+							</ul>
+							<ul class="iphone" style="display: block;">
+								<i class="flag"> </i>
+								<li class="phone_desc">Website : <a href="mailto:mail@demolink.org">www.demolink.com</a>
+								</li>
+								<div class="clearfix"></div>
+							</ul>
+						</div>
+						<div class="">
+							<ul class="iphone" style="display: block;">
+								<i class="msg"> </i>
+								<li class="phone_desc">Email : <a href="mailto:mail@demolink.org">mail(at)watches.com</a>
+								</li>
+								<div class="clearfix"></div>
+							</ul>
+							<ul class="iphone" style="display: block;">
+								<i class="home"> </i>
+								<li class="phone_desc">Địa chỉ : vel illum dolore eu feugiat
+									nulla</li>
+								<div class="clearfix"></div>
+							</ul>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
 			</div>
 		</div>
 		<div class="map">

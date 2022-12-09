@@ -1,4 +1,4 @@
-package com.watch.shopwatchonline.Controller.Admin;
+package com.watch.shopwatchonline.Controller.Site;
 
 import java.util.Date;
 
@@ -24,7 +24,7 @@ import com.watch.shopwatchonline.Model.Mail;
 import com.watch.shopwatchonline.Repository.MailRepository;
 
 @Controller
-@RequestMapping("site/mail")
+@RequestMapping("/api/site/mail")
 public class MailComtroller {
     @Autowired
     JavaMailSender javaMailSender;
@@ -44,14 +44,12 @@ public class MailComtroller {
     	if(result.hasErrors()) {
             return new ModelAndView("web-site/contact");
         }
-    	System.out.println(result);
 		Mail entity = new Mail();
 		BeanUtils.copyProperties(dto, entity);
 		Date date = new Date();
 		entity.setCreateAt(date);
 		entity.setUpdateAt(date);
 		mailRepository.save(entity);
-		model.addAttribute("message", "Mail is saved!");
-		return new ModelAndView("redirect:/site/mail/form", model);
+		return new ModelAndView("redirect:/api/site/mail/form");
 	}
 }

@@ -9,114 +9,14 @@
 
   <body class="cbp-spmenu-push">
     <div layout:fragment="content">
-        <div id="page-wrapper">
-            <h2>Danh Sach Thương Hiệu</h2>
-            <div class="row">
-                <ol class="breadcrumb">
-                    <li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
-                    <li><a th:href="@{/api/admin/brands/}">Danh Sách</a></li>
-                    <li><a th:href="@{/api/admin/brands/add-brand}">Thêm Mới</a></li>
-                </ol>
-            </div>
-            <div class="form-inline my-2 my-lg-0 text-right">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							</div>
-
-            <div class="main-page">
-                <div class="tables">
-                    <div class="bs-example widget-shadow" data-example-id="hoverable-table">
-
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Ảnh</th>
-                                    <th>Tên</th>
-                                    <th>Mô Tỏa</th>
-                                    <th>Hoạt động</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each=" item : ${brands}">
-                                    <td><img th:src="'/api/admin/product/images/'+${item.thumbnail}"></td>
-                                    <td th:text="${item.name}">1</td>
-                                    <td th:text="${item.description}">1</td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#gridSystemModal"
-                                            th:attr="onclick=|showProfileBrand('${item.name}', '${item.thumbnail}','${item.description}')|"
-                                            class="fa fa-search"></a>
-                                        <div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="gridSystemModalLabel">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        <h4 class="modal-title text-center" id="gridSystemModalLabel">
-                                                            Thông Tin</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-
-
-                                                        <!-- Email input -->
-                                                        <div class="form-outline mb-4">
-                                                            <label class="form-label">Image:</label>
-                                                            <img th:src="'/api/admin/product/images/'+${item.thumbnail}" id="thumbnail">
-                                                        </div>
-                                                        
-                                                        <div class="form-outline mb-4">
-                                                            <label class="form-label">Name:</label>
-                                                            <input class="form-control" id="name" readonly />
-                                                        </div>
-
-                                                        <!-- Message input -->
-                                                        <div class="form-outline mb-4">
-                                                            <label class="form-label">Nội Dung:</label>
-                                                            <textarea class="form-control" id="description" readonly
-                                                                rows="4"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
-                                        </div> <!-- /.modal -->
-                                        <a th:href="@{'/api/admin/brands/edit/' + ${item.id}}" class="fa fa-edit"></a>
-                                        <a th:data-id="${item.id}" th:data-name="${item.name}"
-                                            onclick="DeleteSwal(this.getAttribute('data-id'),'brands')"
-                                            class="fa fa-trash-o"> </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-  <!--
-                        <div class="modal fade" id="confirmationId" tabindex="-1" role="dialog"
-                            aria-labelledby="modelTitleId" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirmation</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Bạn có muốn xóa không "<span id="mailName"></span>"?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a id="yesOption" type="button" class="btn btn-danger">Yes</a>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
--->
-                    </div>
-                </div>
-            </div>
+      <div id="page-wrapper">
+        <h2>Danh Sach Thương Hiệu</h2>
+        <div class="row">
+          <ol class="breadcrumb">
+            <li><a href="#">Trang Chủ</a></li>
+            <li><a href="#">Danh Sách</a></li>
+            <li><a href="#">Thêm Mới</a></li>
+          </ol>
         </div>
 
         <div class="main-page">
@@ -137,7 +37,10 @@
                 <tbody>
                   <tr th:each=" item : ${brands}">
                     <td th:text="${item.name}">1</td>
-                    <td th:text="${item.thumbnail}"></td>
+                    <td >
+                      <img class="tbl-list img-fluid"
+                        th:src="${item.thumbnail!=null?'/images/'+item.thumbnail:'/images/Background.png'}" />
+                    </td>
                     <td th:text="${item.description}">1</td>
                     <td>
                       <a

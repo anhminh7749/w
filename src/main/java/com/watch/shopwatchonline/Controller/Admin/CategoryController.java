@@ -25,7 +25,7 @@ import com.watch.shopwatchonline.Model.Category;
 import com.watch.shopwatchonline.Service.CategoryService;
 
 @Controller
-@RequestMapping("admin/categories")
+@RequestMapping("/api/admin/categories")
 public class CategoryController {
 
     @Autowired
@@ -84,7 +84,7 @@ public class CategoryController {
         return new ModelAndView("forward:/api/admin/categories", model);
     }
 
-    @RequestMapping("")
+    @GetMapping("")
     public String list(ModelMap model) {
         List<Category> list = categoryService.findAll();
 

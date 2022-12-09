@@ -93,7 +93,7 @@
                             <div class="_50XPwl">
                               <div class="shopee-image__wrapper">
                                 <img id="orderdetails__img"
-                                  class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2 img-fluid rounded float-start"
+                                  class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2 rounded float-start"
                                   th:src="${'/api/images/'+detail[iStart.index].product.thumbnail }" alt="" srcset="" />
                               </div>
                             </div>
@@ -156,12 +156,12 @@
                     </button>
                   </div>
                  <!-- th:attr="onclick=|showraiting('${detail[iStart.index].product.id}')|" -->
-                  <div th:if="!${detail[iStart.index].Raiting}"></div>
+                  <div th:if="!${detail[iStart.index].Raiting} and ${detail[0].orders.status == 3}" >
                   <button class="stardust-button stardust-button--secondary Kz9HeM" 
                   >
                     Đánh giá
                   </button>
-                  
+                </div>
                 </div>
               </div>
             </div>
@@ -176,10 +176,11 @@
                     Đánh giá sản phẩm
                   </h1>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="setDefault">
+                  <input hidden type="text" id="orderdetailsid">
                 <div class="hDGdsD" style="align-items: center;">
                   <div class="shopee-image__wrapper _50XPwl">
-                    <img id="img-order" src="" class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2 img-fluid rounded float-start">
+                    <img id="img-order" src="" class="shopee-image__content bd-placeholder-img flex-shrink-0 me-2  rounded float-start">
                   </div>
                   <div class="tODfT4 QJqUaT">
                     <span id="name-order" class="WVc4Oc"></span>
@@ -213,11 +214,11 @@
                   </div>
                 </div>
                 <div class="">
-                  <textarea name="" id="" cols="88" rows="7"></textarea>
+                  <textarea name="" id="textarearaiting" cols="88" rows="7"></textarea>
                 </div>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer" id="modal-footer">
                   <button type="button" class="btn btn-secondary">
                     <span class="close" id="closeModels">Đóng</span>
                   </button>

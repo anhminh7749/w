@@ -80,7 +80,7 @@
                   </h1>
                 </div>
                 <div class="modal-body">
-                  <div class="listaddress" th:each="item, iStart:${listaddress}">
+                  <div class="listaddress" th:if="${listaddress != null} " th:each="item, iStart:${listaddress}">
                     <input type="radio" name="abcs"
                       th:attr="onclick=|setaddress('${item.id}','${item.name}', '${item.phone}','${item.specificAddress}','${item.address}')|"
                       required />

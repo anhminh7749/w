@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
+    <style>
+
+    </style>
 </head>
 
 <body th:fragment="banner">
@@ -15,25 +18,32 @@
                 </div>
                 <div class="header_top_right">
                     <div class="lang_list">
-                        <div class="dropdown"><span class="old"><select tabindex="4" class="" id="EasyDropDown57549B">
-                                    <option value="" class="label">$ Us</option>
-                                    <option value="1">Dollar</option>
-                                    <option value="2">Euro</option>
-                                </select></span><span class="selected">$ Us</span><span class="carat"></span>
-                            <div>
-                                <ul>
-                                    <li>Dollar</li>
-                                    <li>Euro</li>
-                                </ul>
-                            </div>
-                        </div>
+
                     </div>
-                    <ul class="header_user_info">
-                        <a class="login" href="login.html">
+                    <ul class="header_user_info" style="display: contents;">
+                        <a class="login" href="/api/user/profile/info" style="font-size: larger;">
                             <i class="user"> </i>
-                            <li class="user_desc">My Account</li>
+                            <li class="user_desc">My Account
+                                <ul>
+                                    <div id="loginIsFalse">
+                                        <li><a href="/api/auth/site/login">Đăng Nhập</a></li>
+                                        <li><a href="/api/auth/site/register">Đăng ký</a></li>
+                                        <li><a href="/api/user/forgot-password">Quên mật khẩu</a></li>
+                                    </div>
+                                    <div id="loginIsTrue">
+                                        <li><a href="/api/user/profile/info">Hồ sơ</a></li>
+                                        <li><a href="/api/user/orders">Đơn hàng</a></li>
+                                        <li>
+                                            <a style="color: #fff;" onclick="logout()">Đăng xuất</a>
+                                            <!-- <form th:action="@{/api/auth/signout}" method="post">
+                                                <input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+                                            </form> -->
+                                            
+                                        </li>
+                                    </div>
+                                </ul>
+                            </li>
                         </a>
-                        <div class="clearfix"> </div>
                     </ul>
                     <!-- start search-->
                     <div class="search-box">
@@ -61,9 +71,9 @@
                     <div class="listcate">
                         <a href="/api/site/product">SẢN PHẨM</a>
                         <a href="/api/site/blog">TIN TỨC</a>
-                        <a href="">PHẢN HỒI</a>
+                        <a href="/api/site/mail/form">PHẢN HỒI</a>
                         <a href="">GIỚI THIỆU</a>
-                        <a href="">THƯƠNG HIỆU</a>
+                        <a href="/api/site/brands">THƯƠNG HIỆU</a>
                     </div>
 
                 </div>
