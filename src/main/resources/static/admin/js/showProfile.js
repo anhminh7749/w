@@ -18,7 +18,7 @@ function showProfileBlog(ig, name, td, tt) {
 	console.log(ig, name, td, tt);
 	document.getElementById("banner").value = ig;
 
-	document.getElementById("name").value = name;
+	document.getElementById("product.name").value = name;
 
 	document.getElementById("title").value = td;
 

@@ -80,18 +80,18 @@
                             <h5 class="avatar_left items" th:text="${raitingPage.size}+'/'+${tt}"></h5>
                             <ul class="header-right pagination">
 								<li class="disabled" th:class="${1== raitingPage.number+1} ? 'active':''">
-								<a th:href="@{/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${1})}" aria-label="Previous">
+								<a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${1})}" aria-label="Previous">
 								<span aria-hidden="true">«</span></a></li>
 								
 								<li th:each="pageNum:${pageNums}"
 										th:if="${raitingPage.totalPages>1}"
 										th:class="${pageNum==raitingPage.number+1}?'page-item active':'page-item'"><a class="page-link"
-										th:href="@{/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${pageNum})}"
+										th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${pageNum})}"
 										th:text="${pageNum}"></a>
 									</li>
 								
 								<li th:class="${raitingPage.totalPages== raitingPage.number+1} ? 'active':''">
-                                <a th:href="@{/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${raitingPage.totalPages})}" 
+                                <a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${raitingPage.totalPages})}" 
 								aria-label="Next"><span aria-hidden="true">»</span></a></li>
 							</ul>
 

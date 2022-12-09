@@ -21,7 +21,7 @@
 						</ol>
 					</div>
 				</div>
-				<form th:action="@{/admin/blog/update}" method="post" enctype="multipart/form-data" th:object="${blog}">
+				<form th:action="@{/api/admin/blog/update}" method="post" enctype="multipart/form-data" th:object="${blog}">
 
 					<input type="hidden" th:field="*{isEdit}">
 					<input hidden readonly="readonly" th:field="*{Id}">
