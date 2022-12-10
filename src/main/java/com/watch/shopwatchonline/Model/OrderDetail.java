@@ -46,5 +46,5 @@ public class OrderDetail implements Serializable {
 
      @OneToOne 
     @JoinColumn(name = "raitingId") 
-    private Raiting Raiting;
+    private Raiting Raitings;
 }

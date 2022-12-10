@@ -72,8 +72,8 @@ public class OrderUserController {
     Raiting raiting = new Raiting();
     Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
     if (detail.isPresent()) {
-      if (detail.get().getRaiting() != null) {
-        raiting = raitingRepository.findById(detail.get().getRaiting().getId()).get();
+      if (detail.get().getRaitings() != null) {
+        raiting = raitingRepository.findById(detail.get().getRaitings().getId()).get();
       }
     } 
     raiting.setUsers(null);
@@ -100,7 +100,7 @@ public class OrderUserController {
     
     raitingRepository.save(raiting);
     Optional<OrderDetail> detail = detailRepository.findById(Integer.parseInt(id));
-    detail.get().setRaiting(raiting);
+    detail.get().setRaitings(raiting);
     detailRepository.save(detail.get());
   }
 

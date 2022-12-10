@@ -53,8 +53,12 @@ function Login() {
         UserName = document.getElementById("username").value;
         sessionStorage.setItem("UserName", UserName);
         swal("Đăng nhập thành công!", "", "success");
-        const url =window.location.hostname+response.responseText;
-        console.log(url);
+        let url='';
+        if(window.location.hostname=='localhost'){
+         url = 'http://localhost:8080'+response.responseText;
+        }else{
+         url = 'http://'+window.location.hostname+response.responseText;
+        }
         setTimeout(function(){ window.location = url }, 1500);
       }
 

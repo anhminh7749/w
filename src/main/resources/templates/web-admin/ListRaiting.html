@@ -47,24 +47,23 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>                                    
-                                    <th>name sp</th>
-                                    <th>name user</th>
-                                    <th>cmt</th>
-                                    <th>pont</th>
-                                    <th>date</th>
-                                    
+                                    <th>Tên sản phẩm</th>
+                                    <th>Người đánh giá</th>
+                                    <th>Nội dung</th>
+                                    <th>Số sao</th>
+                                    <th>Ngày đánh giá</th>                
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="item, iStart:${raitingPage}">
-                                <td th:text="${item.product.Name}"></td>
+                                <td th:text="${item.orderDetails.Product.name}"></td>
                                 <td th:text="${item.users.username}"></td>
 								<td th:text="${item.comment}"></td>
                                 <td th:text="${item.point}"></td>
 								<td th:text="${item.createAt}"></td>
                                 <td>              
-                                    <a th:href="@{'/api/admin/raiting/check/'+${item.Id}}"><i class="fa fa-check icon_del" ></i></a>
+                                    <a th:if="${item.active==0}" th:href="@{'/api/admin/raiting/check/'+${item.Id}}"><i class="fa fa-check icon_del" ></i></a>
                                     <a><i class="fa fa-exclamation-circle icon_del" ></i></a>
                                     <a th:href="@{'/api/admin/raiting/delete/' + ${item.Id}}"><i class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
                                     

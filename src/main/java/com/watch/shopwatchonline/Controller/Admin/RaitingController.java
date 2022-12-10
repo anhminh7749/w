@@ -143,10 +143,10 @@ public class RaitingController {
             BeanUtils.copyProperties(entity, r);
             r.setActive((short) 1);
             raitingRepository.save(r);
-            return "/list-waiting";
+            return "redirect:/api/admin/raiting/list-waiting";
         }
 
-        return"/list-check";
+        return"redirect:/api/admin/raiting/list-check";
     }
 
     @GetMapping("delete/{Id}")
