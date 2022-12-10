@@ -113,7 +113,7 @@ public class BrandController {
 		return new ModelAndView("forward:/api/admin/brands", model);
 	}
 
-	@GetMapping("")
+	@RequestMapping("")
 	public String list(ModelMap model) {
 		List<Brand> list = brandService.findAll();
 

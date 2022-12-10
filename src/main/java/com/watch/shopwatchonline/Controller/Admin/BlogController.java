@@ -195,10 +195,10 @@ public class BlogController {
 				.body(file);
 	}
 	
-	  @GetMapping("/delete")
-	    public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
-	        blogService.deleteById(Integer.parseInt(id));
-	        return new ModelAndView("forward:/api/admin/blog/list-blog");
+	  @GetMapping("/delete/{Id}")
+	    public  ModelAndView delete(@PathVariable(name = "Id") Integer id) {
+	        blogService.deleteById(id);
+	        return new ModelAndView("redirect:/api/admin/blog/list-blog");
 	    }
 
 	@GetMapping("edit/{Id}")

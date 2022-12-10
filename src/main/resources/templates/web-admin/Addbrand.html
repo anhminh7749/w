@@ -1,134 +1,112 @@
-<!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{web-admin/layout}"
->
-  <head> </head>
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{web-admin/layout}">
 
-  <body class="cbp-spmenu-push">
-    <div layout:fragment="content">
-      <div id="page-wrapper">
-        <div class="main-page">
-          <div class="tables">
-            <div class="table-responsive bs-example widget-shadow">
-              <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                  <label class="nav-item active">
-                    <h4>Thêm Mới Thương Hiệu:</h4>
-                  </label>
-                </ul>
+<head>
 
-                <div class="form-inline my-2 my-lg-0 text-right">
-                  <a th:href="@{/api/admin/brands/}" class="btn btn-success"
-                    >ListStaff</a
-                  >
-                </div>
-              </div>
-              <div class="form-three widget-shadow">
-                <div class="panel-body-inputin">
-                  <form
-                    class="form-horizontal"
-                    th:action="@{/api/admin/brands/saveOrUpdate}"
-                    method="post"
-                    th:object="${brand}"
-                  >
-                    <input type="hidden" th:filed="*{isEdit}" />
-                    <input type="text" hidden th:field="*{id}" />
-                    <div
-                      class="form-group"
-                      th:classappend="${#fields.hasErrors('name')} ? 'has-error'"
-                    >
-                      <label class="col-md-2 control-label"
-                        >Tên Thương Hiệu:</label
-                      >
-                      <div class="col-md-8">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                          </span>
-                          <input
-                            type="text"
-                            class="form-control1"
-                            th:field="*{name}"
-                            placeholder="Name"
-                          />
-                        </div>
-                        <small
-                          th:if="${#fields.hasErrors('name')}"
-                          id="customerIdHid"
-                          class="form-text text-muted help-block"
-                          th:errors="*{name}"
-                        >
-                        </small>
-                      </div>
-                    </div>
-                    <div
-                      class="form-group"
-                      th:classappend="${#fields.hasErrors('thumbnail')} ? 'has-error'"
-                    >
-                      <label class="col-md-2 control-label">Ảnh:</label>
-                      <div class="col-md-8">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                          </span>
-                          <input
-                            type="text"
-                            class="form-control1"
-                            th:field="*{thumbnail}"
-                            placeholder="Ảnh"
-                          />
-                        </div>
-                        <small
-                          th:if="${#fields.hasErrors('thumbnail')}"
-                          id="customerIdHid"
-                          class="form-text text-muted help-block"
-                          th:errors="*{thumbnail}"
-                        >
-                        </small>
-                      </div>
-                    </div>
-                    <div
-                      class="form-group"
-                      th:classappend="${#fields.hasErrors('description')} ? 'has-error'"
-                    >
-                      <label class="col-md-2 control-label">Mô Tả:</label>
-                      <div class="col-md-8">
-                        <div class="input-group">
-                          <span class="input-group-addon">
-                            <i class="fa fa-user"></i>
-                          </span>
-                          <input
-                            type="text"
-                            class="form-control1"
-                            th:field="*{description}"
-                            placeholder="Nội dung"
-                          />
-                        </div>
-                        <small
-                          th:if="${#fields.hasErrors('description')}"
-                          id="customerIdHid"
-                          class="form-text text-muted help-block"
-                          th:errors="*{description}"
-                        >
-                        </small>
-                      </div>
-                    </div>
-                    <div class="card-footer text-center">
-                      <button class="btn btn-primary">
-                        <span th:if="${brand.isEdit}">Cập Nhật</span>
-                        <span th:unless="${brand.isEdit}">Thêm</span>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+</head>
+
+<body class="cbp-spmenu-push men_banner">
+	<div layout:fragment="content">
+		<div id="page-wrapper">
+			<h2>Danh Sach Thương Hiệu</h2>
+            <div class="row">
+                <ol class="breadcrumb">
+                    <li><a th:href="@{/api/admin}">Trang Chủ</a></li>
+                    <li><a th:href="@{/api/admin/brands/}">Danh Sách</a></li>
+                    <li><a th:href="@{/api/admin/brands/add-brand}">Thêm Mới</a></li>
+                </ol>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+            <div class="form-inline my-2 my-lg-0 text-right">
+								<input class="form-control mr-sm-2" type="search" placeholder="Search"
+									aria-label="Search">
+								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+							</div>
+				<div class="tables">
+					<div class="table-responsive bs-example widget-shadow">
+
+						<div class="collapse navbar-collapse">
+
+							<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+								<label class="nav-item active">
+									<h4>Thêm Mới Thương Hiệu:</h4>
+								</label>
+							</ul>
+
+							<div class="form-inline my-2 my-lg-0 text-right">
+								<a th:href="@{/api/admin/brands/}" class="btn btn-success">ListStaff</a>
+							</div>
+						</div>
+						<div class="form-three widget-shadow">
+							<div class=" panel-body-inputin">
+								<form class="form-horizontal" th:action="@{/api/admin/brands/saveOrUpdate}"
+								enctype="multipart/form-data"	method="post" th:object="${brand}">
+									<input type="hidden" th:filed="*{isEdit}"> <input type="text" hidden
+										th:field="*{id}">
+									<div class="row">
+										<div class="col-md-5">
+											<label class="custom-file-upload1">
+												<input id="upload-button-thumbnail" name="imageFile"
+													onclick="changeContentThumbnail()" type="file" />
+												<a class="name-add-image11">Ảnh</a>
+												<i class="faa fa-plus-circle icon-add-image"></i>
+												</i>
+												<img class="" th:field="*{thumbnail}" id="chosen-thumbnail" alt="edit" style="width: 330px;"
+													th:src="${brand.thumbnail!=null?'/api/admin/product/images/'+brand.thumbnail:'/images/Background.png'}">
+											
+													<small th:if="${#fields.hasErrors('thumbnail')}" id="customerIdHid"
+														class="form-text text-muted help-block" th:errors="*{thumbnail}">
+													</small>
+												</label>
+										</div>
+										<div class="col-md-7">
+											<div class="form-group has-success has-feedback"
+												th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
+												<label class="col-md-2 control-label">Tên Thương Hiệu:</label>
+												<div class="col-md-8">
+													<div class="input-group">
+														<span class="input-group-addon"> <i class="fa fa-user"></i>
+														</span> <input type="text" class="form-control1"
+															th:field="*{name}" placeholder="Name">
+													</div>
+													<small th:if="${#fields.hasErrors('name')}" id="customerIdHid"
+														class="form-text text-muted help-block" th:errors="*{name}">
+													</small>
+												</div>
+											</div>
+
+											<div class="form-group has-success has-feedback"
+												th:classappend="${#fields.hasErrors('description')} ? 'has-error'">
+												<label class="col-md-2 control-label">Mô Tả:</label>
+												<div class="col-md-8">
+													<div class="input-group">
+														<span class="input-group-addon"> <i class="fa fa-user"></i>
+														</span> <input type="text" class="form-control1"
+															th:field="*{description}" placeholder="Nội dung">
+													</div>
+													<small th:if="${#fields.hasErrors('description')}"
+														id="customerIdHid" class="form-text text-muted help-block"
+														th:errors="*{description}"> </small>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="card-footer text-center">
+										<button class="btn btn-primary">
+											<span th:if="${brand.isEdit}">Cập Nhật</span> <span
+												th:unless="${brand.isEdit}">Thêm</span>
+										</button>
+
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+</body>
+
 </html>

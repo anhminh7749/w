@@ -89,7 +89,7 @@ public class StaffController {
         return new ModelAndView("forward:/api/admin/staffs");
     }
 
-    @GetMapping("")
+    @RequestMapping("")
     public String list(ModelMap model) {
         List<Staff> list = staffService.findAll();
 
