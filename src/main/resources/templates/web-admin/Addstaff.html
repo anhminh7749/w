@@ -11,7 +11,7 @@
 		<div id="page-wrapper">
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
+                    <li><a th:href="@{/api/admin}">Trang Chủ</a></li>
                     <li><a th:href="@{/api/admin/staffs/}">Danh Sách</a></li>
                     <li><a th:href="@{/api/admin/staffs/add-staff}">Thêm Mới</a></li>
                 </ol>
@@ -126,7 +126,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-money"></i>
-														</span> <input type="number" class="form-control"
+														</span> <input type="number" class="form-control" style="padding: 10px;"
 															th:field="*{luong}" placeholder="Luong">
 													</div>
 													<small th:if="${#fields.hasErrors('luong')}" id="customerIdHid"
@@ -140,7 +140,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-calendar"></i>
-														</span> <input type="date" class="form-control"
+														</span> <input type="date" class="form-control" style="padding: 10px;"
 															th:field="*{ngayBD}" placeholder="dd/mm/yyyy">
 													</div>
 													<small th:if="${#fields.hasErrors('ngayBD')}" id="customerIdHid"

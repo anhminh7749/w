@@ -27,7 +27,7 @@
 						</div>
 						<div class="form-three widget-shadow">
 							<div class=" panel-body-inputin">
-								<form class="form-horizontal" th:action="@{/admin/contacs/send}" method="post"
+								<form class="form-horizontal" th:action="@{/api/admin/contacs/send}" method="post"
 									th:object="${mail}">
 									<input type="hidden" th:filed="*{isEdit}"> <input type="text" hidden
 										th:field="*{mailId}">

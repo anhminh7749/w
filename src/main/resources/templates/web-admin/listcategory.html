@@ -11,7 +11,7 @@
 	<div layout:fragment="content">
 		<div id="page-wrapper">
 			<h2>Danh Sach Loại</h2>
-			<div class="row">
+			<div class="row"> 
 				<ol class="breadcrumb">
 					<li><a href="#">Trang Chủ</a></li>
 					<li><a href="#">Danh Sách</a></li>
@@ -66,8 +66,8 @@
 										<a th:href="@{'/api/admin/categories/edit/' + ${item.id}}" class="fa fa-edit"></a>
 
 										<a th:data-id="${item.id}" th:data-name="${item.name}"
-											onclick="showConfirmModelDialogCategory(this.getAttribute('data-id'), this.getAttribute('data-name'))"
-											class="fa fa-trash-o"> </a>
+										onclick="DeleteSwal(this.getAttribute('data-id'),'categories')"	 
+										class="fa fa-trash-o"> </a>
 									</td>
 								</tr>
 							</tbody>
