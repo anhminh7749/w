@@ -30,7 +30,7 @@ function logout() {
     swal("Đã đăng xuất!", "Bạn sẽ được chuyển hướng đến trang chủ", "success");
     sessionStorage.removeItem("UserName");
     
-    setTimeout(function(){ window.location = 'http://localhost:8080/api/site' }, 1500);    
+    setTimeout(function(){ window.location = '/api/site' }, 1500);    
   });
   
 }
@@ -194,6 +194,7 @@ if (checkdiscountcode) {
           swal("", "Áp dụng mã Thành công!", "success");
 
           countcode.innerHTML = response;
+          updatetotal();
         }
       },
       error: function (response) {
@@ -210,7 +211,7 @@ if (checkout) {
         $.ajax({
           type: "POST",
           contentType: "application/json; charset=utf-8",
-          url: "http://localhost:8080/cart/save?addressId=" +
+          url: "/cart/save?addressId=" +
             addressId.value +
             "&discountcode=" +
             discountcode.value,

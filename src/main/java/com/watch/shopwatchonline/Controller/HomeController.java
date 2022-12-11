@@ -97,8 +97,13 @@ public class HomeController {
     return "web-admin/login";
   }
 
+  @GetMapping("/abcabc")
+  public String allAccs() {
+    return "web-site/index1";
+  }
+
   @GetMapping("/site/brands")
-  public String brands(Model model,@RequestParam("page") Optional<Integer> page) {
+  public String brands(Model model, @RequestParam("page") Optional<Integer> page) {
     int pages = page.orElse(1);
     Pageable pageable = PageRequest.of(pages, 6);
     List<Brand> brands = brandRepository.findAll();
@@ -108,14 +113,38 @@ public class HomeController {
       BeanUtils.copyProperties(brand, brandDto);
       brandDto.setCountBrandProduct(productRepository.countBrandProduct(brand.getId()));
       cnst.add(brandDto);
-System.out.println(brandDto);
+      System.out.println(brandDto);
     }
 
     model.addAttribute("brands", cnst);
     return "web-site/brands";
   }
+
+  @GetMapping("/admin/staticyear")
+  public @ResponseBody List<Statistics> chart() {
+    List<String> s = orderRepository.statisticyear();
+    String[] words = null;
+    List<Statistics> list = new ArrayList<>();
+    for (int i = 0; i < s.size(); i++) {
+      Statistics statistics = new Statistics();
+
+      words = s.get(i).split("\\,");
+
+      statistics.setStartyear(words[0]);
+      statistics.setValue(words[1]);
+
+      list.add(statistics);
+    }
+    return list;
+  }
+
   @GetMapping("/admin")
   public String main(Model model) {
+    // List<Statistics> list = new ArrayList<>();
+    // for (Statistics statistics : orderRepository.statistics()) {
+    // System.out.println(statistics);
+    // }
+
     model.addAttribute("countUsers", userRepository.countUsers());
     model.addAttribute("countOrders30", orderRepository.countOrders30());
     model.addAttribute("sumStockProduct", productRepository.sumStockProduct());
@@ -131,6 +160,7 @@ System.out.println(brandDto);
   public String viewmain() {
     return "web-site/main";
   }
+
   @GetMapping("/auth/site/login")
   public String all() {
     return "web-site/login";
@@ -191,55 +221,54 @@ System.out.println(brandDto);
 
     // }
 
-    List<Statistics> statistics = new ArrayList<>();
-    String list = orderRepository.statisticyear();
+    // List<Statistics> statistics = new ArrayList<>();
+    // String list = orderRepository.statisticyear();
 
-    String[] splits = list.split(",");
-    Statistics s = new Statistics();
-    for (String item : splits) {
+    // String[] splits = list.split(",");
+    // Statistics s = new Statistics();
+    // for (String item : splits) {
 
-      s.setStartyear(item);
-      statistics.add(s);
-      System.out.print(item);
-      System.out.println(s);
-    }
+    // s.setStartyear(item);
+    // statistics.add(s);
+    // System.out.print(item);
+    // System.out.println(s);
+    // }
 
     return ResponseEntity.ok().body(null);
   }
 
-  
-
   @GetMapping("/product/getInfo")
   public @ResponseBody Product getProduct(@RequestBody @RequestParam(name = "id") int id) {
-Optional<Product> product = productRepository.findById(id);
-product.get().setBrand(null);
-product.get().setCategory(null);
-product.get().setWishlists(null);
-product.get().setBlogs(null);
-product.get().setOrderDetails(null);
-return product.get();
+    Optional<Product> product = productRepository.findById(id);
+    product.get().setBrand(null);
+    product.get().setCategory(null);
+    product.get().setWishlists(null);
+    product.get().setBlogs(null);
+    product.get().setOrderDetails(null);
+    return product.get();
   }
 
-  // public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest request) {
+  // public List<OrderDto> getTotalPriceAndQuantityWithUser(HttpServletRequest
+  // request) {
 
-  //   Optional<User> user = userRepository.findByUsername(utils.getUser(request));
-  //   List<Order> orders = orderRepository.FindbyUserName(user.get().getId());
-  //   List<OrderDto> ordersDto = new ArrayList<>();
-  //   for (Order order : orders) {
-  //     OrderDto dto = new OrderDto();
-  //     BeanUtils.copyProperties(order, dto);
-  //     float total = 0;
-  //     int quantity = 0;
-  //     List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
-  //     for (OrderDetail detail : details) {
-  //       total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
-  //       quantity += detail.getQuantity();
-  //       dto.setTotalAmount(total);
-  //       dto.setTotalQuantity(quantity);
-  //     }
-  //     ordersDto.add(dto);
-  //   }
-  //   return ordersDto;
+  // Optional<User> user = userRepository.findByUsername(utils.getUser(request));
+  // List<Order> orders = orderRepository.FindbyUserName(user.get().getId());
+  // List<OrderDto> ordersDto = new ArrayList<>();
+  // for (Order order : orders) {
+  // OrderDto dto = new OrderDto();
+  // BeanUtils.copyProperties(order, dto);
+  // float total = 0;
+  // int quantity = 0;
+  // List<OrderDetail> details = detailRepository.FindByOrder(order.getId());
+  // for (OrderDetail detail : details) {
+  // total += (detail.getPrice() - detail.getDiscount()) * detail.getQuantity();
+  // quantity += detail.getQuantity();
+  // dto.setTotalAmount(total);
+  // dto.setTotalQuantity(quantity);
+  // }
+  // ordersDto.add(dto);
+  // }
+  // return ordersDto;
   // }
 
   @GetMapping("/chatbox")
@@ -259,7 +288,7 @@ return product.get();
 
     Address address = new Address();
     BeanUtils.copyProperties(dto, address);
-System.out.println(address);
+    System.out.println(address);
     Optional<User> user = userRepository.findByUsername(utils.getUser(request));
     address.setUsers(user.get());
 
@@ -280,10 +309,10 @@ System.out.println(address);
     List<Address> address = new ArrayList<>();
     if (utils.getUser(request) != null) {
       Optional<User> user = userRepository.findByUsername(utils.getUser(request));
-    address = addressRepository.findbyuser(user.get().getId());
+      address = addressRepository.findbyuser(user.get().getId());
     }
-      model.addAttribute("listaddress", address);
-    
+    model.addAttribute("listaddress", address);
+
     return "web-site/checkout";
   }
 

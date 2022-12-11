@@ -107,7 +107,6 @@ public class getLocalStorage {
   }
 
   @RequestMapping(value = "/cart/save", method = RequestMethod.POST)
-
   public ResponseEntity<?> saveOrUpdateCompany(
       @RequestBody String cart,
       @RequestParam(name = "discountcode", required = false) String code,

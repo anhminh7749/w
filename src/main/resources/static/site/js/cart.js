@@ -4,6 +4,11 @@ const onchangepage = document.querySelector("#shoppingcart");
 
 let usernameshop = sessionStorage.getItem("UserName");
 
+function updatetotal(){
+    console.log();
+    document.getElementById('total_price').innerText = shoptotalCost.innerText - countcode.innerText;
+}
+
 // assign all values from local stoarge
 let shopCartItems = (JSON.parse(localStorage.getItem(usernameshop)) || []);
 
@@ -76,6 +81,7 @@ function shopcalculateTotal() {
     });
 
     shoptotalCost.innerHTML = total;
+    updatetotal();
 }
 
 function shopsaveToLocalStorage() {

@@ -177,7 +177,7 @@ public List<Category> getCategoryDtos(){
 
         if (result.hasErrors()) {
        
-        return new ModelAndView("admin/product/AddProduct");
+        return new ModelAndView("/api/admin/product/AddProduct");
         }
         if(!dto.getIsEdit()) {
        dto.setCreateAt(new Date());
@@ -218,7 +218,7 @@ public List<Category> getCategoryDtos(){
 
 
 
-            return new ModelAndView("redirect:/admin/product/list-product");
+            return new ModelAndView("redirect:/api/admin/product/list-product");
             }
 
 
@@ -259,7 +259,7 @@ public List<Category> getCategoryDtos(){
             public String delete(ModelMap map, @PathVariable("Id") Integer id) {
             ProductService.deleteById(id);
 
-            return "redirect:/admin/product/list-product";
+            return "redirect:/api/admin/product/list-product";
             }
 
     @GetMapping("edit/{productId}")

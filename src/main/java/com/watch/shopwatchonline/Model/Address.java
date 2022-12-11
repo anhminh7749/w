@@ -43,8 +43,9 @@ public class Address implements Serializable{
     private String name;
 
     private String phone;
-
+@Column( columnDefinition = "nvarchar(100) not null")
     private String address;
+    @Column( columnDefinition = "nvarchar(100) not null")
     private String specificAddress;
     private Short status;
     @Column

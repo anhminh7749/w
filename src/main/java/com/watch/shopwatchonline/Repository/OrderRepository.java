@@ -48,10 +48,9 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
         Integer countOrders();
 
         @Query(value = "SELECT * FROM [dbo].[statisticyear] ()", nativeQuery = true)
-        List<Statistics> statistics(@Param("date") String date, @Param("value") String value,
-                        @Param("keyword") String where, @Param("group") String group);
+        List<Statistics> statistics();
 
         @Query(value = "SELECT * FROM [dbo].[statisticyear] ()", nativeQuery = true)
-        String statisticyear();
+        List<String> statisticyear();
 
 }
