@@ -4,40 +4,69 @@
 <head>
 </head>
 
-<body th:fragment="add">
-    <div class="container">
+<body th:fragment="add" >
+    <div class="container" >
 
         <form id="address_form" th:action="@{/api/address/up}" method="post" th:object="${address}">
             <input type="hidden" name="redirect" id="redirect">
 
             <fieldset>
-                <legend class="section-title aits">Your Information</legend>
+                <legend class="section-title aits">Thông tin của bạn</legend>
 
                 <div class="section agileinfo row">
 
                     <div class="form-group wthree col-md-6">
-                        <label class="control-label" for="first-name-1">Name</label>
+                        <label class="control-label" for="first-name-1">Tên gọi</label>
                         <input class="form-control" id="first-name-1" name="name" value="" type="text"
                             maxlength="50" required>
                     </div>
 
                     <div class="form-group agileits-w3layouts col-md-6">
-                        <label class="control-label" for="phone"> Phone</label>
+                        <label class="control-label" for="phone"> Số điện thoại</label>
                         <input class="form-control" id="phone" name="phone" value="" type="tel" maxlength="25"
                             required />
                     </div>
 
                 </div>
                 <div class="section w3-agileits">
-                    <fieldset>
-                        <legend>Address</legend>
-                        <div class="form-group">
-                            <label class="control-label" for="street-address">Address </label>
-                            <input class="form-control" id="street-address" name="address" value="" type="text"
+                    <fieldset style="position: relative;">
+                        <legend>Địa chỉ</legend>
+                        <div class="form-group" id="clickoutsite" >
+                            <label class="control-label" for="street-address">Địa chỉ </label>
+                            <input class="form-control" onclick="showchoiseAdd()" id="street-address" name="address" value="" type="text"
                                 maxlength="200">
+                                <div id="selectedAddress">
+                                    <div class="main">
+                                      <main>
+                                        <input id="tab1" type="radio" name="tabs" checked>
+                                        <label for="tab1" >Tỉnh - Thành phố</label>
+                                
+                                        <input id="tab2" disabled type="radio" name="tabs">
+                                        <label for="tab2" >Quận - Huyện</label>
+                                
+                                        <input id="tab3" disabled type="radio" name="tabs">
+                                        <label for="tab3">Phường - Xã</label>
+                                
+                                        <section id="content1">
+                                          <select id="list-tinh-tp"  onchange="changelistquan()"> </select>
+                                        </section>
+                                
+                                        <section id="content2">
+                                          <select id="list-quan-huyen" onchange="changequan()"></select>
+                                        </section>
+                                
+                                        <section id="content3">
+                                          <select id="list-xa-phuong" onchange="listxaphuong()"></select>
+                                        </section>
+                                
+                                
+                                      </main>
+                                    </div>
+                                  </div>
                         </div>
+                        
                         <div class="form-group">
-                            <label class="control-label" for="city">specific address</label>
+                            <label class="control-label" for="city">Địa chỉ chi tiết</label>
                             <input class="form-control" id="city" name="specificAddress" value="" type="text"
                                 maxlength="50">
                         </div>
@@ -47,18 +76,20 @@
                 <div class="section">
                     <fieldset>
                         <fieldset>
-                            <legend>Default Address</legend>
+                            <legend>Thiết lập mặc định</legend>
                             <label for="yes" class="radio-inline">
-                                <input type="radio" id="yes" value="1" name="status" required> Yes
+                                <input type="radio" id="yes" value="1" name="status" required> Có
                             </label>
-                            <label for="no" class="radio-inline wthree">
-                                <input type="radio" value="0" id="no" name="status"> No
+                            <label for="no" class="radio-inline wthree" style="margin-left: 10px;">
+                                <input type="radio" value="0" id="no" name="status"> Không
                             </label>
                         </fieldset>
                     </fieldset>
                 </div>
             </fieldset>
         </form>
+
+      
     </div>
     </div>
 </body>

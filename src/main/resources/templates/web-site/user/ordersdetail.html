@@ -149,14 +149,14 @@
               </div>
               <div class="NIZAp8">
                 <div class="VN6h8+">
-                  <div th:if="${detail[iStart.index].Raiting}">
+                  <div th:if="${detail[iStart.index].Raitings}">
                     <button class="stardust-button stardust-button--secondary Kz9HeM" 
                     >
                       Xem đánh giá
                     </button>
                   </div>
                  <!-- th:attr="onclick=|showraiting('${detail[iStart.index].product.id}')|" -->
-                  <div th:if="!${detail[iStart.index].Raiting} and ${detail[0].orders.status == 3}" >
+                  <div th:if="!${detail[iStart.index].Raitings} and ${detail[0].orders.status == 3}" >
                   <button class="stardust-button stardust-button--secondary Kz9HeM" 
                   >
                     Đánh giá

@@ -36,6 +36,7 @@
 
     <!-- js-->
     <!-- <script src="/admin/js/jquery-1.11.1.min.js"></script> -->
+    <script src="/admin/js/staticfic.js"></script>
     <script src="/admin/js/modernizr.custom.js"></script>
     <script src="/admin/js/btn.js"></script>
     <script src="/admin/js/order.js"></script>
@@ -196,28 +197,7 @@ document.querySelector(`.avgraiting .stars-inner`).style.width = starPercentageR
     ></script>
 
     <script>
-      window.onload = function () {
       
-      //Better to construct options first and then pass it as a parameter
-      var options = {
-        
-        data: [              
-        {
-          // Change type to "doughnut", "line", "splineArea", etc.
-          type: "column",
-          dataPoints: [
-            { label: "apple",  y: 10  },
-            { label: "orange", y: 15  },
-            { label: "banana", y: 25  },
-            { label: "mango",  y: 30  },
-            { label: "grape",  y: 28  }
-          ]
-        }
-        ]
-      };
-      
-      $("#chartContainer").CanvasJSChart(options);
-      }
       </script>
 
       <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>

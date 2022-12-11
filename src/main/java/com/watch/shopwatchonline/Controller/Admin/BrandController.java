@@ -33,7 +33,7 @@ import com.watch.shopwatchonline.Service.BrandService;
 import com.watch.shopwatchonline.Service.StogareService;
 
 @Controller
-@RequestMapping("api/admin/brands")
+@RequestMapping("/api/admin/brands")
 public class BrandController {
 
 	@Autowired
@@ -89,7 +89,7 @@ public class BrandController {
 	    }
 
 
-	@PostMapping("/saveOrUpdate")
+	@GetMapping("/saveOrUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("brand") BrandDto dto,
 			BindingResult result) {
 		try {

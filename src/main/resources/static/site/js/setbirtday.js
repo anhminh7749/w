@@ -48,7 +48,10 @@ $(document).ready(function () {
     }
     $('#year').append(option);
     // $('#year').val(selectedYear);
+    //selectContry();
 });
+
+
 
 function isLeapYear(year) {
     year = parseInt(year);
@@ -152,7 +155,7 @@ function submitforminfo() {
 function checkduplicated() {
     var checkEmail = $("#checkEmail").val();
     const erorr = document.getElementById('error-email');
-  
+
     $.ajax({
         url: "/api/user/profile/info/check?phone=null&email=" + checkEmail,
         method: "GET",
@@ -161,43 +164,115 @@ function checkduplicated() {
                 console.log(data);
                 erorr.style.display = 'block';
                 erorr.style.color = '#31ae2c';
-                erorr.innerText='Email hợp lệ';
+                erorr.innerText = 'Email hợp lệ';
             }
             if (data == false) {
                 erorr.style.display = 'block';
                 erorr.style.color = 'red';
-                erorr.innerText='Email đã được sử dụng';
+                erorr.innerText = 'Email đã được sử dụng';
             }
         }
     });
 
 }
 
+const listboxtp = document.getElementById('list-tinh-tp');
+const listquan = document.querySelector('#list-quan-huyen');
+const listxa = document.querySelector('#list-xa-phuong');
+const url = 'https://raw.githubusercontent.com/sunrise1002/hanhchinhVN/master/dist/tree.json';
 
-function checkduplicatedphone() {
-   
-    var checkPhone = $("#checkPhone").val();
-    const erorr = document.getElementById('error-phone');
+function showchoiseAdd() {
+    document.getElementById('selectedAddress').style.display = 'block';
+    selectContry();
+}
 
-    $.ajax({
-        url: "/api/user/profile/info/check?email=null&phone=" + checkPhone,
-        method: "GET",
-        success: function (data) {
-            if (data == true ) {
+function selectContry() {
+    const request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    request.onload = function () {
+        if (request.status === 200) {
+            xx = "";
+            const jsonFile = JSON.parse(request.responseText);
+            for (var x in jsonFile) {
                
-                erorr.style.display = 'block';
-                erorr.style.color = '#31ae2c';
-                erorr.innerText='Số điện thoại hợp lệ';
+                 xx += '<option value="'+jsonFile[x].code+'">'+jsonFile[x].name+'</option>';
+               $("#list-tinh-tp").html(xx);
             }
-            if (data == false ) {
-                erorr.style.display = 'block';
-                erorr.style.color = 'red';
-                erorr.innerText='Số điện thoại đã được sử dụng';
-            }
-            
         }
-    });
-   
-
+    }
+    request.send();
 }
 
+function changelistquan() {
+    $('#tab2').prop("disabled", false); 
+    document.getElementById('tab2').checked = true;
+    const request = new XMLHttpRequest();
+    request.open('GET', url, true);
+    document.getElementById('street-address').value = $("#list-tinh-tp").children("option:selected").html()
+    while ($('#list-quan-huyen').firstChild) {
+        $('#list-quan-huyen').removeChild($('#list-quan-huyen').lastChild);
+    }
+    request.onload = function () {
+        if (request.status === 200) {
+            const jsonFile = JSON.parse(request.responseText);
+            for (var x in jsonFile) {
+                if (jsonFile[x]['code'] ==  $("#list-tinh-tp").children("option:selected").val()) {
+                    xx = "";
+                    for (var y in jsonFile[x]['quan-huyen']) {
+                        xx += '<option value="'+jsonFile[x]['quan-huyen'][y].code+'">'+jsonFile[x]['quan-huyen'][y].name_with_type+'</option>';
+                        $("#list-quan-huyen").html(xx);
+                    }
+                }
+            }
+        }
+    }
+    request.send();
+}
+
+function changequan() {
+    $('#tab3').prop("disabled", false); 
+    document.getElementById('street-address').value = $("#list-tinh-tp").children("option:selected").html()+', '+$("#list-quan-huyen").children("option:selected").html();
+        document.getElementById('tab3').checked = true;
+        const request = new XMLHttpRequest();
+        request.open('GET', url, true);
+        while ($('#list-xa-phuong').firstChild) {
+            $('#list-xa-phuong').removeChild($('#list-xa-phuong').lastChild);
+        }
+        request.onload = function () {
+            if (request.status === 200) {
+                const jsonFile = JSON.parse(request.responseText);
+                for (var x in jsonFile) {
+                    if (jsonFile[x]['code'] == $("#list-tinh-tp").children("option:selected").val()) {
+                        for (var y in jsonFile[x]['quan-huyen']) {
+                            if (jsonFile[x]['quan-huyen'][y].code == $("#list-quan-huyen").children("option:selected").val()) {
+                                xx='';
+                                for (var z in jsonFile[x]['quan-huyen'][y]['xa-phuong']) {
+                                    xx += '<option value="'+jsonFile[x]['quan-huyen'][y]['xa-phuong'][z].code+'">'+jsonFile[x]['quan-huyen'][y]['xa-phuong'][z].name_with_type+'</option>';
+                                   
+                                }
+                                $("#list-xa-phuong").html(xx);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        request.send();
+}
+function listxaphuong() {
+    document.getElementById('street-address').value = $("#list-tinh-tp").children("option:selected").html()
++', '+$("#list-quan-huyen").children("option:selected").html()+', '+$("#list-xa-phuong").children("option:selected").html();
+}
+
+
+document.addEventListener("click", (evt) => {
+    const flyoutEl = document.getElementById("clickoutsite");
+    let targetEl = evt.target; // clicked element      
+    do {
+      if(targetEl == flyoutEl) {
+        return;
+      }
+      targetEl = targetEl.parentNode;
+    } while (targetEl);
+    document.getElementById('selectedAddress').style.display = 'none';
+  });
