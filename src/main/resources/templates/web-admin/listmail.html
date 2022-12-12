@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html
-  lang="en"
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{web-admin/layout}"
->
-  <head> </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{web-admin/layout}">
+
+<head> </head>
 
 <body class="cbp-spmenu-push">
 	<div layout:fragment="content">
@@ -70,14 +67,10 @@
 															<input class="form-control" id="gmailgmail" readonly />
 														</div>
 
-                              <div class="form-outline mb-4">
-                                <label class="form-label">Tiêu Đề:</label>
-                                <input
-                                  class="form-control"
-                                  id="titletitle"
-                                  readonly
-                                />
-                              </div>
+														<div class="form-outline mb-4">
+															<label class="form-label">Tiêu Đề:</label>
+															<input class="form-control" id="titletitle" readonly />
+														</div>
 
 														<!-- Message input -->
 														<div class="form-outline mb-4">
@@ -91,7 +84,8 @@
 											</div>
 											<!-- /.modal-dialog -->
 										</div> <!-- /.modal --> <a th:if="${item.status==0}"
-											th:href="@{'/api/admin/contacs/edit/' + ${item.mailId}}" class="fa fa-edit"></a>
+											th:href="@{'/api/admin/contacs/edit/' + ${item.mailId}}"
+											class="fa fa-edit"></a>
 										<a th:data-id="${item.mailId}" th:data-name="${item.gmail}"
 											onclick="showConfirmModelDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"
 											class="fa fa-trash-o"> </a>
@@ -134,7 +128,7 @@
 					</div>
 
 				</div>
-			</div> 
+			</div>
 		</div>
 	</div>
 
