@@ -5,39 +5,59 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <section class="w3l-text-11 py-5" th:object="${blog}">
+        <section class="w3l-text-11 py-5" th:object="${blog}" style="background: beige;">
             <div class="text11 py-md-5 py-4">
                 <div class="container">
                     
                         <div class=" text11-content mx-auto">
                             <img th:src="${blog.banner!=null?'/api/images/'+blog.banner:'/images/Background.png'}"
-                                class="img-fluid radius-image img-rounded" alt="">
-                            <h3 class="title font-weight-bold mt-4" th:text="${blog.title}"></h3>
-                            <ul class="admin-list mt-2 mb-4">
+                                class="img-fluid radius-image img-rounded" alt="" style="padding: 35px 120px;background: blanchedalmond;margin-top: -185px;">
+                            <!-- <h3 class="title font-weight-bold mt-4" th:text="${blog.title}" style="margin: 0px !important;text-align: center;"></h3> -->
+                            <div class="blo-singl mb-3" style="border: ridge; margin-bottom: 0px !important;width: 690px;margin-left: 225px;">
+                                <ul class="blog-single-author-date d-sm-flex align-items-center" style="margin: 0px;">
+                                    <li class="circle avatar">
+                                        <a href="blog-single.html">Eetey Cruis<i class="icon-user"></i></a>
+                                    </li>
+                                    <li style="margin-left: 30px;
+                                    width: 330px;
+                                    margin-right: 30px;
+                                    text-align: center;">
+                                        <span class="fas fa-user"></span><a th:href="@{'/api/site/product/detail/'+${blog.product.id}}" class=" primary-clr-bg"
+                                        th:text="${blog.product.name}"></a></i>
+                                    </a>
+                                    </li>
+                                    <li>
+                                        <span class="far fa-clock"></span> <b th:text="${blog.createAt}"></b>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- <ul class="admin-list mt-2 mb-4">
                                 <li><a href="blog-single.html">Eetey Cruis<i class="icon-user"></i>
                                     </a></li>
                                 <li><a th:href="@{'/api/site/product/detail/'+${blog.product.id}}" class=" primary-clr-bg"
                                         th:text="${blog.product.name}"></a></i>
                                     </a></li>
-                                <li> <i class="icon-calendar"></i><a href="blog-single.html"
-                                        th:text="${blog.createAt}"></a>
+                                <li> <i class="icon-calendar"></i>
+                                    <b th:text="${blog.createAt}"></b>
                                 </li>
-                            </ul>
+                            </ul> -->
                             <blockquote class="quote my-sm-5 my-4">
-                                <q class="quick_desc" th:text="${blog.shortdecs}"> </q>
-
+                                <label for=""><strong>Mô tả:</strong></label> <br>
+                                <q class="quick_desc" th:text="${blog.shortdecs}" style="background: bisque;"></q> 
                             </blockquote>
-                            <p class="quick_desc" th:text="${blog.description}"></p>
-
-
+                            <blockquote class="quote my-sm-5 my-4">
+                                <label for=""><strong>Mô tả ngắn:</strong></label> <br>
+                                <q class="quick_desc" th:text="${blog.description}" style="background: bisque;"></q>
+                            </blockquote>
                             <div class="item mt-5">
-                                <h3 class="aside-title">img </h3>
+                                <h3 class="aside-title">Ảnh: </h3>
                                 <div class="row">
                                     <div class="col-sm-6" th:each="img, iStart:${listimage}">
                                         <div class="list-view list-view1">
                                             <div class="grids5-info">
-                                                <a  class="d-block zoom"><img
-                                                        th:src="${img.name!=null?'/api/images/'+img.name:'/images/Background.png'}"
+                                                <a  class="d-block zoom">
+                                                    <img th:src="${img.name!=null?'/api/images/'+img.name:'/images/Background.png'}"
+                                                    style="margin-left: 300px;  padding: 10px 10px; background: wheat;"
                                                         class="img-fluid radius-image news-image"></a>
                                             </div>
                                         </div>

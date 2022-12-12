@@ -1,8 +1,10 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{web-site/layout}">
+
 <head>
 </head>
+
 <body>
 	<div layout:fragment="content">
 		<div class="men">
@@ -10,37 +12,100 @@
 
 				<div class="newsletter">
 					<h3>Tin tức</h3>
-					
+
 				</div>
-				<div class="row justify-content-center">
+                        <ul class="content-home" style="display: flex; flex-wrap: wrap; flex-direction: row; justify-content: center;">
+                            <li class="col-sm-4" th:each="item, iStart:${blogPage}" style="padding: 10px;">
+                                <div class="card">
+									<div class="bannerBox">
+										<div class="card-header p-0 position-relative">
+											<a th:href="@{'/api/site/blog/detail/'+${item.id}}" class="zoom d-block">
+												<img class="card-img-bottom d-block" th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}" alt="blog-img"
+												style="height: 360px; width: 350px;">
+											</a>
+										</div>
+									</div>
+                                    <div class="card-body blog-details">
+                                        <!-- <div class="price-review d-flex justify-content-between mb-1 align-items-center">
+                                            <p>News</p>
+                                        </div> -->
+                                        <a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}" class="blog-desc"></a> <br>
+                                        <a style="text-decoration: none; color: #d2a2a2; font-size: 15px; width: 280px;"
+										th:href="@{'/api/site/product/detail/'+${item.product.id}}"
+										class=" primary-clr-bg" th:text="${item.product.name}">
+									    </a>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="author align-items-center">
+                                            <div class="date" style="text-align: center;">
+                                                <p th:text="${item.createAt}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+
+				<!-- <ul class="content-home" style="display: flex;">
+					<li class="col-sm-4" th:each="item, iStart:${blogPage}">
+						<a th:href="@{'/api/site/blog/detail/'+${item.id}}" class="item-link" title="">
+							<div class="bannerBox" style="width: 350px; height: 360px;">
+								<img th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}" class="item-img"
+									title="" alt="" style="height: 360px; width: 350px;">
+								<div class="item-html" style="height: 300px; width: 280px;">
+									<h3>
+										<a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}" 
+									style="width: 280px; font-size: 40px; height: 100px; color: blanchedalmond; text-align: center;"></a>
+								    </h3>
+									<p style="margin-bottom: 50px; margin-top: 70px;text-align: center;">
+										<a style="text-decoration: none; color: #d2a2a2; font-size: 15px; width: 280px;"
+										th:href="@{'/api/site/product/detail/'+${item.product.id}}"
+										class=" primary-clr-bg" th:text="${item.product.name}">
+									    </a>
+								    </p>
+									<a th:href="@{'/api/site/blog/detail/'+${item.id}}" style="font-size: 30px;
+									color: beige;text-align: center;">Chi Tiết!</a>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul> -->
+				<!-- <div class="row justify-content-center">
 					<div class="col-lg-4 col-md-6" th:each="item, iStart:${blogPage}">
 						<div class="blog-card-single">
 							<div class="grids5-info">
-								<a href="@{'/api/site/blog/detail/'+${item.id}}"><img class="tbl-list img-fluid" id="image" style="border-top-right-radius: 20px;
-									border-top-left-radius: 20px;"
-									th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}"
-									alt="edit"></a>
+								<a href="@{'/api/site/blog/detail/'+${item.id}}">
+									<img class="tbl-list img-fluid" id="image" style="border-top-right-radius: 20px;
+									border-top-left-radius: 20px;" th:src="${item.banner!=null?'/api/images/'+item.banner:'/images/Background.png'}"
+										alt="edit"></a>
 								<div class="blog-info">
-									<h5><a style="text-decoration: none;color: black;font-size: 15px;" th:href="@{'/api/site/product/detail/'+${item.product.id}}" class=" primary-clr-bg" th:text="${item.product.name}"></a></h5>
-									<h3 style=" width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-								"><a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}"></a></h3>
+									<h5>
+										<a style="text-decoration: none;color: black;font-size: 15px;"
+											th:href="@{'/api/site/product/detail/'+${item.product.id}}"
+											class=" primary-clr-bg" th:text="${item.product.name}">
+										</a>
+									</h5>
+									<h3 style=" width: 300px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+								       <a th:href="@{'/api/site/blog/detail/'+${item.id}}" th:text="${item.title}"></a>
+							        </h3>
 									<div class="d-flex align-items-center justify-content-between mb-3">
 										<a class="d-flex align-items-center" title="23k followers">
 											<i class="icon-user"></i><span class="small ml-2">Admin</span>
 										</a>
-										<p class="float_right"><i class="icon-calendar"></i> <a th:text="${#dates.format(item.createAt, 'dd-MM-yyyy')}"></a></p>
+										<p class="float_right"><i class="icon-calendar"></i> 
+											<a th:text="${#dates.format(item.createAt, 'dd-MM-yyyy')}"></a></p>
 									</div>
-									<!-- <p class="quick_desc" th:text="${item.shortdecs}"></p> -->
+									 <p class="quick_desc" th:text="${item.shortdecs}"></p> -->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<ul class="women_pagenation dc_paginationA dc_paginationA06" style="display: block;">
 					<li><a class="previous">Trang : </a></li>
 					<li th:each="pageNum:${pageNums}" th:if="${blogPage.totalPages>0}"
-						th:class="${pageNum==blogPage.number+1}?'page-item active':'page-item'"><a
-							class="page-link"
+						th:class="${pageNum==blogPage.number+1}?'page-item active':'page-item'"><a class="page-link"
 							th:href="@{/api/site/blog(sort=${sort}, size = ${blogPage.size}, page=${pageNum})}"
 							th:text="${pageNum}"></a>
 					</li>
