@@ -86,7 +86,7 @@ public class StaffController {
 
         model.addAttribute("message", "Staff is saved!");
 
-        return new ModelAndView("forward:/api/admin/staffs");
+        return new ModelAndView("redirect:/api/admin/staffs");
     }
 
     @RequestMapping("")

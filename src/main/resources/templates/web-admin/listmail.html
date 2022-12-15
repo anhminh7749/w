@@ -10,9 +10,7 @@
 			<h2>Danh Sách Phản Hồi</h2>
 			<div class="row">
 				<ol class="breadcrumb">
-					<li><a href="#">Trang Chủ</a></li>
-					<li><a href="#">Danh Sách</a></li>
-					<li><a href="#">Thêm Mới</a></li>
+					<li><a th:href="@{/api/admin}">Trang Chủ</a></li>
 				</ol>
 			</div>
 
@@ -87,7 +85,7 @@
 											th:href="@{'/api/admin/contacs/edit/' + ${item.mailId}}"
 											class="fa fa-edit"></a>
 										<a th:data-id="${item.mailId}" th:data-name="${item.gmail}"
-											onclick="showConfirmModelDialog(this.getAttribute('data-id'), this.getAttribute('data-name'))"
+											onclick="DeleteSwal(this.getAttribute('data-id'), 'contacs')"
 											class="fa fa-trash-o"> </a>
 									</td>
 								</tr>

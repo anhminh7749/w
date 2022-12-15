@@ -81,7 +81,7 @@ public class CustomerController {
 
         model.addAttribute("message", "Customer is saved!");
 
-        return new ModelAndView("forward:/api/admin/customers", model);
+        return new ModelAndView("redirect:/api/admin/customers", model);
     }
 
     @RequestMapping("")

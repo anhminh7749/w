@@ -9,12 +9,12 @@
 <body class="cbp-spmenu-push">
     <div layout:fragment="content">
         <div id="page-wrapper">
-            <h2>Danh SÃ¡ch Sáº£n Pháº©m</h2>
+            <h2>Danh Sách Chờ</h2>
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><a href="#">Trang Chá»§</a></li>
-                    <li><a>Sáº£n Pháº©m</a></li>
-                    <li class="active">Danh SÃ¡ch</li>
+                    <li><a th:href="@{/api/admin}">Trang Chủ</a></li>
+                    <li><a th:href="@{/api/admin/raiting/list-waiting}">Danh Sách</a></li>
+                    <li><a th:href="@{/api/admin/raiting/list-check}">Kiểm tra</a></li>
                 </ol>
             </div>
 
@@ -35,10 +35,12 @@
 
                         <form class="input">
                             <div class="header-right" style="position: relative; ">
-                            <input class="sb-search-input input__field--madoka search" placeholder="Search........name, brand, category" type="search"  name="keyword" id="search-input">
-                            <label class="input__label" for="search-input">
-                                <i class="fa fa-search"></i>
-                            </label>
+                                <input class="sb-search-input input__field--madoka search"
+                                    placeholder="Search........name, brand, category" type="search" name="keyword"
+                                    id="search-input">
+                                <label class="input__label" for="search-input">
+                                    <i class="fa fa-search"></i>
+                                </label>
                             </div>
                         </form>
 
@@ -46,53 +48,60 @@
 
                         <table class="table table-hover">
                             <thead>
-                                <tr>                                    
-                                    <th>Tên sản phẩm</th>
-                                    <th>Người đánh giá</th>
-                                    <th>Nội dung</th>
-                                    <th>Số sao</th>
-                                    <th>Ngày đánh giá</th>                
+                                <tr>
+                                    <th>Tên SP</th>
+                                    <th>Tên User</th>
+                                    <th>Nội Dung</th>
+                                    <th>Đánh Giá</th>
+                                    <th>Ngày Đánh Giá</th>
+
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr th:each="item, iStart:${raitingPage}">
-                                <td th:text="${item.orderDetails.Product.name}"></td>
-                                <td th:text="${item.users.username}"></td>
-								<td th:text="${item.comment}"></td>
-                                <td th:text="${item.point}"></td>
-								<td th:text="${item.createAt}"></td>
-                                <td>              
-                                    <a th:if="${item.active==0}" th:href="@{'/api/admin/raiting/check/'+${item.Id}}"><i class="fa fa-check icon_del" ></i></a>
-                                    <a><i class="fa fa-exclamation-circle icon_del" ></i></a>
-                                    <a th:href="@{'/api/admin/raiting/delete/' + ${item.Id}}"><i class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
-                                    
-                                </td>
-									</tr>
-                            
-                       
+                                    <td th:text="${item.product.Name}"></td>
+                                    <td th:text="${item.users.username}"></td>
+                                    <td th:text="${item.comment}"></td>
+                                    <td th:text="${item.point}"></td>
+                                    <td th:text="${item.createAt}"></td>
+                                    <td>
+                                        <a th:if="${item.active==0}"
+                                            th:href="@{'/api/admin/raiting/check/'+${item.Id}}"><i
+                                                class="fa fa-check icon_del"></i></a>
+                                        <a><i class="fa fa-exclamation-circle icon_del"></i></a>
+                                        <a th:href="@{'/api/admin/raiting/delete/' + ${item.Id}}"><i
+                                                class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
+
+                                    </td>
+                                </tr>
+
+
                             </tbody>
                         </table>
-                        
+
                         <div class="row" th:if="${raitingPage.totalPages >1}">
 
                             <h5 class="avatar_left items" th:text="${raitingPage.size}+'/'+${tt}"></h5>
                             <ul class="header-right pagination">
-								<li class="disabled" th:class="${1== raitingPage.number+1} ? 'active':''">
-								<a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${1})}" aria-label="Previous">
-								<span aria-hidden="true">«</span></a></li>
-								
-								<li th:each="pageNum:${pageNums}"
-										th:if="${raitingPage.totalPages>1}"
-										th:class="${pageNum==raitingPage.number+1}?'page-item active':'page-item'"><a class="page-link"
-										th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${pageNum})}"
-										th:text="${pageNum}"></a>
-									</li>
-								
-								<li th:class="${raitingPage.totalPages== raitingPage.number+1} ? 'active':''">
-                                <a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${raitingPage.totalPages})}" 
-								aria-label="Next"><span aria-hidden="true">»</span></a></li>
-							</ul>
+                                <li class="disabled" th:class="${1== raitingPage.number+1} ? 'active':''">
+                                    <a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${1})}"
+                                        aria-label="Previous">
+                                        <span aria-hidden="true">Â«</span></a>
+                                </li>
+
+                                <li th:each="pageNum:${pageNums}" th:if="${raitingPage.totalPages>1}"
+                                    th:class="${pageNum==raitingPage.number+1}?'page-item active':'page-item'"><a
+                                        class="page-link"
+                                        th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${pageNum})}"
+                                        th:text="${pageNum}"></a>
+                                </li>
+
+                                <li th:class="${raitingPage.totalPages== raitingPage.number+1} ? 'active':''">
+                                    <a th:href="@{/api/admin/raiting/list-raiting(name=${keyword}, size = ${raitingPage.size}, page=${raitingPage.totalPages})}"
+                                        aria-label="Next"><span aria-hidden="true">Â»</span></a>
+                                </li>
+                            </ul>
 
                         </div>
                     </div>
@@ -100,9 +109,9 @@
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
-    
+
 </body>
 
 </html>

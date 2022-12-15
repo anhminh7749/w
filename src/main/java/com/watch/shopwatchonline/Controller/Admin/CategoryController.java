@@ -82,7 +82,7 @@ public class CategoryController {
 
         model.addAttribute("message", "Category is saved!");
 
-        return new ModelAndView("forward:/api/admin/categories", model);
+        return new ModelAndView("redirect:/api/admin/categories", model);
     }
 
     @RequestMapping("")

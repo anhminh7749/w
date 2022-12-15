@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{web-admin/layout}">
 
 <head>
@@ -13,20 +12,18 @@
 			<h2>Danh Sách Mã Giảm Giá</h2>
 			<div class="row">
 				<ol class="breadcrumb">
-					<li><a href="#">Trang Chủ</a></li>
-					<li><a href="#">Danh Sách</a></li>
-					<li><a href="#">Thêm Mới</a></li>
+					<li><a th:href="@{/api/admin/}">Trang Chủ</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/}">Danh Sách</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/list-code}">Thêm Mới</a></li>
 				</ol>
 			</div>
 
 			<div class="main-page">
 				<div class="tables">
-					<div class="bs-example widget-shadow"
-						data-example-id="hoverable-table">
+					<div class="bs-example widget-shadow" data-example-id="hoverable-table">
 						<form class="avatar_left">
 
-							<select class="form-control" name="size"
-								onchange="this.form.submit()">
+							<select class="form-control" name="size" onchange="this.form.submit()">
 								<option th:selected="${codePage.size == 5 }" value="5">5</option>
 								<option th:selected="${codePage.size == 10 }" value="10">10</option>
 								<option th:selected="${codePage.size == 15 }" value="15">15</option>
@@ -38,9 +35,8 @@
 
 						<form class="input">
 							<div class="header-right" style="position: relative;">
-								<input class="sb-search-input input__field--madoka search"
-									placeholder="Search...." type="search" name="keyword"
-									id="search-input"> <label class="input__label"
+								<input class="sb-search-input input__field--madoka search" placeholder="Search...."
+									type="search" name="keyword" id="search-input"> <label class="input__label"
 									for="search-input"> <i class="fa fa-search"></i>
 								</label>
 							</div>
@@ -59,7 +55,7 @@
 									<th>Ngày Áp Dụng</th>
 									<th>Ngày Hết Hạn</th>
 									<th>Trạng Thái</th>
-									<th>&nbsp;</th>
+									<th>Hoạt Động</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -74,12 +70,54 @@
 									<td th:text="${item.ApplicableDate}"></td>
 									<td th:text="${item.ExpirationDate}"></td>
 									<td th:text="${item.status}"></td>
-									<td><a
-										th:href="@{'/api/admin/DiscountCode/edit/' + ${item.Id}}"><i
-											class="fa fa-pencil-square-o icon_del" aria-hidden="true"></i></a>
+									<td>
+										<a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileDiscountcode('${item.name}', '${item.ReductionAmount}','${item.AmountApplied}',
+											'${item.Quantity}','${item.ByteCode}','${item.ApplicableDate}','${item.ExpirationDate}')|"
+											class="fa fa-search"></a>
+										<div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"
+											aria-labelledby="gridSystemModalLabel">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal"
+															aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+														<h4 class="modal-title text-center" id="gridSystemModalLabel">
+															Thông Tin</h4>
+													</div>
+													<div class="modal-body">
+														<div>
+															<label class="control-label">Tên: </label>
+															<input class="form-control" id="name" readonly><br>
+															<label class="control-label">Giảm giá:</label>
+															<input class="form-control" id="ReductionAmount"
+																readonly><br>
+															<label class="control-label">Giá áp dụng: </label>
+															<input class="form-control" id="AmountApplied" readonly><br>
+															<label class="control-label">Số lượng: </label>
+															<input class="form-control" id="Quantity" readonly><br>
+															<label class="control-label">Mã giảm giá: </label>
+															<input class="form-control" id="ByteCode" readonly><br>
+															<label class="control-label">Ngày áp dụng: </label>
+															<input class="form-control" id="ApplicableDate"
+																readonly><br>
+															<label class="control-label">Ngày hết hạng: </label>
+															<input class="form-control" id="ExpirationDate"
+																readonly><br>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+										<a th:href="@{'/api/admin/DiscountCode/edit/' + ${item.Id}}"><i
+												class="fa fa-pencil-square-o icon_del" aria-hidden="true"></i></a>
 										<a th:data-id="${item.id}" th:data-name="${item.name}"
-										onclick="DeleteSwal(this.getAttribute('data-id'),'DiscountCode')"
-										class="fa fa-trash-o"> </a></td>
+											onclick="DeleteSwal(this.getAttribute('data-id'),'DiscountCode')"
+											class="fa fa-trash-o"> </a>
+									</td>
 
 
 								</tr>
@@ -90,26 +128,21 @@
 
 						<div class="row" th:if="${codePage.totalPages >1}">
 
-							<h5 class="avatar_left items"
-								th:text="${codePage.size}+'/'+${tt}"></h5>
+							<h5 class="avatar_left items" th:text="${codePage.size}+'/'+${tt}"></h5>
 							<ul class="header-right pagination">
-								<li class="disabled"
-									th:class="${1== codePage.number+1} ? 'active':''"><a
-									th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${1})}"
-									aria-label="Previous"> <span aria-hidden="true">«</span></a></li>
+								<li class="disabled" th:class="${1== codePage.number+1} ? 'active':''"><a
+										th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${1})}"
+										aria-label="Previous"> <span aria-hidden="true">«</span></a></li>
 
-								<li th:each="pageNum:${pageNums}"
-									th:if="${codePage.totalPages>1}"
+								<li th:each="pageNum:${pageNums}" th:if="${codePage.totalPages>1}"
 									th:class="${pageNum==codePage.number+1}?'page-item active':'page-item'"><a
-									class="page-link"
-									th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${pageNum})}"
-									th:text="${pageNum}"></a></li>
+										class="page-link"
+										th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${pageNum})}"
+										th:text="${pageNum}"></a></li>
 
-								<li
-									th:class="${codePage.totalPages== codePage.number+1} ? 'active':''">
-									<a
-									th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${codePage.totalPages})}"
-									aria-label="Next"><span aria-hidden="true">»</span></a>
+								<li th:class="${codePage.totalPages== codePage.number+1} ? 'active':''">
+									<a th:href="@{/api/admin/DiscountCode/list-code(name=${keyword}, size = ${codePage.size}, page=${codePage.totalPages})}"
+										aria-label="Next"><span aria-hidden="true">»</span></a>
 								</li>
 							</ul>
 

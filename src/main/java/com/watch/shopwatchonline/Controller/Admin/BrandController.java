@@ -89,7 +89,7 @@ public class BrandController {
 	    }
 
 
-	@GetMapping("/saveOrUpdate")
+	@PostMapping("/saveOrUpdate")
 	public ModelAndView saveOrUpdate(ModelMap model, @Valid @ModelAttribute("brand") BrandDto dto,
 			BindingResult result) {
 		try {
@@ -110,7 +110,7 @@ public class BrandController {
 			e.getMessage();
 		}
 
-		return new ModelAndView("forward:/api/admin/brands", model);
+		return new ModelAndView("redirect:/api/admin/brands", model);
 	}
 
 	@RequestMapping("")
