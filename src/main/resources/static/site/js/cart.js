@@ -115,14 +115,13 @@ function ShowItemToTheDOM(product) {
     <div class="close1 btn__small btn_remove" action="remove"></div>
     <div class="cart-sec simpleCart_shelfItem">
         <div class="cart-item cyc">
-            <img id="product_image" src="${product.thumbnail}" class="img-responsive" alt="" />
+            <img id="product_image" src="/api/images/${product.thumbnail}" class="img-responsive" alt="" />
         </div>
         <div class="cart-item-info">
             <input type="hidden" id="product__id" value="${product.id}">
             <h3 style="width: 450px;"><a style="font-size: large;  color: #8a8585; text-decoration: none;" class="product__name">${product.name}</a><span>Model No: ${product.id}</span></h3>
             <ul class="qty row" style="display: flex; align-items: center; ">
-            ${product.discount == 0 ? '<li> <p id="product__price">Price : '+product.price+' </p></li>': '<li><p id="product__price">Original Price : '+product.price+'</p></li><li><p class="product__discount">Unit Price : '+(product.price-product.discount)+'</p></li>'}
-        
+            ${product.discount == 0 ? '<li> <p id="product__price">Price : '+product.price+' </p></li>': '<li><p id="product__price">Original Price : '+product.price+'</p></li><li><p class="product__discount">Unit Price : '+(product.price-product.discount)+'</p></li>'}      
                 <li style="display: flex;     align-items: center;">
                 <a class="btn__small" action="decrease">&minus;</a> <p class="product__quantity"> ${product.quantity}</p><a class="btn__small" action="increase">&plus;</a>
                 </li>

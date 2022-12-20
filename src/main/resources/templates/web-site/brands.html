@@ -11,10 +11,11 @@
       	 <h1 class="page-heading product-listing">
 			Brands
          </h1>
-         <div class="product-count">Showing 1 - 4 of 4 items</div>
-           <div th:each="item:${brands}" class="brand_box" style="display: flex;">
+         <!-- <div class="product-count">Showing 1 - 4 of 4 items</div> -->
+           <div th:each="item:${brands}" class="brand_box" style="display: flex;align-items: center;">
 	         <div class="left-side col-xs-12 col-sm-3">
-				 <img src="/site/images/2nd-day.jpg" alt=""/>
+				 <img th:src="${item.thumbnail!=null?'/api/images/'+item.thumbnail:'/site/images/2nd-day.jpg'}"
+				 alt=""/>
 			 </div> 
 		     <div class="middle-side col-xs-12 col-sm-5">
 		     	<h4><a  th:utext="${item.name}"></a></h4>

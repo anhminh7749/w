@@ -9,7 +9,7 @@
 <body>
 	<div layout:fragment="content">
 		<div class="men" th:object="${product}">
-			<input type="hidden" name="" id="product__id" th:value="${product.id}" />
+			
 			<div class="container">
 				<div class="col-md-12 single_top">
 					<div class="single_left">
@@ -46,8 +46,8 @@
 											<span class="sr-only">Previous</span>
 										</div>
 									</div>
-									<div class="list-image">
-										<div>
+									<div class="list-image" >
+										<div  th:if="${listimage.size >0}">
 											<img th:src="${product.thumbnail!=null?'/api/images/'+product.thumbnail:'/images/Background.png'}"
 												alt="">
 										</div>
@@ -154,7 +154,8 @@
 
 							<div class="clearfix quantity_box"></div>
 						</div>
-						<a href="#"
+						<input type="hidden" name="" id="product__id" th:value="${product.id}" />
+						<a 
 							class="btn btn-primary btn-normal btn-inline btn_form button item_add item_1 btn__add__to__cart"
 							target="_self">Thêm vào giỏ hàng</a>
 
@@ -215,7 +216,8 @@
 										<div class="comments mt-5">
 											<div class="media mt-4" th:each="rai, iStart:${raiting}">
 												<div class="img-circle">
-													<img src="/images/user.jpg" class="img-fluid" alt="...">
+													<img th:src="${rai.users.avatar!=null?'/api/images/'+rai.users.avatar:'/images/user.png'}"
+													style="display: block;margin: auto;"class="img-fluid" alt="...">
 												</div>
 												<div class="media-body">
 

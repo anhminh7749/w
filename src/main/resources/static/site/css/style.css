@@ -1,3 +1,7 @@
+button:focus {
+  outline: none;
+}
+
 #selectedAddress {
   position: absolute;
   left: 0px;
@@ -990,12 +994,13 @@ ul.header_user_info li.user_desc > ul > li{
  }
 
  .comments .img-circle {
-   width: 80px;
-   height: 80px;
+   width: 70px;
+   height: 70px;
    display: inline-block;
    overflow: hidden;
    background: #f3f6f9;
    border-radius: 50%;
+   border: 1px solid #e6e6e6;
  }
 
  .comments .media {

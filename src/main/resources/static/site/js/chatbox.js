@@ -24,35 +24,41 @@ var colors = [
 ];
 
 function connect(event) {
-  usernamechat = nameInput;
-  InputRoom = nameInput;
+  if (document.getElementById('hiden_connecting') == null) {
 
-  if (nameInput == null) {
-    nameInput = "client_" + (Math.random() + 1).toString(36).substring(5);
-    roomToken();
-    InputRoom = Cookies.get('roomId');
+
+
+    usernamechat = nameInput;
+    InputRoom = nameInput;
+
+    if (nameInput == null) {
+      nameInput = "client_" + (Math.random() + 1).toString(36).substring(5);
+      roomToken();
+      InputRoom = Cookies.get('roomId');
+    }
+
+
+    if (usernamechat) {
+      // usernamePage.classList.add('hidden');
+      // chatPage.classList.remove('hidden');
+
+      var socket = new SockJS('/ws');
+      stompClient = Stomp.over(socket);
+
+      stompClient.connect({}, onConnected, onError);
+    }
+    event.preventDefault();
   }
-
-
-  if (usernamechat) {
-    // usernamePage.classList.add('hidden');
-    // chatPage.classList.remove('hidden');
-
-    var socket = new SockJS('/ws');
-    stompClient = Stomp.over(socket);
-
-    stompClient.connect({}, onConnected, onError);
-  }
-  event.preventDefault();
-  $("#chat-circle").toggle('scale');
-  $(".chat-box").toggle('scale');
+    $("#chat-circle").toggle('scale');
+    $(".chat-box").toggle('scale');
+  
 }
 
 // Leave the current room and enter a new one.
 function enterRoom(newRoomId) {
 
   roomId = newRoomId;
-  roomIdDisplay.textContent = usernamechat;
+  roomIdDisplay.textContent = 'Xin chào '+usernamechat.toUpperCase();
   topic = `/app/chat/${newRoomId}`;
 
   if (currentSubscription) {
@@ -71,6 +77,7 @@ function enterRoom(newRoomId) {
 function onConnected() {
   enterRoom(InputRoom);
   connectingElement.classList.add('hidden');
+  connectingElement.id = 'hiden_connecting';
 }
 
 function onError(error) {
@@ -176,7 +183,7 @@ function roomToken() {
   };
   Cookies.set('roomId', base64EncodeUrl(JSON.stringify(token)));
 }
-$(".chat-box-toggle").click(function () {
+$(".chat-box-toggle-close").click(function () {
   $("#chat-circle").toggle('scale');
   $(".chat-box").toggle('scale');
 })

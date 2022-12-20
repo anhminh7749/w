@@ -32,42 +32,44 @@ addToCartBtn.forEach(btn => {
         } else {
 
             let parentElement = btn.parentElement;
+            $.ajax({
+                url: "/api/product/getInfo?id=" + parentElement.querySelector("#product__id").value,
+                method: "GET",
+                success: function (data) {
+                    const product = {
+                        id: parentElement.querySelector("#product__id").value,
+                        name: data.name,
+                        thumbnail: data.thumbnail,
+                        price: data.price,
+                        discount: data.discount,
+                        quantity: 1
+                    }
+                    let isIncart = cartItems.filter(item => item.id === product.id).length > 0;
+                    // check if alreday Exists
+                    if (!isIncart) {
+                        addItemToTheDOM(product);
+                        
+                    } else {
 
-            const product = {
-                id: parentElement.querySelector("#product__id").value,
-                name: parentElement.querySelector(".product__name").innerText,
-                thumbnail: parentElement.querySelector("#image").getAttribute("src"),
-                price: parentElement.querySelector(".product__price").innerText.replace("$", ""),
-                discount: parentElement.querySelector(".product__discount").innerText.replace("$", ""),
-                quantity: 1
-            }
-
-            let isIncart = cartItems.filter(item => item.id === product.id).length > 0;
-
-            // check if alreday Exists
-            if (!isIncart) {
-                addItemToTheDOM(product);
-            } else {
-                swal("", "Sản phẩm đã có trong giỏ hàng!", "info");
-                return;
-            }
-
-            const cartDOMItems = document.querySelectorAll(".cart_item");
-
-            cartDOMItems.forEach(individualItem => {
-                if (individualItem.querySelector("#product__id").value === product.id) {
-                    // increrase
-                    increaseItem(individualItem, product);
-                    // decrease
-                    decreaseItem(individualItem, product);
-                    // Removing Element
-                    removeItem(individualItem, product);
-
+                        swal("", "Sản phẩm đã có trong giỏ hàng!", "info");
+                        return;
+                    }
+                    const cartDOMItems = document.querySelectorAll(".cart_item");
+                    cartDOMItems.forEach(individualItem => {
+                        if (individualItem.querySelector("#product__id").value === product.id) {
+                            // increrase
+                            increaseItem(individualItem, product);
+                            // decrease
+                            decreaseItem(individualItem, product);
+                            // Removing Element
+                            removeItem(individualItem, product);
+                        }
+                    })
+                    cartItems.push(product);
+                    calculateTotal();
+                    saveToLocalStorage();
                 }
-            })
-            cartItems.push(product);
-            calculateTotal();
-            saveToLocalStorage();
+            });
         }
     });
 
@@ -134,11 +136,11 @@ function addItemToTheDOM(product) {
 
 
     if ((product.name).length > 25) {
-        product.name = (product.name).substring(0, 25) + '...';
+        product.name = (product.name).substring(0, 20) + '...';
     }
     cartDOM.insertAdjacentHTML("afterbegin", `<div class="cart_item">
             <input type="hidden" id="product__id" value="${product.id}">
-           <img id="product_image" src="${product.thumbnail}" alt="" srcset="">
+           <img id="product_image" src="/api/images/${product.thumbnail}" alt="" srcset="">
            <h4 class="product__name">${product.name}  </h4>
            <div style="display: flex;"><a class="btn__small" action="decrease">&minus;</a> <h4 class="product__quantity">${product.quantity}</h4><a class="btn__small" action="increase">&plus;</a>
           <span id="product__price">${product.price - product.discount}</span>

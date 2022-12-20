@@ -33,11 +33,11 @@
               <div class="order actives">
                 <i class="fa icon-list-alt fa-2x active"></i>
                 <p>Đã đặt hàng</p>
-                <span th:text="${#dates.format(detail[0].orders.createAt, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                <span th:text="${#dates.format(detail[0].orders.createAt, 'dd-MM-yyyy hh:mm')}"></span>
                             </div>
                             <div th:if="${detail[0].orders.status == 4 || detail[0].orders.status == 5}" class="order error">
                                 <i class="fa icon-remove fa-2x error"></i>
-                                <span th:text="${#dates.format(detail[0].orders.cancellationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                <span th:text="${#dates.format(detail[0].orders.cancellationDate, 'dd-MM-yyyy hh:mm')}"></span>
                                 <p th:utext="${detail[0].orders.status != 4?'Bị hủy bởi hệ thống':'Bị hủy bởi người dùng'}"
                                     style="left: -37px !important"></p>
                             </div>
@@ -49,21 +49,21 @@
                                     <i th:class="${detail[0].orders.status > 0}?'icon-ok fa-2x active':'icon-ok fa-2x'"></i>
                                     <p th:if="${detail[0].orders.status > 0}">Đã xác nhận</p>
                                     <span th:if="${detail[0].orders.status > 0}"
-                                        th:text="${#dates.format(detail[0].orders.confirmationDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                        th:text="${#dates.format(detail[0].orders.confirmationDate, 'dd-MM-yyyy hh:mm')}"></span>
                                 </div>
                                 <div th:case="1">
                                     <i
                                         th:class="${detail[0].orders.status > 1}?'icon-truck fa-2x fa-flip-horizontal active':'icon-truck fa-2x fa-flip-horizontal'"></i>
                                     <p th:if="${detail[0].orders.status >1}">Đã lấy hàng</p>
                                     <span th:if="${detail[0].orders.status >1}"
-                                        th:text="${#dates.format(detail[0].orders.DeliveringDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                        th:text="${#dates.format(detail[0].orders.DeliveringDate, 'dd-MM-yyyy hh:mm')}"></span>
                                 </div>
                         
                                 <div th:case="2">
                                     <i th:class="${detail[0].orders.status > 2}?'fa icon-inbox fa-2x active':'fa icon-inbox fa-2x'"></i>
                                     <p th:if="${detail[0].orders.status >2}">Đã giao song</p>
                                     <span th:if="${detail[0].orders.status >2}"
-                                        th:text="${#dates.format(detail[0].orders.CompleteDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
+                                        th:text="${#dates.format(detail[0].orders.CompleteDate, 'dd-MM-yyyy hh:mm')}"></span>
                                 </div>
                             </div>
                         </div>      
@@ -78,7 +78,7 @@
                     <div class="mzsqa6" th:utext="${'Thương hiệu: '+detail[iStart.index].product.brand.name}"></div>
                   </div>
                   <div class="WPNwG4" th:if="${detail[0].orders.status == 3}">
-                    <div  th:text="${detail[iStart.index].Raiting}?'Đã đánh giá':'Chưa đánh giá'"></div>
+                    <div  th:text="${detail[iStart.index].Raitings}?'Đã đánh giá':'Chưa đánh giá'"></div>
                     <!-- <div class="l4WFo0" th:text="${detail[0].raitting_id != null}?'Đã đánh giá':'Chưa đánh giá'"></div> -->
                   </div>
                 </div>
@@ -140,7 +140,7 @@
             </div>
             <div class="_1ERzqw">
               <div class="cLwmWY">
-                <div class="_8vTqu9">
+                <div class="_8vTqu9" th:if="${detail[0].orders.status == 3}">
                   <input type="hidden" name="" id="product__id" th:value="${detail[iStart.index].product.id}" />
                   <button class="stardust-button stardust-button--primary Kz9HeM btn__add__to__cart">
                     Mua lại

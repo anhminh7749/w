@@ -77,6 +77,7 @@ public class OrderUserController {
       }
     } 
     raiting.setUsers(null);
+    raiting.setOrderDetails(null);
     return raiting;
   }
 

@@ -274,5 +274,7 @@ document.addEventListener("click", (evt) => {
       }
       targetEl = targetEl.parentNode;
     } while (targetEl);
-    document.getElementById('selectedAddress').style.display = 'none';
+    if(document.getElementById('selectedAddress')){
+        document.getElementById('selectedAddress').style.display = 'none';
+    }
   });

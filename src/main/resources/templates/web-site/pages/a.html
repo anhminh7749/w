@@ -9,21 +9,23 @@
   <body>
 
     <div id="body">
-      <div id="chat-circle" class="btn btn-raised">
+      <div id="chat-circle" >
         <div id="chat-overlay"></div>
-        <a  id="btn-chat"><i class="icon-comment"></i></a>
+        <div ><a id="btn-chat"><i class="icon-comment"></i></a></div>
+        
       </div>
 
       <div class="chat-box" id="chat-box">
         <div class="chat-box-header">
-          <span class="chat-box-toggle" id="room-id-display"><i class="material-icons">close</i></span>
+          <span id="room-id-display"><i class="material-icons"></i></span>
+          <span class="chat-box-toggle-close" >.</span>
         </div>
         <div class="chat-box-body">
           <div class="chat-box-overlay"> </div>
           <div class="connecting">
             Connecting...
           </div>
-          <ul class="chat-logs" id="messageArea"></ul>
+          <ul class="chat-logs" id="messageArea" style="display: block;"></ul>
           <!--chat-log -->
         </div>
         <div class="chat-input">
