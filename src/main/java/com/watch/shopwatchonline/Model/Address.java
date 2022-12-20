@@ -25,7 +25,6 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,26 +34,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "address")
-public class Address implements Serializable{
+public class Address implements Serializable {
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     private String name;
 
     private String phone;
-@Column( columnDefinition = "nvarchar(100) not null")
+    @Column(columnDefinition = "nvarchar(100) not null")
     private String address;
-    @Column( columnDefinition = "nvarchar(100) not null")
+    @Column(columnDefinition = "nvarchar(100) not null")
     private String specificAddress;
     private Short status;
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     private Date deleteAt;
-    
+
     @ManyToOne
-	@JoinColumn(name = "userId",nullable = false)
-	private User users;
+    @JoinColumn(name = "userId", nullable = false)
+    private User users;
 
     @OneToMany(mappedBy = "address")
     private Set<Order> orders;

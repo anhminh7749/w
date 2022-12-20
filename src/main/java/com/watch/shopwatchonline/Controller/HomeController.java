@@ -138,6 +138,7 @@ public class HomeController {
     return list;
   }
 
+
   @GetMapping("/admin")
   public String main(Model model) {
     // List<Statistics> list = new ArrayList<>();
@@ -237,6 +238,7 @@ public class HomeController {
     return ResponseEntity.ok().body(null);
   }
 
+ 
   @GetMapping("/product/getInfo")
   public @ResponseBody Product getProduct(@RequestBody @RequestParam(name = "id") int id) {
     Optional<Product> product = productRepository.findById(id);
