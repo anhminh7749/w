@@ -62,6 +62,6 @@ public class Staff implements Serializable {
 
 	@NotNull(message = "Lương không để trống!")
 	@Min(value = 1000, message = "Phải trên 1000")
-	private Float luong;
+	private float luong;
 
 }

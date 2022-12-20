@@ -12,7 +12,7 @@
             <h2>Danh Sach Thương Hiệu</h2>
             <div class="row">
                 <ol class="breadcrumb">
-                    <li><a th:href="@{/api/admin/statistical/}">Trang Chủ</a></li>
+                    <li><a th:href="@{/api/admin}">Trang Chủ</a></li>
                     <li><a th:href="@{/api/admin/brands/}">Danh Sách</a></li>
                     <li><a th:href="@{/api/admin/brands/add-brand}">Thêm Mới</a></li>
                 </ol>
@@ -38,7 +38,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each=" item : ${brands}">
-                                    <td><img th:src="'/api/admin/product/images/'+${item.thumbnail}" style="width: 100px; height: 70px;"></td>
+                                    <td><img th:src="'/api/admin/brands/images/'+${item.thumbnail}" style="width: 100px; height: 70px;"></td>
                                     <td th:text="${item.name}">1</td>
                                     <td th:text="${item.description}">1</td>
                                     <td>
@@ -63,7 +63,7 @@
                                                         <!-- Email input -->
                                                         <div class="form-outline mb-4">
                                                             <label class="form-label">Image:</label>
-                                                            <img th:src="'/api/admin/product/images/'+${item.thumbnail}" id="thumbnail">
+                                                            <img th:src="'/api/admin/brands/images/'+${item.thumbnail}" id="thumbnail">
                                                         </div>
                                                         
                                                         <div class="form-outline mb-4">

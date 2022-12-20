@@ -47,7 +47,7 @@ public class StaffDto {
     
     @NotNull(message = "Lương không để trống!")
     @Min(message = "Phải trên 1000", value = 1000)
-	private Float luong;
+	private float luong;
     
 	private Boolean isEdit = false;
 }
