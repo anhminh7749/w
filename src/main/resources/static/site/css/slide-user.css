@@ -702,6 +702,7 @@ user agent stylesheet a:-webkit-any-link {
 }
 .stardust-dropdown {
   position: relative;
+  margin-top: inherit;
 }
 .\+1u02e {
   text-decoration: none;
@@ -1038,7 +1039,7 @@ h1 {
   padding: 0;
 }
 ul {
-  display: grid;
+  /* display: grid; */
   list-style-type: none;
   margin-block-end: 1em;
   margin-inline-start: 0px;

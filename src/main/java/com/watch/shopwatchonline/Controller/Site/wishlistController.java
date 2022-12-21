@@ -42,7 +42,7 @@ import com.watch.shopwatchonline.security.jwt.JwtUtils;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @Controller
-@RequestMapping("api/site/wishlist")
+@RequestMapping("api/user/wishlist")
 public class wishlistController {
     @Autowired
     private WishlistRepository wishlistRepository;
@@ -119,14 +119,7 @@ public class wishlistController {
 
         model.addAttribute("productPage", resultPage);
         return new ModelAndView("web-site/wishlist", model);
-    }
-
-    @GetMapping("delete/{Id}")
-    public String delete(ModelMap map, @PathVariable("Id") Integer id) {
-        wishlistRepository.deleteById(id);
-
-        return "redirect:/api/admin/raiting/list-waiting";
-    }
+            }
 
     
     @GetMapping("/like")

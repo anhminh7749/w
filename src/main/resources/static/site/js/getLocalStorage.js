@@ -248,37 +248,39 @@ if (document.getElementById("redirect")) {
   });
 }
 
-
-
 function likeProduct(id) {
-  $.ajax({
-    type: "GET",
-    contentType: "application/json; charset=utf-8",
-    url: "/api/site/wishlist/like?id=" + id + "&username=" + sessionStorage.getItem("UserName"),
-    success: function (response) {
-      switch (response) {
-        case 0:
-
-          document.getElementById("iconLikePro").classList.remove("icon-heart");
-          document.getElementById("iconLikePro").classList.add("icon-heart-empty");
-          break;
-        case 1:
-
-          document.getElementById("iconLikePro").classList.remove("icon-heart-empty");
-          document.getElementById("iconLikePro").classList.add("icon-heart");
-          break;
-
-        default:
-          swal("", "Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích!", "error");
-
-          break;
-      }
-
-    },
-    error: function (response) {
-      alert(response);
-    },
-  });
+  if(sessionStorage.getItem("UserName")){
+    $.ajax({
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      url: "/api/user/wishlist/like?id=" + id + "&username=" + sessionStorage.getItem("UserName"),
+      success: function (response) {
+        if(window.location.pathname == '/api/user/wishlist'){
+          swal("", "Đã xóa khỏi danh sách yêu thích!", "info");
+          setTimeout(()=>{location.reload();},1500);
+        }else{
+          switch (response) {
+            case 0:
+              document.getElementById("iconLikePro").classList.remove("icon-heart");
+              document.getElementById("iconLikePro").classList.add("icon-heart-empty");
+              break;
+            case 1:
+              document.getElementById("iconLikePro").classList.remove("icon-heart-empty");
+              document.getElementById("iconLikePro").classList.add("icon-heart");
+              break;
+            default:
+              swal("", "Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích!", "error");
+              break;
+          }
+        }
+      },
+      error: function (response) {
+        console.log(response);
+      },
+    });
+  }else{
+    swal("", "Bạn phải đăng nhập mới có thể thêm vào danh sách yêu thích!", "error");
+  }
 }
 
 
