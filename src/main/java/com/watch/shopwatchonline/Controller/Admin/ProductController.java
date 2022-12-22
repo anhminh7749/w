@@ -255,11 +255,11 @@ public List<Category> getCategoryDtos(){
                         .body(file);
             }
 
-            @GetMapping("delete/{Id}")
-            public String delete(ModelMap map, @PathVariable("Id") Integer id) {
-            ProductService.deleteById(id);
+            @GetMapping("/delete")
+            public @ResponseBody ModelAndView delete(@RequestParam(name = "id") String id) {
+                ProductService.deleteById(Integer.parseInt(id));
 
-            return "redirect:/api/admin/product/list-product";
+            return new ModelAndView("redirect:/api/admin/product/list-product");
             }
 
     @GetMapping("edit/{productId}")

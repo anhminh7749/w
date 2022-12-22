@@ -117,16 +117,15 @@
               <div class="form-group row">
                 <label for="focusedinput" class="col-sm-2">Giá</label>
                 <div class="col-sm-7 col-lg-7">
-                  <input onclick="changeContentPrice()" name="Price" type="text"
-                  th:value="${#numbers.formatDecimal(product.Price, 0, 'COMMA', 2, 'POINT')}"
+                  <input onclick="changeContentPrice()" name="Price" type="number"
+                  th:field="*{Price}"
                     class="form-control1" id="focusedinput" placeholder="" />
                 </div>
               </div>
               <div class="form-group row">
                 <label for="focusedinput" class="col-sm-2">Giá Giảm</label>
                 <div class="col-sm-7 col-lg-7">
-                  <input onclick="changeContentSalePrice()" name="Discount" type="text"
-                  th:value="${#numbers.formatDecimal(product.Discount, 0, 'COMMA', 2, 'POINT')}"
+                  <input onclick="changeContentSalePrice()" name="Discount" type="number"th:field="*{Discount}"
                     class="form-control1" id="focusedinput" placeholder="" />
                 </div>
               </div>

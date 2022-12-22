@@ -120,7 +120,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-money"></i>
-														</span> <input type="text" th:value="${#numbers.formatDecimal(staff.luong, 0, 'COMMA', 2, 'POINT')}" class="form-control" style="padding: 10px;"
+														</span> <input type="text" th:field="*{luong}" class="form-control" style="padding: 10px;"
 															 placeholder="Luong">
 													</div>
 													<small th:if="${#fields.hasErrors('luong')}" id="customerIdHid"

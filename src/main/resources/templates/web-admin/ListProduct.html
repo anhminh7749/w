@@ -84,7 +84,7 @@
                                     </td>
                                     <td>
                                         <a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileProduct('${item.thumbnail}', '${item.Name}','${#numbers.formatDecimal(item.Price, 0, 'COMMA', 2, 'POINT')}',
-											'${item.Quantity}','${item.Discount}','${item.Category.name}','${item.brand.name}','${item.Active}')|"
+											'${item.Quantity}','${#numbers.formatDecimal(item.Discount, 0, 'COMMA', 2, 'POINT')}','${item.Category.name}','${item.brand.name}','${item.Active}')|"
                                             class="fa fa-search"></a>
                                         <div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"
                                             aria-labelledby="gridSystemModalLabel">
@@ -150,8 +150,9 @@
                                         </div> <!-- /.modal -->
                                         <a th:href="@{'/api/admin/product/edit/' + ${item.Id}}"><i
                                                 class="fa fa-pencil-square-o icon_del" aria-hidden="true"></i></a>
-                                        <a th:href="@{'/api/admin/product/delete/' + ${item.Id}}"><i
-                                                class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
+                                        <a th:data-id="${item.id}" 
+                                        onclick="DeleteSwal(this.getAttribute('data-id'),'product')"
+                                        class="fa fa-trash-o"></i></a>
                                     </td>
 
 
