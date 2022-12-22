@@ -7,6 +7,7 @@
 <body class="cbp-spmenu-push">
   <div layout:fragment="content">
     <div id="page-wrapper" style="min-height: 1800px">
+      <div id="par-1"></div>
       <div class="main-page">
         <div class="forms" id="static-content">
           <h2>Thêm Sản Phẩm</h2>
@@ -18,8 +19,10 @@
             </ol>
           </div>
         </div>
+        
         <form th:action="@{/api/admin/product/update}" method="post" enctype="multipart/form-data"
           th:object="${product}">
+          
           <input type="hidden" th:field="*{isEdit}" />
           <input hidden readonly="readonly" th:field="*{Id}" />
           <div class="col-sm-9 col-lg-9">

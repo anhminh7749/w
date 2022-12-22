@@ -121,7 +121,7 @@
                                         </div> <!-- /.modal -->
                     <a th:href="@{'/api/admin/blog/edit/' + ${item.Id}}"><i class="fa fa-pencil-square-o icon_del"
                         aria-hidden="true"></i></a>
-                    <a th:href="@{'/api/admin/blog/delete?id=' + ${item.Id}}"><i class="fa fa-trash-o icon_del"
+                    <a onclick="DeleteSwal(this.getAttribute('data-id'),'blog')"	th:data-id="${item.id}"><i class="fa fa-trash-o icon_del"
                         aria-hidden="true"></i></a>
                   </td>
 

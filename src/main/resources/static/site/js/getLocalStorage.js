@@ -219,15 +219,15 @@ if (checkout) {
             shopcart: JSON.stringify(shopCartItems),
           },
           success: function (response) {
-            if (response == "success") {
+            
               clearCartItems();
               clearCartShopItems();
               swal("", "Thanh toán thành công!", "success");
-
-            }
+setTimeout(()=>{window.location.href= '/api/user/orders/detail/'+response},1500);
+            
           },
           error: function (response) {
-            alert(response);
+            console.log(response);
           },
         });
       } else {

@@ -27,7 +27,7 @@ uploadButton.onchange = () => {
     reader.onload = () => {
         chosenImage.setAttribute("src",reader.result);
     }
-    fileName.textContent = uploadButton.files[0].name;
+    //fileName.textContent = uploadButton.files[0].name;
 }   
 
   

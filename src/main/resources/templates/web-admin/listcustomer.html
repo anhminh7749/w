@@ -27,14 +27,14 @@
 									<th>Tên Đăng Nhập</th>
 									<th>Email</th>
 									<th>Giới Tính</th>
-									<th>Mật khẩu</th>
+									
 									<th>SĐT</th>
 									<th>Hoạt Động</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each=" item : ${users}">
-									<td><img th:src="'/api/admin/brands/images/'+${item.avatar}" style="width: 100px; height: 70px;"></td>
+									<td><img th:src="${item.avatar != null ?'/api/images/'+item.avatar : '/api/images/user.jpg'}" style="width: 100px; height: 70px;"></td>
 									<td th:text="${item.username}">1</td>
 									<td th:text="${item.email}">1</td>
 									<td>
@@ -42,7 +42,7 @@
 											th:text="${item.gender==0?'nam':'nữ'}">
 									</span>
 									</td>
-									<td th:text="${item.password}">1</td>
+								
 									<td th:text="${item.phone}">1</td>
 									<td>
 									<a th:data-id="${item.id}" th:data-name="${item.username}"

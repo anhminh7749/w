@@ -99,8 +99,7 @@ public class BrandController {
 			}
 			Brand entity = new Brand();
 			BeanUtils.copyProperties(dto, entity);
-
-			entity.setThumbnail(stogareService.getFileName(dto.getImageFile()));
+		entity.setThumbnail(stogareService.getFileName(dto.getImageFile()));
 			stogareService.store(dto.getImageFile(), entity.getThumbnail());
 
 			brandService.save(entity);

@@ -28,20 +28,20 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
-  @NotBlank
+  
   @Column(columnDefinition = "nvarchar(50)")
   private String name;
 
-  @NotNull
+  
   @Size(max = 20)
   private String username;
 
-  @NotNull
+  
   @Size(max = 50)
   @Email
   private String email;
 
-  @NotNull
+  
   @Size(max = 120)
   private String password;
 
@@ -50,10 +50,10 @@ public class User {
 
   private String avatar;
 
-  @NotNull
+  
   private Short gender;
 
-  @NotNull
+  
   private String phone;
 
   @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)

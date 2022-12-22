@@ -111,9 +111,9 @@ public class getLocalStorage {
       @RequestBody String cart,
       @RequestParam(name = "discountcode", required = false) String code,
       @RequestParam(name = "addressId") Integer addressId) {
-
+        Order order = new Order();
     try {
-      Order order = new Order();
+      
       DiscountCode discountcode = discountCodeRepository.findByByteCode(code);
       Optional<Address> address = addressRepository.findById(addressId);
       Set<OrderDetail> orderDetails = new HashSet<>();
@@ -161,7 +161,7 @@ public class getLocalStorage {
       System.out.println(e.getMessage());
     }
 
-    return  ResponseEntity.ok().body("success");
+    return  ResponseEntity.ok().body(""+order.getId());
   }
 
   @RequestMapping(value = "/code/check", method = RequestMethod.POST)

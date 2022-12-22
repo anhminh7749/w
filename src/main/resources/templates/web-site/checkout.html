@@ -16,19 +16,21 @@
             <!-- th:action="@{/filter}" method="post" -->
             <a class="continue" href="/api/site/product">Quay lại mua hàng</a>
             <div class="price-details">
-              <h4>Địa CHỉ Nhận Hàng</h4>
+              <h4>Địa Chỉ Nhận Hàng</h4>
               <div>
                 <input type="text" name="addressId" id="addressId" hidden />
                 <div id="name-phone"></div>
 
-                <div id="address-detail"></div>
+                <div style="display: flex;">
+                  <div id="address-detail"></div>
+                </div>
               </div>
               <a class="btn btn-primary" style="text-decoration: none;" id="showaddressbtn">Chọn</a>
               <div class="clearfix"></div>
             </div>
             <div class="price-details" id="alltotal" >
               <h3>CHI TIẾT GIÁ CẢ</h3>
-              <ul>
+              <ul style="display: grid;">
                 <li>
                   <span>Tổng chi phí</span> <a id="shop__total__cost">0</a>
                 </li>

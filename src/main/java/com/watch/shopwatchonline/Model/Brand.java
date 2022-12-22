@@ -14,7 +14,9 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 
 @Data
@@ -40,7 +42,9 @@ public class Brand implements Serializable{
 	@Column(nullable = false)
 	private short active;
 
-	@OneToMany(mappedBy = "Brand", cascade = CascadeType.ALL)
+	
+	
+	@OneToMany(mappedBy = "Brand")
 	private Set<Product> products;
     
 }

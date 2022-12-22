@@ -69,10 +69,10 @@
                                         <a th:if="${item.active==0}"
                                             th:href="@{'/api/admin/raiting/check/'+${item.Id}}"><i
                                                 class="fa fa-check icon_del"></i></a>
-                                        <a><i class="fa fa-exclamation-circle icon_del"></i></a>
-                                        <a th:href="@{'/api/admin/raiting/delete/' + ${item.Id}}"><i
-                                                class="fa fa-trash-o icon_del" aria-hidden="true"></i></a>
-
+                                        <!-- <a><i class="fa fa-exclamation-circle icon_del"></i></a> -->
+                                        <!-- <a onclick="DeleteSwal(this.getAttribute('data-id'),'raiting')"	th:data-id="${item.id}"><i -->
+                                                <!-- class="fa fa-trash-o icon_del" aria-hidden="true"></i></a> -->
+<!--  -->
                                     </td>
                                 </tr>
 

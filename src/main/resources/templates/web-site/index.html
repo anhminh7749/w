@@ -10,8 +10,8 @@
 			<div class="col-md-3 sidebar_men">
 				<div>
 					<h3>Danh mục</h3>
-					<ul class="product-categories color" th:each="Category, iStart:${cate}">
-						<li class="cat-item cat-item-42">
+					<ul class="product-categories color" style="    max-height: 300px;overflow-y: scroll;">
+						<li class="cat-item cat-item-42"th:each="Category, iStart:${cate}">
 							<a th:text="${Category.name}"></a>
 							<span class="count">
 
@@ -26,8 +26,8 @@
 
 					<!-- onchange="this.form.submit()" -->
 					<h3>Thương hiệu</h3>
-					<ul class="product-categories color" th:each="br, iStart:${brand}">
-						<li class="cat-item cat-item-42">
+					<ul class="product-categories color" style="    max-height: 300px;overflow-y: scroll;">
+						<li class="cat-item cat-item-42" th:each="br, iStart:${brand}">
 							<a th:text="${br.name}"></a>
 							<span class="count">
 								<input type="radio" name="Getbrand" th:checked="${Getbrand==br.id} ? 'checked'"
@@ -37,7 +37,7 @@
 					</ul>
 
 					<h3>Giá</h3>
-					<ul class="product-categories">
+					<ul class="product-categories" >
 						<li class="cat-item cat-item-42"><a href="#">Dưới 1 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==1} ? 'checked'" value="1"
 									onchange="this.form.submit()"></span></li>

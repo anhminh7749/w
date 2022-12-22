@@ -18,6 +18,6 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail, Intege
         @Query(value = "SELECT sum((od.price-od.discount)*od.quantity) from order_detail od "
                 + " JOIN orders o ON o.id = od.order_id "
                 + " where DATEDIFF(day,o.create_at, getdate()) <= 30", nativeQuery = true)
-        Integer countOrdersDetail30();
+        Double countOrdersDetail30();
 
 }

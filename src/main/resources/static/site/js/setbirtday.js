@@ -161,7 +161,6 @@ function checkduplicated() {
         method: "GET",
         success: function (data) {
             if (data == true) {
-                console.log(data);
                 erorr.style.display = 'block';
                 erorr.style.color = '#31ae2c';
                 erorr.innerText = 'Email hợp lệ';
@@ -170,6 +169,30 @@ function checkduplicated() {
                 erorr.style.display = 'block';
                 erorr.style.color = 'red';
                 erorr.innerText = 'Email đã được sử dụng';
+            }
+        }
+    });
+
+}
+
+
+function checkduplicatedphone() {
+    var checkPhone = $("#checkPhone").val();
+    const erorr = document.getElementById('error-phone');
+
+    $.ajax({
+        url: "/api/user/profile/info/check?email=null&phone=" +checkPhone ,
+        method: "GET",
+        success: function (data) {
+            if (data == true) {
+                erorr.style.display = 'block';
+                erorr.style.color = '#31ae2c';
+                erorr.innerText = 'Số điện thoại hợp lệ';
+            }
+            if (data == false) {
+                erorr.style.display = 'block';
+                erorr.style.color = 'red';
+                erorr.innerText = 'Số điện thoại đã được sử dụng';
             }
         }
     });

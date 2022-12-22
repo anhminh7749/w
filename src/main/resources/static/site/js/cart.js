@@ -35,7 +35,7 @@ function setaddress(id, name, phone, detail, address) {
 
 function getaddress() {
     document.getElementById("name-phone").innerHTML = dress.at(1) + '  <div id="numberphoneaddress"> ' + dress.at(2) + '</div>';
-    document.getElementById("address-detail").innerHTML = dress.at(3) + ',  <div style="margin-left: 9px;">' + dress.at(4) + '</div> ';
+    document.getElementById("address-detail").innerHTML = '  <div style="margin-left: 9px;">' + dress.at(3) + ', ' + dress.at(4) + '</div> ';
     document.getElementById("addressId").setAttribute('value', dress.at(0));
     closeModels();
 }
