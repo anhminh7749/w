@@ -17,11 +17,6 @@
                     <li><a th:href="@{/api/admin/brands/add-brand}">Thêm Mới</a></li>
                 </ol>
             </div>
-            <div class="form-inline my-2 my-lg-0 text-right">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							</div>
 
             <div class="main-page">
                 <div class="tables">
@@ -63,8 +58,9 @@
 
                                                         <!-- Email input -->
                                                         <div class="form-outline mb-4">
-                                                            <label class="form-label">Image:</label>
-                                                            <img th:src="'/api/admin/brands/images/'+${item.thumbnail}" id="thumbnail">
+                                                            <img id="thumbnail" style="width: 500px;
+                                                            height: 200px;border: solid;
+                                                            margin-left: 30px;">
                                                         </div>
                                                         
                                                         <div class="form-outline mb-4">

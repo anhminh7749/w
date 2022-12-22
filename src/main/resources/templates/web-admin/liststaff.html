@@ -26,11 +26,6 @@
 									<h4>Danh Sách Nhân Viên:</h4>
 								</label>
 							</ul>
-							<div class="form-inline my-2 my-lg-0 text-right">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							</div>
 						</div>	
 			<div class="main-page">
 				<div class="tables">
@@ -60,7 +55,7 @@
 									<td th:text="${#numbers.formatDecimal(item.luong, 0, 'COMMA', 0, 'POINT')}">1</td>
 									<td>
 										<a data-toggle="modal" data-target="#gridSystemModal"
-											th:attr="onclick=|showProfileStaff('${item.email}', '${item.name}','${item.pBan}','${item.cVu}','${item.phone}','${item.ngayBD}','${item.luong}')|"
+											th:attr="onclick=|showProfileStaff('${item.email}', '${item.name}','${item.pBan}','${item.cVu}','${item.phone}','${item.ngayBD}','${#numbers.formatDecimal(item.luong, 0, 'COMMA', 0, 'POINT')}')|"
 											class="fa fa-search"></a>
 										<div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"
 											aria-labelledby="gridSystemModalLabel">

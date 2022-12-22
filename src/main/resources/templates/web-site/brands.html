@@ -15,7 +15,7 @@
            <div th:each="item:${brands}" class="brand_box" style="display: flex;align-items: center;">
 	         <div class="left-side col-xs-12 col-sm-3">
 				 <img th:src="${item.thumbnail!=null?'/api/images/'+item.thumbnail:'/site/images/2nd-day.jpg'}"
-				 alt=""/>
+				 alt="" style="width: 150px;height: 60px;"/>
 			 </div> 
 		     <div class="middle-side col-xs-12 col-sm-5">
 		     	<h4><a  th:utext="${item.name}"></a></h4>

@@ -27,12 +27,6 @@
 									<h4>Thong Tin Nhan Vien:</h4>
 								</label>
 							</ul>
-
-							<form class="form-inline my-2 my-lg-0 text-right">
-								<input class="form-control mr-sm-2" type="search" placeholder="Search"
-									aria-label="Search">
-								<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-							</form>
 						</div>
 
 						<div class="form-three widget-shadow">
@@ -112,7 +106,7 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-phone"></i>
-														</span> <input type="number" class="form-control"
+														</span> <input type="text" class="form-control"
 															th:field="*{phone}" placeholder="Phone">
 													</div>
 													<small th:if="${#fields.hasErrors('phone')}" id="customerIdHid"
@@ -126,8 +120,8 @@
 												<div class="col-md-8">
 													<div class="input-group">
 														<span class="input-group-addon"> <i class="fa fa-money"></i>
-														</span> <input type="number" class="form-control" style="padding: 10px;"
-															th:field="*{luong}" placeholder="Luong">
+														</span> <input type="text" th:value="${#numbers.formatDecimal(staff.luong, 0, 'COMMA', 2, 'POINT')}" class="form-control" style="padding: 10px;"
+															 placeholder="Luong">
 													</div>
 													<small th:if="${#fields.hasErrors('luong')}" id="customerIdHid"
 														class="form-text text-muted help-block" th:errors="*{luong}">
@@ -152,8 +146,6 @@
 									</div>
 
 									<div class="card-footer text-center">
-										<a th:href="@{/api/admin/staffs/}" class="btn btn-success">Danh Sách</a>
-
 										<button class="btn btn-primary">
 											<span th:if="${staff.isEdit}">Cập Nhật</span> <span
 												th:unless="${staff.isEdit}">Thêm</span>

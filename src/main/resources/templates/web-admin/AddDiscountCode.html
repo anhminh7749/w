@@ -12,8 +12,8 @@
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a th:href="@{/api/admin/}">Trang Chủ</a></li>
-				<li><a th:href="@{/api/admin/DiscountCode/}">Danh Sách</a></li>
-				<li><a th:href="@{/api/admin/DiscountCode/list-code}">Thêm Mới</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/list-code}">Danh Sách</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/}">Thêm Mới</a></li>
 			</ol>
 		</div>
 		<div class="main-page">
@@ -79,8 +79,8 @@
 										</div>
 										<div class="col-md-6"
 											th:classappend="${#fields.hasErrors('ApplicableDate')} ? 'has-error'">
-											<label> Giá giảm:</label> <input type="number"
-												class="form-control1"  min="0" th:field="*{ReductionAmount}"
+											<label> Giá giảm:</label> <input type="text"
+												class="form-control1" th:value="${#numbers.formatDecimal(code.ReductionAmount, 0, 'COMMA', 2, 'POINT')}"  min="0" th:field="*{ReductionAmount}"
 												name="ReductionAmount"><div class="has-error">
 												<small th:if="${#fields.hasErrors('ReductionAmount')}"
 													id="customerIdHid" class="form-text text-muted help-block"
@@ -90,8 +90,8 @@
 									</div>
 									<div class="form-group">
 										<div class="col-md-6">
-											<label>Giá áp dụng:</label> <input type="number"
-												class="form-control1" th:field="*{AmountApplied}"  min="0"
+											<label>Giá áp dụng:</label> <input type="text" 
+												class="form-control1" th:value="${#numbers.formatDecimal(code.AmountApplied, 0, 'COMMA', 2, 'POINT')}"  min="0"
 												name="AmountApplied"><div class="has-error">
 												<small th:if="${#fields.hasErrors('AmountApplied')}"
 													id="customerIdHid" class="form-text text-muted help-block"

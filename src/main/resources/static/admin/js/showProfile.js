@@ -10,7 +10,7 @@ function showProfileBrand(name, ig, des) {
 	console.log(name, ig, des);
 	document.getElementById("name").value = name;
 if(ig!= 'null'){
-	document.getElementById("thumbnail").src = ig;
+	document.getElementById("thumbnail").src = '/api/images/' +ig;
 }else{
 	document.getElementById("thumbnail").src = '/api/images/pa6222488-0990-49c1-be89-4ae45d487ddd.jpg';
 }
@@ -70,7 +70,7 @@ function showProfileCustomer(email, name, gt, tt, day) {
 	document.getElementById("birthday").value = day;
 }
 function showProfileDiscountcode(name, ra, aa, qt, bc, ad, ed) {
-
+console.log(ra,aa);
 	document.getElementById("name").value = name;
 
 	document.getElementById("ReductionAmount").value = ra;

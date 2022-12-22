@@ -23,17 +23,18 @@
 						<table class="table table-hover">
 							<thead>
 								<tr>
+									<th>Ảnh</th>
 									<th>Tên Đăng Nhập</th>
 									<th>Email</th>
 									<th>Giới Tính</th>
 									<th>Mật khẩu</th>
-									<th>Ảnh</th>
 									<th>SĐT</th>
 									<th>Hoạt Động</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr th:each=" item : ${users}">
+									<td><img th:src="'/api/admin/brands/images/'+${item.avatar}" style="width: 100px; height: 70px;"></td>
 									<td th:text="${item.username}">1</td>
 									<td th:text="${item.email}">1</td>
 									<td>
@@ -42,11 +43,10 @@
 									</span>
 									</td>
 									<td th:text="${item.password}">1</td>
-									<td><img th:src="'/api/admin/brands/images/'+${item.avatar}" style="width: 100px; height: 70px;"></td>
 									<td th:text="${item.phone}">1</td>
 									<td>
 									<a th:data-id="${item.id}" th:data-name="${item.username}"
-										onclick="DeleteSwal(this.getAttribute('data-id'),'customers')"	 
+										onclick="DeleteSwal(this.getAttribute('data-id'),'user')"	 
 										class="fa fa-trash-o"> </a>
 									</td>
 								</tr>

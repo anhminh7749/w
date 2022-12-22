@@ -13,8 +13,8 @@
 			<div class="row">
 				<ol class="breadcrumb">
 					<li><a th:href="@{/api/admin/}">Trang Chủ</a></li>
-				<li><a th:href="@{/api/admin/DiscountCode/}">Danh Sách</a></li>
-				<li><a th:href="@{/api/admin/DiscountCode/list-code}">Thêm Mới</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/list-code}">Danh Sách</a></li>
+				<li><a th:href="@{/api/admin/DiscountCode/}">Thêm Mới</a></li>
 				</ol>
 			</div>
 
@@ -71,7 +71,9 @@
 									<td th:text="${item.ExpirationDate}"></td>
 									<td th:text="${item.status}"></td>
 									<td>
-										<a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileDiscountcode('${item.name}', '${item.ReductionAmount}','${item.AmountApplied}',
+										<a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileDiscountcode('${item.name}', 
+										'${item.#numbers.formatDecimal(item.ReductionAmount, 0, 'COMMA', 2, 'POINT')}',
+										'${item.#numbers.formatDecimal(item.AmountApplied, 0, 'COMMA', 2, 'POINT')}',
 											'${item.Quantity}','${item.ByteCode}','${item.ApplicableDate}','${item.ExpirationDate}')|"
 											class="fa fa-search"></a>
 										<div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"

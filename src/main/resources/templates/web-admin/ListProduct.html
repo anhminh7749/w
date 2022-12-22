@@ -80,10 +80,10 @@
                                     <td th:text="${item.Category.name}"></td>
                                     <td th:text="${item.brand.name}"></td>
                                     <td><span th:class="${item.Active==0?'label label-success':'label label-danger'}"
-                                            th:text="${item.Active==0?'ACTIVE':'INACTIVE'}"></span>
+                                            th:text="${item.Active==0?'Còn hàng':'Hết hàng'}"></span>
                                     </td>
                                     <td>
-                                        <a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileProduct('${item.thumbnail}', '${item.Name}','${item.Price}',
+                                        <a data-toggle="modal" data-target="#gridSystemModal" th:attr="onclick=|showProfileProduct('${item.thumbnail}', '${item.Name}','${#numbers.formatDecimal(item.Price, 0, 'COMMA', 2, 'POINT')}',
 											'${item.Quantity}','${item.Discount}','${item.Category.name}','${item.brand.name}','${item.Active}')|"
                                             class="fa fa-search"></a>
                                         <div class="modal fade" id="gridSystemModal" tabindex="-1" role="dialog"
@@ -104,7 +104,7 @@
                                                         <!-- Email input -->
                                                         <div class="form-outline mb-4">
                                                         
-                                                            <img id=thumbnail style="width: 40%;height: 40%;">
+                                                            <img id=thumbnail style="margin-left: 175px; width: 500px; height: 300px;">
                                                         </div>
 
                                                         <div class="form-outline mb-4">
@@ -139,7 +139,8 @@
 
                                                         <div class="form-outline mb-4">
                                                             <label class="form-label">Trạng thái:</label>
-                                                            <input class="form-control" id="Active" readonly />
+                                                            <span th:class="${item.Active==0?'label label-success':'label label-danger'}"
+                                            th:text="${item.Active==0?'Còn hàng':'Hết hàng'}"></span>
                                                         </div>
                                                     </div>
                                                 </div>
