@@ -54,6 +54,8 @@ public class UserController {
 	private StogareService stogareService;
 	@Autowired
 	private AddressRepository addressRepository;
+	@Autowired
+	private JwtUtils utils;
 
 	@GetMapping("/profile/info")
 	public String getInfo(Model model, HttpServletRequest request) {
@@ -80,8 +82,9 @@ public class UserController {
 	}
 
 	@GetMapping("/profile/address/status")
-	public @ResponseBody void setStatusAddress(@RequestBody @RequestParam(name = "id", required = false) int id) {
-		Address add = addressRepository.findByStatus((short) 1);
+	public @ResponseBody void setStatusAddress(@RequestBody @RequestParam(name = "id", required = false) int id, HttpServletRequest request) {
+		Optional<User> user = userRepository.findByUsername(utils.getUser(request));
+		Address add = addressRepository.findByStatus((short) 1,user.get().getId());
 		if (add != null) {
 			add.setStatus((short) 0);
 			addressRepository.save(add);

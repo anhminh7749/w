@@ -60,7 +60,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="item, iStart:${raitingPage}">
-                                    <td th:text="${item.product.Name}"></td>
+                                    <td th:text="${item.orderDetails.product.Name}"></td>
                                     <td th:text="${item.users.username}"></td>
                                     <td th:text="${item.comment}"></td>
                                     <td th:text="${item.point}"></td>

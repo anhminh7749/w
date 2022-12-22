@@ -11,7 +11,9 @@ import com.watch.shopwatchonline.Model.Address;
 
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
-    Address findByStatus(Short status);
+
+    @Query(value = "select * FROM address where address.status = ?1 and address.user_id = ?2 and delete_at is null", nativeQuery = true)
+    Address findByStatus(Short status,int id);
 
     @Query(value = "select * FROM address where address.user_id = ?1 and delete_at is null", nativeQuery = true)
     List<Address> findbyuser(int id);

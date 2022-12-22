@@ -300,7 +300,7 @@ List<Integer> rai = new ArrayList<>();
     address.setUsers(user.get());
 
     if (dto.getStatus().intValue() == 1) {
-      Address add = addressRepository.findByStatus((short) 1);
+      Address add = addressRepository.findByStatus((short) 1, user.get().getId());
       if (add != null) {
         add.setStatus((short) 0);
         addressRepository.save(add);
