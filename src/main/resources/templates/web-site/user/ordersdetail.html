@@ -61,7 +61,7 @@
                         
                                 <div th:case="2">
                                     <i th:class="${detail[0].orders.status > 2}?'fa icon-inbox fa-2x active':'fa icon-inbox fa-2x'"></i>
-                                    <p th:if="${detail[0].orders.status >2}">Đã giao song</p>
+                                    <p th:if="${detail[0].orders.status >2}">Đã giao xong</p>
                                     <span th:if="${detail[0].orders.status >2}"
                                         th:text="${#dates.format(detail[0].orders.CompleteDate, 'dd-MM-yyyy hh:mm')}"></span>
                                 </div>

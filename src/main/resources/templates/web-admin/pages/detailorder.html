@@ -37,7 +37,7 @@
 
         <div th:case="2">
           <i th:class="${detail.status > 2}?'fa fa-inbox fa-2x active':'fa fa-inbox fa-2x'"></i>
-          <p th:if="${detail.status >2}">Đã giao song</p>
+          <p th:if="${detail.status >2}">Đã giao xong</p>
           <span th:if="${detail.status >2}"
             th:text="${#dates.format(detail.CompleteDate, 'dd-MM-yyyy hh:mm:ss')}"></span>
         </div>
