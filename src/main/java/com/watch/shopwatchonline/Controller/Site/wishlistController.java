@@ -62,7 +62,7 @@ public class wishlistController {
         Page<Product> resultPage = null;
 
         int curPage = page.orElse(1);
-        int pageSize = size.orElse(6);
+        int pageSize = size.orElse(26);
         int abx = sort.orElse(1);
         if (!sort.isEmpty()) {
 
