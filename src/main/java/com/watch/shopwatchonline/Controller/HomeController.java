@@ -145,7 +145,12 @@ public class HomeController {
     // for (Statistics statistics : orderRepository.statistics()) {
     // System.out.println(statistics);
     // }
-
+List<Integer> rai = new ArrayList<>();
+    for (int i = 1; i < 6; i++) {
+      rai.add(raitingRepository.avgRaittingforPoint(i));
+    }
+   // model.addAttribute("countpoint",raitingRepository.findByUserAndPoint());
+    model.addAttribute("countpointuser",rai);
     model.addAttribute("countUsers", userRepository.countUsers());
     model.addAttribute("countOrders30", orderRepository.countOrders30());
     model.addAttribute("sumStockProduct", productRepository.sumStockProduct());

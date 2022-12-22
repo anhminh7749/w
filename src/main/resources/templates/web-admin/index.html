@@ -83,14 +83,84 @@
                         </div>
                         <div class="content-top-1 ">
                             <div class="col-md-12 top-content ">
-                                <h5>Đánh giá trung bình </h5>
-                                <input hidden type="text" id="avg-raiting" th:value="${avgRaitting}" />
-                                <div class="avgraiting" style="font-size: larger;">
-                                    <div class="stars-outer">
-                                        <div class="stars-inner"></div>
+                                <h5 style=" margin-top: 0; margin-bottom: 11px;">Đánh giá trung bình </h5>
+                                <!-- <input hidden type="text" id="avg-raiting" th:value="${avgRaitting}" /> -->
+                                <!-- <div class="avgraiting" style="font-size: larger;"> -->
+                                    <!-- <div class="stars-outer"> -->
+                                        <!-- <div class="stars-inner"></div> -->
+                                    <!-- </div> -->
+                                <!-- </div> -->
+
+                                <div class="container">
+                                    <div class="inner">
+                                      <div class="rating">
+                                        <label class="rating-num" th:text="${avgRaitting}"></label>
+                                        <input hidden type="text" id="avg-raiting" th:value="${avgRaitting}" />
+                                        <div class="rating-stars avgraiting">
+                                            <div class="stars-outer">
+                                                <div class="stars-inner"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-users">
+                                            <!-- <i class='fa fa-user icon-user ' ></i> <span ></span>  th:text="${countpointuser}" -->
+                                        </div>
+                                      </div>
+                                      
+                                     <div class="histo">
+                                        <div class="five histo-rate">
+                                          <span class="histo-star">
+                                            <i class='fa fa-star fa-1x' style='color:#919191'></i> 5           </span>
+                                          <span class="bar-block">
+                                            <span id="bar-5" class="bar">
+                                              <span id="raiforstar" th:text="${countpointuser[4]!= null ?countpointuser[4]:0}"></span>&nbsp;
+                                            </span> 
+                                          </span>
+                                        </div>
+                                        
+                                        <div class="four histo-rate">
+                                          <span class="histo-star">
+                                            <i class='fa fa-star fa-1x' style='color:#919191'></i> 4           </span>
+                                          <span class="bar-block">
+                                            <span id="bar-4" class="bar">
+                                              <span id="raiforstar" th:text="${countpointuser[3]!= null ?countpointuser[3]:0}"></span>&nbsp;
+                                            </span> 
+                                          </span>
+                                        </div> 
+                                        
+                                        <div class="three histo-rate">
+                                          <span class="histo-star">
+                                            <i class='fa fa-star fa-1x' style='color:#919191'></i> 3           </span>
+                                          <span class="bar-block">
+                                            <span id="bar-3" class="bar">
+                                              <span id="raiforstar" th:text="${countpointuser[2]!= null ?countpointuser[2]:0}"></span>&nbsp;
+                                            </span> 
+                                          </span>
+                                        </div>
+                                        
+                                        <div class="two histo-rate">
+                                          <span class="histo-star">
+                                            <i class='fa fa-star fa-1x' style='color:#919191'></i> 2           </span>
+                                          <span class="bar-block">
+                                            <span id="bar-2" class="bar">
+                                              <span id="raiforstar" th:text="${countpointuser[1]!= null ?countpointuser[1]:0}"></span>&nbsp;
+                                            </span> 
+                                          </span>
+                                        </div>
+                                        
+                                        <div class="one histo-rate">
+                                          <span class="histo-star">
+                                            <i class='fa fa-star fa-1x' style='color:#919191'></i> 1           </span>
+                                          <span class="bar-block">
+                                            <span id="bar-1" class="bar">
+                                              <span id="raiforstar" th:text="${countpointuser[0] != null ?countpointuser[0]:0 }"></span>&nbsp;
+                                            </span> 
+                                          </span>
+                                        </div>
+                                      </div> 
                                     </div>
-                                </div>
+                                  </div>
                             </div>
+                            
                           
                            
                             <div class="clearfix"> </div>

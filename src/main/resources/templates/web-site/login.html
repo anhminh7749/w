@@ -11,24 +11,24 @@
       <div class="container" style="display: flex;justify-content: center;">
         
         <div class="col-8 account-top">
-          <h3 class="text-center">Account</h3>
+          <h3 class="text-center">Đăng nhập</h3>
           <!-- <form  method="post">  -->
             <!-- th:action="@{/api/auth/signin}" -->
             <div>
-              <span>UserName*</span>
+              <span>Tài khoản*</span>
               <input type="text" id="username" name="username" />
             </div>
             <div>
-              <span class="pass">Password*</span>
+              <span class="pass">Mật khẩu*</span>
               <input type="password" id="password" name="password" />
             </div>
            
            <div class="float-left">
-            <input type="submit" onclick="Login()" value="Login" />
+            <input type="submit" onclick="Login()" value="Đăng nhập" />
            </div>
            
             <div class="float-right ">
-              <a href="/forgot-password">Quên mật khẩu </a>|
+              <a href="/api/user/forgot-password">Quên mật khẩu </a>|
               <a href="/api/auth/site/register"> Đăng ký</a>
             </div>
           <!-- </form> -->

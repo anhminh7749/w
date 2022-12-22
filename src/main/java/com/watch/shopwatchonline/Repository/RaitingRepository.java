@@ -44,4 +44,10 @@ Page<Raiting> findByActive(Short active, Pageable pageable);
             "JOIN Order_Detail ON Order_Detail.raiting_Id = Raiting.id "+
             "where Order_Detail.id=:id", nativeQuery = true)
     Optional<Raiting> findByUserAndDetail(@Param("id") int id);
+
+//     @Query(value = "SELECT sum(point),user_id FROM Raiting Group BY user_id", nativeQuery = true)
+//     Integer findByUserAndPoint();
+
+@Query(value = " SELECT SUM(point) FROM Raiting WHERE point = ?1", nativeQuery = true)
+Integer avgRaittingforPoint(int point);
 }

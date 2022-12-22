@@ -28,3 +28,25 @@
 //     }]
 // };
 // $("#chartContainer").CanvasJSChart(options);
+
+
+$(document).ready(function () {
+    var sumrai = 0;
+    document.querySelectorAll('#raiforstar').forEach((item) => {
+        sumrai += Number(item.innerHTML);
+    })
+    let index = 5;
+    $('.bar span').hide();
+    document.querySelectorAll('#raiforstar').forEach((item) => {
+        let x = (item.innerHTML / sumrai) * 100;
+        $('#bar-' + index).animate({
+            width: x + '%'
+        }, 1000);
+        index--
+    })
+
+    setTimeout(function () {
+        $('.bar span').fadeIn('slow');
+    }, 1000);
+
+});

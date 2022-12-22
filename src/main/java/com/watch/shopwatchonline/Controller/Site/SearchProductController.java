@@ -131,19 +131,19 @@ public class SearchProductController {
                         case 1:
 
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 0, 100, pageable);
+                                    Integer.parseInt(Getcategory), 0, 1000000, pageable);
                             break;
                         case 2:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 100, 500, pageable);
+                                    Integer.parseInt(Getcategory), 1000000, 10000000, pageable);
                             break;
                         case 3:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 500, 1000, pageable);
+                                    Integer.parseInt(Getcategory), 10000000, 50000000, pageable);
                             break;
                         case 4:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 1000, 5000, pageable);
+                                    Integer.parseInt(Getcategory), 50000000, 150000000,  pageable);
                             break;
                         case 5:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
@@ -155,23 +155,23 @@ public class SearchProductController {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
 
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 100,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 1000000,
                                     pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 100, 500,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000000, 10000000,
                                     pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 500, 1000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 10000000, 50000000,
                                     pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000, 5000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 50000000, 150000000, 
                                     pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 5000, 500000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 150000000,  999999999,
                                     pageable);
                             break;
                     }
@@ -180,22 +180,22 @@ public class SearchProductController {
                 if (Getbrand != null && Getcategory == null && GetPrice != null) {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 100, pageable);
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 1000000, pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 100, 500,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000000, 10000000,
                                     pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 500, 1000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 10000000, 50000000,
                                     pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000, 5000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 50000000, 150000000, 
                                     pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 5000, 500000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 150000000,  999999999,
                                     pageable);
                             break;
                     }
@@ -204,19 +204,19 @@ public class SearchProductController {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
 
-                            resultPage = ProductService.findByPriceBetween(0, 100, pageable);
+                            resultPage = ProductService.findByPriceBetween(0, 1000000, pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByPriceBetween(100, 500, pageable);
+                            resultPage = ProductService.findByPriceBetween(1000000, 10000000, pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByPriceBetween(500, 1000, pageable);
+                            resultPage = ProductService.findByPriceBetween(10000000, 50000000, pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByPriceBetween(1000, 5000, pageable);
+                            resultPage = ProductService.findByPriceBetween(50000000, 150000000,  pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByPriceBetween(5000, 500000, pageable);
+                            resultPage = ProductService.findByPriceBetween(150000000,  999999999, pageable);
                             break;
                     }
                 }
@@ -242,19 +242,19 @@ public class SearchProductController {
                         case 1:
 
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 0, 100, pageable);
+                                    Integer.parseInt(Getcategory), 0, 1000000, pageable);
                             break;
                         case 2:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 100, 500, pageable);
+                                    Integer.parseInt(Getcategory), 1000000, 10000000, pageable);
                             break;
                         case 3:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 500, 1000, pageable);
+                                    Integer.parseInt(Getcategory), 10000000, 50000000, pageable);
                             break;
                         case 4:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
-                                    Integer.parseInt(Getcategory), 1000, 5000, pageable);
+                                    Integer.parseInt(Getcategory), 50000000, 150000000,  pageable);
                             break;
                         case 5:
                             resultPage = ProductService.findByAll(Integer.parseInt(Getbrand),
@@ -266,23 +266,23 @@ public class SearchProductController {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
 
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 100,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 0, 1000000,
                                     pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 100, 500,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000000, 10000000,
                                     pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 500, 1000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 10000000, 50000000,
                                     pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 1000, 5000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 50000000, 150000000, 
                                     pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 5000, 500000,
+                            resultPage = ProductService.findByAllNotBrand(Integer.parseInt(Getcategory), 150000000,  999999999,
                                     pageable);
                             break;
                     }
@@ -291,22 +291,22 @@ public class SearchProductController {
                 if (Getbrand != null && Getcategory == null && GetPrice != null) {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 100, pageable);
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 0, 1000000, pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 100, 500,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000000, 10000000,
                                     pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 500, 1000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 10000000, 50000000,
                                     pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 1000, 5000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 50000000, 150000000, 
                                     pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 5000, 500000,
+                            resultPage = ProductService.findByAllNotCate(Integer.parseInt(Getbrand), 150000000,  999999999,
                                     pageable);
                             break;
                     }
@@ -314,19 +314,19 @@ public class SearchProductController {
                 if (Getbrand == null && Getcategory == null && GetPrice != null) {
                     switch (Integer.parseInt(GetPrice)) {
                         case 1:
-                            resultPage = ProductService.findByPriceBetween(0, 100, pageable);
+                            resultPage = ProductService.findByPriceBetween(0, 1000000, pageable);
                             break;
                         case 2:
-                            resultPage = ProductService.findByPriceBetween(100, 500, pageable);
+                            resultPage = ProductService.findByPriceBetween(1000000, 10000000, pageable);
                             break;
                         case 3:
-                            resultPage = ProductService.findByPriceBetween(500, 1000, pageable);
+                            resultPage = ProductService.findByPriceBetween(10000000, 50000000, pageable);
                             break;
                         case 4:
-                            resultPage = ProductService.findByPriceBetween(1000, 5000, pageable);
+                            resultPage = ProductService.findByPriceBetween(50000000, 150000000,  pageable);
                             break;
                         case 5:
-                            resultPage = ProductService.findByPriceBetween(5000, 500000, pageable);
+                            resultPage = ProductService.findByPriceBetween(150000000,  999999999, pageable);
                             break;
                     }
                 }

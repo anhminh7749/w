@@ -217,9 +217,9 @@ public class UserController {
 			user.setPassword(encoder.encode(newPassword));
 			userRepository.save(user);
 			log.info("Luu mat khau moi cua user");
-			mailService.send(MailRequest.builder()
+			mailService.send( MailRequest.builder()
 					.to(user.getEmail())
-					.subject("Thông báo lấy lại mật khẩu")
+					.subject("")
 					.body("Mật khẩu mới của bạn là: [({$password})]")
 					.params(params)
 					.build());

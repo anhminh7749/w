@@ -1,4 +1,4 @@
-function showProfile(email, tt, des) {
+ function showProfile(email, tt, des) {
 	console.log(email, tt, des);
 	document.getElementById("gmailgmail").value = email;
 
@@ -9,14 +9,18 @@ function showProfile(email, tt, des) {
 function showProfileBrand(name, ig, des) {
 	console.log(name, ig, des);
 	document.getElementById("name").value = name;
-
-	document.getElementById("thumbnail").innerHTML = ig;
+if(ig!= 'null'){
+	document.getElementById("thumbnail").src = ig;
+}else{
+	document.getElementById("thumbnail").src = '/api/images/pa6222488-0990-49c1-be89-4ae45d487ddd.jpg';
+}
+	
 
 	document.getElementById("description").innerHTML = des;
 }
 function showProfileBlog(ig, name, td, tt) {
 	console.log(ig, name, td, tt);
-	document.getElementById("banner").value = ig;
+	document.getElementById("banner").src ='/api/images/' +ig;
 
 	document.getElementById("name").value = name;
 
@@ -30,7 +34,7 @@ function showProfileCategory(name) {
 }
 function showProfileProduct(ig, name, pr, qt, dc, ct, br, tt) {
 
-	document.getElementById("thumbnail").value = ig;
+	document.getElementById("thumbnail").src ='/api/images/'+ ig;
 
 	document.getElementById("Name").value = name;
 

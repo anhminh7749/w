@@ -38,7 +38,8 @@
                             </thead>
                             <tbody>
                                 <tr th:each=" item : ${brands}">
-                                    <td><img th:src="'/api/admin/brands/images/'+${item.thumbnail}" style="width: 100px; height: 70px;"></td>
+                                    
+                                    <td><img th:src="${item.thumbnail != null?'/api/admin/brands/images/'+item.thumbnail:'/api/images/pa6222488-0990-49c1-be89-4ae45d487ddd.jpg'}" style="width: 100px; height: 70px;"></td>
                                     <td th:text="${item.name}">1</td>
                                     <td th:text="${item.description}">1</td>
                                     <td>

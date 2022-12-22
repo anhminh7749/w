@@ -38,19 +38,19 @@
 
 					<h3>Giá</h3>
 					<ul class="product-categories">
-						<li class="cat-item cat-item-42"><a href="#">200$-300$</a> <span class="count">
+						<li class="cat-item cat-item-42"><a href="#">Dưới 1 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==1} ? 'checked'" value="1"
 									onchange="this.form.submit()"></span></li>
-						<li class="cat-item cat-item-60"><a href="#">300$-400$</a> <span class="count">
+						<li class="cat-item cat-item-60"><a href="#">1 - 10 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==2} ? 'checked'" value="2"
 									onchange="this.form.submit()"></span></li>
-						<li class="cat-item cat-item-63"><a href="#">400$-500$</a> <span class="count">
+						<li class="cat-item cat-item-63"><a href="#">10 - 50 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==3} ? 'checked'" value="3"
 									onchange="this.form.submit()"></span></li>
-						<li class="cat-item cat-item-54"><a href="#">500$-600$</a> <span class="count">
+						<li class="cat-item cat-item-54"><a href="#">50 - 150 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==4} ? 'checked'" value="4"
 									onchange="this.form.submit()"></span></li>
-						<li class="cat-item cat-item-55"><a href="#">600$-700$</a> <span class="count">
+						<li class="cat-item cat-item-55"><a href="#">trên 150 triệu</a> <span class="count">
 								<input type="radio" name="GetPrice" th:checked="${GetPrice==5} ? 'checked'" value="5"
 									onchange="this.form.submit()"></span></li>
 					</ul>
@@ -146,17 +146,17 @@
 												<input type="hidden" name="" id="product__id" th:value="${pro.id}" />
 												<div th:if="${pro.discount==0}">
 													<a class="price mount product__price" style="color: black;"
-														th:text="'$'+${pro.Price}"></a>
+														th:text="'₫'+${#numbers.formatDecimal(pro.Price, 0, 'COMMA', 2, 'POINT')}"></a>
 												</div>
 												<div th:if="${pro.discount!=0}">
 													<a class="price mount product__price reducedfrom"
-														th:text="'$'+${pro.Price}"></a>
+														th:text="'₫'+${#numbers.formatDecimal(pro.Price, 0, 'COMMA', 2, 'POINT')}"></a>
 													<a class="price mount actual"
-														th:text="'$'+${pro.Price-pro.discount}"></a>
+														th:text="'₫'+${#numbers.formatDecimal(pro.Price-pro.discount, 0, 'COMMA', 2, 'POINT')}"></a>
 												</div>
-
+												
 												<p class=" product__discount actual" hidden
-													th:text="'$'+${pro.discount}"></p>
+													th:text="'₫'+${#numbers.formatDecimal(pro.discount, 0, 'COMMA', 2, 'POINT')}"></p>
 												<a class="button item_add cbp-vm-icon cbp-vm-add row btn__add__to__cart"
 													style="display: block;"> Thêm vào giỏ hàng</a>
 											</div>
