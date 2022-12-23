@@ -152,7 +152,7 @@ function cancelorder(id) {
         method: "POST",
         success: function (data) {
           swal("", "Hủy thành công đơn hàng!", "success");
-          showDataOrder(document.querySelector('input[name="mode"]:checked').value);
+          showDataUserOrder(document.querySelector('input[name="mode"]:checked').value);
         }
       });
     });

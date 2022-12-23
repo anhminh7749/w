@@ -33,10 +33,10 @@
                 </div>
                 <div class="col-lg-9">
                   <label class="custom-file-upload">
-                    <input id="upload-button-thumbnail" name="imageFile" accept=".png, .jpg, .jpeg"
+                    <input id="upload-button-thumbnail" name="imageFile" accept=".png, .jpg, .jpeg" 
                       onclick="changeContentThumbnail()" type="file" />
                     <i class="fa fa-plus-circle icon-add-image"></i>
-                    <img class="" th:field="*{thumbnail}" id="chosen-thumbnail" alt="edit"
+                    <img class=""  id="chosen-thumbnail" alt="edit"
                       th:src="${product.thumbnail!=null?'/api/images/'+product.thumbnail:'/images/Background.png'}" />
                     <a class="name-add-image" id="file-thumbnail">Ảnh bìa</a>
                   </label>

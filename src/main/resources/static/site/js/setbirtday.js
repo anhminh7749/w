@@ -82,13 +82,13 @@ function cancelPhone() {
 }
 
 function changePhone() {
-    var change = '<div class="ovqcxY phoneModifile"><input type="text" id="checkPhone" oninput="checkduplicatedphone()" name="phone" value="' + valuePhone + '" placeholder="Phone" class=" y-NK4C"></div> <a class="+x-MFb btn-change-info phoneModifile" onclick="cancelPhone()">Hủy bỏ</a>'
+    var change = '<div class="ovqcxY phoneModifile"><input type="text" autocomplete="password" id="checkPhone" oninput="checkduplicatedphone()" name="phone" value="' + valuePhone + '" placeholder="Phone" class=" y-NK4C"></div> <a class="+x-MFb btn-change-info phoneModifile" onclick="cancelPhone()">Hủy bỏ</a>'
     $('.defautPhone').remove();
     $('#formPhone').append(change);
 }
 
 function changeEmail() {
-    var change = '<div class="ovqcxY emailModifile"><input type="email" id="checkEmail" oninput="checkduplicated()" name="email" value="' + valueEmail + '" placeholder="Email" class=" y-NK4C"></div> <a class="+x-MFb emailModifile btn-change-info" onclick="cancelEmail()">Hủy bỏ</a>'
+    var change = '<div class="ovqcxY emailModifile"><input type="email" autocomplete="password" id="checkEmail" oninput="checkduplicated()" name="email" value="' + valueEmail + '" placeholder="Email" class=" y-NK4C"></div> <a class="+x-MFb emailModifile btn-change-info" onclick="cancelEmail()">Hủy bỏ</a>'
     $('.defautEmail').remove();
     $('#formEmail').append(change);
 
